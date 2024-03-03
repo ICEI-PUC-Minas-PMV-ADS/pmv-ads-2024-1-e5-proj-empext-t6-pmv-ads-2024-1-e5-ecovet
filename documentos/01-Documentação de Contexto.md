@@ -3,34 +3,22 @@
 A crescente demanda por serviços veterinários de qualidade tem sido um desafio para muitas clínicas veterinárias e profissionais da área. Nesse contexto, surge a necessidade de uma plataforma que conecte de forma eficiente e eficaz as clínicas veterinárias aos profissionais veterinários disponíveis. Este projeto propõe o desenvolvimento de uma plataforma online que visa otimizar essa conexão, facilitando a busca e contratação de profissionais qualificados para atender às necessidades específicas de cada clínica.
 
 ## Problema
-Nesse momento você deve apresentar o problema que a sua aplicação deve  resolver. No entanto, não é a hora de comentar sobre a aplicação.
-
-Descreva também o contexto em que essa aplicação será usada, se  houver: empresa, tecnologias, etc. Novamente, descreva apenas o que de  fato existir, pois ainda não é a hora de apresentar requisitos  detalhados ou projetos.
-
-Nesse momento, o grupo pode optar por fazer uso  de ferramentas como Design Thinking, que permite um olhar de ponta a ponta para o problema.
-
-> **Links Úteis**:
-> - [Objetivos, Problema de pesquisa e Justificativa](https://medium.com/@versioparole/objetivos-problema-de-pesquisa-e-justificativa-c98c8233b9c3)
-> - [Matriz Certezas, Suposições e Dúvidas](https://medium.com/educa%C3%A7%C3%A3o-fora-da-caixa/matriz-certezas-suposi%C3%A7%C3%B5es-e-d%C3%BAvidas-fa2263633655)
-> - [Brainstorming](https://www.euax.com.br/2018/09/brainstorming/)
+O mercado de serviços veterinários muitas vezes enfrenta dificuldades na localização de profissionais qualificados, especialmente em momentos de alta demanda ou em regiões geograficamente desafiadoras. A falta de uma ferramenta centralizada para conectar clínicas veterinárias a profissionais da área também pode resultar em serviços subutilizados ou até mesmo em clientes insatisfeitos devido à demora na prestação de serviços. Além disso, para profissionais autônomos ou recém-formados, pode ser desafiador encontrar oportunidades de trabalho que se adequem às suas habilidades e disponibilidade.
 
 ## Objetivos
 
-Aqui você deve descrever os objetivos do trabalho indicando que o objetivo geral é desenvolver um software para solucionar o problema apresentado acima. 
+O objetivo geral deste trabalho é desenvolver uma plataforma online que funcione como um intermediário confiável entre clínicas veterinárias e profissionais da área, facilitando a contratação de serviços veterinários.
 
-Apresente também alguns (pelo menos 2) objetivos específicos dependendo de onde você vai querer concentrar a sua prática investigativa, ou como você vai aprofundar no seu trabalho.
- 
-> **Links Úteis**:
-> - [Objetivo geral e objetivo específico: como fazer e quais verbos utilizar](https://blog.mettzer.com/diferenca-entre-objetivo-geral-e-objetivo-especifico/)
+Alguns objetivos específicos incluem:
+Criar um sistema de cadastro e perfil para clínicas veterinárias, permitindo que elas publiquem vagas de emprego, requisitos e detalhes sobre os serviços oferecidos.
+Desenvolver um sistema de cadastro e perfil para profissionais veterinários, possibilitando que eles ofereçam seus serviços, habilidades e experiências.
+Implementar um sistema de busca avançada, permitindo que clínicas encontrem profissionais com base em especialidades, localização e disponibilidade.
 
 ## Justificativa
 
-Descreva a importância ou a motivação para trabalhar com esta aplicação que você escolheu. Indique as razões pelas quais você escolheu seus objetivos específicos ou as razões para aprofundar em certos aspectos do software.
+A importância deste projeto reside na necessidade de otimização e eficiência no mercado de serviços veterinários. A plataforma proposta visa melhorar a qualidade e rapidez na contratação de profissionais qualificados, promovendo, assim, uma prestação de serviços mais eficiente e satisfatória para os clientes finais, os animais de estimação.
 
-O grupo de trabalho pode fazer uso de questionários, entrevistas e dados estatísticos, que podem ser apresentados, com o objetivo de esclarecer detalhes do problema que será abordado pelo grupo.
-
-> **Links Úteis**:
-> - [Como montar a justificativa](https://guiadamonografia.com.br/como-montar-justificativa-do-tcc/)
+Além disso, a plataforma também pode ser uma oportunidade valiosa para profissionais autônomos ou recém-formados entrarem no mercado de trabalho, conectando-os diretamente a clínicas que necessitam de seus serviços.
 
 ## Relação com a Extensão Universitária
 
