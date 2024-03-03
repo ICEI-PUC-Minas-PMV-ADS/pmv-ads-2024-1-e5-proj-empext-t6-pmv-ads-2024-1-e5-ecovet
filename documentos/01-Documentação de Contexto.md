@@ -1,6 +1,6 @@
 # Introdução
 
-Texto descritivo com a visão geral do projeto abordado. Inclui o contexto, o problema, os objetivos, a justificativa e o público-alvo do projeto.
+A crescente demanda por serviços veterinários de qualidade tem sido um desafio para muitas clínicas veterinárias e profissionais da área. Nesse contexto, surge a necessidade de uma plataforma que conecte de forma eficiente e eficaz as clínicas veterinárias aos profissionais veterinários disponíveis. Este projeto propõe o desenvolvimento de uma plataforma online que visa otimizar essa conexão, facilitando a busca e contratação de profissionais qualificados para atender às necessidades específicas de cada clínica.
 
 ## Problema
 Nesse momento você deve apresentar o problema que a sua aplicação deve  resolver. No entanto, não é a hora de comentar sobre a aplicação.
