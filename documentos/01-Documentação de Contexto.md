@@ -22,8 +22,15 @@ Além disso, a plataforma também pode ser uma oportunidade valiosa para profiss
 
 ## Relação com a Extensão Universitária
 
-Relacionar a situação-problema da organização com o impacto social esperado com a implantação do sistema sociotécnico.
+ A criação de uma plataforma online que une profissionais veterinários a clínicas é um exemplo prático da extensão universitária, pois aplica o conhecimento acadêmico para beneficiar a comunidade e promover o bem-estar animal.
 
+Veterinários: A plataforma serve como um canal eficaz para os veterinários encontrarem oportunidades de trabalho, permitindo que eles se conectem com clínicas que precisam de seus serviços. Isso não apenas ajuda os veterinários a expandir suas oportunidades de carreira, mas também garante que as clínicas tenham acesso a profissionais qualificados quando necessário.
+
+Clínicas Veterinárias: Para as clínicas, a plataforma simplifica o processo de contratação, permitindo que elas localizem e contratem veterinários de maneira eficiente. Isso melhora a qualidade dos serviços prestados à comunidade, garantindo que os animais recebam cuidados adequados quando necessário.
+
+Equipe de Desenvolvimento/Estudantes Envolvidos: Para os estudantes envolvidos no desenvolvimento da plataforma, esta é uma oportunidade única de aplicar na prática os conhecimentos adquiridos na universidade, enriquecendo sua formação e preparando-os para os desafios do mercado de trabalho. O sucesso na implementação da plataforma não apenas marca um ponto importante em suas trajetórias acadêmicas, mas também representa uma contribuição real para a sociedade, promovendo o bem-estar animal.
+
+Contribuição para a Comunidade e Universidade: Este projeto estabelece uma ligação valiosa entre a universidade e a sociedade, demonstrando o impacto social significativo que a extensão universitária pode ter. Ao unir teoria e prática na resolução de problemas reais, a plataforma beneficia não apenas veterinários e clínicas, mas toda a comunidade, promovendo o bem-estar animal.
 ## Descrição do Parceiro
 
 Apresente uma descrição resumida sobre a organização onde o projeto será desenvolvido para que possa ser compreendido o cenário sistema sociotécnico.
