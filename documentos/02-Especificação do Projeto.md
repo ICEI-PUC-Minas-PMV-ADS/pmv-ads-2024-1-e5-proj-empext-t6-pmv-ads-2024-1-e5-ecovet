@@ -46,6 +46,15 @@ Com base na análise das personas forma identificadas as seguintes histórias de
 
 o	Descreva brevemente a arquitetura definida para o projeto e as tecnologias a serem utilizadas. Sugere-se a criação de um diagrama de componentes da solução.
 
+Segue abaixa a tabela com as tecnologia utilizadas.
+
+|ID    | Descrição do Requisito  |
+|------|-----------------------------------------|
+|IDE	| Visual Studio Code(Frontend), Visual Studio(Backend) | 
+|Linguagem Frontend	| React   |
+|Linguagem Backend		| C#   |
+|Banco de dados			| MySql   |
+
 ## Project Model Canvas
 
 Colocar a imagem do modelo construído apresentando a proposta de solução.
