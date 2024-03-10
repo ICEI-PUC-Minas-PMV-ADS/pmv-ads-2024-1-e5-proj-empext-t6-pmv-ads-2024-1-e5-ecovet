@@ -59,7 +59,8 @@ Para o desenvolvimento do sistema usaremos a arquitetura MVC para a backend e pa
 Colocar a imagem do modelo construído apresentando a proposta de solução.
 
 > **Links Úteis**:
-> Disponíveis em material de apoio do projeto
+![Ptcanvas](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/114812210/fc1c14e9-83fe-4e27-95f7-ff8eb7c8ec3b)
+
 
 ## Requisitos
 
