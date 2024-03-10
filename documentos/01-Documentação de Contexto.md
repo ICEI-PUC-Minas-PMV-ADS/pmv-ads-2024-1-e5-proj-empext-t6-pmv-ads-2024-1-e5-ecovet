@@ -33,11 +33,11 @@ Equipe de Desenvolvimento/Estudantes Envolvidos: Para os estudantes envolvidos n
 Contribuição para a Comunidade e Universidade: Este projeto estabelece uma ligação valiosa entre a universidade e a sociedade, demonstrando o impacto social significativo que a extensão universitária pode ter. Ao unir teoria e prática na resolução de problemas reais, a plataforma beneficia não apenas veterinários e clínicas, mas toda a comunidade, promovendo o bem-estar animal.
 ## Descrição do Parceiro
 
-A ECIVET - Equipe Cirúrgica Veterinária - é uma empresa de cirurgias veterinárias de animais domésticos de pequeno porte  que atende clínicas em Belo Horizonte, Contagem, Betim, Nova Lima, Pedro Leopoldo, Lagoa Santa, Sete Lagoas e Igarapé.
+A ECIVET - Equipe Cirúrgica Veterinária - é uma empresa de cirurgias veterinárias de pequenos animais  que atende clínicas em Belo Horizonte, Contagem, Betim, Nova Lima, Pedro Leopoldo, Lagoa Santa, Sete Lagoas e Igarapé.
 
-Observando a crescente abertura de novas clínicas nessas regiões e a necessidade de profissionais experientes em cirurgias, a ECIVET montou um equipe com a missão de levar serviços cirúrgicos para os consultórios que contam apenas com profissionais de consulta clínica, de modo que os pacientes não precisem ser encaminhados para clínicas especializadas que sejam distantes de suas residências, promovendo assim o bem-estar animal e a promoção do cliente (clínica) com o aumento de serviços oferecidos por este. 
+Observando a crescente abertura de novas clínicas nessas regiões e a necessidade de profissionais experientes em cirurgias, a ECIVET montou um equipe com a missão de levar serviços cirúrgicos para os estabelecimentos que contam apenas com profissionais de consulta clínica, de modo que os pacientes não precisem ser encaminhados para clínicas especializadas que sejam distantes de suas residências, promovendo assim o bem-estar animal e a promoção do cliente (clínica) com o aumento de serviços oferecidos por este. 
 
 A ECIVET é uma empresa que se divulga principalmente por recomendações de clínicas já atendidas e por outros profissionais da área. Atualmente, possui apenas uma conta no instagram (@ecivetbh) atrelada a um linktr (linktr.ee/ecivet). 
-As recentes difuldades encontradas tem sido a comunicação entre as clínicas e a empresa para retornos médicos e a procura por auxiliares veterinários e anestesistas que estejam disponíveis para as emergências. Assim, a Ecivet necessita de ferramentas para encontrar esses profissionais que possam somar à equipe e ferramentas em que ela possa ser encontrada.
+As recentes dificuldades encontradas tem sido a comunicação entre as clínicas e a empresa para retornos médicos e a procura por auxiliares veterinários e anestesistas que estejam disponíveis para as emergências. Assim, a Ecivet necessita de ferramentas para encontrar esses profissionais que possam somar à equipe e ferramentas em que ela possa ser encontrada.
 
 
