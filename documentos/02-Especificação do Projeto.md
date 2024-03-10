@@ -54,6 +54,7 @@ Segue abaixa a tabela com as tecnologia utilizadas.
 |Linguagem Frontend	| React   |
 |Linguagem Backend		| C#   |
 |Banco de dados			| MySql   |
+
 Para o desenvolvimento do sistema usaremos a arquitetura MVC para a backend e para o frontend iremos usar uma arquitetura baseada na arquitetura baseada em componentes.
 
 ![arquiteturaETecnologia](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/80110034/0c495ed0-c0fc-469b-a71a-6674382db979)
