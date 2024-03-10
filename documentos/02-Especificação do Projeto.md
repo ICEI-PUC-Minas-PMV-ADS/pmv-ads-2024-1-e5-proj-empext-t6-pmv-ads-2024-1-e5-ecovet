@@ -40,7 +40,8 @@ Com base na análise das personas forma identificadas as seguintes histórias de
 |Pedro Henrique	 | Encontrar oportunidades de estágio ou trabalho em clínicas	 | Ganhar experiência prática na área veterinária. |
 |Pedro Henrique  | Aprender com profissionais experientes	 | Melhorar minhas habilidades e conhecimento|
 |Marcelo de Lima     | Encontrar clínicas que precisam de meus serviços	 | Expandir minhas oportunidades de trabalho |
-|Marcelo de Lima | Flexibilidade para escolher os locais e horários de trabalho		 | Equilibrar meu trabalho e vida pessoal |
+|Marcelo de Lima | Receber notificações sobre novas oportunidades de trabalho			 | Para que eu possa me candidatar a elas o mais rápido possível |
+|Pedro Henrique  | Conectar-me com veterinários experientes.	 | Para novas oportunidades de trabalho|
 
 ## Arquitetura e Tecnologias
 
@@ -74,8 +75,17 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 |ID    | Descrição do Requisito  | Prioridade |
 |------|-----------------------------------------|----|
-|RF-001| Permitir que o usuário cadastre tarefas | ALTA | 
-|RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
+|RF-001| Permitir que os veterinários criem e gerenciem seus perfis	 | ALTA | 
+|RF-002| Permitir que as clínicas criem e gerenciem seus perfis	   | ALTA |
+|RF-003| Permitir que as clínicas postem oportunidades de trabalho	| ALTA |
+|RF-004| Permitir que os veterinários busquem e se candidatem a oportunidades de trabalho	| ALTA |
+|RF-005| Fornecer um sistema de mensagens para que veterinários e clínicas possam se comunicar		| Média |
+|RF-006| Permitir que as clínicas e os veterinários deixem avaliações uns dos outros		   | Baixa |
+|RF-007| Fornecer um sistema de notificações para alertar os veterinários sobre novas oportunidades de trabalho		 | ALTA |
+|RF-008| Permitir que as clínicas vejam os perfis dos veterinários antes de contratá-los		| ALTA |
+|RF-009|Permitir que os veterinários vejam informações sobre a clínica antes de se candidatarem a uma oportunidade			| ALTA |
+|RF-010|Permitir que os usuários alterem suas informações de perfil, incluindo foto de perfil, experiência, habilidades, etc.				| Baixa |
+|RF-011|Permitir que veterinários encontrem outros veterinários 			| ALTA |
 
 ### Requisitos não Funcionais
 
@@ -83,6 +93,8 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 |-------|-------------------------|----|
 |RNF-001| O sistema deve ser responsivo para rodar em um dispositivos móvel | MÉDIA | 
 |RNF-002| Deve processar requisições do usuário em no máximo 3s |  BAIXA | 
+|RNF-003| O sistema deve ser seguro, protegendo os dados dos usuários	|  Alta | 
+
 
 Com base nas Histórias de Usuário, enumere os requisitos da sua solução. Classifique esses requisitos em dois grupos:
 
