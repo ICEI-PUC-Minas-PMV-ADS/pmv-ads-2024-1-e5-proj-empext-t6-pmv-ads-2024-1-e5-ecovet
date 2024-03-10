@@ -28,6 +28,20 @@ Apresente uma visão geral do que será abordado nesta parte do documento, enume
 |  `Hobbies`: |   `História`:  | `Personalidade`:  |
 |<br> Gosta de ler sobre novos avanços na medicina veterinária <br><br> Adora passar tempo ao ar livre com seu cachorro <br><br> Gosta de assistir a documentários sobre animais <br> <br> | Marcelo é um veterinário dedicado que está sempre procurando expandir suas habilidades e conhecimentos. Ele adora animais e está sempre procurando maneiras de melhorar seus cuidados. <br>| Proativo <br><br> Empático <br><br> Dedicado<br>|
 
+## Histórias de Usuários
+
+Com base na análise das personas forma identificadas as seguintes histórias de usuários:
+
+
+|EU COMO... `PERSONA`| QUERO/PRECISO ... `FUNCIONALIDADE` |PARA ... `MOTIVO/VALOR`                 |
+|--------------------|------------------------------------|----------------------------------------|
+|Joana Santos     | Encontrar veterinários qualificados para minha clínica	| Melhorar a qualidade dos serviços prestados |
+|Joana Santos     | Simplificar o processo de contratação	 | Melhorar a eficiência operacional da clínica |
+|Pedro Henrique	 | Encontrar oportunidades de estágio ou trabalho em clínicas	 | Ganhar experiência prática na área veterinária. |
+|Pedro Henrique  | Aprender com profissionais experientes	 | Melhorar minhas habilidades e conhecimento|
+|Marcelo de Lima     | Encontrar clínicas que precisam de meus serviços	 | Expandir minhas oportunidades de trabalho |
+|Marcelo de Lima | Flexibilidade para escolher os locais e horários de trabalho		 | Equilibrar meu trabalho e vida pessoal |
+
 ## Arquitetura e Tecnologias
 
 o	Descreva brevemente a arquitetura definida para o projeto e as tecnologias a serem utilizadas. Sugere-se a criação de um diagrama de componentes da solução.
