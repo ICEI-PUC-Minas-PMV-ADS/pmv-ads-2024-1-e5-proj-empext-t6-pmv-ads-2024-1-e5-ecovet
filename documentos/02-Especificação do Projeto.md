@@ -15,11 +15,11 @@ Apresente uma visão geral do que será abordado nesta parte do documento, enume
 | <br> Gosta de ler livros de ficção <br><br> Adora viajar e conhecer novos lugares <br><br> Pratica yoga para relaxar <br> <br>    | Joana é uma gerente dedicada que está sempre procurando maneiras de melhorar a eficiência e a qualidade dos serviços em sua clínica veterinária. <br>| Organizada <br><br> Determinada <br><br> Prática<br>|
 
 
-|    `Nome`: Rafael Fernandes Rocha  | `Profissão`: Desenvolvedor Mobile   |     `Idade`: 28 Anos    |
+|    `Nome`: Pedro Henrique  | `Profissão`: Estudante de Veterinária   |     `Idade`: 23 Anos    |
 |--------------------|------------------------------------|----------------------------------------|
-| <img width="250" alt="image" src="https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-infra-t1-pmv-ads-2023-2-e4-proj-bibliosync/assets/103579574/aea66113-9f26-45c4-bc7e-e5af89014a0a">| `Motivações`: <br> Procurar oportunidades de trabalho em diferentes clínicas. <br> <br> Expandir sua rede de contatos profissionais. <br> <br> Flexibilidade para escolher os locais e horários de trabalho.|  `Frustrações`: <br> Dificuldade em encontrar clínicas que precisam de seus serviços. <br> <br> Falta de uma plataforma centralizada para procurar oportunidades. <br><br>    
+| <img width="250" alt="image" src="https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-infra-t1-pmv-ads-2023-2-e4-proj-bibliosync/assets/103579574/aea66113-9f26-45c4-bc7e-e5af89014a0a">| `Motivações`: <br> Ganhar experiência prática na área veterinária. <br> <br> Encontrar oportunidades de estágio ou trabalho em clínicas. <br> <br> Aprender com profissionais experientes.|  `Frustrações`:<br> Dificuldade em encontrar oportunidades de estágio ou trabalho. <br> <br> Falta de uma plataforma centralizada para procurar oportunidades. <br><br>
 |  `Hobbies`: |   `História`:  | `Personalidade`:  |
-|<br> Gosta de ler sobre novos avanços na medicina veterinária <br><br> Adora passar tempo ao ar livre com seu cachorro <br><br> Gosta de assistir a documentários sobre animais <br> <br> | Carlos é um veterinário dedicado que está sempre procurando expandir suas habilidades e conhecimentos. Ele adora animais e está sempre procurando maneiras de melhorar seus cuidados. <br>| Proativo <br><br> Empático <br><br> Dedicado<br>|
+|<br> Gosta de passar tempo com seus animais de estimação <br><br> Adora assistir a filmes e séries <br><br> Gosta de jogar futebol com os amigos <br> <br> | Pedro Henrique é um estudante de veterinária apaixonado que está ansioso para aplicar o que aprendeu na sala de aula em um ambiente prático. <br>	| Ambicioso <br><br> Curioso <br><br> Amigável<br>|
 
 
 |    `Nome`: Marcelo de Lima Henrique | `Profissão`: Veterinário         |     `Idade`: 54 Anos    |
@@ -28,17 +28,6 @@ Apresente uma visão geral do que será abordado nesta parte do documento, enume
 |  `Hobbies`: |   `História`:  | `Personalidade`:  |
 |<br> Gosta de ler sobre novos avanços na medicina veterinária <br><br> Adora passar tempo ao ar livre com seu cachorro <br><br> Gosta de assistir a documentários sobre animais <br> <br> | Marcelo é um veterinário dedicado que está sempre procurando expandir suas habilidades e conhecimentos. Ele adora animais e está sempre procurando maneiras de melhorar seus cuidados. <br>| Proativo <br><br> Empático <br><br> Dedicado<br>|
 
-|    `Nome`: Laura Ferreira Cabral | `Profissão`: Jornalista       |     `Idade`: 27 Anos    |
-|--------------------|------------------------------------|----------------------------------------|
-| <img width="250" alt="image" src="https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e4-proj-dad-t3-projeto/raw/main/docs/img/people_images/ddddd.jpg">| `Motivações`: <br>  Se cuidar mais <br> <br> Atendimento ágil  <br> <br> Facilidade de comunicação com hospital |  `Frustrações`: <br>   Esquecimento da data de marcação  <br> <br> Longa espera para o atendimento            
-|  `Hobbies`: |   `História`:  | `Personalidade`:  |
-| <br> Fotografia  <br><br> Leitura<br><br> Conversar com as pessoas <br> <br>        | Laura é jornalista que sofre de depressão desde a adolescência. <br>  Ela está em tratamento psicológico e toma medicamentos para ajudar a gerenciar seus sintomas.  <br>        | Extroverdita <br><br> Disciplinada <br><br> Educada <br>    |
-
-|    `Nome`: Carolina Almeida de Souza | `Profissão`: Assistente Social      |     `Idade`: 29 Anos    |
-|--------------------|------------------------------------|----------------------------------------|
-| <img width="250" alt="image" src="https://user-images.githubusercontent.com/13721147/194158525-bbc9cf21-13af-47a7-ba23-97f21870d676.png">| `Motivações`: <br>  Se cuidar mais <br> <br> Atendimento ágil  <br> <br> Facilidade de comunicação com hospital |  `Frustrações`: <br>   Ter de ir a hospitais muitas vezes <br> <br> Falta de tempo <br><br> Longa espera para o atendimento            
-|  `Hobbies`: |   `História`:  | `Personalidade`:  |
-| <br> Ler  <br><br> Atividades ao ar livre<br><br> Culinária <br> <br>        | Carolina é assistente social e sofre com asma desde a infância. <br> Ela pratica esportes, mas deve tomar precauções extras e ter um plano de ação em caso de crises de asma.   <br>        | Esforçada <br><br> Resiliente <br><br> Organizada  <br>    |
 ## Arquitetura e Tecnologias
 
 o	Descreva brevemente a arquitetura definida para o projeto e as tecnologias a serem utilizadas. Sugere-se a criação de um diagrama de componentes da solução.
