@@ -104,7 +104,8 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 
 O diagrama de casos de uso é o próximo passo após a elicitação de requisitos, que utiliza um modelo gráfico e uma tabela com as descrições sucintas dos casos de uso e dos atores. Ele contempla a fronteira do sistema e o detalhamento dos requisitos funcionais com a indicação dos atores, casos de uso e seus relacionamentos. 
 
-![Captura de tela de 2024-03-10 14-12-04](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/100283917/f53169ad-e442-4f2a-a170-9e9bc759e7a6)
+![Captura de tela de 2024-03-25 09-46-50](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/100283917/75f6d9e0-5bc6-4839-b2af-0972bf614480)
+
 
 
 ## Modelo ER (Projeto Conceitual)
