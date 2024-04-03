@@ -110,10 +110,11 @@ O diagrama de casos de uso é o próximo passo após a elicitação de requisito
 
 ## Modelo ER (Projeto Conceitual)
 
-![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/f169000a-63d8-4853-be2d-f9010a62e8b0)
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/80110034/2379d635-d370-4b05-be92-80db255aba63)
 
 
 ## Projeto da Base de Dados
 
-![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/d9d88041-9e0c-44ad-9d34-4e1e416c1e0d)
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/80110034/268ccc2e-ae7c-4b2c-aa4e-d9523e50c894)
+
 
