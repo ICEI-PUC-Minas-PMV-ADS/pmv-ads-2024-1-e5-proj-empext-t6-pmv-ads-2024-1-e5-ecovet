@@ -1,0 +1,1 @@
+web: node codigo-fonte/front-app/scripts/heroku-start.js
