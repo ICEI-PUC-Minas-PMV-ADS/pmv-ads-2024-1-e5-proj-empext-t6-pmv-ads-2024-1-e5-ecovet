@@ -18,13 +18,11 @@ namespace back_app.Startups
 
             services.AddScoped<IClinicaVeterinariaService, ClinicaVeterinariaService>();
 
-            //services.AddScoped<IFuncionariosService, FuncionariosService>();
+            services.AddScoped<IProfissionalVeterinarioService, ProfissionalVeterinarioService>();
 
-            //services.AddScoped<IFuncoesService, FuncoesService>();
+            services.AddScoped<ICandidaturaService, CandidaturaService>();
 
-            //services.AddScoped<ISecoesService, SecoesService>();
-
-
+            services.AddScoped<IVagaService, VagaService>();
 
         }
     }

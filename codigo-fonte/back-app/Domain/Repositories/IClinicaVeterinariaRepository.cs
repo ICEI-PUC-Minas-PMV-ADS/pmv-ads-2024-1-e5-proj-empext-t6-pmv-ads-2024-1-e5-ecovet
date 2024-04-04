@@ -2,7 +2,7 @@
 
 namespace Domain.Repositories
 {
-    public interface IClinicaVeterinariaReadOnly
+    public interface IClinicaVeterinariaRepository
     {
         /// <summary>
         /// Obtem as clinicas veterinárias.

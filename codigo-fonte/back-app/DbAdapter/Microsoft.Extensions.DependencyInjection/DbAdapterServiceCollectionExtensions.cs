@@ -15,8 +15,10 @@ namespace DbAdapter.Microsoft.Extensions.DependencyInjection
             }
 
             services.AddSingleton(configuration);
-            services.AddScoped<IClinicaVeterinariaReadOnly, ClinicaVeterinariaReadOnly>();
-            //services.AddScoped<IIntegracaoTotvsRepositoryWriteOnly, IntegracaoTotvsRepositoryWriteOnly>();
+            services.AddScoped<IClinicaVeterinariaRepository, ClinicaVeterinariaRepository>();
+            services.AddScoped<IVagaRepository, VagaRepository>();
+            services.AddScoped<ICandidaturaRepository, CandidaturaRepository>();
+            services.AddScoped<IProfissionalVeterinarioRepository, ProfissionalVeterinarioRepository>();
 
             services.AddScoped(d => new DbAdapterContext(
                 configuration.SqlConnectionString));

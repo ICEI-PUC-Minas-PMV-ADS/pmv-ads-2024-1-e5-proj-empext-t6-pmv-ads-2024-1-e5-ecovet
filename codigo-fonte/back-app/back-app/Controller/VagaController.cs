@@ -8,32 +8,32 @@ using Microsoft.AspNetCore.Mvc;
 namespace back_app.Controller
 {
     [Route("[controller]")]
-    public class ClinicaVeterinariaController : ControllerBase
+    public class VagaController : ControllerBase
     {
         private readonly IMapper mapper;
-        private readonly IClinicaVeterinariaService clinicaVeterinariaService; 
+        private readonly IVagaService vagaService;
 
-        public ClinicaVeterinariaController(IMapper mapper, IClinicaVeterinariaService clinicaVeterinariaService)
+        public VagaController(IMapper mapper, IVagaService vagaService)
         {
             this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            this.clinicaVeterinariaService = clinicaVeterinariaService ??
-                        throw new ArgumentNullException(nameof(clinicaVeterinariaService));
+            this.vagaService = vagaService ??
+                        throw new ArgumentNullException(nameof(vagaService));
         }
 
         /// <summary>
-        /// Obter clínicas veterinarias.
+        /// Obter vagas.
         /// </summary>
         /// <response code="200">Lista de resultados.</response>
         /// <response code="400">
         ///     Dados inválidos
         /// </response>
         /// <response code="500">Erro interno.</response>
-        [HttpGet("obterVeterinarios"), AllowAnonymous]
-        [ProducesResponseType(typeof(IEnumerable<ClinicaVeterinariaModel>), 200)]
+        [HttpGet("obterVagas"), AllowAnonymous]
+        [ProducesResponseType(typeof(IEnumerable<VagaModel>), 200)]
         [Authorize]
         public async Task<IActionResult> ObterClinicasVeterinarias()
         {
-            var result = await clinicaVeterinariaService.ObterClinicasVeterinariasAsync();
+            var result = await vagaService.ObterVagasAsync();
 
             return Ok(mapper.Map<IEnumerable<ClinicaVeterinariaModel>>(result));
         }

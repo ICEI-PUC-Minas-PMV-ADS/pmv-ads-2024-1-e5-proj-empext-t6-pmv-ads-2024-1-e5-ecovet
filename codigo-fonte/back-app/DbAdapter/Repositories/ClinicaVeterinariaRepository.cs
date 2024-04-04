@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DbAdapter.Repositories
 {
-    public class ClinicaVeterinariaReadOnly : IClinicaVeterinariaReadOnly
+    public class ClinicaVeterinariaRepository : IClinicaVeterinariaRepository
     {
         private readonly EcoVetContext ecoVetContext;
 
-        public ClinicaVeterinariaReadOnly(EcoVetContext ecoVetContext)
+        public ClinicaVeterinariaRepository(EcoVetContext ecoVetContext)
         {
             this.ecoVetContext = ecoVetContext;
         }

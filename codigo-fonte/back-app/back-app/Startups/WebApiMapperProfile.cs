@@ -10,8 +10,14 @@ namespace back_app.Startups
         {
             public WebApiMapperProfile()
             {
-                CreateMap<ClinicaVeterinariaModel, ClinicaVeterinaria>().ReverseMap();
-                CreateMap<ClinicaVeterinaria, ClinicaVeterinariaModel>().ReverseMap();
+                CreateMap<ClinicaVeterinariaModel, ClinicaVeterinaria>();
+                CreateMap<ClinicaVeterinaria, ClinicaVeterinariaModel>();
+                CreateMap<Vaga, VagaModel>();
+                CreateMap<VagaModel, Vaga>();
+                CreateMap<Candidatura, CandidaturaModel>();
+                CreateMap<CandidaturaModel, Candidatura>();
+                CreateMap<ProfissionalVeterinario, ProfissionalVeterinarioModel>();
+                CreateMap<ProfissionalVeterinarioModel, ProfissionalVeterinario>();
 
             }
         }

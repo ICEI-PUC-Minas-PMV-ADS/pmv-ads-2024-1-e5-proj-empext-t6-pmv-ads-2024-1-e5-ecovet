@@ -6,17 +6,17 @@ namespace Application
 {
     public class ClinicaVeterinariaService : IClinicaVeterinariaService
     {
-        private readonly IClinicaVeterinariaReadOnly clinicaVeterinariaReadOnly;
+        private readonly IClinicaVeterinariaRepository clinicaVeterinariaRepository;
 
-        public ClinicaVeterinariaService(IClinicaVeterinariaReadOnly clinicaVeterinariaReadOnly)
+        public ClinicaVeterinariaService(IClinicaVeterinariaRepository clinicaVeterinariaRepository)
         {
-            this.clinicaVeterinariaReadOnly = clinicaVeterinariaReadOnly ??
-                                 throw new ArgumentNullException(nameof(clinicaVeterinariaReadOnly));
+            this.clinicaVeterinariaRepository = clinicaVeterinariaRepository ??
+                                 throw new ArgumentNullException(nameof(clinicaVeterinariaRepository));
         }
 
         public async Task<IEnumerable<ClinicaVeterinaria>> ObterClinicasVeterinariasAsync()
         {
-            return await clinicaVeterinariaReadOnly.ObterClinicasVeterinariasAsync();
+            return await clinicaVeterinariaRepository.ObterClinicasVeterinariasAsync();
         }
     }
 }
