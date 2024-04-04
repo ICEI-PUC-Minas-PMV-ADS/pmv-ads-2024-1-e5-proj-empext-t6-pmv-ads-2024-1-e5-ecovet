@@ -1,6 +1,8 @@
 #!/bin/sh
 echo ">>> Preparing back deploy"
 
+git pull
+
 mkdir ~/Documentos/deploy_temp/
 
 echo ">>> Cloning repo"
