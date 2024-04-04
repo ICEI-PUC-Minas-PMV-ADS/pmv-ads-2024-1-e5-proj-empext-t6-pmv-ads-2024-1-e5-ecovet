@@ -28,7 +28,7 @@ namespace back_app.Controller
         ///     Dados inválidos
         /// </response>
         /// <response code="500">Erro interno.</response>
-        [HttpGet("obterVeterinarios"), AllowAnonymous]
+        [HttpGet("obterVeterinarios")]
         [ProducesResponseType(typeof(IEnumerable<ClinicaVeterinariaModel>), 200)]
         [Authorize]
         public async Task<IActionResult> ObterClinicasVeterinarias()
