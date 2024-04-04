@@ -30,3 +30,4 @@ echo ">>> Deploying... $current_date_time"
 
 rm -rf ~/Documentos/deploy_temp/
 
+heroku logs --tail --app=ecovet-api
