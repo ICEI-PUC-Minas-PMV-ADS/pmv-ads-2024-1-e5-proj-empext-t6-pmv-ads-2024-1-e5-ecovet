@@ -49,7 +49,7 @@ Segue abaixa a tabela com as tecnologia utilizadas.
 |Linguagem Backend		| C#   |
 |Banco de dados			| MySql   |
 
-Para o desenvolvimento do sistema usaremos a arquitetura MVC para a backend e para o frontend iremos usar uma arquitetura baseada na arquitetura baseada em componentes.
+Para o desenvolvimento do sistema usaremos a Arquitetura Hexagonal (Alistair Cockburn) para a backend e para o frontend iremos usar uma arquitetura baseada em componentes.
 
 ![Inserir um subtítulo (5)](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/80110034/147696d4-f70d-410d-a25d-583b8714289f)
 
