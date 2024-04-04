@@ -12,5 +12,11 @@ namespace DbAdapter.Repositories
         {
             this.ecoVetContext = ecoVetContext;
         }
+
+        public async Task<ProfissionalVeterinario> ObterVeterinarioLoginAsync(string email, string senha)
+        {
+            return await ecoVetContext.ProfissionaisVeterinarios
+                        .FirstOrDefaultAsync(v => v.Email == email && v.Senha == senha);
+        }
     }
 }

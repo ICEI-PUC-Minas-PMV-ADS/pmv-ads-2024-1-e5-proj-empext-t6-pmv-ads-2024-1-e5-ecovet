@@ -13,6 +13,12 @@ namespace DbAdapter.Repositories
             this.ecoVetContext = ecoVetContext;
         }
 
+        public async Task<ClinicaVeterinaria> ObterClinicaLoginAsync(string email, string senha)
+        {
+            return await ecoVetContext.ClinicasVeterinarias
+                        .FirstOrDefaultAsync(c => c.Email == email && c.Senha == senha);
+        }
+
         public async Task<IEnumerable<ClinicaVeterinaria>> ObterClinicasVeterinariasAsync()
         {
            return await ecoVetContext.ClinicasVeterinarias.ToListAsync(); 
