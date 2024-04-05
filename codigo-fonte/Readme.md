@@ -40,6 +40,9 @@ git push --set-upstream origin feature/back/NOME_DA_BRANCH
 
 ```
 
+Ao terminar faça o `Pull Request` entrando na página do repositório, lá vai ficar evidente que tem a possibilidade um `Pull Request`, confira se é sua branch e faça :
+https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet
+
 
 
 ## Desenvolvendo no FRONT
@@ -78,3 +81,9 @@ git push --set-upstream origin feature/front/NOME_DA_BRANCH
 git push --set-upstream origin feature/front/NOME_DA_BRANCH
 
 ```
+
+Ao terminar faça o `Pull Request` entrando na página do repositório, lá vai ficar evidente que tem a possibilidade um `Pull Request`, confira se é sua branch e faça :
+https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet
+
+
+## Como fazer um Pull Request
