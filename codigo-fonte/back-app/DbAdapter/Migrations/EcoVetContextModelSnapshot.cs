@@ -2,8 +2,8 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -17,30 +17,30 @@ namespace DbAdapter.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.28")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.Entidade.Candidatura", b =>
+            modelBuilder.Entity("Domain.Dto.Candidatura", b =>
                 {
                     b.Property<int>("IDCandidatura")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IDCandidatura"), 1L, 1);
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IDCandidatura"));
 
                     b.Property<DateTime>("DataDaCandidatura")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("ProfissionalVeterinarioIDProfissional")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Status")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<int>("VagaIDVaga")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("IDCandidatura");
 
@@ -51,106 +51,106 @@ namespace DbAdapter.Migrations
                     b.ToTable("Candidaturas");
                 });
 
-            modelBuilder.Entity("Domain.Entidade.ClinicaVeterinaria", b =>
+            modelBuilder.Entity("Domain.Dto.ClinicaVeterinaria", b =>
                 {
                     b.Property<int>("IDClinica")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IDClinica"), 1L, 1);
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IDClinica"));
 
                     b.Property<string>("DescricaoDosServicos")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Endereco")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Senha")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Telefone")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("IDClinica");
 
                     b.ToTable("ClinicasVeterinarias");
                 });
 
-            modelBuilder.Entity("Domain.Entidade.ProfissionalVeterinario", b =>
+            modelBuilder.Entity("Domain.Dto.ProfissionalVeterinario", b =>
                 {
                     b.Property<int>("IDProfissional")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IDProfissional"), 1L, 1);
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IDProfissional"));
 
                     b.Property<string>("Disponibilidade")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Especialidade")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Localizacao")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Senha")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Telefone")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("IDProfissional");
 
                     b.ToTable("ProfissionaisVeterinarios");
                 });
 
-            modelBuilder.Entity("Domain.Entidade.Vaga", b =>
+            modelBuilder.Entity("Domain.Dto.Vaga", b =>
                 {
                     b.Property<int>("IDVaga")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IDVaga"), 1L, 1);
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IDVaga"));
 
                     b.Property<int>("ClinicaVeterinariaIDClinica")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("PeriodoDeDisponibilidade")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Requisitos")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("IDVaga");
 
@@ -159,15 +159,15 @@ namespace DbAdapter.Migrations
                     b.ToTable("Vagas");
                 });
 
-            modelBuilder.Entity("Domain.Entidade.Candidatura", b =>
+            modelBuilder.Entity("Domain.Dto.Candidatura", b =>
                 {
-                    b.HasOne("Domain.Entidade.ProfissionalVeterinario", "ProfissionalVeterinario")
+                    b.HasOne("Domain.Dto.ProfissionalVeterinario", "ProfissionalVeterinario")
                         .WithMany()
                         .HasForeignKey("ProfissionalVeterinarioIDProfissional")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entidade.Vaga", "Vaga")
+                    b.HasOne("Domain.Dto.Vaga", "Vaga")
                         .WithMany()
                         .HasForeignKey("VagaIDVaga")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -178,9 +178,9 @@ namespace DbAdapter.Migrations
                     b.Navigation("Vaga");
                 });
 
-            modelBuilder.Entity("Domain.Entidade.Vaga", b =>
+            modelBuilder.Entity("Domain.Dto.Vaga", b =>
                 {
-                    b.HasOne("Domain.Entidade.ClinicaVeterinaria", "ClinicaVeterinaria")
+                    b.HasOne("Domain.Dto.ClinicaVeterinaria", "ClinicaVeterinaria")
                         .WithMany()
                         .HasForeignKey("ClinicaVeterinariaIDClinica")
                         .OnDelete(DeleteBehavior.Cascade)

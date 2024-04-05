@@ -30,7 +30,7 @@ namespace back_app.Controller
         /// <response code="500">Erro interno.</response>
         [HttpGet("obterVeterinarios")]
         [ProducesResponseType(typeof(IEnumerable<ClinicaVeterinariaModel>), 200)]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> ObterClinicasVeterinarias()
         {
             var result = await clinicaVeterinariaService.ObterClinicasVeterinariasAsync();

@@ -1,11 +1,12 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace DbAdapter.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Heroku : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,14 +14,14 @@ namespace DbAdapter.Migrations
                 name: "ClinicasVeterinarias",
                 columns: table => new
                 {
-                    IDClinica = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Endereco = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Senha = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DescricaoDosServicos = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    IDClinica = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Nome = table.Column<string>(type: "text", nullable: false),
+                    Endereco = table.Column<string>(type: "text", nullable: false),
+                    Senha = table.Column<string>(type: "text", nullable: false),
+                    Telefone = table.Column<string>(type: "text", nullable: false),
+                    Email = table.Column<string>(type: "text", nullable: false),
+                    DescricaoDosServicos = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,15 +32,15 @@ namespace DbAdapter.Migrations
                 name: "ProfissionaisVeterinarios",
                 columns: table => new
                 {
-                    IDProfissional = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Especialidade = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Senha = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Disponibilidade = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Localizacao = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    IDProfissional = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Nome = table.Column<string>(type: "text", nullable: false),
+                    Especialidade = table.Column<string>(type: "text", nullable: false),
+                    Senha = table.Column<string>(type: "text", nullable: false),
+                    Telefone = table.Column<string>(type: "text", nullable: false),
+                    Email = table.Column<string>(type: "text", nullable: false),
+                    Disponibilidade = table.Column<string>(type: "text", nullable: false),
+                    Localizacao = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -50,12 +51,12 @@ namespace DbAdapter.Migrations
                 name: "Vagas",
                 columns: table => new
                 {
-                    IDVaga = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Requisitos = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PeriodoDeDisponibilidade = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ClinicaVeterinariaIDClinica = table.Column<int>(type: "int", nullable: false)
+                    IDVaga = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Descricao = table.Column<string>(type: "text", nullable: false),
+                    Requisitos = table.Column<string>(type: "text", nullable: false),
+                    PeriodoDeDisponibilidade = table.Column<string>(type: "text", nullable: false),
+                    ClinicaVeterinariaIDClinica = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -72,18 +73,18 @@ namespace DbAdapter.Migrations
                 name: "Candidaturas",
                 columns: table => new
                 {
-                    IDCandidatura = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DataDaCandidatura = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ProfissionalVeterinarioIDProfissional = table.Column<int>(type: "int", nullable: false),
-                    VagaIDVaga = table.Column<int>(type: "int", nullable: false)
+                    IDCandidatura = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Status = table.Column<string>(type: "text", nullable: false),
+                    DataDaCandidatura = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    ProfissionalVeterinarioIDProfissional = table.Column<int>(type: "integer", nullable: false),
+                    VagaIDVaga = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Candidaturas", x => x.IDCandidatura);
                     table.ForeignKey(
-                        name: "FK_Candidaturas_ProfissionaisVeterinarios_ProfissionalVeterinarioIDProfissional",
+                        name: "FK_Candidaturas_ProfissionaisVeterinarios_ProfissionalVeterina~",
                         column: x => x.ProfissionalVeterinarioIDProfissional,
                         principalTable: "ProfissionaisVeterinarios",
                         principalColumn: "IDProfissional",
