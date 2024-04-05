@@ -13,8 +13,6 @@ echo ">>> Cloning repo"
 
 echo ">>> Clearing folder"
 
-# (cd ~/Documentos/deploy_temp/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet && rm -rf apresentacao && rm -rf atas && rm -rf codigo-fonte && rm -rf proex && rm -rf README.md && rm -rf documentos)
-
 (cd ~/Documentos/deploy_temp/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet && rm -rf Application.Tests && rm -rf Application && rm -rf DbAdapter && rm -rf Domain && rm -rf back-app && rm -rf back-app.sln)
 
 echo ">>> Copying files"
