@@ -15,5 +15,7 @@ namespace Domain.Services
         Task<IEnumerable<ClinicaVeterinaria>> ObterClinicasVeterinariasAsync();
 
         #endregion
+        Task InserirClinica();
+
     }
 }

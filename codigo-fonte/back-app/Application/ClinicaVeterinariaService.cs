@@ -14,6 +14,11 @@ namespace Application
                                  throw new ArgumentNullException(nameof(clinicaVeterinariaRepository));
         }
 
+        public async Task InserirClinica()
+        {
+            await clinicaVeterinariaRepository.InserirClinica();    
+        }
+
         public async Task<IEnumerable<ClinicaVeterinaria>> ObterClinicasVeterinariasAsync()
         {
             return await clinicaVeterinariaRepository.ObterClinicasVeterinariasAsync();

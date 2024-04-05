@@ -19,7 +19,7 @@ builder.Services.AddSwaggerGen();
 var dbAdapterConfig = builder.Configuration.GetSection("DbAdapterConfiguration").Get<DbAdapterConfiguration>();
 
 builder.Services.AddDbContext<EcoVetContext>(options =>
-    options.UseSqlServer(dbAdapterConfig.SqlConnectionString));
+    options.UseNpgsql(dbAdapterConfig.SqlConnectionString));
 
 builder.Services.AddDbAdapter(dbAdapterConfig);
 

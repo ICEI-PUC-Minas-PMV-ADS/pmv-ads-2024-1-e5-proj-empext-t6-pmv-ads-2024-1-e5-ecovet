@@ -13,5 +13,7 @@ namespace Domain.Repositories
         /// Obter a clinica para login.
         /// </summary>
         Task<ClinicaVeterinaria> ObterClinicaLoginAsync(string email, string senha);
+        //Todo: corrigir toda a parte de inserir clinica 
+        Task InserirClinica();
     }
 }
