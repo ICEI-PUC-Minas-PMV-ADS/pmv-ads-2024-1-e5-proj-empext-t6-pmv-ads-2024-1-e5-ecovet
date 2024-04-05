@@ -40,9 +40,8 @@ git push --set-upstream origin feature/back/NOME_DA_BRANCH
 
 ```
 
-Ao terminar faça o `Pull Request` entrando na página do repositório, lá vai ficar evidente que tem a possibilidade um `Pull Request`, confira se é sua branch e faça :
-https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet
 
+> Ao terminar faça o `Pull Request` entrando na página do repositório, lá vai ficar evidente que tem a possibilidade um `Pull Request`, confira abaixo como fazer
 
 
 ## Desenvolvendo no FRONT
@@ -82,8 +81,24 @@ git push --set-upstream origin feature/front/NOME_DA_BRANCH
 
 ```
 
-Ao terminar faça o `Pull Request` entrando na página do repositório, lá vai ficar evidente que tem a possibilidade um `Pull Request`, confira se é sua branch e faça :
-https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet
+> Ao terminar faça o `Pull Request` entrando na página do repositório, lá vai ficar evidente que tem a possibilidade um `Pull Request`, confira abaixo como fazer
 
 
 ## Como fazer um Pull Request
+Ao entrar no link do repositório
+
+https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet
+
+Se subiu direitinho, vai aparecer como a imagem abaixo:
+![alt text](./images/image.png)
+
+> Note que pode haver mais de uma, mexa na sua!
+
+Passos:
+- Clique em `Compare & pull request` 
+- Note que em base deve ser `main` e em compare precisa estar o nome da sua branch e em verde que pode fazer o merge
+![alt text](./images/image_merge.png)
+- Clique em `Create pull request`
+- Espere tudo rodar
+- Clique em `Merge Pull Request`
+- Clique em
