@@ -4,6 +4,7 @@ import { DialogState } from '../types'
 const initialState: DialogState = {
   isOpen: false,
   title: '',
+  action: '',
   message: ''
 }
 
@@ -14,6 +15,7 @@ export const dialogSlice = createSlice({
     setDialog: (state, { payload }) => {
       state.isOpen = true
       state.title = payload.title
+      state.action = payload.action
       state.message = payload.message
       state.messageArray = payload.messageArray
       state.redirect = payload.redirect
@@ -21,6 +23,7 @@ export const dialogSlice = createSlice({
     setDialogIdle: (state) => {
       state.isOpen = false
       state.title = ''
+      state.action = ''
       state.message = ''
       state.messageArray = []
     }

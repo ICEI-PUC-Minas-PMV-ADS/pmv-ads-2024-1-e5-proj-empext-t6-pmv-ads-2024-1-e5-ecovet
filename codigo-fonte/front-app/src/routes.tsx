@@ -5,6 +5,7 @@ import { createBrowserRouter } from "react-router-dom";
 import AuthorizedPage from './component/AuthorizedPage'
 
 import HomePage from './pages/Home'
+import LoginPage from './pages/Login'
 
 
 const router = createBrowserRouter([
@@ -13,8 +14,8 @@ const router = createBrowserRouter([
     element: <AuthorizedPage children={<HomePage />} role='user'/>
   },
   {
-    path: "/logado",
-    element: <AuthorizedPage children={<HomePage />} role='user'/>
+    path: "/login",
+    element: <AuthorizedPage children={<LoginPage />} role='user'/>
   }
 ]);
 
