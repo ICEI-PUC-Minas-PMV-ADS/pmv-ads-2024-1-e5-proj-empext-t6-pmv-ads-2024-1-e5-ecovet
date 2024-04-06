@@ -17,9 +17,6 @@ const PageContainerComponent = ({ title, children }: any) => {
       <Grid
         style={{ marginTop: "1em", paddingLeft: isMobile ? 50 : 50 }}
         direction="row"
-        // sx={{sx: {
-        //   mr: 20
-        // }}}
         alignItems="center"
         justifyContent="flex-start"
         container
