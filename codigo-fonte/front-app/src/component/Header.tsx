@@ -27,6 +27,7 @@ import Container from '@mui/material/Container';
 
 const HeaderComponent = () => {
   const isLoading = useSelector((state: RootState) => state.loading.isLoading)
+  const isAuthorized = useSelector((state: RootState) => state.user.isAuthorized)
   const isDialogOpen = useSelector((state: RootState) => state.dialog.isOpen)
   const dispatch = useDispatch<AppDispatch>()
   const theme = useTheme();
@@ -106,6 +107,12 @@ const HeaderComponent = () => {
                 Vet
             </Typography>
           </Box>
+          
+          {isAuthorized ? 
+            <Box>
+              <Typography>teste</Typography>
+            </Box> : null
+          }
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (

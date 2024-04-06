@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { UserState } from '../types'
 import { setUserToken } from "../services/agent"
 
-const initialState: UserState = { name: "Usuário", email: "user@gmail.com", isAuthorized: false}
+const initialState: UserState = { name: "Usuário", email: "user@gmail.com", isAuthorized: true}
 
 const getToken = createAsyncThunk(
   'token/get',
