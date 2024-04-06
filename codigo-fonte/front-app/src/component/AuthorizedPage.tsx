@@ -20,14 +20,9 @@ const AuthorizedPage = ({children, userRole}: any) => {
   // },[isAuthorized]) 
   
   return (
-    token ?
     <Box>
       <HeaderComponent  />
       {children}
-    </Box> 
-    : 
-    <Box>
-      <HeaderComponent/>
     </Box> 
   )
 }

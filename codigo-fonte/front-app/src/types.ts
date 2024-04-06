@@ -2,7 +2,8 @@
 export interface DialogState {
     isOpen: boolean,
     title: string,
-    message: string
+    message: string,
+    action?: string,
     messageArray?: any[]
     redirect?: ''
 }
