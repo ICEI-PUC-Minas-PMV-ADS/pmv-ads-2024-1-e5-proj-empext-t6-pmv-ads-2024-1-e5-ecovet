@@ -167,7 +167,7 @@ const HeaderComponent = () => {
           autoHideDuration={6000}
           message="Carregando..."
         />}
-        <DialogComponent open={isDialogOpen} handleClose={() => dispatch(setDialogIdle())} />
+        {/* <DialogComponent open={isDialogOpen} handleClose={() => dispatch(setDialogIdle())} /> */}
       </Container>
     </AppBar>
   );

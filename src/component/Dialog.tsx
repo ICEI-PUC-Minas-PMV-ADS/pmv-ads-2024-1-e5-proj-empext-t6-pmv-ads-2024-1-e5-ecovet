@@ -23,9 +23,9 @@ const Transition = React.forwardRef(function Transition(
 });
 
 
-const DialogComponent = ({open, handleClose}: any) => {
+const DialogComponent = ({open, handleClose, children}: any) => {
   const navigate = useNavigate()
-  const {title, message, messageArray, redirect} = useSelector((state: RootState) => state.dialog)
+  const {title, message, messageArray, redirect, action} = useSelector((state: RootState) => state.dialog)
 
   const handleOkClick = () => {
     handleClose()
@@ -48,18 +48,15 @@ const DialogComponent = ({open, handleClose}: any) => {
     >
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>
-        <DialogContentText id="alert-dialog-slide-description">
-          <span dangerouslySetInnerHTML={processMessage(message)} />
-          {messageArray && 
-            <ul>
-              {messageArray.map((x: string)=> <li>{x[0]}</li>)}
-            </ul>
-          }
+        <DialogContentText id="alert-dialog-slide-description" style={{padding: '2em'}}>
+          {children}
         </DialogContentText>
       </DialogContent>
-      <DialogActions>
-        <Button onClick={handleOkClick}>OK</Button>
-      </DialogActions>
+      {action ? 
+        <DialogActions>
+          <Button onClick={handleOkClick}>OK</Button>
+        </DialogActions> : null
+      }
     </Dialog>
   );
 }
