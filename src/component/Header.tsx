@@ -20,10 +20,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setDialogIdle } from '../reducers/dialogReducer';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+
 
 
 const HeaderComponent = () => {
   const isLoading = useSelector((state: RootState) => state.loading.isLoading)
+  const isAuthorized = useSelector((state: RootState) => state.user.isAuthorized)
   const isDialogOpen = useSelector((state: RootState) => state.dialog.isOpen)
   const dispatch = useDispatch<AppDispatch>()
   const theme = useTheme();
@@ -52,80 +56,119 @@ const HeaderComponent = () => {
 
   const pages = [
     {
-      name: 'PRÉ-PROJETOS', options: [
-        { name: 'Cadastrar', link: 'preproject' },
-        { name: 'Importar', link: 'preProject-incharge' },
-        { type: 'divider' },
-        { name: 'Ver Pré-Projetos', link: 'preprojects' },
-        { name: 'Ver Importações', link: 'preProject-imports' }
-      ], link: ''
+      name: 'Oportunidades', options: [  ], link: 'preproject'
     },
     {
-      name: 'PROJETOS', options: [
-        { name: 'Ver Projetos', link: '' }
-      ], link: ''
+      name: 'Buscar oportunidades', options: [ ], link: ''
     },
+    {
+      name: 'Postar vagas', options: [ ], link: ''
+    }
   ];
 
 
   return (
     <AppBar position="static" sx={{ backgroundColor: '#fff', color: '#000' }}>
-      {/* <Container maxWidth="xl"> */}
-      <Toolbar >
-        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-          {pages.map((page) => (
-            <Button
-              onClick={(event) => handleMenu(event, page.options)}
-              key={page.name}
-              sx={{ my: 2, display: 'block' }}
+      <Container maxWidth="xl">
+        <Toolbar >
+          
+          <Box 
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' }
+            }}>
+            <Typography
+                variant="h6"
+                noWrap
+                component="a"
+                href="#app-bar-with-responsive-menu"
+                sx={{
+                  fontFamily: "Red Hat Display",
+                  fontWeight: 800,
+                  color: '#2563EB',
+                  textDecoration: 'none',
+                }}
+              >
+                Eco
+            </Typography>
+
+            <Typography
+                variant="h6"
+                noWrap
+                component="a"
+                href="#app-bar-with-responsive-menu"
+                sx={{
+                  fontFamily: "Red Hat Display",
+                  fontWeight: 800,
+                  color: '#1677CC',
+                  textDecoration: 'none',
+                }}
+              >
+                Vet
+            </Typography>
+          </Box>
+          
+          {isAuthorized ? 
+            <Box>
+              <Typography>teste</Typography>
+            </Box> : null
+          }
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {pages.map((page) => (
+              <Button
+                onClick={(event) => handleMenu(event, page.options)}
+                key={page.name}
+                sx={{ ml: 5, my: 2, display: 'block' }}
+              >
+                {page.name}
+              </Button>
+            ))}
+          </Box>
+
+          {menuOptions.length > 0 &&
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'center'
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'center',
+              }}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
             >
-              {page.name}
-            </Button>
-          ))}
-        </Box>
+              {
+                menuOptions.map((x: any) => {
+                  if (x.type === 'divider') {
+                    return <Divider />;
+                  }
+                  return <MenuItem onClick={() => handleMenuClick(x.link)}>{x.name}</MenuItem>;
+                })
+              }
+            </Menu>
+          }
 
-        {menuOptions.length > 0 &&
-          <Menu
-            id="menu-appbar"
-            anchorEl={anchorEl}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'center'
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'center',
-            }}
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >
-            {
-              menuOptions.map((x: any) => {
-                if (x.type === 'divider') {
-                  return <Divider />;
-                }
-                return <MenuItem onClick={() => handleMenuClick(x.link)}>{x.name}</MenuItem>;
-              })
-            }
-          </Menu>
-        }
-
-        <Box sx={{ flexGrow: 0 }}>
-          <UserMenuComponent />
-        </Box>
-      </Toolbar>
-      {isLoading && <LinearProgress />}
-      {isLoading && <Snackbar
-        open={true}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right'
-        }}
-        autoHideDuration={6000}
-        message="Carregando..."
-      />}
-      <DialogComponent open={isDialogOpen} handleClose={() => dispatch(setDialogIdle())} />
+          <Box sx={{ flexGrow: 0 }}>
+            <UserMenuComponent />
+          </Box>
+        </Toolbar>
+        {isLoading && <LinearProgress />}
+        {isLoading && <Snackbar
+          open={true}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right'
+          }}
+          autoHideDuration={6000}
+          message="Carregando..."
+        />}
+        <DialogComponent open={isDialogOpen} handleClose={() => dispatch(setDialogIdle())} />
+      </Container>
     </AppBar>
   );
 }

@@ -3,9 +3,6 @@ const BASE_URL = "https://app-preproject-hom.azurewebsites.net";
 let access_token = ''
 
 export const get = async (url: string) => {
-    console.log("GET")
-    console.log(">>>>>>>>>>>>> access_token")
-    console.log(access_token)
     return await fetch(`${BASE_URL}/${url}`,{
         method: "GET",
         headers: {
@@ -13,15 +10,6 @@ export const get = async (url: string) => {
         },
     })
     .then(response => response.json())
-}
-
-export const getV2 = async (url: string) => {
-    return await fetch(`${BASE_URL}/${url}`,{
-        method: "GET",
-        headers: {
-            'Authorization' : `Bearer ${access_token}`
-        },
-    })
 }
 
 export const post = async (url: string, data?: any) => {
