@@ -7,7 +7,12 @@ namespace Domain.Services
         #region Obter
 
         /// <summary>
-        /// Processo de obter clinicas veterinarias veterinarios.
+        /// Obtem as clinicas veterinárias por id.
+        /// </summary>
+        Task<ClinicaVeterinaria> ObterClinicasVeterinariasPorIdAsync(int idClinicaVeterinaria);
+
+        /// <summary>
+        /// Processo de obter clinicas veterinarias.
         /// </summary>
         /// <returns>
         ///      Lista de clinicas veterinarias encontrados conforme critério de pesquisa.
@@ -15,7 +20,7 @@ namespace Domain.Services
         Task<IEnumerable<ClinicaVeterinaria>> ObterClinicasVeterinariasAsync();
 
         #endregion
-        Task InserirClinica();
+        Task InserirClinicaAsync(ClinicaVeterinaria clinicaVeterinaria);
 
     }
 }
