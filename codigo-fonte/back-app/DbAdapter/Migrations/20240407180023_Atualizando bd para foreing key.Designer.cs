@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DbAdapter.Migrations
 {
     [DbContext(typeof(EcoVetContext))]
-    partial class EcoVetContextModelSnapshot : ModelSnapshot
+    [Migration("20240407180023_Atualizando bd para foreing key")]
+    partial class Atualizandobdparaforeingkey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,7 +34,7 @@ namespace DbAdapter.Migrations
                     b.Property<DateTime>("DataDaCandidatura")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("ProfissionalVeterinarioIDProfissional")
+                    b.Property<int>("IdProfissionalVeterinario")
                         .HasColumnType("integer");
 
                     b.Property<int>("IdVaga")
@@ -41,9 +43,6 @@ namespace DbAdapter.Migrations
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<int>("VagaIDVaga")
-                        .HasColumnType("integer");
 
                     b.HasKey("IDCandidatura");
 
@@ -138,14 +137,11 @@ namespace DbAdapter.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IDVaga"));
 
-                    b.Property<int>("ClinicaVeterinariaIDClinica")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("IDClinicaVeterinaria")
+                    b.Property<int>("IdProfissionalVeterinario")
                         .HasColumnType("integer");
 
                     b.Property<string>("PeriodoDeDisponibilidade")
@@ -158,20 +154,14 @@ namespace DbAdapter.Migrations
 
                     b.HasKey("IDVaga");
 
-                    b.HasIndex("IDClinicaVeterinaria");
+                    b.HasIndex("IdProfissionalVeterinario");
 
                     b.ToTable("Vagas");
                 });
 
             modelBuilder.Entity("Domain.Dto.Candidatura", b =>
                 {
-                    b.HasOne("Domain.Dto.ProfissionalVeterinario", "ProfissionalVeterinario")
-                        .WithMany()
-                        .HasForeignKey("ProfissionalVeterinarioIDProfissional")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Dto.Vaga", "Vaga")
+                    b.HasOne("Domain.Dto.Vaga", null)
                         .WithMany()
                         .HasForeignKey("IdVaga")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -180,9 +170,9 @@ namespace DbAdapter.Migrations
 
             modelBuilder.Entity("Domain.Dto.Vaga", b =>
                 {
-                    b.HasOne("Domain.Dto.ClinicaVeterinaria", "ClinicaVeterinaria")
+                    b.HasOne("Domain.Dto.ClinicaVeterinaria", null)
                         .WithMany()
-                        .HasForeignKey("IDClinicaVeterinaria")
+                        .HasForeignKey("IdProfissionalVeterinario")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

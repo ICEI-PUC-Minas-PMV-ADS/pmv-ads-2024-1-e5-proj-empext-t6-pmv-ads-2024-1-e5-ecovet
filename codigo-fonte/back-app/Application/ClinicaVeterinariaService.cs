@@ -14,14 +14,19 @@ namespace Application
                                  throw new ArgumentNullException(nameof(clinicaVeterinariaRepository));
         }
 
-        public async Task InserirClinica()
+        public async Task InserirClinicaAsync(ClinicaVeterinaria clinicaVeterinaria)
         {
-            await clinicaVeterinariaRepository.InserirClinica();    
+            await clinicaVeterinariaRepository.InserirClinicaAsync(clinicaVeterinaria);    
         }
 
         public async Task<IEnumerable<ClinicaVeterinaria>> ObterClinicasVeterinariasAsync()
         {
             return await clinicaVeterinariaRepository.ObterClinicasVeterinariasAsync();
+        }
+
+        public async Task<ClinicaVeterinaria> ObterClinicasVeterinariasPorIdAsync(int idClinicaVeterinaria)
+        {
+            return await clinicaVeterinariaRepository.ObterClinicasVeterinariasPorIdAsync(idClinicaVeterinaria);
         }
     }
 }

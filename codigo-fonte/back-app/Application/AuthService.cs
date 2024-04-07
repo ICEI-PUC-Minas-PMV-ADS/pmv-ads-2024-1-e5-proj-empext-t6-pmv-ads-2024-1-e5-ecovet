@@ -4,14 +4,14 @@ using Domain.Services;
 
 namespace Application
 {
-    public class LoginService : ILoginService
+    public class AuthService : IAuthService
     {
         private readonly IClinicaVeterinariaRepository clinicaVeterinariaRepository;
 
         private readonly IProfissionalVeterinarioRepository profissionalVeterinarioRepository;
 
 
-        public LoginService(IClinicaVeterinariaRepository clinicaVeterinariaRepository, 
+        public AuthService(IClinicaVeterinariaRepository clinicaVeterinariaRepository, 
             IProfissionalVeterinarioRepository profissionalVeterinarioRepository)
         {
             this.clinicaVeterinariaRepository = clinicaVeterinariaRepository ??
