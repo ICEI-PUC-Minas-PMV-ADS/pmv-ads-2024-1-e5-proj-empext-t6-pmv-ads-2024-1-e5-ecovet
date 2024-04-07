@@ -1,20 +1,12 @@
-import { useEffect } from "react";
+import React from "react";
 import PageContainerComponent from "../component/PageContainer";
-import type { AppDispatch, RootState } from "../reducers/store";
-import { useSelector, useDispatch } from "react-redux";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
-import { setDialog, setDialogIdle } from "../reducers/dialogReducer";
-import { title } from "process";
-import DialogComponent from "../component/Dialog";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
+import TextField, { TextFieldProps } from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
-import FormControl from "@mui/material/FormControl";
 import Typography from "@mui/material/Typography";
-import Link from "@mui/material/Link";
+import { useTheme } from "@mui/material/styles";
 import { Box, styled } from "@mui/material";
-import { Input } from "@mui/material";
 
 const TypographyForCardBox = styled(Typography)({
   fontFamily: "red-hat-display",
@@ -29,30 +21,72 @@ const TyphographyLabel = styled(Typography)({
 
 const FormBox = styled(Box)({
   backgroundColor: "#fff",
-  padding: "25px",
-  boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)",
-  borderRadius: '10px'
+  padding: "25px 35px",
+  boxShadow:
+    "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)",
+  borderRadius: "10px",
 });
 
-const InputText = ({
-  title,
-  placeholder,
-  margin,
-  name,
-}: {
+type InputTextProps = {
   title: string;
   placeholder: string;
   name: string;
   margin?: boolean;
-}) => {
+};
+
+const InputText = ({ title, placeholder, margin, name }: InputTextProps) => {
   return (
     <>
       <TyphographyLabel variant="h6" mb={1} mt={margin ? "35px" : 2}>
         {title}
       </TyphographyLabel>
-      <TextField placeholder={placeholder} fullWidth size="small" name={name} required/>
+      <TextField
+        placeholder={placeholder}
+        fullWidth
+        size="small"
+        name={name}
+        required
+      />
     </>
   );
+};
+
+type TextinputTestProps = {
+  children: React.ReactNode;
+  title: string;
+  margin?: boolean;
+};
+
+const TextFieldLabel: React.FC<TextinputTestProps> & {
+  Field: React.FC<TextFieldProps>;
+} = ({ children, title, margin }) => {
+  return (
+    <>
+      <TyphographyLabel variant="h6" mb={1} mt={margin ? "35px" : 2}>
+        {title}
+      </TyphographyLabel>
+      {children}
+    </>
+  );
+};
+
+TextFieldLabel.Field = TextField;
+
+const sendForm = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+
+  const data = new FormData(e.currentTarget);
+
+  const formValue = {
+    title: data.get("title"),
+    type: data.get("type"),
+    value: data.get("value"),
+    experience: data.get("experience"),
+    description: data.get("description"),
+    responsabilits: data.get("responsabilits"),
+  };
+
+  console.log(formValue);
 };
 
 const UploadJob = () => {
@@ -64,7 +98,7 @@ const UploadJob = () => {
       title=""
       style={{ marginLeft: isMobile ? 60 : 3000 }}
     >
-      <Grid container spacing={3} mt={"15px"}>
+      <Grid container spacing={3}>
         <Grid item xs={12} md={8} xl={6}>
           <FormBox>
             <Typography
@@ -75,63 +109,85 @@ const UploadJob = () => {
             >
               Criar Vaga
             </Typography>
-            <form>
-              <InputText
-                title="Título da vaga"
-                placeholder="Título"
-                name="title"
-              />
+            <form onSubmit={sendForm}>
+              <TextFieldLabel title="Título da vaga">
+                <TextFieldLabel.Field
+                  placeholder="título"
+                  name="title"
+                  size="small"
+                  fullWidth
+                />
+              </TextFieldLabel>
 
               <Grid container spacing={2}>
                 <Grid item xs={12} md={6}>
-                  <InputText
-                    title=" Tipo da vaga"
-                    placeholder="tipo da vaga"
-                    margin
-                    name="type"
-                  />
+                  <TextFieldLabel title="Tipo da vaga" margin>
+                    <TextFieldLabel.Field
+                      placeholder="Tipo da vaga"
+                      name="type"
+                      size="small"
+                      fullWidth
+                    />
+                  </TextFieldLabel>
                 </Grid>
 
                 <Grid item xs={12} md={6}>
-                  <InputText
-                    title=" Valor"
-                    placeholder="Valor"
-                    margin
-                    name="value"
-                  />
+                  <TextFieldLabel title="Valor" margin>
+                    <TextFieldLabel.Field
+                      placeholder="Valor"
+                      name="value"
+                      size="small"
+                      fullWidth
+                    />
+                  </TextFieldLabel>
                 </Grid>
               </Grid>
 
-              <InputText
-                title="Experência"
-                placeholder="Experência"
-                margin
-                name="experience"
-              />
+              <TextFieldLabel title="Experiencia" margin>
+                <TextFieldLabel.Field
+                  placeholder="Experência"
+                  name="experience"
+                  size="small"
+                  fullWidth
+                />
+              </TextFieldLabel>
 
-              <TyphographyLabel variant="h6" mb={1} mt={"35px"}>
-                Descrição da vaga
-              </TyphographyLabel>
-              <TextField rows={6} multiline maxRows={6} fullWidth name="description"/>
+              <TextFieldLabel title="Descrição da vaga" margin>
+                <TextFieldLabel.Field
+                  rows={6}
+                  maxRows={6}
+                  name="description"
+                  size="small"
+                  fullWidth
+                />
+              </TextFieldLabel>
 
-              <TyphographyLabel variant="h6" mb={1} mt={"35px"}>
-                Responsabilidades
-              </TyphographyLabel>
-              <TextField multiline rows={6} maxRows={6} fullWidth name="responsabilits"/>
+              <TextFieldLabel title="Responsabilidades" margin>
+                <TextFieldLabel.Field
+                  rows={6}
+                  maxRows={6}
+                  name="responsabilits"
+                  size="small"
+                  fullWidth
+                />
+              </TextFieldLabel>
 
               <Button
-              sx={{
-                marginTop: '35px'
-                ,padding: "8px 30px"
-                
-              }}
-              variant="contained">Criar</Button>
+                sx={{
+                  marginTop: "35px",
+                  padding: "8px 30px",
+                }}
+                type="submit"
+                variant="contained"
+              >
+                Criar
+              </Button>
             </form>
           </FormBox>
         </Grid>
 
         <Grid item xs={12} md={4} xl={6}>
-          <TypographyForCardBox   ml={10} variant="h5" color={"#000"}>
+          <TypographyForCardBox ml={10} variant="h5" color={"#000"}>
             Postagens Recentes
           </TypographyForCardBox>
 
