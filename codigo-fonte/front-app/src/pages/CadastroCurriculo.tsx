@@ -34,7 +34,7 @@ const CurriculoPage = () => {
   return (
 
     <PageContainerComponent title="" style={{ marginLeft: isMobile ? 60 : 3000 }}>
-        {/*  mexer só daqui pra baixo ...*/}
+        {/*  mexer só daqui pra baixo */}
         <Grid container spacing={3}style={{width: '75%'}}>
           <Grid item xs={6}>
             <Typography>Nome</Typography>
