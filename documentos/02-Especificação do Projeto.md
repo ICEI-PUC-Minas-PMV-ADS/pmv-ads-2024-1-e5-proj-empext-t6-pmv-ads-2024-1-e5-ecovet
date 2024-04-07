@@ -58,7 +58,8 @@ Para o desenvolvimento do sistema usaremos a Arquitetura Hexagonal (Alistair Coc
 
 
 > **Links Úteis**:
-![Ptcanvas](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/114812210/fc1c14e9-83fe-4e27-95f7-ff8eb7c8ec3b)
+
+![Modelcanvas](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/114812210/442bdfee-9c47-4558-90d7-52d89ea590e0)
 
 
 ## Requisitos
