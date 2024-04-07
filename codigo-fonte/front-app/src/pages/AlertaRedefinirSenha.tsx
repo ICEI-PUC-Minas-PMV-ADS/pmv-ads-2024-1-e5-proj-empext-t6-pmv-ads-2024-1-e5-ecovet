@@ -39,6 +39,7 @@ const AlertaSenhaPage = () => {
           <Grid item xs={12}>
               <Typography> <Link href="#">Fechar</Link></Typography>
           </Grid>
+      
         </Grid>
       </DialogComponent>
     </PageContainerComponent>

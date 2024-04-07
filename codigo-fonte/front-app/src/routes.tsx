@@ -11,7 +11,7 @@ import AlertaSenhaPage from './pages/AlertaRedefinirSenha';
 
 
 
-const router = createBrowserRouter([
+const router = createBrowserRouter([ 
   {
     path: "/",
     element: <AuthorizedPage children={<HomePage />} role='user'/>
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
   {
     path: "/esquecisenha",
     element: <AuthorizedPage children={<EsqueciSenhaPage />} role='user'/>
-  },
+  },  
   {
     path: "/alertaredefinirsenha",
     element: <AuthorizedPage children={<AlertaSenhaPage />} role='user'/>
