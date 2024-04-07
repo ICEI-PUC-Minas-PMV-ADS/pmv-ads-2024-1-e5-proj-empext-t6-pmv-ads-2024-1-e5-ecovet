@@ -49,7 +49,7 @@ namespace back_app.Controller
         /// <response code="500">Erro interno.</response>
         [HttpPost("cadastrarProfissionalVeterinario")]
         [ProducesResponseType(typeof(IActionResult), 200)]
-        public async Task<IActionResult> CadastrarProfissionalVeterinario(ProfissionalVeterinarioModel profissionalVeterinarioModel)
+        public async Task<IActionResult> CadastrarProfissionalVeterinario([FromBody] ProfissionalVeterinarioModel profissionalVeterinarioModel)
         {
             var veterinario = mapper.Map<ProfissionalVeterinario>(profissionalVeterinarioModel);
 

@@ -12,7 +12,7 @@ import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import FormControl from '@mui/material/FormControl';
 import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
 
 
 const LoginPage = () => {
@@ -47,8 +47,8 @@ const LoginPage = () => {
             <Button variant="contained" style={{width: '100%'}} >Entrar</Button>
           </Grid>
           <Grid item xs={12}>
-              <Typography>Esqueceu a senha?<Link href="#">Clique aqui</Link></Typography>
-              <Typography>Não tem conta?<Link href="#">Clique aqui</Link></Typography>
+              <Typography>Esqueceu a senha?<Link to="/">Clique aqui</Link></Typography>
+              <Typography>Não tem conta?<Link to="/cadastroveterinario">Clique aqui</Link></Typography>
           </Grid>
         </Grid>
 
