@@ -1,0 +1,14 @@
+{
+    "env": {
+      "browser": true,
+      "commonjs": true,
+      "cypress/globals": true
+    },
+    "plugins": ["cypress"],
+    "extends": ["eslint:recommended", "plugin:cypress/recommended"],
+    "parserOptions": {
+      "ecmaVersion": "latest"
+    },
+    "rules": {}
+  }
+  

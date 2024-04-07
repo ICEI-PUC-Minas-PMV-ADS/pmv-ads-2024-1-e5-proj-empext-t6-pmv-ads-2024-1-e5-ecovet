@@ -1,0 +1,31 @@
+{
+  "name": "motivos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true,
+    "cucumberJson": {
+      "generate": true,
+      "outputFolder": "cypress/cucumber-json",
+      "filePrefix": "",
+      "fileSufix": ".cucumber"
+    }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "eslint": "eslint cypress/",
+    "eslint:fix": "eslint cypress/ --fix"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^13.3.1",
+    "cypress-cucumber-preprocessor": "^4.3.1",
+    "multiple-cucumber-html-reporter": "^3.5.0"
+  },
+  "devDependencies": {
+    "cypress-slow-down": "^1.2.1",
+    "eslint-plugin-cypress": "^2.15.1"
+  }
+}

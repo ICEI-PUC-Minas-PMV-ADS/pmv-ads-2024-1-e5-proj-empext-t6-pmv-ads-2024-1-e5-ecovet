@@ -1,0 +1,82 @@
+[
+  {
+    "keyword": "Feature",
+    "name": "Teste Automatizado EcoVet",
+    "line": 1,
+    "id": "teste-automatizado-ecovet",
+    "tags": [],
+    "uri": "ecovet.feature",
+    "elements": [
+      {
+        "id": "teste-automatizado-ecovet;01-acessa-a-aplicacao-ecovet",
+        "keyword": "Scenario",
+        "line": 6,
+        "name": "01 acessa a aplicacao EcoVet",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "faz login na aplicacao EcoVet",
+            "result": {
+              "status": "passed",
+              "duration": 2437000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 7,
+            "name": "acessa a aplicacao de monitoramento",
+            "result": {
+              "status": "passed",
+              "duration": 461000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "clique no botão Novo Ponto de Medição",
+            "result": {
+              "status": "passed",
+              "duration": 460000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "preencha todos os campos",
+            "result": {
+              "status": "passed",
+              "duration": 462000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "clique em Salvar Ponto de Medição",
+            "result": {
+              "status": "passed",
+              "duration": 461000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 11,
+            "name": "o registro deve ser salvo",
+            "result": {
+              "status": "passed",
+              "duration": 459000000
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
