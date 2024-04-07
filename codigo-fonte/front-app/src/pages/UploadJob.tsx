@@ -2,9 +2,9 @@ import React from "react";
 import PageContainerComponent from "../component/PageContainer";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Button from "@mui/material/Button";
-import TextField, { TextFieldProps } from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import TextField, { TextFieldProps } from "@mui/material/TextField";
 import { useTheme } from "@mui/material/styles";
 import { Box, styled } from "@mui/material";
 
@@ -159,6 +159,7 @@ const UploadJob = () => {
                   name="description"
                   size="small"
                   fullWidth
+                  multiline
                 />
               </TextFieldLabel>
 
@@ -169,6 +170,7 @@ const UploadJob = () => {
                   name="responsabilits"
                   size="small"
                   fullWidth
+                  multiline
                 />
               </TextFieldLabel>
 
