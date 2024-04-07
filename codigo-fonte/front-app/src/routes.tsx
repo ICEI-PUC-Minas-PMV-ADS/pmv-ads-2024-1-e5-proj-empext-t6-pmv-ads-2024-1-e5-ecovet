@@ -6,6 +6,7 @@ import AuthorizedPage from './component/AuthorizedPage'
 
 import HomePage from './pages/Home'
 import LoginPage from './pages/Login'
+import UploadJob from './pages/UploadJob';
 
 
 const router = createBrowserRouter([
@@ -16,6 +17,9 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <AuthorizedPage children={<LoginPage />} role='user'/>
+  },{
+    path: "upload-job",
+    element: <AuthorizedPage children={<UploadJob />} />
   }
 ]);
 
