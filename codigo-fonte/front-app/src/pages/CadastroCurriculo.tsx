@@ -14,6 +14,7 @@ import FormControl from '@mui/material/FormControl';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import SnackbarContent from '@mui/material/SnackbarContent';
+import { Padding } from '@mui/icons-material';
 
 
 
@@ -31,12 +32,10 @@ const CurriculoPage = () => {
   },[])
 
   return (
-    <PageContainerComponent title="" style={{ marginLeft: isMobile ? 60 : 3000 }}>
-      <DialogComponent open={isDialogOpen} handleClose={() => dispatch(setDialogIdle())}style={{width: '500px!important'}} >
-        
-        {/*  mexer só daqui pra baixo */}
 
-        <Grid container spacing={3}style={{width: '100%'}}>
+    <PageContainerComponent title="" style={{ marginLeft: isMobile ? 60 : 3000 }}>
+        {/*  mexer só daqui pra baixo */}
+        <Grid container spacing={3}style={{width: '75%'}}>
           <Grid item xs={6}>
             <Typography>Nome</Typography>
             <TextField id="filled-basic" style={{width: '100%'}} label="Seu nome" variant="outlined" />
@@ -69,12 +68,10 @@ const CurriculoPage = () => {
             <Typography>Cursos</Typography>
             <TextField id="filled-basic" style={{width: '100%'}} label="" variant="outlined" />
           </Grid>
-          <Grid item xs={12}>
-            <Typography style={{height: '30%'}}>Principais atividades</Typography>
+          <Grid item xs={12} style={{height: '100%'}}>
+            <Typography style={{height: '50%'}}>Principais atividades</Typography>
             <TextField id="filled-basic" style={{width: '100%'}} label="" variant="outlined" />
           </Grid>
-
-
           <Grid item xs={12}>
             <Button variant="contained" style={{width: '100%'}} >Cadastrar</Button>
           </Grid>
@@ -84,13 +81,7 @@ const CurriculoPage = () => {
           </Grid>
         </Grid>
 
-        
-
-        
-
-
         {/*  mexer só daqui pra cima */}
-      </DialogComponent>
 
       
 
