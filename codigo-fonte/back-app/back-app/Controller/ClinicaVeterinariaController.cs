@@ -28,7 +28,7 @@ namespace back_app.Controller
         ///     Dados inválidos
         /// </response>
         /// <response code="500">Erro interno.</response>
-        [HttpGet("obterVeterinarios")]
+        [HttpGet("obterClincasVeterinarias")]
         [ProducesResponseType(typeof(IEnumerable<ClinicaVeterinariaModel>), 200)]
         //[Authorize]
         public async Task<IActionResult> ObterClinicasVeterinarias()
@@ -36,6 +36,25 @@ namespace back_app.Controller
             var result = await clinicaVeterinariaService.ObterClinicasVeterinariasAsync();
 
             return Ok(mapper.Map<IEnumerable<ClinicaVeterinariaModel>>(result));
+        }       
+        
+        /// <summary>
+        /// Cadastro de cliníca veterinaria.
+        /// </summary>
+        /// <response code="200">Lista de resultados.</response>
+        /// <response code="400">
+        ///     Dados inválidos
+        /// </response>
+        /// <response code="500">Erro interno.</response>
+        [HttpPost("cadastrarClinicaVeterinaria")]
+        [ProducesResponseType(typeof(IActionResult), 200)]
+        public async Task<IActionResult> CadastrarClinicaVeterinaria(ClinicaVeterinariaModel clinicaVeterinariaModel)
+        {
+            var clinica = mapper.Map<ClinicaVeterinaria>(clinicaVeterinariaModel);
+
+            await clinicaVeterinariaService.InserirClinicaAsync(clinica);
+
+            return Ok();
         }
     }
 }

@@ -11,20 +11,20 @@ using System.Text;
 public class AuthController : ControllerBase
 {
     private readonly IConfiguration _configuration;
-    private readonly ILoginService _loginService;
+    private readonly IAuthService _authService;
 
-    public AuthController(IConfiguration configuration, ILoginService loginService)
+    public AuthController(IConfiguration configuration, IAuthService authService)
     {
         _configuration = configuration;
-        _loginService = loginService;
+        _authService = authService;
     }
 
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] UserLoginModel user)
     {
         bool usuario = user.TipoLogin == Tipo.Clinica
-            ? await _loginService.LoginClinica(user.Email, user.Senha)
-            : await _loginService.LoginVeterinario(user.Email, user.Senha);
+            ? await _authService.LoginClinica(user.Email, user.Senha)
+            : await _authService.LoginVeterinario(user.Email, user.Senha);
 
         if (usuario)
         {

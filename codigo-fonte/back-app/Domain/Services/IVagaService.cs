@@ -15,5 +15,10 @@ namespace Domain.Services
         Task<IEnumerable<Vaga>> ObterVagasAsync();
 
         #endregion
+
+        /// <sumary>
+        /// Cadastrar vaga. 
+        /// </sumary>
+        Task InserirVagaAsync(Vaga vaga);
     }
 }
