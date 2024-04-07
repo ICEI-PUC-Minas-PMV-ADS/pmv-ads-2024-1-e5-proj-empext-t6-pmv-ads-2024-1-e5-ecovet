@@ -13,6 +13,18 @@ namespace DbAdapter.Repositories
             this.ecoVetContext = ecoVetContext;
         }
 
+        public async Task InserirProfissionalVeterinarioAsync(ProfissionalVeterinario profissionalVeterinario)
+        {
+            ecoVetContext.ProfissionaisVeterinarios.Add(profissionalVeterinario);
+
+            await ecoVetContext.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<ProfissionalVeterinario>> ObterProfissionaisVeterinarios()
+        {
+            return await ecoVetContext.ProfissionaisVeterinarios.ToListAsync();
+        }
+
         public async Task<ProfissionalVeterinario> ObterVeterinarioLoginAsync(string email, string senha)
         {
             return await ecoVetContext.ProfissionaisVeterinarios
