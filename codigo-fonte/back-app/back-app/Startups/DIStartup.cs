@@ -24,7 +24,7 @@ namespace back_app.Startups
 
             services.AddScoped<IVagaService, VagaService>();
 
-            services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<IAuthService, AuthService>();
 
         }
     }

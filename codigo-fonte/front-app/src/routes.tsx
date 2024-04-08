@@ -9,6 +9,11 @@ import HomePage from './pages/Home'
 import LoginPage from './pages/Login'
 import AlertaSenhaPage from './pages/AlertaRedefinirSenha';
 
+import CadastroProfissionalPage from './pages/CadastroProfissional';
+
+import UploadJob from './pages/UploadJob';
+import LogUpCompany from './pages/LogUpCompany';
+
 
 
 const router = createBrowserRouter([ 
@@ -27,9 +32,20 @@ const router = createBrowserRouter([
   {
     path: "/alertaredefinirsenha",
     element: <AuthorizedPage children={<AlertaSenhaPage />} role='user'/>
+  },
+  {
+    path: "upload-job",
+    element: <AuthorizedPage children={<UploadJob />} />
+  },
+  {
+    path: "logup-company",
+    element: <AuthorizedPage><LogUpCompany /></AuthorizedPage>
+  },
+  {
+    path: "/cadastroveterinario",
+    element: <AuthorizedPage children={<CadastroProfissionalPage />} role='user'/>
   }
 
-  
 
 ]);
 
