@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { UserState } from '../types'
 import { setUserToken } from "../services/agent"
 
-const initialState: UserState = { name: "Usuário", email: "user@gmail.com", isAuthorized: true}
+const initialState: UserState = { isAuthorized: false}
 
 const getToken = createAsyncThunk(
   'token/get',
@@ -17,18 +17,16 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     authorizeUser: (state, { payload }) => {
-      if(payload.accounts.length == 0){
-        // payload.instance?.loginRedirect(loginRequest)
-        // .catch((e: any) => {
-        //   console.log(e);
-        // });
-      }else{
-        const data = payload.accounts[0];
-        state.isAuthorized = true
-        state.name = data.name
-        state.userName = data.username
-        state.userRegistrationId = data.localAccountId
-      }
+      console.log(">>> authorizeUser")
+      console.log(payload)
+      state.isAuthorized = true
+      state.token = payload.token
+      state.name = payload.name
+      state.userName = payload.username
+      state.role = payload.tipoLogin === 1 ? 'Clínica' : 'Profissional'
+      console.log(">>> state")
+      console.log(state)
+      // state.userRegistrationId = data.localAccountId
     },
     logout: (state) => {
       state = initialState

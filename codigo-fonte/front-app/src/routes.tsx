@@ -22,13 +22,17 @@ const router = createBrowserRouter([
     element: <AuthorizedPage children={<HomePage />} role='user'/>
   },
   {
-    path: "/cadastrarcurriculo",
-    element: <AuthorizedPage children={<CurriculoPage />} role='user'/>
+    path: "/logup", // cadastro de users
+    element: <AuthorizedPage><LogUpCompany /></AuthorizedPage>
   },
   {
     path: "/login",
     element: <AuthorizedPage children={<LoginPage />} role='user'/>
-  },  
+  }, 
+  {
+    path: "/cadastrarcurriculo", //passo 2 de cadastro de usuario
+    element: <AuthorizedPage children={<CurriculoPage />} role='user'/>
+  }, 
   {
     path: "/esquecisenha",
     element: <AuthorizedPage children={<EsqueciSenhaPage />} role='user'/>
@@ -38,17 +42,13 @@ const router = createBrowserRouter([
     element: <AuthorizedPage children={<AlertaSenhaPage />} role='user'/>
   },
   {
-    path: "upload-job",
+    path: "/upload-job",
     element: <AuthorizedPage children={<UploadJob />} />
   },
-  {
-    path: "logup-company",
-    element: <AuthorizedPage><LogUpCompany /></AuthorizedPage>
-  },
-  {
-    path: "/cadastroveterinario",
-    element: <AuthorizedPage children={<CadastroProfissionalPage />} role='user'/>
-  }
+  // {
+  //   path: "/cadastroveterinario",//passo 1 de cadastro de usuario
+  //   element: <AuthorizedPage children={<CadastroProfissionalPage />} role='user'/>
+  // }
 
 
 ]);

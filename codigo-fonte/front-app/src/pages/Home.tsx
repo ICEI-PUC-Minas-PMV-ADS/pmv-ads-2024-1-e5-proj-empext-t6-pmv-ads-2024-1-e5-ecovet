@@ -13,8 +13,8 @@ const HomePage = () => {
  
 
   return (
-    <PageContainerComponent title="Principal" style={{ marginLeft: isMobile ? 60 : 3000 }}>
-      <div>oi!!</div>
+    <PageContainerComponent title="Area logada" style={{ marginLeft: isMobile ? 60 : 3000 }}>
+      <div>Estamos em desenvolvimento ...</div>
     </PageContainerComponent>
   )
 }

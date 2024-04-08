@@ -14,7 +14,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 
 const UserMenuComponent = ({field}: any) => {
-  const { name, email } = useSelector((state: RootState) => state.user)
+  const { name, email, role } = useSelector((state: RootState) => state.user)
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -53,7 +53,7 @@ const UserMenuComponent = ({field}: any) => {
               aria-label="account of current user" 
               aria-controls="menu-appbar" 
               aria-haspopup="true">
-              <Typography>{email}</Typography>
+              <Typography>{role}</Typography>
             </Grid>
           </Grid>
 

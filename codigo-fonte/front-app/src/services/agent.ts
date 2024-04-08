@@ -1,4 +1,4 @@
-const BASE_URL = "https://app-preproject-hom.azurewebsites.net";
+const BASE_URL = "https://ecovet-api-a70660ac3f23.herokuapp.com";
 
 let access_token = ''
 

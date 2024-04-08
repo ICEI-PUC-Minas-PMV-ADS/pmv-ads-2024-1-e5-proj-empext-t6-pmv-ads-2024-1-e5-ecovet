@@ -14,7 +14,7 @@ import FormControl from '@mui/material/FormControl';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import { useState } from 'react';
-import {cadastrarVeterinario} from '../services/agent';
+import {post} from '../services/agent';
 
 const CadastroProfissionalPage = () => {
   const isDialogOpen = useSelector((state: RootState) => state.dialog.isOpen)
@@ -49,7 +49,7 @@ const CadastroProfissionalPage = () => {
     };
   
     try {
-      const response = await cadastrarVeterinario(profissionalData);
+      const response = await post('/ProfissionalVeterinario/cadastrarProfissionalVeterinario', profissionalData);
       if (response.ok) {
         // Tratamento de sucesso
         alert('Cadastro realizado com sucesso!');
