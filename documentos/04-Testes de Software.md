@@ -30,5 +30,19 @@
 |Critério de Êxito | Login realizado  |
  
 # Evidências de Testes de Software
+Evidencia - Antes de logar
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/78057aa0-ca48-4494-97b8-2396c34f0f14)
+Evidencia - Logado
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/20ce866a-477c-4ab1-8008-03614b38603f)
+Evidencia - esqueci a senha
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/27342887-c7fa-4ddb-8ddc-a672fa2d9496)
 
-Apresente imagens e/ou vídeos que comprovam que um determinado teste foi executado, e o resultado esperado foi obtido. Normalmente são screenshots de telas, ou vídeos do software em funcionamento.
+
+Evidencia - Cadastro de currículo
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/08fadde5-c996-4dc1-8860-5057bef2789c)
+Evidencia - Criação de Vaga
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/0b359b6b-c999-4779-85a2-cfb0ad4c1914)
+
+
+
+
