@@ -11,11 +11,11 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { Link } from 'react-router-dom';
-import {login} from '../services/agent'
+import { Link, Navigate } from 'react-router-dom';
+import { post } from '../services/agent'
 import { Select, MenuItem, InputLabel, FormControl } from '@mui/material';
-
-
+import { authorizeUser } from '../reducers/userReducer'
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const isDialogOpen = useSelector((state: RootState) => state.dialog.isOpen)
@@ -25,6 +25,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [tipoLogin, setTipoLogin] = useState(1);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(setDialog({
@@ -40,10 +41,17 @@ const LoginPage = () => {
     };
   
     try {
-      const response = await login(userData);
+    const response = await post("Auth/login",userData);
       if (response.ok) {
         const data = await response.json();
         console.log(data); 
+        dispatch(authorizeUser({
+          token: data.token,
+          username: email,
+          name: email,
+          tipoLogin
+        }))
+        navigate('/')
       } else {
         alert('Falha no login');
       }
@@ -52,9 +60,12 @@ const LoginPage = () => {
     }
   };
   return (
-    <PageContainerComponent title="" style={{ marginLeft: isMobile ? 60 : 3000 }}>
+    <PageContainerComponent 
+      title="" 
+      style={{ 
+        marginLeft: isMobile ? 60 : 3000, 
+      }}>
       <DialogComponent open={isDialogOpen} handleClose={() => dispatch(setDialogIdle())} >
-        
         {/*  mexer só daqui pra baixo */}
 
         <Grid container spacing={2}>

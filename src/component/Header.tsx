@@ -24,7 +24,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
 
-
 const HeaderComponent = () => {
   const isLoading = useSelector((state: RootState) => state.loading.isLoading)
   const isAuthorized = useSelector((state: RootState) => state.user.isAuthorized)
@@ -68,7 +67,12 @@ const HeaderComponent = () => {
 
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: '#fff', color: '#000' }}>
+    <AppBar position="static" sx={{ 
+      backgroundColor: '#fff !important', 
+      color: '#000', 
+      display: 'flex',
+      flexDirection: 'row', 
+      justifyContent: 'flex-end' }}>
       <Container maxWidth="xl">
         <Toolbar >
           
@@ -108,23 +112,20 @@ const HeaderComponent = () => {
             </Typography>
           </Box>
           
-          {isAuthorized ? 
             <Box>
-              <Typography>teste</Typography>
-            </Box> : null
-          }
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                onClick={(event) => handleMenu(event, page.options)}
-                key={page.name}
-                sx={{ ml: 5, my: 2, display: 'block' }}
-              >
-                {page.name}
-              </Button>
-            ))}
-          </Box>
+              <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                {isAuthorized && pages.map((page) => (
+                  <Button
+                    onClick={(event) => handleMenu(event, page.options)}
+                    key={page.name}
+                    sx={{ ml: 5, my: 2, display: 'block' }}
+                  >
+                    {page.name}
+                  </Button>
+                ))}
+              </Box>
+  
+            </Box>
 
           {menuOptions.length > 0 &&
             <Menu
@@ -153,9 +154,15 @@ const HeaderComponent = () => {
             </Menu>
           }
 
-          <Box sx={{ flexGrow: 0 }}>
-            <UserMenuComponent />
-          </Box>
+          <Box sx={{ 
+            flexGrow: 2,
+            display: 'flex',
+            flexDirection: 'row', 
+            justifyContent: 'flex-end' }}>
+            {isAuthorized ?
+              <UserMenuComponent />: <Button variant="outlined" onClick={() => navigate('/login')}>Login</Button>
+            }
+          </Box> 
         </Toolbar>
         {isLoading && <LinearProgress />}
         {isLoading && <Snackbar
