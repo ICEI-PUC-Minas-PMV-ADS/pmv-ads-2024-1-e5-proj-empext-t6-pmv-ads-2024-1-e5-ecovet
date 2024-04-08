@@ -27,30 +27,6 @@ const FormBox = styled(Box)({
   borderRadius: "10px",
 });
 
-type InputTextProps = {
-  title: string;
-  placeholder: string;
-  name: string;
-  margin?: boolean;
-};
-
-const InputText = ({ title, placeholder, margin, name }: InputTextProps) => {
-  return (
-    <>
-      <TyphographyLabel variant="h6" mb={1} mt={margin ? "35px" : 2}>
-        {title}
-      </TyphographyLabel>
-      <TextField
-        placeholder={placeholder}
-        fullWidth
-        size="small"
-        name={name}
-        required
-      />
-    </>
-  );
-};
-
 type TextinputTestProps = {
   children: React.ReactNode;
   title: string;
@@ -62,7 +38,7 @@ const TextFieldLabel: React.FC<TextinputTestProps> & {
 } = ({ children, title, margin }) => {
   return (
     <>
-      <TyphographyLabel variant="h6" mb={1} mt={margin ? "35px" : 2}>
+      <TyphographyLabel variant="h6"  mt={margin ? "10px" : 2}>
         {title}
       </TyphographyLabel>
       {children}
