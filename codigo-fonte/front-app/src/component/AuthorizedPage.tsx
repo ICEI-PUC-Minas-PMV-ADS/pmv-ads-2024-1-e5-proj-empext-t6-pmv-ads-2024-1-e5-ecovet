@@ -20,7 +20,12 @@ const AuthorizedPage = ({children, userRole}: any) => {
   // },[isAuthorized]) 
   
   return (
-    <Box>
+    <Box
+    style={{ 
+      backgroundImage: `url("img/bg.jpg")`,
+      backgroundColor: 'red !important',
+      height: '100vh',
+    }}>
       <HeaderComponent  />
       {children}
     </Box> 

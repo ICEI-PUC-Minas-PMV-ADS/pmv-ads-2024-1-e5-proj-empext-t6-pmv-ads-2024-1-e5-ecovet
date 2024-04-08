@@ -97,7 +97,7 @@ const LogUpCompany = () => {
         <form onSubmit={sendForm}>
           <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
-              <Button fullWidth type="button" variant="contained">
+              <Button fullWidth type="button" variant="outlined">
                 Clínica
               </Button>
             </Grid>
@@ -145,7 +145,7 @@ const LogUpCompany = () => {
             />
           </TextFieldLabel>
 
-          <TextFieldLabel title="Descrição dos Serviços" margin>
+          {/* <TextFieldLabel title="Descrição dos Serviços" margin>
                 <TextFieldLabel.Field
                   rows={6}
                   maxRows={6}
@@ -154,7 +154,7 @@ const LogUpCompany = () => {
                   fullWidth
                   multiline
                 />
-              </TextFieldLabel>
+              </TextFieldLabel> */}
 
           <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
