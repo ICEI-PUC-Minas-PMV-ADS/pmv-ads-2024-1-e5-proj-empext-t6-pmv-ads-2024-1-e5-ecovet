@@ -9,8 +9,7 @@ namespace Domain.Dto
         public int IDCandidatura { get; set; }
         public string Status { get; set; }
         public DateTime DataDaCandidatura { get; set; }
-
-        public ProfissionalVeterinario ProfissionalVeterinario { get; set; }
-        public Vaga Vaga { get; set; }
+        public int IdProfissionalVeterinario { get; set; }
+        public int IdVaga { get; set; }
     }
 }

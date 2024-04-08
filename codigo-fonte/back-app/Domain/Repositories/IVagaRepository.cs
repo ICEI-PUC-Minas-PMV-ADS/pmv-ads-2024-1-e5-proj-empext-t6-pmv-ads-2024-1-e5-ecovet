@@ -8,5 +8,10 @@ namespace Domain.Repositories
         /// Obtem as vagas.
         /// </summary>
         Task<IEnumerable<Vaga>> ObterVagasAsync();
+
+        /// <sumary>
+        /// Cadastrar vaga. 
+        /// </sumary>
+        Task InserirVagaAsync(Vaga vaga);
     }
 }
