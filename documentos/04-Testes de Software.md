@@ -30,6 +30,9 @@
 |Critério de Êxito | Login realizado  |
  
 # Evidências de Testes de Software
+Eviencia - Criar conta
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/1414226f-6e30-4300-9901-ef01c2781d48)
+
 Evidencia - Antes de logar
 ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/78057aa0-ca48-4494-97b8-2396c34f0f14)
 Evidencia - Logado
