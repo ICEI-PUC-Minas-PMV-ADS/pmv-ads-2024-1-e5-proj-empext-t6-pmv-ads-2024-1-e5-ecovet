@@ -7,13 +7,21 @@ namespace Domain.Repositories
         /// <summary>
         /// Obtem as clinicas veterinárias.
         /// </summary>
-        Task<IEnumerable<ClinicaVeterinaria>> ObterClinicasVeterinariasAsync();    
+        Task<IEnumerable<ClinicaVeterinaria>> ObterClinicasVeterinariasAsync();
+        
+        /// <summary>
+        /// Obtem as clinicas veterinárias por id.
+        /// </summary>
+        Task<ClinicaVeterinaria> ObterClinicasVeterinariasPorIdAsync(int idClinicaVeterinaria);    
         
         /// <summary>
         /// Obter a clinica para login.
         /// </summary>
         Task<ClinicaVeterinaria> ObterClinicaLoginAsync(string email, string senha);
-        //Todo: corrigir toda a parte de inserir clinica 
-        Task InserirClinica();
+
+        /// <summary>
+        /// Inserir clinica veterinária.
+        /// </summary>
+        Task InserirClinicaAsync(ClinicaVeterinaria clinicaVeterinaria);
     }
 }

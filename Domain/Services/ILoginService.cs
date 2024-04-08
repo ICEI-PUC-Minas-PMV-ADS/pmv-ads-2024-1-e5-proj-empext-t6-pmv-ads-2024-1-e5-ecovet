@@ -2,7 +2,7 @@
 
 namespace Domain.Services
 {
-    public interface ILoginService
+    public interface IAuthService
     {
 
         /// <summary>

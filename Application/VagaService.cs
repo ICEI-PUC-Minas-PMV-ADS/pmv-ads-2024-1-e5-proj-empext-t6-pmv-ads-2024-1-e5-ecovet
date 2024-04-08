@@ -14,6 +14,11 @@ namespace Application
                                  throw new ArgumentNullException(nameof(vagaRepository));
         }
 
+        public async Task InserirVagaAsync(Vaga vaga)
+        {
+            await vagaRepository.InserirVagaAsync(vaga);
+        }
+
         public async Task<IEnumerable<Vaga>> ObterVagasAsync()
         {
             return await vagaRepository.ObterVagasAsync();

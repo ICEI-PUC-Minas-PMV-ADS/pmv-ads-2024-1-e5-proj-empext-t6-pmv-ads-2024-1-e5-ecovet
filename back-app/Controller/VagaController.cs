@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Application;
+using AutoMapper;
 using back_app.Models;
 using Domain.Dto;
 using Domain.Services;
@@ -12,12 +13,17 @@ namespace back_app.Controller
     {
         private readonly IMapper mapper;
         private readonly IVagaService vagaService;
+        private readonly IClinicaVeterinariaService clinicaVeterinariaService;
 
-        public VagaController(IMapper mapper, IVagaService vagaService)
+        public VagaController(IMapper mapper, IVagaService vagaService, IClinicaVeterinariaService clinicaVeterinariaService)
         {
             this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+
             this.vagaService = vagaService ??
                         throw new ArgumentNullException(nameof(vagaService));
+
+            this.clinicaVeterinariaService = clinicaVeterinariaService ??
+                        throw new ArgumentNullException(nameof(clinicaVeterinariaService)); 
         }
 
         /// <summary>
@@ -31,11 +37,30 @@ namespace back_app.Controller
         [HttpGet("obterVagas"), AllowAnonymous]
         [ProducesResponseType(typeof(IEnumerable<VagaModel>), 200)]
         [Authorize]
-        public async Task<IActionResult> ObterClinicasVeterinarias()
+        public async Task<IActionResult> ObterVagas()
         {
-            var result = await vagaService.ObterVagasAsync();
+            var retorno = await vagaService.ObterVagasAsync();
 
-            return Ok(mapper.Map<IEnumerable<ClinicaVeterinariaModel>>(result));
+            return Ok(mapper.Map<IEnumerable<VagaModel>>(retorno));
+        }
+
+        /// <summary>
+        /// Cadastro de vaga.
+        /// </summary>
+        /// <response code="200">Lista de resultados.</response>
+        /// <response code="400">
+        ///     Dados inválidos
+        /// </response>
+        /// <response code="500">Erro interno.</response>
+        [HttpPost("cadastrarVaga")]
+        [ProducesResponseType(typeof(IActionResult), 200)]
+        public async Task<IActionResult> CadastrarVaga([FromBody] VagaModel vagaModel)
+        {
+            var vaga = mapper.Map<Vaga>(vagaModel);
+            
+            await vagaService.InserirVagaAsync(vaga);
+
+            return Ok();
         }
     }
 }
