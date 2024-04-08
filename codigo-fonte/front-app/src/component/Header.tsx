@@ -67,7 +67,12 @@ const HeaderComponent = () => {
 
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: '#fff !important', color: '#000' }}>
+    <AppBar position="static" sx={{ 
+      backgroundColor: '#fff !important', 
+      color: '#000', 
+      display: 'flex',
+      flexDirection: 'row', 
+      justifyContent: 'flex-end' }}>
       <Container maxWidth="xl">
         <Toolbar >
           
@@ -149,9 +154,13 @@ const HeaderComponent = () => {
             </Menu>
           }
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ 
+            flexGrow: 2,
+            display: 'flex',
+            flexDirection: 'row', 
+            justifyContent: 'flex-end' }}>
             {isAuthorized ?
-              <UserMenuComponent />: <Button variant="outlined">Login</Button>
+              <UserMenuComponent />: <Button variant="outlined" onClick={() => navigate('/login')}>Login</Button>
             }
           </Box> 
         </Toolbar>
