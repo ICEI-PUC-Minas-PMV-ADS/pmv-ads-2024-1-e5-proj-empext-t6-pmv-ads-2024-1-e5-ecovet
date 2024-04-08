@@ -31,6 +31,15 @@ export const cadastrarVeterinario = async (data?: any) => {
         body: JSON.stringify(data)
     })
 }
+export const login = async (data?: any) => {
+    return await fetch(`${BASE_URL}/Auth/login`,{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    })
+}
 
 export const setUserToken = (accessToken: any) => {
     access_token =  accessToken
