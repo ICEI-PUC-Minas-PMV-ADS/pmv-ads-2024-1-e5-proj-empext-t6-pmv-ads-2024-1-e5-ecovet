@@ -28,6 +28,13 @@
 |	Requisito Associado 	| RF-001 - Realizar login na aplicação |
 | Objetivo do Teste 	| Verificar inserção dos dados informados pelo profissional. |
 |Critério de Êxito | Login realizado  |
+
+
+| **Caso de Teste** 	| **CT-05 – Cadastro de vaga** 	|
+|:---:	|:---:	|
+|	Requisito Associado 	| RF-001 - Realizar login na aplicação |
+| Objetivo do Teste 	| Verificar inserção dos dados informados pelo profissional. |
+|Critério de Êxito | Login realizado  |
  
 # Evidências de Testes de Software
 Evidência de teste CT 01  - Resultado clinica ok, cadastro de profissional houve inconsistência 
