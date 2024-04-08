@@ -29,7 +29,8 @@ export const userSlice = createSlice({
       // state.userRegistrationId = data.localAccountId
     },
     logout: (state) => {
-      state = initialState
+      console.log("logout")
+      state.isAuthorized = false
     },
     getUser: (state) => {
       return state

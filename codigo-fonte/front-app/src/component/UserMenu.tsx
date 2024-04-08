@@ -11,11 +11,14 @@ import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import { deepOrange, deepPurple } from '@mui/material/colors';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-
+import { useNavigate } from "react-router-dom";
+import { logout } from '../reducers/userReducer'
 
 const UserMenuComponent = ({field}: any) => {
   const { name, email, role } = useSelector((state: RootState) => state.user)
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const dispatch = useDispatch<AppDispatch>()
+  const navigate = useNavigate();
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -27,9 +30,8 @@ const UserMenuComponent = ({field}: any) => {
 
 
   const handleLogout = () => {
-    // instance.logoutRedirect({
-    //   postLogoutRedirectUri: "/",
-    // });
+    dispatch(logout())
+    navigate('/login')
   };
 
   return (
@@ -90,29 +92,3 @@ const UserMenuComponent = ({field}: any) => {
 }
 
 export default UserMenuComponent
-
-
-/* 
-
-  ## Elvis operator ? 
-
-  name?.substring(0, 1)
-
-  if(name){
-    name.substring(0, 1)
-  }
-
-  ## Ternário
-
-  name ? name.substring(0, 1) : console.log('usuário não encontrado')
-
-  if(name){
-    name.substring(0, 1)
-  }else{
-    console.log('usuário não encontrado')
-  }
-
-
-  name && name.substring(0, 1)
-
- */ 
