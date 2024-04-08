@@ -65,6 +65,9 @@ const LogUpCompany = () => {
     const formValue = {
       email: data.get("email"),
       companyName: data.get("companyName"),
+      addres: data.get("endereco"),
+      phone: data.get("telephone"),
+      description: data.get("description"),
       password: data.get("password"),
       ConfirmPass: data.get("ConfirmPass"),
     };
@@ -123,6 +126,35 @@ const LogUpCompany = () => {
               fullWidth
             />
           </TextFieldLabel>
+
+          <TextFieldLabel title="Endereço">
+            <TextFieldLabel.Field
+              placeholder="Endereço"
+              name="endereco"
+              size="small"
+              fullWidth
+            />
+          </TextFieldLabel>
+
+          <TextFieldLabel title="Telefone">
+            <TextFieldLabel.Field
+              placeholder="Telefone"
+              name="telephone"
+              size="small"
+              fullWidth
+            />
+          </TextFieldLabel>
+
+          <TextFieldLabel title="Descrição dos Serviços" margin>
+                <TextFieldLabel.Field
+                  rows={6}
+                  maxRows={6}
+                  name="description"
+                  size="small"
+                  fullWidth
+                  multiline
+                />
+              </TextFieldLabel>
 
           <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
