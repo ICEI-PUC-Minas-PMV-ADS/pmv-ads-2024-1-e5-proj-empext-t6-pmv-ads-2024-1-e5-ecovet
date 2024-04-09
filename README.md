@@ -1,10 +1,10 @@
 # Ecovet
 
-`CURSO`
+`Curso: Análise e Desenvolvimento de Sistemas`
 
-`DISCIPLINA`
+`Disciplina: Projeto Desenvolvimento de um Sistema Sociotécnico Inovador`
 
-`SEMESTRE`
+`5° SEMESTRE`
 
 A crescente demanda por serviços veterinários de qualidade tem sido um desafio para muitas clínicas veterinárias e profissionais da área. Nesse contexto, surge a necessidade de uma plataforma que conecte de forma eficiente e eficaz as clínicas veterinárias aos profissionais veterinários disponíveis. Este projeto propõe o desenvolvimento de uma plataforma online que visa otimizar essa conexão, facilitando a busca e contratação de profissionais qualificados para atender às necessidades específicas de cada clínica.
 
