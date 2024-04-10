@@ -92,6 +92,8 @@ const UploadJob = () => {
                   name="title"
                   size="small"
                   fullWidth
+                  error
+                  required
                 />
               </TextFieldLabel>
 
@@ -103,6 +105,8 @@ const UploadJob = () => {
                       name="type"
                       size="small"
                       fullWidth
+                      error
+                      required
                     />
                   </TextFieldLabel>
                 </Grid>
@@ -114,6 +118,8 @@ const UploadJob = () => {
                       name="value"
                       size="small"
                       fullWidth
+                      error
+                      required
                     />
                   </TextFieldLabel>
                 </Grid>
@@ -125,6 +131,8 @@ const UploadJob = () => {
                   name="experience"
                   size="small"
                   fullWidth
+                  error
+                  required
                 />
               </TextFieldLabel>
 
@@ -136,6 +144,8 @@ const UploadJob = () => {
                   size="small"
                   fullWidth
                   multiline
+                  error
+                  required
                 />
               </TextFieldLabel>
 
@@ -147,6 +157,8 @@ const UploadJob = () => {
                   size="small"
                   fullWidth
                   multiline
+                  error
+                  required
                 />
               </TextFieldLabel>
 
