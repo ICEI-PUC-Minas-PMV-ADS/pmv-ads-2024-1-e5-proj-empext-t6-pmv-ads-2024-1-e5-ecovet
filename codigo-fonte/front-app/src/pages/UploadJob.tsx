@@ -7,6 +7,25 @@ import Typography from "@mui/material/Typography";
 import TextField, { TextFieldProps } from "@mui/material/TextField";
 import { useTheme } from "@mui/material/styles";
 import { Box, styled } from "@mui/material";
+import JobCard from "../component/JobCard";
+
+const fakeData = [
+  {
+    id: "1",
+    title: "Enfermeiro para cirurgia",
+    location: "Belo Horizonte MG",
+    description:
+      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
+    data: "a 1 segundo atrás",
+  },
+  { 
+    id: "2",
+    title: "Enfermeiro para cirurgia",
+  location: "Belo Horizonte MG",
+  description:
+    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
+  data: "a 1 segundo atrás",}
+]
 
 const TypographyForCardBox = styled(Typography)({
   fontFamily: "red-hat-display",
@@ -38,7 +57,7 @@ const TextFieldLabel: React.FC<TextinputTestProps> & {
 } = ({ children, title, margin }) => {
   return (
     <>
-      <TyphographyLabel variant="h6"  mt={margin ? "10px" : 2}>
+      <TyphographyLabel variant="h6" mt={margin ? "10px" : 2}>
         {title}
       </TyphographyLabel>
       {children}
@@ -92,7 +111,6 @@ const UploadJob = () => {
                   name="title"
                   size="small"
                   fullWidth
-                  error
                   required
                 />
               </TextFieldLabel>
@@ -105,7 +123,6 @@ const UploadJob = () => {
                       name="type"
                       size="small"
                       fullWidth
-                      error
                       required
                     />
                   </TextFieldLabel>
@@ -118,7 +135,6 @@ const UploadJob = () => {
                       name="value"
                       size="small"
                       fullWidth
-                      error
                       required
                     />
                   </TextFieldLabel>
@@ -131,7 +147,6 @@ const UploadJob = () => {
                   name="experience"
                   size="small"
                   fullWidth
-                  error
                   required
                 />
               </TextFieldLabel>
@@ -139,12 +154,10 @@ const UploadJob = () => {
               <TextFieldLabel title="Descrição da vaga" margin>
                 <TextFieldLabel.Field
                   rows={6}
-                  maxRows={6}
                   name="description"
                   size="small"
                   fullWidth
                   multiline
-                  error
                   required
                 />
               </TextFieldLabel>
@@ -152,12 +165,10 @@ const UploadJob = () => {
               <TextFieldLabel title="Responsabilidades" margin>
                 <TextFieldLabel.Field
                   rows={6}
-                  maxRows={6}
                   name="responsabilits"
                   size="small"
                   fullWidth
                   multiline
-                  error
                   required
                 />
               </TextFieldLabel>
@@ -176,23 +187,29 @@ const UploadJob = () => {
           </FormBox>
         </Grid>
 
-        <Grid item xs={12} md={4} xl={6}>
-          <TypographyForCardBox ml={10} variant="h5" color={"#000"}>
-            Postagens Recentes
-          </TypographyForCardBox>
+        <Grid
+          item
+          xs={12}
+          md={4}
+          xl={6}
+          sx={{
+            marginTop: { md: "30px" },
+          }}
+        >
+          <Box padding={"20px"} gap={2} display={"flex"} flexDirection={"column"}>
+            <TypographyForCardBox mb={"10px"} variant="h5" color={"#000"}>
+              Postagens Recentes
+            </TypographyForCardBox>
 
-          <Box
-            width={"288px"}
-            height={"288px"}
-            sx={{ border: "1px dashed gray", borderRadius: 4 }}
-            ml={10}
-          ></Box>
-          <Box
-            width={"288px"}
-            height={"288px"}
-            sx={{ border: "1px dashed gray", borderRadius: 4 }}
-            ml={10}
-          ></Box>
+      
+            {/* {Array.from({ length: 2 }).map((_, index) => (
+              <JobCard />
+            ))} */}
+
+            {fakeData.map((item) => (
+              <JobCard job={item} key={item.id}/>
+            ))}
+          </Box>
         </Grid>
       </Grid>
     </PageContainerComponent>
