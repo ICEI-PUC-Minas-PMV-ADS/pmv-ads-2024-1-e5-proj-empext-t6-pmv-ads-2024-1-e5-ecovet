@@ -30,9 +30,9 @@ function JobCard({ job }: JobCardPropss) {
           flexWrap: "wrap",
           "& > :not(style)": {
             width: { xs: "100%", md: "16rem", xl: "16rem" },
-            height: { xs: "16rem", md: "16rem" },
+            height: { xs: "14rem", md: "16rem" },
             padding: "16px",
-            borderRadius: "px",
+            borderRadius: "6px",
           },
         }}
         bgcolor={"white"}
