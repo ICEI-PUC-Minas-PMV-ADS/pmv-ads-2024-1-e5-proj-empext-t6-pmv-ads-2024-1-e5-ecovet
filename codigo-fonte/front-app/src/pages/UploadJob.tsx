@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
@@ -7,6 +7,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField, { TextFieldProps } from "@mui/material/TextField";
 import { useTheme } from "@mui/material/styles";
 import { Box, Container, styled } from "@mui/material";
+import { useLocation } from "react-router-dom";
 
 import JobCard from "../component/JobCard";
 
@@ -69,26 +70,54 @@ const TextFieldLabel: React.FC<TextinputTestProps> & {
 
 TextFieldLabel.Field = TextField;
 
-const sendForm = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-
-  const data = new FormData(e.currentTarget);
-
-  const formValue = {
-    title: data.get("title"),
-    type: data.get("type"),
-    value: data.get("value"),
-    experience: data.get("experience"),
-    description: data.get("description"),
-    responsabilits: data.get("responsabilits"),
-  };
-
-  console.log(formValue);
+const initialValues = {
+  title: "",
+  type: "",
+  value: "",
+  experience: "",
+  description: "",
+  responsibilities: "",
 };
 
 const UploadJob = () => {
+  const [formValues, setFormValues] = useState(initialValues);
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const location = useLocation();
+  const job = location.state ? location.state.job : null;
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormValues((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  useEffect(() => {
+    if (job) {
+      setFormValues(job);
+    }
+  }, [job]);
+
+  const sendForm = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // editar job
+    if (job) {
+      console.log(formValues);
+      setFormValues(initialValues);
+      return;
+    }
+
+    // fluxo para criar job
+    console.log(formValues);
+    setFormValues(initialValues);
+  };
 
   return (
     <React.Fragment>
@@ -112,6 +141,8 @@ const UploadJob = () => {
                     name="title"
                     size="small"
                     fullWidth
+                    value={formValues.title}
+                    onChange={handleChange}
                     required
                   />
                 </TextFieldLabel>
@@ -124,6 +155,8 @@ const UploadJob = () => {
                         name="type"
                         size="small"
                         fullWidth
+                        value={formValues.type}
+                        onChange={handleChange}
                         required
                       />
                     </TextFieldLabel>
@@ -136,6 +169,8 @@ const UploadJob = () => {
                         name="value"
                         size="small"
                         fullWidth
+                        value={formValues.value}
+                        onChange={handleChange}
                         required
                       />
                     </TextFieldLabel>
@@ -147,6 +182,8 @@ const UploadJob = () => {
                     placeholder="Experência"
                     name="experience"
                     size="small"
+                    value={formValues.experience}
+                    onChange={handleChange}
                     fullWidth
                     required
                   />
@@ -157,6 +194,8 @@ const UploadJob = () => {
                     rows={6}
                     name="description"
                     size="small"
+                    value={formValues.description}
+                    onChange={handleChange}
                     fullWidth
                     multiline
                     required
@@ -166,8 +205,10 @@ const UploadJob = () => {
                 <TextFieldLabel title="Responsabilidades" margin>
                   <TextFieldLabel.Field
                     rows={6}
-                    name="responsabilits"
+                    name="responsibilities"
                     size="small"
+                    value={formValues.responsibilities}
+                    onChange={handleChange}
                     fullWidth
                     multiline
                     required
@@ -193,7 +234,6 @@ const UploadJob = () => {
             xs={12}
             md={4}
             xl={6}
-    
             sx={{
               paddingTop: { md: "30px" },
             }}
