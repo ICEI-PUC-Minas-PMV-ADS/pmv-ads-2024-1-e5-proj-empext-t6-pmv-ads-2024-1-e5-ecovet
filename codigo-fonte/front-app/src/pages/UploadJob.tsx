@@ -123,7 +123,7 @@ const UploadJob = () => {
     <React.Fragment>
       <CssBaseline />
       <Container fixed>
-        <Grid mt={4} container>
+        <Grid mt={4} container >
           <Grid xs={12} md={8} xl={6} item>
             <FormBox>
               <Typography
@@ -236,6 +236,7 @@ const UploadJob = () => {
             xl={6}
             sx={{
               paddingTop: { md: "30px" },
+              paddingLeft: {md: "10px"}
             }}
             spacing={4}
           >
