@@ -11,7 +11,17 @@ import { useLocation } from "react-router-dom";
 
 import JobCard from "../component/JobCard";
 
-const fakeData = [
+type Jobs = {
+  
+    id: string;
+    title: string;
+    location: string;
+    description: string;
+    data: string;
+}[]
+
+
+const jobs: Jobs | null = [
   {
     id: "1",
     title: "Enfermeiro para cirurgia",
@@ -244,11 +254,16 @@ const UploadJob = () => {
               Postagens Recentes
             </TypographyForCardBox>
 
-            {fakeData.map((item, index) => (
+            {jobs && jobs.length ? jobs.map((item, index) => (
               <Box key={item.id} sx={{ mt: index > 0 ? 2 : 0 }}>
                 <JobCard job={item} />
               </Box>
-            ))}
+            )) : <Typography variant="body2" sx={{
+              fontFamily: "red-hat-display",
+              opacity: "50%"
+            }}>Não há vagas criadas</Typography>}
+
+           
           </Grid>
         </Grid>
       </Container>
