@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PageContainerComponent from "../component/PageContainer";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import DialogComponent from "../component/Dialog";
@@ -32,7 +32,7 @@ const TextFieldLabel: React.FC<TextinputTestProps> & {
 } = ({ children, title, margin }) => {
   return (
     <>
-      <TyphographyLabel variant="h6" mb={1} mt={margin ? "35px" : 2}>
+      <TyphographyLabel variant="h6" mb={"1px"} mt={"15px"}>
         {title}
       </TyphographyLabel>
       {children}
@@ -42,7 +42,53 @@ const TextFieldLabel: React.FC<TextinputTestProps> & {
 
 TextFieldLabel.Field = TextField;
 
+const style1 = {
+  backgroundColor: "#1D4FD8",
+  opacity: "60%",
+  textTransform: "none",
+  color: "white",
+  fontFamily: "red-hat-display",
+};
+
+const style2 = {
+  textTransform: "none",
+  color: "#1E3A8A",
+  fontFamily: "red-hat-display",
+  borderColor: "#60A5FA",
+};
+
+interface FormValues {
+  email: string | null;
+  companyName?: string | null;
+  address: string | null;
+  phone: string | null;
+  perfil: string | null;
+  password: string | null;
+  confirmPass: string | null;
+  name?: string | null;
+  especiality?: string | null;
+  disponibility?: string | null;
+}
+
+const initialValues = {
+  email: "",
+  companyName: "",
+  address: "",
+  phone: "",
+  perfil: "",
+  password: "",
+  confirmPass: "",
+  name: "",
+  especiality: "",
+  disponibility: "",
+};
+
 const LogUpCompany = () => {
+  const [showPassword, setShowPassword] = React.useState<Boolean>(false);
+  const [isClinic, setIsClinic] = useState<Boolean>(false);
+  const [checkPassword, setCheckPassword] = useState<Boolean>(false);
+  const [formValue, setFormValue] = useState<FormValues>(initialValues);
+
   const isDialogOpen = useSelector((state: RootState) => state.dialog.isOpen);
   const dispatch = useDispatch<AppDispatch>();
   const theme = useTheme();
@@ -57,25 +103,32 @@ const LogUpCompany = () => {
     );
   }, []);
 
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormValue((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   const sendForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const data = new FormData(e.currentTarget);
 
-    const formValue = {
-      email: data.get("email"),
-      companyName: data.get("companyName"),
-      addres: data.get("endereco"),
-      phone: data.get("telephone"),
-      description: data.get("description"),
-      password: data.get("password"),
-      ConfirmPass: data.get("ConfirmPass"),
-    };
+    if (isClinic) {
+      console.log("clinic");
+
+    } else {
+      console.log("professional");
+    }
+
+    // if(formValue.password !== formValue.confirmPass) return
 
     console.log(formValue);
   };
-
-  const [showPassword, setShowPassword] = React.useState<Boolean>(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -84,6 +137,16 @@ const LogUpCompany = () => {
   ) => {
     event.preventDefault();
   };
+
+  useEffect(() => {
+    if(formValue.password !== formValue.confirmPass || formValue.confirmPass === "" || formValue.password === ""){
+      setCheckPassword(true)
+    } else {
+      setCheckPassword(false)
+    }
+  }, [
+    formValue.confirmPass, formValue.password
+  ])
 
   return (
     <PageContainerComponent
@@ -97,64 +160,140 @@ const LogUpCompany = () => {
         <form onSubmit={sendForm}>
           <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
-              <Button fullWidth type="button" variant="contained">
+              <Button
+                onClick={() => {setIsClinic(true); setFormValue(initialValues)}}
+                fullWidth
+                type="button"
+                variant={isClinic ? "contained" : "outlined"}
+                sx={isClinic ? style1 : style2}
+              >
                 Clínica
               </Button>
             </Grid>
 
             <Grid item xs={12} md={6}>
-              <Button fullWidth type="button" variant="contained">
+              <Button
+                onClick={() => {setIsClinic(false); setFormValue(initialValues)}}
+                fullWidth
+                type="button"
+                variant={!isClinic ? "contained" : "outlined"}
+                sx={isClinic ? style2 : style1}
+              >
                 Profissional
               </Button>
             </Grid>
           </Grid>
+
+          {isClinic ? (
+            <TextFieldLabel title="Nome de empresa">
+              <TextFieldLabel.Field
+                placeholder="nome de empresa"
+                name="companyName"
+                size="small"
+                fullWidth
+                type="text"
+                value={formValue.companyName}
+                onChange={handleChange}
+                required
+              />
+            </TextFieldLabel>
+          ) : (
+            <TextFieldLabel title="Nome ">
+              <TextFieldLabel.Field
+                placeholder="nome"
+                name="name"
+                size="small"
+                fullWidth
+                required
+                onChange={handleChange}
+                value={formValue.name}
+                type="text"
+              />
+            </TextFieldLabel>
+          )}
 
           <TextFieldLabel title="Endereço de e-mail">
             <TextFieldLabel.Field
               placeholder="email@example.com"
               name="email"
               size="small"
+              type="email"
+              value={formValue.email}
+              onChange={handleChange}
               fullWidth
-            />
-          </TextFieldLabel>
-
-          <TextFieldLabel title="Nome de empresa">
-            <TextFieldLabel.Field
-              placeholder="nome de empresa"
-              name="companyName"
-              size="small"
-              fullWidth
+              required
             />
           </TextFieldLabel>
 
           <TextFieldLabel title="Endereço">
             <TextFieldLabel.Field
               placeholder="Endereço"
-              name="endereco"
+              name="address"
               size="small"
+              type="text"
+              value={formValue.address}
+              onChange={handleChange}
               fullWidth
+              required
             />
           </TextFieldLabel>
 
           <TextFieldLabel title="Telefone">
             <TextFieldLabel.Field
               placeholder="Telefone"
-              name="telephone"
+              name="phone"
               size="small"
-              fullWidth
+              type="tel"
+              value={formValue.phone}
+              onChange={handleChange}
+              required
             />
           </TextFieldLabel>
 
-          <TextFieldLabel title="Descrição dos Serviços" margin>
+          {isClinic && (
+            <TextFieldLabel title="Sobre a clínica" margin>
+              <TextFieldLabel.Field
+                rows={6}
+                name="perfil"
+                size="small"
+                fullWidth
+                multiline
+                value={formValue.perfil}
+                onChange={handleChange}
+                required
+              />
+            </TextFieldLabel>
+          )}
+
+          {!isClinic && (
+            <>
+              <TextFieldLabel title="Especialidade">
                 <TextFieldLabel.Field
-                  rows={6}
-                  maxRows={6}
-                  name="description"
+                  placeholder="Especialidade"
+                  name="especiality"
                   size="small"
+                  type="text"
+                  value={formValue.especiality}
+                  onChange={handleChange}
+                  required
                   fullWidth
-                  multiline
                 />
               </TextFieldLabel>
+
+              <TextFieldLabel title="Disponibilidade">
+                <TextFieldLabel.Field
+                  placeholder="disponibilidade"
+                  name="disponibility"
+                  size="small"
+                  type="text"
+                  value={formValue.disponibility}
+                  onChange={handleChange}
+                  required
+                  fullWidth
+                />
+              </TextFieldLabel>
+            </>
+          )}
 
           <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
@@ -164,7 +303,10 @@ const LogUpCompany = () => {
                   name="password"
                   size="small"
                   fullWidth
-                  type="password"
+                  required
+                  value={formValue.password}
+                  onChange={handleChange}
+                  type={showPassword ? "text" : "password"}
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
@@ -187,10 +329,13 @@ const LogUpCompany = () => {
               <TextFieldLabel title="Confirmar password" margin>
                 <TextFieldLabel.Field
                   placeholder="Confirma password"
-                  name="ConfirmPass"
+                  name="confirmPass"
                   size="small"
                   fullWidth
-                  type="password"
+                  required
+                  value={formValue.confirmPass}
+                  onChange={handleChange}
+                  type={showPassword ? "text" : "password"}
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
@@ -212,9 +357,13 @@ const LogUpCompany = () => {
 
           <Button
             sx={{
-              marginTop: "35px",
-              padding: "8px 30px",
+              marginTop: "25px",
+              padding: "8px 32px",
+              fontWeight: 500,
+              textTransform: "none",
+            
             }}
+            disabled={checkPassword ? true : false}
             type="submit"
             variant="contained"
           >
@@ -222,10 +371,15 @@ const LogUpCompany = () => {
           </Button>
         </form>
 
-        <Grid mt={5} item xs={12}>
-          <Typography>
-            Não tem conta?
-            <Link sx={{ color: "blue" }} href="#">
+        <Grid mt={"16px"} item xs={12}>
+          <Typography
+            sx={{
+              fontFamily: "red-hat-display",
+              fontSize: "14px",
+            }}
+          >
+            Já tem uma conta?
+            <Link sx={{ color: "blue", marginLeft: "5px" }} href="/login">
               Clique aqui
             </Link>
           </Typography>

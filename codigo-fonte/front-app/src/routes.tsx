@@ -24,7 +24,7 @@ const router = createBrowserRouter([
     element: <AuthorizedPage children={<UploadJob />} />
   },
   {
-    path: "logup-company",
+    path: "/cadastro/base",
     element: <AuthorizedPage><LogUpCompany /></AuthorizedPage>
   },
   {
