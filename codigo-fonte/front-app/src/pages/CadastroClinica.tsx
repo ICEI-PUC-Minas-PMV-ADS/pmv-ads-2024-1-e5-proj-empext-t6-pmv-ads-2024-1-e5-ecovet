@@ -17,7 +17,7 @@ import { useState } from 'react';
 import {post} from '../services/agent';
 import { useNavigate } from 'react-router-dom';
 
-const CadastroProfissionalPage = () => {
+const CadastroClinicaPage = () => {
   const isDialogOpen = useSelector((state: RootState) => state.dialog.isOpen)
   const dispatch = useDispatch<AppDispatch>();
   const theme = useTheme();
@@ -25,33 +25,31 @@ const CadastroProfissionalPage = () => {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
-  const [localizacao, setLocalizacao] = useState('');
-  const [especialidade, setEspecialidade] = useState('');
-  const [disponibilidade, setDisponibilidade] = useState('');
+  const [endereco, setEndereco] = useState('');
+  const [descricaoDosServicos, setDescricaoDosServicos] = useState('');
   const [senha, setSenha] = useState('');
 
 
   useEffect(() => {
     dispatch(setDialog({
-      title: 'Cadastro Profissional',
+      title: 'Cadastro Clínica',
       action: null
     }))
   },[])
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
-    const profissionalData = {
+    const clinicaData = {
       nome,
-      email,
-      telefone,
-      localizacao,
-      especialidade,
-      disponibilidade,
+      endereco,
       senha,
+      telefone,
+      email,
+      descricaoDosServicos,
     };
-
+  
     try {
-      const response = await post('ProfissionalVeterinario/cadastrarProfissionalVeterinario', profissionalData);
+      const response = await post('ClinicaVeterinaria/cadastrarClinicaVeterinaria', clinicaData);
       if (response.ok) {
         // Tratamento de sucesso
         alert('Cadastro realizado com sucesso!');
@@ -86,18 +84,13 @@ const CadastroProfissionalPage = () => {
           </Grid>
 
           <Grid item xs={12}>
-            <Typography>Localização</Typography>
-            <TextField id="filled-basic" style={{width: '100%'}} label="Digite sua localização" variant="outlined" onChange={(e) => setLocalizacao(e.target.value)}/>
+            <Typography>Endereco</Typography>
+            <TextField id="filled-basic" style={{width: '100%'}} label="Digite sua localização" variant="outlined" onChange={(e) => setEndereco(e.target.value)}/>
           </Grid>
 
           <Grid item xs={12}>
-            <Typography>Especialidade</Typography>
-            <TextField id="filled-basic" style={{width: '100%'}} label="Sua especialidade" variant="outlined" onChange={(e) => setEspecialidade(e.target.value)}/>
-          </Grid>
-
-          <Grid item xs={12}>
-            <Typography>Disponibilidade</Typography>
-            <TextField id="filled-basic" style={{width: '100%'}} label="Disponibilidade" variant="outlined" onChange={(e) => setDisponibilidade(e.target.value)}/>
+            <Typography>Descrição dos Serviços</Typography>
+            <TextField id="filled-basic" style={{width: '100%'}} label="DescricaoServicos" variant="outlined" onChange={(e) => setDescricaoDosServicos(e.target.value)}/>
           </Grid>
 
           <Grid item xs={12}>
@@ -115,4 +108,4 @@ const CadastroProfissionalPage = () => {
   )
 }
 
-export default CadastroProfissionalPage
+export default CadastroClinicaPage

@@ -13,6 +13,7 @@ import CadastroProfissionalPage from './pages/CadastroProfissional';
 
 import UploadJob from './pages/UploadJob';
 import LogUpCompany from './pages/LogUpCompany';
+import CadastroClinicaPage from './pages/CadastroClinica';
 
 
 
@@ -45,10 +46,14 @@ const router = createBrowserRouter([
     path: "/upload-job",
     element: <AuthorizedPage children={<UploadJob />} />
   },
-  // {
-  //   path: "/cadastroveterinario",//passo 1 de cadastro de usuario
-  //   element: <AuthorizedPage children={<CadastroProfissionalPage />} role='user'/>
-  // }
+  {
+    path: "/cadastroveterinario",//passo 1 de cadastro de usuario
+    element: <AuthorizedPage children={<CadastroProfissionalPage />} role='user'/>
+  },
+  {
+    path: "/clinica/cadastro",//passo 1 de cadastro de usuario
+    element: <AuthorizedPage children={<CadastroClinicaPage />} role='user'/>
+  }
 
 
 ]);

@@ -97,7 +97,7 @@ const LoginPage = () => {
           </Grid>
           <Grid item xs={12}>
               <Typography>Esqueceu a senha?<Link to="/">Clique aqui</Link></Typography>
-              <Typography>Não tem conta?<Link to="/cadastroveterinario">Clique aqui</Link></Typography>
+              <Typography>Não tem conta?<Link to="/logup">Clique aqui</Link></Typography>
           </Grid>
         </Grid>
 
