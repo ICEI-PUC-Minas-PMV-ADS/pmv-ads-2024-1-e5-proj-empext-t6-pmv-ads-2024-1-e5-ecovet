@@ -145,18 +145,62 @@ const ClinicPerfilEdit = () => {
     );
   }
 
-
   return (
     <React.Fragment>
       <CssBaseline />
       <Container fixed maxWidth={"xl"}>
+        <Stack direction={"column"} paddingY={"20px"}>
+          <Grid container flex={1}>
+            <Grid
+              item
+              md={12}
+              xs={12}
+              sx={{
+                display: "flex",
+                flexDirection: { xs: "column", md: "row" },
+                alignItems: { md: "center" },
+                width: "100%",
+              }}
+              gap={"12px"}
+              justifyContent={"space-between"}
+            >
+              <TypographyMold
+                variant="h2"
+                fontSize={"20px"}
+                fontWeight={"600"}
+                color={"#4b5563"}
+              >
+                Bem-vindo, clinica EcoVet
+              </TypographyMold>
 
+              <Box
+                display={"flex"}
+                alignItems={"center"}
+                justifyContent={"center"}
+                sx={{ paddingY: { xs: "20px", md: "0px" } }}
+                gap={"20px"}
+              >
+                <EditButton
+                  variant="contained"
+                  endIcon={<DriveFileRenameOutlineIcon />}
+                  onClick={() => setOpen(true)}
+                />
+                <UploadButton
+                  variant="outlined"
+                  endIcon={<FileUploadOutlinedIcon />}
+                  onClick={() => navigate("/upload-job")}
+                >
+                  Upload vaga
+                </UploadButton>
+              </Box>
+            </Grid>
+          </Grid>
+        </Stack>
+
+        <ClinicPerfilModal open={open} setOpen={setOpen} />
       </Container>
     </React.Fragment>
-  )
-
-
-}
-
+  );
+};
 
 export default ClinicPerfilEdit;
