@@ -194,6 +194,58 @@ const ClinicPerfilEdit = () => {
                 </UploadButton>
               </Box>
             </Grid>
+
+            {/* correção bug  */}
+              <Grid
+              flex={1}
+              item
+              md={12}
+              xs={12}
+              sx={{
+                display: "flex",
+                flexDirection: { xs: "column", md: "row" },
+                justifyContent: { xs: "start", md: "space-between" },
+                marginTop: { xs: "20px", md: "32px" },
+              }}
+            >
+              <InfoBox>
+                <PlaceIcon
+                  sx={{ color: "#475569", width: "16px", height: "16px" }}
+                />
+                <InfoTypography>
+                  {fakeUser.location || "No location"}
+                </InfoTypography>
+              </InfoBox>
+
+              <InfoBox>
+                <EmailOutlinedIcon
+                  sx={{ color: "#475569", width: "16px", height: "16px" }}
+                />
+                <InfoTypography>
+                  {fakeUser.email || "No email provide"}
+                </InfoTypography>
+              </InfoBox>
+
+              <InfoBox>
+                <CallOutlinedIcon
+                  sx={{ color: "#475569", width: "16px", height: "16px" }}
+                />
+                <InfoTypography>
+                  {fakeUser.contact || "No contact"}
+                </InfoTypography>
+              </InfoBox>
+
+              <JobsPostLenght>
+                <TypographyMold fontSize={"20px"}>
+                  {fakeUser.jobs.length ? fakeUser.jobs.length : "0"}
+                </TypographyMold>
+                <TypographyMold color={"#2563eb"} fontSize={"14px"}>
+                  Vagas postadas
+                </TypographyMold>
+              </JobsPostLenght>
+            </Grid>
+              {/* correção bug */}
+              
           </Grid>
         </Stack>
 
