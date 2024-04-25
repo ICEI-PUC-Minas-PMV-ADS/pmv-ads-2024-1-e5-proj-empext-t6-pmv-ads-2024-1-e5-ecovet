@@ -195,8 +195,8 @@ const ClinicPerfilEdit = () => {
               </Box>
             </Grid>
 
-            {/* correção bug  */}
-              <Grid
+            {/* PESSOAL RESOLVER TIRAR  */}
+            {/* <Grid
               flex={1}
               item
               md={12}
@@ -243,10 +243,13 @@ const ClinicPerfilEdit = () => {
                   Vagas postadas
                 </TypographyMold>
               </JobsPostLenght>
-            </Grid>
-              {/* correção bug */}
-              
+            </Grid> */}
+            {/* PESSOAL RESOLVER TIRAR   */}
+ 
           </Grid>
+            
+            {/* COLOCAR O GRID QUE RENDERIZA OS CARD ABAIXO  */}
+          
         </Stack>
 
         <ClinicPerfilModal open={open} setOpen={setOpen} />
