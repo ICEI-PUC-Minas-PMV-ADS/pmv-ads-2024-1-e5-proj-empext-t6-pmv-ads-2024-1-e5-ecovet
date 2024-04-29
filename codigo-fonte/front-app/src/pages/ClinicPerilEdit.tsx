@@ -31,7 +31,7 @@ const fakeData = [
   {
     id: "1",
     title: "Enfermeiro para cirurgia",
-    location: "Belo Horizonte MG",
+    location: "São Paulo - SP",
     value: "a combinar",
     type: "urgent",
     experience: "2 years",
@@ -43,7 +43,34 @@ const fakeData = [
   },
   {
     id: "2",
-    title: "Enfermeiro para cirurgia",
+    title: "Enfermeiro assistente",
+    location: "Belo Horizonte MG",
+    value: "a combinar",
+    type: "urgent",
+    experience: "2 years",
+    description:
+      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
+    responsibilities:
+      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
+    data: "a 1 segundo atrás",
+  },
+
+  {
+    id: "3",
+    title: "Enfermeiro auxiliar",
+    location: "Rio de Janeiro - RJ",
+    value: "a combinar",
+    type: "urgent",
+    experience: "2 years",
+    description:
+      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
+    responsibilities:
+      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
+    data: "a 1 segundo atrás",
+  },
+  {
+    id: "4",
+    title: "Enfermeiro cirurgião",
     location: "Belo Horizonte MG",
     value: "a combinar",
     type: "urgent",
@@ -149,6 +176,8 @@ const ClinicPerfilEdit = () => {
     <React.Fragment>
       <CssBaseline />
       <Container fixed maxWidth={"xl"}>
+
+        {/* /////////////////////DAKI PARA BAIXO//////////////////////////// */}
         <Stack direction={"column"} paddingY={"20px"}>
           <Grid container flex={1}>
             <Grid
@@ -172,7 +201,7 @@ const ClinicPerfilEdit = () => {
               >
                 Bem-vindo, clinica EcoVet
               </TypographyMold>
-
+                
               <Box
                 display={"flex"}
                 alignItems={"center"}
@@ -194,64 +223,96 @@ const ClinicPerfilEdit = () => {
                 </UploadButton>
               </Box>
             </Grid>
+          </Grid>
 
-            {/* PESSOAL RESOLVER TIRAR  */}
-            {/* <Grid
-              flex={1}
+          <Grid
+            container
+            flex={1}
+            display={"flex"}
+            flexDirection={"column"}
+            gap={"6px"}
+            marginTop={"80px"}
+          >
+            <Grid item md={12} xs={20} lg={12}>
+              <TypographyMold fontSize={"16px"} variant="h6">
+                Vagas Criadas
+              </TypographyMold>
+            </Grid>
+
+            <Grid
               item
               md={12}
-              xs={12}
-              sx={{
-                display: "flex",
-                flexDirection: { xs: "column", md: "row" },
-                justifyContent: { xs: "start", md: "space-between" },
-                marginTop: { xs: "20px", md: "32px" },
-              }}
+              xs={20}
+              lg={12}
+              display={"flex"}
+              gap={"12px"}
+              flexWrap={"wrap"}
             >
-              <InfoBox>
-                <PlaceIcon
-                  sx={{ color: "#475569", width: "16px", height: "16px" }}
-                />
-                <InfoTypography>
-                  {fakeUser.location || "No location"}
-                </InfoTypography>
-              </InfoBox>
+              {fakeUser.jobs && fakeUser.jobs.length ? (
+                fakeUser.jobs.map((item) => (
+                  <Box>
+                    {" "}
+                    <JobCard job={item} />
+                    <Box
+                      display={"flex"}
+                      justifyContent={"space-between"}
+                      alignItems={"center"}
+                      paddingX={"20px"}
+                      marginTop={"10px"}
+                    >
+                      <Button
+                        sx={{
+                          fontSize: "14px",
+                          textTransform: "none",
+                          color: "#000",
+                          fontFamily: "red-hat-display",
+                          fontWeight: 400,
+                        }}
+                        startIcon={
+                          <EditNoteIcon
+                            sx={{
+                              color: "#1E3A8A",
+                              width: "35px",
+                              height: "35px",
+                            }}
+                          />
+                        }
+                        onClick={() => handleEditJob(item)}
+                      >
+                        Editar
+                      </Button>
 
-              <InfoBox>
-                <EmailOutlinedIcon
-                  sx={{ color: "#475569", width: "16px", height: "16px" }}
-                />
-                <InfoTypography>
-                  {fakeUser.email || "No email provide"}
-                </InfoTypography>
-              </InfoBox>
-
-              <InfoBox>
-                <CallOutlinedIcon
-                  sx={{ color: "#475569", width: "16px", height: "16px" }}
-                />
-                <InfoTypography>
-                  {fakeUser.contact || "No contact"}
-                </InfoTypography>
-              </InfoBox>
-
-              <JobsPostLenght>
-                <TypographyMold fontSize={"20px"}>
-                  {fakeUser.jobs.length ? fakeUser.jobs.length : "0"}
-                </TypographyMold>
-                <TypographyMold color={"#2563eb"} fontSize={"14px"}>
-                  Vagas postadas
-                </TypographyMold>
-              </JobsPostLenght>
-            </Grid> */}
-            {/* PESSOAL RESOLVER TIRAR   */}
- 
+                      <Button
+                        sx={{
+                          fontSize: "14px",
+                          textTransform: "none",
+                          color: "#000",
+                          fontFamily: "red-hat-display",
+                          fontWeight: 400,
+                        }}
+                        startIcon={
+                          <HighlightOffIcon
+                            sx={{
+                              color: "#991B1B",
+                              width: "35px",
+                              height: "35px",
+                            }}
+                          />
+                        }
+                        onClick={() => handleDeleteJob(item)}
+                      >
+                        Apagar
+                      </Button>
+                    </Box>
+                  </Box>
+                ))
+              ) : (
+                <TypographyMold>Nao há vagas criadas</TypographyMold>
+              )}
+            </Grid>
           </Grid>
-            
-            {/* COLOCAR O GRID QUE RENDERIZA OS CARD ABAIXO  */}
-          
         </Stack>
-
+                 {/* /////////////////////DAKI PARA CIMA//////////////////////////// */}
         <ClinicPerfilModal open={open} setOpen={setOpen} />
       </Container>
     </React.Fragment>
