@@ -9,6 +9,7 @@ import HomePage from './pages/Home'
 import LoginPage from './pages/Login'
 import UploadJob from './pages/UploadJob';
 import LogUpCompany from './pages/LogUpCompany';
+import FindJob from './pages/FindJob';
 
 
 const router = createBrowserRouter([
@@ -30,6 +31,11 @@ const router = createBrowserRouter([
   {
     path: "/cadastroveterinario",
     element: <AuthorizedPage children={<CadastroProfissionalPage />} role='user'/>
+  },
+
+  {
+    path: "/encontaremprego",
+    element: <AuthorizedPage children={<FindJob />} role='user'/>
   }
 
 
