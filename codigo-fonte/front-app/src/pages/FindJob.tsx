@@ -1,21 +1,11 @@
 import React, { useEffect, useState } from "react";
-import PageContainerComponent from "../component/PageContainer";
-import type { AppDispatch, RootState } from "../reducers/store";
-import { useSelector, useDispatch } from "react-redux";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
-import { setDialog, setDialogIdle } from "../reducers/dialogReducer";
-import { title } from "process";
-import DialogComponent from "../component/Dialog";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import FormControl from "@mui/material/FormControl";
 import Typography from "@mui/material/Typography";
-import Link from "@mui/material/Link";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AutoAwesomeSharpIcon from "@mui/icons-material/AutoAwesomeSharp";
+import TuneIcon from "@mui/icons-material/Tune";
 import {
   Box,
   Checkbox,
@@ -25,16 +15,12 @@ import {
   FormControlLabel,
   FormGroup,
   FormHelperText,
-  FormLabel,
-  InputLabel,
-  MenuItem,
-  Select,
   Stack,
   styled,
 } from "@mui/material";
 
-import { BlockLike } from "typescript";
 import ListBox from "../component/ListBox";
+import JobCard from "../component/JobCard"
 
 const CheckboxLabel = ({
   title,
@@ -243,11 +229,40 @@ function FilterFindjob({
   );
 }
 
+const fakeData = [
+  {
+    id: "1",
+    title: "Enfermeiro para cirurgia",
+    location: "Belo Horizonte MG",
+    value: "a combinar",
+    type: "urgent",
+    experience: "2 years",
+    description:
+      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
+    responsibilities:
+      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
+    data: "a 1 segundo atrás",
+  },
+  {
+    id: "2",
+    title: "Enfermeiro para cirurgia",
+    location: "Belo Horizonte MG",
+    value: "a combinar",
+    type: "urgent",
+    experience: "2 years",
+    description:
+      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
+    responsibilities:
+      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
+    data: "a 1 segundo atrás",
+  },
+];
+
 const FindJob = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [jobLocation, setJobLocation] = useState("");
-  const [isLoading, setEsLoading] = useState(false)
-  const [sort, setSort] = useState("Novo")
+  const [isLoading, setEsLoading] = useState(false);
+  const [sort, setSort] = useState("Novo");
   const [state, setState] = React.useState({
     gilad: false,
     jason: false,
@@ -261,34 +276,12 @@ const FindJob = () => {
   });
 
   const sendSearch = () => {
-    console.log("values", { searchQuery, jobLocation });
-    if (searchQuery === "" || jobLocation === "") return;
 
-    try {
-    } catch (error) {
-      console.log("error on shearcing: ", error);
-    }
   };
-
-
-  if (isLoading) {
-    return (
-      <Box
-        flex={1}
-        display={"flex"}
-        alignItems={"center"}
-        justifyContent={"center"}
-        sx={{ marginY: "200px" }}
-      >
-        <CircularProgress />
-      </Box>
-    );
-  }
 
   return (
     <React.Fragment>
       <CssBaseline />
-
 
       <Container maxWidth={"xl"}>
         <Stack
@@ -301,11 +294,10 @@ const FindJob = () => {
         >
           <Box
             bgcolor={"white"}
-            
             sx={{
               boxShadow: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
-              display: {xs: "none", md: "block"},
-              flex: {md: 2, lg: 1}
+              display: { xs: "none", md: "block" },
+              flex: { md: 2, lg: 1 },
             }}
           >
             <FilterFindjob
@@ -316,20 +308,34 @@ const FindJob = () => {
             />
           </Box>
 
-          <Box sx={{flex: { md:  4, lg: 5}}}>
+          <Box sx={{ flex: { md: 4, lg: 5 } }}>
             <Grid container>
-              <Grid item xs={12} sm={12} md={12} sx={{ padding: { xs: "20px", sm: "0px" } }}>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={12}
+                sx={{ padding: { xs: "20px", sm: "0px" } }}
+              >
                 <Box
                   display={"flex"}
                   justifyContent={"space-between"}
                   marginBottom={"16px"}
                   alignItems={"center"}
-                  
                 >
-                  <TypographyMold sx={{ fontSize: { xs: "14px", sm: "16px" } }}>
+                  <TypographyMold
+                    sx={{
+                      fontSize: { xs: "14px", sm: "16px" },
+                      display: { xs: "none", md: "block" },
+                    }}
+                  >
                     Mostrando{" "}
                     <span style={{ fontWeight: 600 }}>1.902 vagas</span>
                   </TypographyMold>
+
+                  <Box sx={{ display: { xs: "block", md: "none" } }}>
+                    <TuneIcon sx={{ opacity: 0.5 }} />
+                  </Box>
 
                   <Box
                     display={"flex"}
@@ -339,17 +345,69 @@ const FindJob = () => {
                         sm: "row",
                       },
                       gap: { xs: "0", sm: "8px" },
-               
                     }}
                     alignItems={"center"}
                   >
-                    <TypographyMold sx={{
-                      fontSize: {sx: "14px", sm: "16px"}
-                    }}>Filtrar por: </TypographyMold>
+                    <TypographyMold
+                      sx={{
+                        fontSize: { sx: "14px", sm: "16px" },
+                      }}
+                    >
+                      Mostrar por:{" "}
+                    </TypographyMold>
 
-                      <ListBox sort={sort} setSort={setSort} />
+                    <ListBox sort={sort} setSort={setSort} />
                   </Box>
                 </Box>
+              </Grid>
+
+              <Grid item sx={{ display: { xs: "flex", md: "none" } }}>
+                <TypographyMold
+                  sx={{
+                    fontSize: {
+                      xs: "14px",
+                      sm: "16px",
+                      opacity: 0.5,
+                      marginBottom: 10,
+                    },
+                  }}
+                >
+                  Mostrando <span style={{ fontWeight: 600 }}>1.902 vagas</span>
+                </TypographyMold>
+              </Grid>
+
+              <Grid
+                item
+                flexWrap={"wrap"}
+                display={"flex"}
+                xs={12}
+                sm={12}
+                md={12}
+                gap={"16px"}
+              >
+                {!isLoading ? (
+                  fakeData && fakeData.length ? (
+                    fakeData.map((item, index) => (
+                      <JobCard job={item} key={index} />
+                    ))
+                  ) : (
+                    <TypographyMold sx={{ flex: 1, textAlign: "center" }}>
+                      No data yet 😓{" "}
+                    </TypographyMold>
+                  )
+                ) : (
+                  <Box
+                    sx={{
+                      marginTop: 20,
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <CircularProgress />
+                  </Box>
+                )}
               </Grid>
             </Grid>
           </Box>
