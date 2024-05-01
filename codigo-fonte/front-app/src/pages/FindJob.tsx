@@ -12,15 +12,19 @@ import {
   CircularProgress,
   Container,
   CssBaseline,
+  Fab,
   FormControlLabel,
   FormGroup,
   FormHelperText,
   Stack,
+  Tooltip,
   styled,
+  useMediaQuery,
 } from "@mui/material";
 
 import ListBox from "../component/ListBox";
-import JobCard from "../component/JobCard"
+import JobCard from "../component/JobCard";
+import FilterDrawer from "../component/FilterDrawer";
 
 const CheckboxLabel = ({
   title,
@@ -68,12 +72,13 @@ const TypographyMold = styled(Typography)({
 type FilterFindjobProps = {
   setState: React.Dispatch<any>;
   state: {
-    gilad: boolean;
-    jason: boolean;
-    antoine: boolean;
+    veterinario: boolean;
+    auxiliar: boolean;
+    anestesista: boolean;
+    cirurgiao: boolean;
   };
-  setExpirience: React.Dispatch<any>;
-  expirience: {
+  setExperience: React.Dispatch<any>;
+  experience: {
     under1year: boolean;
     between1to2years: boolean;
     between2to6years: boolean;
@@ -84,8 +89,8 @@ type FilterFindjobProps = {
 function FilterFindjob({
   state,
   setState,
-  expirience,
-  setExpirience,
+  experience,
+  setExperience,
 }: FilterFindjobProps) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState({
@@ -97,14 +102,14 @@ function FilterFindjob({
   const handlechangeExpirience = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setExpirience({
-      ...expirience,
+    setExperience({
+      ...experience,
       [event.target.name]: event.target.checked,
     });
   };
 
   const { between1to2years, moreThan6years, between2to6years, under1year } =
-    expirience;
+    experience;
   const error =
     [between1to2years, moreThan6years, between2to6years, under1year].filter(
       (v) => v
@@ -138,32 +143,43 @@ function FilterFindjob({
           <CssFormControlLabel
             control={
               <Checkbox
-                checked={state.gilad}
+                checked={state.veterinario}
                 onChange={handleChange}
-                name="gilad"
+                name="veterinario"
               />
             }
-            label="Gilad Gray"
+            label="Veterinário Geral"
           />
           <CssFormControlLabel
             control={
               <Checkbox
-                checked={state.jason}
+                checked={state.auxiliar}
                 onChange={handleChange}
-                name="jason"
+                name="auxiliar"
               />
             }
-            label="Jason Killian"
+            label="Auxiliar Cirúrgico"
           />
           <CssFormControlLabel
             control={
               <Checkbox
-                checked={state.antoine}
+                checked={state.anestesista}
                 onChange={handleChange}
-                name="antoine"
+                name="anestesista"
               />
             }
-            label="Antoine Llorca"
+            label="Técnico anestesista"
+          />
+
+          <CssFormControlLabel
+            control={
+              <Checkbox
+                checked={state.cirurgiao}
+                onChange={handleChange}
+                name="cirurgiao"
+              />
+            }
+            label="Cirurgião"
           />
         </FormGroup>
       </FormControl>
@@ -180,7 +196,7 @@ function FilterFindjob({
           <CssFormControlLabel
             control={
               <Checkbox
-                checked={expirience.under1year}
+                checked={experience.under1year}
                 onChange={handlechangeExpirience}
                 name="under1year"
               />
@@ -190,7 +206,7 @@ function FilterFindjob({
           <CssFormControlLabel
             control={
               <Checkbox
-                checked={expirience.between1to2years}
+                checked={experience.between1to2years}
                 onChange={handlechangeExpirience}
                 name="between1to2years"
               />
@@ -200,7 +216,7 @@ function FilterFindjob({
           <CssFormControlLabel
             control={
               <Checkbox
-                checked={expirience.between2to6years}
+                checked={experience.between2to6years}
                 onChange={handlechangeExpirience}
                 name="between2to6years"
               />
@@ -211,7 +227,7 @@ function FilterFindjob({
           <CssFormControlLabel
             control={
               <Checkbox
-                checked={expirience.moreThan6years}
+                checked={experience.moreThan6years}
                 onChange={handlechangeExpirience}
                 name="moreThan6years"
               />
@@ -262,13 +278,15 @@ const FindJob = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [jobLocation, setJobLocation] = useState("");
   const [isLoading, setEsLoading] = useState(false);
+  const [open, setOpen] = useState(false);
   const [sort, setSort] = useState("Novo");
   const [state, setState] = React.useState({
-    gilad: false,
-    jason: false,
-    antoine: false,
+    veterinario: false,
+    auxiliar: false,
+    anestesista: false,
+    cirurgiao: false
   });
-  const [expirience, setExpirience] = useState({
+  const [experience, setExperience] = useState({
     under1year: false,
     between1to2years: false,
     between2to6years: false,
@@ -276,8 +294,22 @@ const FindJob = () => {
   });
 
   const sendSearch = () => {
+    console.log("values", { searchQuery, jobLocation });
+    if (searchQuery === "" || jobLocation === "") return;
 
+    try {
+    } catch (error) {
+      console.log("error on shearcing: ", error);
+    }
   };
+
+  const smallScrell = useMediaQuery("(max-width: 900px)");
+
+  useEffect(() => {
+    if (!smallScrell) {
+      setOpen(false);
+    }
+  }, [smallScrell]);
 
   return (
     <React.Fragment>
@@ -303,8 +335,8 @@ const FindJob = () => {
             <FilterFindjob
               state={state}
               setState={setState}
-              expirience={expirience}
-              setExpirience={setExpirience}
+              experience={experience}
+              setExperience={setExperience}
             />
           </Box>
 
@@ -334,8 +366,19 @@ const FindJob = () => {
                   </TypographyMold>
 
                   <Box sx={{ display: { xs: "block", md: "none" } }}>
-                    <TuneIcon sx={{ opacity: 0.5 }} />
+                    <Tooltip onClick={() => setOpen(true)} title="filter">
+                      <TuneIcon sx={{ opacity: 0.5, cursor: "pointer" }} />
+                    </Tooltip>
                   </Box>
+
+                  <FilterDrawer
+                    open={open}
+                    setOpen={setOpen}
+                    state={state}
+                    setState={setState}
+                    experience={experience}
+                    setExperience={setExperience}
+                  />
 
                   <Box
                     display={"flex"}
