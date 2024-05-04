@@ -1,5 +1,39 @@
-import { Box, Container, CssBaseline, Grid } from "@mui/material";
+import {
+  Box,
+  Container,
+  CssBaseline,
+  Grid,
+  Typography,
+  styled,
+} from "@mui/material";
 import React from "react";
+import { clinicFooterLinks } from "../utils/data";
+import { Link } from "react-router-dom";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+
+const isUserLogged = true;
+
+const TypographyModel = styled(Typography)({
+  fontFamily: "red-hat-display",
+});
+
+const CssTypography = styled(Typography)({
+  fontFamily: "red-hat-display",
+  color: "#EDEDED",
+  fontSize: "16px",
+  opacity: 0.7,
+});
+
+const iconStyle = {
+  fill: "white",
+  transition: "transform 0.3s ease",
+  "&:hover": {
+    transform: "scale(1.2)",
+  },
+};
 
 const Footer = () => {
   return (
@@ -56,16 +90,158 @@ const Footer = () => {
               marginX: "auto",
             }}
           >
-            <Grid item md={4} sm={4} xs={12}>
-              tempo
+            <Grid padding={"10px"} item md={4} sm={4} xs={12}>
+              <Box
+                sx={{
+                  paddingRight: { sm: "30%" },
+                }}
+              >
+                <TypographyModel
+                  sx={{
+                    fontSize: "32px",
+                    fontWeight: 900,
+                    color: "white",
+                    textAlign: { xs: "center", sm: "initial" },
+                    width: "100%",
+                  }}
+                >
+                  Eco<span style={{ color: "#BAB6B6" }}>Vet</span>
+                </TypographyModel>
+
+                <CssTypography
+                  sx={{
+                    color: "#EDEDED",
+                    fontSize: "16px",
+
+                    opacity: 0.7,
+                  }}
+                >
+                  Unindo veterinários e clínicas para cuidar dos animais.
+                  Juntos, transformamos vidas na EcoVet: a ponte da saúde
+                  animal.
+                </CssTypography>
+              </Box>
             </Grid>
 
-            <Grid item md={4} sm={4} xs={12}>
-              tempo2
+            <Grid
+              display={"flex"}
+              alignItems={"center"}
+              justifyContent={"center"}
+              padding={"10px"}
+              item
+              md={4}
+              sm={4}
+              xs={12}
+            >
+              <Box>
+                <TypographyModel
+                  fontSize={"16px"}
+                  fontWeight={800}
+                  color={"white"}
+                >
+                  Links Rápidos
+                </TypographyModel>
+                <Box paddingY={3}>
+                  {isUserLogged &&
+                    clinicFooterLinks.map((item) => (
+                      <Link to={item.path}>
+                        <CssTypography
+                          sx={{
+                            color: "#EDEDED",
+                            fontSize: "16px",
+                            opacity: 0.7,
+                            transition: "all 0.3s ease",
+                            "&:hover": {
+                              opacity: 1,
+                              transform: "scale(1.1)",
+                            },
+                          }}
+                        >
+                          {item.link}
+                        </CssTypography>
+                      </Link>
+                    ))}
+                </Box>
+              </Box>
             </Grid>
 
-            <Grid item md={4} sm={4} xs={12}>
-              tempo3
+            <Grid
+              display={"flex"}
+              sx={{
+                justifyContent: { xs: "center", sm: "flex-end" },
+              }}
+              padding={"10px"}
+              item
+              md={4}
+              sm={4}
+              xs={12}
+            >
+              <Box display={"flex"} gap={2} flexDirection={"column"}>
+                <TypographyModel
+                  fontSize={"16px"}
+                  fontWeight={800}
+                  color={"white"}
+                >
+                  Informações Para Contato
+                </TypographyModel>
+
+                <Box>
+                  <CssTypography>Email: Contato@gmail.com</CssTypography>
+
+                  <CssTypography>Contato: (31) 99999-9999</CssTypography>
+                </Box>
+                <Box
+                  display={"flex"}
+                  gap={1}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                >
+                  <a href="#" target="_blank" rel="noreferrer">
+                    <FacebookIcon sx={iconStyle} />
+                  </a>
+
+                  <a href="#" target="_blank" rel="noreferrer">
+                    <TwitterIcon sx={iconStyle} />
+                  </a>
+
+                  <a href="#" target="_blank" rel="noreferrer">
+                    <InstagramIcon sx={iconStyle} />
+                  </a>
+
+                  <a href="#" target="_blank" rel="noreferrer">
+                    <LinkedInIcon sx={iconStyle} />
+                  </a>
+                </Box>
+              </Box>
+            </Grid>
+
+            <Grid padding={"10px"} item xs={12} sm={12} md={12}>
+              <Box
+                sx={{
+                  height: "80px",
+                  backgroundColor: "rgba(0, 26, 54, 0.5)",
+                  borderRadius: "20px",
+                  padding: "20px 20px",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <TypographyModel
+                  sx={{
+                    color: "#BAB6B6",
+                    fontSize: "16px",
+                  }}
+                >
+                  <span style={{ fontWeight: 800, color: "#fff" }}>
+                    2024&#174;{" "}
+                    <span style={{ fontWeight: 800, color: "#fff" }}>Eco</span>
+                    <span style={{ fontWeight: 800, color: "#BAB6B6" }}>
+                      Vet.
+                    </span>
+                  </span>{" "}
+                  Todos os direitos reservados
+                </TypographyModel>
+              </Box>
             </Grid>
           </Grid>
         </Container>
