@@ -4,6 +4,7 @@ import type { AppDispatch, RootState } from '../reducers/store'
 import Box from '@mui/material/Box';
 import HeaderComponent from './Header';
 import { authorizeUser, getToken } from '../reducers/userReducer'
+import Footer from './Footer';
 
 const AuthorizedPage = ({children, userRole}: any) => {
   const isAuthorized = useSelector((state: RootState) => state.user.isAuthorized)
@@ -20,9 +21,14 @@ const AuthorizedPage = ({children, userRole}: any) => {
   // },[isAuthorized]) 
   
   return (
-    <Box>
+    <Box sx={{
+      display: "flex",
+      flexDirection: "column",
+      minHeight:"100vh"
+    }}> 
       <HeaderComponent  />
       {children}
+      <Footer />
     </Box> 
   )
 }

@@ -14,7 +14,7 @@ const HomePage = () => {
 
   return (
     <PageContainerComponent title="Principal" style={{ marginLeft: isMobile ? 60 : 3000 }}>
-      <div>oi!!</div>
+      <div className='container-flexgrow'>oi!!</div>
     </PageContainerComponent>
   )
 }
