@@ -315,7 +315,7 @@ const FindJob = () => {
     <React.Fragment>
       <CssBaseline />
 
-      <Container maxWidth={"xl"}>
+      <Container className="container-flexgrow" maxWidth={"xl"}>
         <Stack
           direction={"row"}
           bgcolor={"#f7fdfd"}
