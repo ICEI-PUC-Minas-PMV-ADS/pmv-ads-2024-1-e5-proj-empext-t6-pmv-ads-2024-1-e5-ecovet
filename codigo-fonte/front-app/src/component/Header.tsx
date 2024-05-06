@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -27,6 +27,7 @@ import Container from '@mui/material/Container';
 const HeaderComponent = () => {
   const isLoading = useSelector((state: RootState) => state.loading.isLoading)
   const isAuthorized = useSelector((state: RootState) => state.user.isAuthorized)
+  const role = useSelector((state: RootState) => state.user.role)
   const isDialogOpen = useSelector((state: RootState) => state.dialog.isOpen)
   const dispatch = useDispatch<AppDispatch>()
   const theme = useTheme();
@@ -53,17 +54,27 @@ const HeaderComponent = () => {
     setMenuOptions([])
   }
 
-  const pages = [
+  let pages = [
     {
-      name: 'Oportunidades', options: [  ], link: 'preproject'
+      name: 'Minhas vagas', options: [  ], link: 'preproject'
     },
     {
-      name: 'Buscar oportunidades', options: [ ], link: ''
-    },
-    {
-      name: 'Postar vagas', options: [ ], link: ''
+      name: 'Procurar Veterinários', options: [ ], link: ''
     }
   ];
+
+  useEffect(() => {
+    if(role == 'Profissional'){
+      pages = [
+        {
+          name: 'Buscar Vagas', options: [  ], link: 'preproject'
+        },
+        {
+          name: 'Vagas aceitas', options: [ ], link: ''
+        }
+      ];
+    }
+  }, []) 
 
 
   return (
