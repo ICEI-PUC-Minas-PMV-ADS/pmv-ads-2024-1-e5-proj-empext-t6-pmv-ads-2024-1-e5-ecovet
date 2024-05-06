@@ -21,25 +21,14 @@ namespace Application
                                  throw new ArgumentNullException(nameof(profissionalVeterinarioRepository));
         }
 
-        public async Task<bool> LoginClinica(string email, string senha)
+        public async Task<ClinicaVeterinaria> LoginClinica(string email, string senha)
         {
-            var clinica = await clinicaVeterinariaRepository.ObterClinicaLoginAsync(email, senha);
-
-            if (clinica == null)
-                return false;
-            else
-                return true;
-
+            return await clinicaVeterinariaRepository.ObterClinicaLoginAsync(email, senha);
         }
 
-        public async Task<bool> LoginVeterinario(string email, string senha)
+        public async Task<ProfissionalVeterinario> LoginVeterinario(string email, string senha)
         {
-            var veterinario = await profissionalVeterinarioRepository.ObterVeterinarioLoginAsync(email, senha);
-
-            if (veterinario == null)
-                return false;
-            else
-                return true;
+            return await profissionalVeterinarioRepository.ObterVeterinarioLoginAsync(email, senha);
         }
 
     }

@@ -1,4 +1,5 @@
 ﻿using back_app.Models;
+using Domain.Dto;
 using Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -22,16 +23,32 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] UserLoginModel user)
     {
-        bool usuario = user.TipoLogin == Tipo.Clinica
-            ? await _authService.LoginClinica(user.Email, user.Senha)
-            : await _authService.LoginVeterinario(user.Email, user.Senha);
-
-        if (usuario)
+        if (user.TipoLogin == Tipo.Clinica)
         {
-            return Ok(
-                new {
+            ClinicaVeterinaria usuarioRetornado = await _authService.LoginClinica(user.Email, user.Senha);
+
+            if (usuarioRetornado != null)
+            {
+                user.Id = usuarioRetornado.IDClinica;
+
+                return Ok(new
+                {
                     token = await GenerateToken(user)
-                } );
+                });
+            }
+        }
+        else
+        {
+            ProfissionalVeterinario usuarioRetornado = await _authService.LoginVeterinario(user.Email, user.Senha);
+
+            if (usuarioRetornado != null)
+            {
+                user.Id = usuarioRetornado.IDProfissional;
+                return Ok(new
+                {
+                    token = await GenerateToken(user)
+                });
+            }
         }
 
         return Unauthorized();
@@ -42,6 +59,7 @@ public class AuthController : ControllerBase
         var claims = new[]
         {
             new Claim(ClaimTypes.Email, user.Email),
+            new Claim("IdUsuario", user.Id.ToString()),
             new Claim("Tipo", user.TipoLogin.ToString())
         };
 
