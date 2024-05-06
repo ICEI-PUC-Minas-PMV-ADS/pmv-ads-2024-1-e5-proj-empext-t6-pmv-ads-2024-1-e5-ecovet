@@ -23,7 +23,13 @@ type JobCardPropss = {
 function JobCard({ job }: JobCardPropss) {
   const { description, data, location, title } = job;
   return (
-    <Box>
+    <Box
+    sx={{
+      "&:hover": {
+        boxShadow: "0 30px 30px -30px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)"
+      }
+    }}
+    >
       <Box
         sx={{
           display: "flex",
