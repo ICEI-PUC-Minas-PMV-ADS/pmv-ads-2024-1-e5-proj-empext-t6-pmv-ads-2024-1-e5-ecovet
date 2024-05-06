@@ -12,7 +12,7 @@ import TextField, { TextFieldProps } from "@mui/material/TextField";
 import { setDialog, setDialogIdle } from "../reducers/dialogReducer";
 import { useSelector, useDispatch } from "react-redux";
 import { styled, useTheme } from "@mui/material/styles";
-import { Alert, AlertTitle, IconButton, InputAdornment } from "@mui/material";
+import { IconButton, InputAdornment } from "@mui/material";
 import type { AppDispatch, RootState } from "../reducers/store";
 
 const TyphographyLabel = styled(Typography)({
@@ -39,15 +39,6 @@ const TextFieldLabel: React.FC<TextinputTestProps> & {
     </>
   );
 };
-
-const AlertBox = styled(Alert)({
-  position: "absolute",
-  top: "10%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  zIndex: 9999,
-  margin: "auto",
-});
 
 TextFieldLabel.Field = TextField;
 
@@ -97,10 +88,6 @@ const LogUpCompany = () => {
   const [isClinic, setIsClinic] = useState<Boolean>(false);
   const [checkPassword, setCheckPassword] = useState<Boolean>(false);
   const [formValue, setFormValue] = useState<FormValues>(initialValues);
-  const [alert, setAlert] = useState<{
-    status: string;
-    message: string;
-  }>({ status: "", message: "" });
 
   const isDialogOpen = useSelector((state: RootState) => state.dialog.isOpen);
   const dispatch = useDispatch<AppDispatch>();
@@ -128,19 +115,19 @@ const LogUpCompany = () => {
 
   const sendForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      setAlert({
-        status: "ok",
-        message: "Cadastro feito com sucesso.",
-      });
-    } catch (error) {
-      setAlert({
-        status: "error",
-        message: "Erro ao fazer cadastro! Tente novamente",
-      });
+
+    const data = new FormData(e.currentTarget);
+
+    if (isClinic) {
+      console.log("clinic");
+
+    } else {
+      console.log("professional");
     }
 
-    // console.log(formValue);
+    // if(formValue.password !== formValue.confirmPass) return
+
+    console.log(formValue);
   };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -152,29 +139,20 @@ const LogUpCompany = () => {
   };
 
   useEffect(() => {
-    if (
-      formValue.password !== formValue.confirmPass ||
-      formValue.confirmPass === "" ||
-      formValue.password === ""
-    ) {
-      setCheckPassword(true);
+    if(formValue.password !== formValue.confirmPass || formValue.confirmPass === "" || formValue.password === ""){
+      setCheckPassword(true)
     } else {
-      setCheckPassword(false);
+      setCheckPassword(false)
     }
-  }, [formValue.confirmPass, formValue.password]);
+  }, [
+    formValue.confirmPass, formValue.password
+  ])
 
   return (
     <PageContainerComponent
       title=""
       style={{ marginLeft: isMobile ? 60 : 3000 }}
     >
-      {alert.status !== "" && (
-        <AlertBox severity={alert.status === "ok" ? "success" : "error"}>
-          <AlertTitle>{alert.status === "ok" ? "Sucesso" : "Error"}</AlertTitle>
-          {alert.message}
-        </AlertBox>
-      )}
-
       <DialogComponent
         open={isDialogOpen}
         handleClose={() => dispatch(setDialogIdle())}
@@ -183,10 +161,7 @@ const LogUpCompany = () => {
           <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
               <Button
-                onClick={() => {
-                  setIsClinic(true);
-                  setFormValue(initialValues);
-                }}
+                onClick={() => {setIsClinic(true); setFormValue(initialValues)}}
                 fullWidth
                 type="button"
                 variant={isClinic ? "contained" : "outlined"}
@@ -198,10 +173,7 @@ const LogUpCompany = () => {
 
             <Grid item xs={12} md={6}>
               <Button
-                onClick={() => {
-                  setIsClinic(false);
-                  setFormValue(initialValues);
-                }}
+                onClick={() => {setIsClinic(false); setFormValue(initialValues)}}
                 fullWidth
                 type="button"
                 variant={!isClinic ? "contained" : "outlined"}
@@ -389,6 +361,7 @@ const LogUpCompany = () => {
               padding: "8px 32px",
               fontWeight: 500,
               textTransform: "none",
+            
             }}
             disabled={checkPassword ? true : false}
             type="submit"

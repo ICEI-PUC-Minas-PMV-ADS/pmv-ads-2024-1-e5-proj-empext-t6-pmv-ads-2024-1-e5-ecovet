@@ -13,14 +13,20 @@ const PageContainerComponent = ({ title, children }: any) => {
   return (
     <Container
       fixed
-      maxWidth="xl">
+      maxWidth="xl"
+    
+      >
+        
       <Grid
-        style={{ marginTop: "1em", paddingLeft: isMobile ? 50 : 50 }}
+        style={{ marginTop: "1em" }}
         direction="row"
         alignItems="center"
         justifyContent="flex-start"
         container
-        spacing={0}>
+        spacing={0}
+    
+        >
+          
         <Grid
           item
           xs={9}>

@@ -1,4 +1,4 @@
-const BASE_URL = "https://app-preproject-hom.azurewebsites.net";
+const BASE_URL = "https://ecovet-api-a70660ac3f23.herokuapp.com";
 
 let access_token = ''
 
@@ -24,6 +24,15 @@ export const post = async (url: string, data?: any) => {
 }
 export const cadastrarVeterinario = async (data?: any) => {
     return await fetch(`${BASE_URL}/ProfissionalVeterinario/cadastrarProfissionalVeterinario`,{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    })
+}
+export const login = async (data?: any) => {
+    return await fetch(`${BASE_URL}/Auth/login`,{
         method: "POST",
         headers: {
             "Content-Type": "application/json",

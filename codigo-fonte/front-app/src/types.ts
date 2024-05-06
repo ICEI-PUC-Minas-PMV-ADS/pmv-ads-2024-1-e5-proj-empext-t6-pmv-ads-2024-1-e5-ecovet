@@ -18,6 +18,7 @@ export interface UserState {
     email?: string,
     isAuthorized: boolean,
     userRegistrationId?: number,
+    userType?: string,
     role?: string,
     token?: string
 }
