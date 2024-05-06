@@ -16,6 +16,10 @@ const theme = createTheme({
         styleOverrides: {
           root: {
             boxShadow:  "0 10px 15px -1px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)",
+            transition: 'box-shadow 0.3s ease-in-out',
+            '&:hover': {
+              boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.1)', // Define os estilos para quando o mouse passa sobre o componente
+            }
           }
         }
       }
