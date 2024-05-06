@@ -56,10 +56,10 @@ const HeaderComponent = () => {
 
   let pages = [
     {
-      name: 'Minhas vagas', options: [  ], link: 'preproject'
+      name: 'Minhas vagas', options: [  ], link: 'perfil/clinic'
     },
     {
-      name: 'Procurar Veterinários', options: [ ], link: ''
+      name: 'Procurar Veterinários', options: [ ], link: 'preproject'
     }
   ];
 
@@ -67,7 +67,7 @@ const HeaderComponent = () => {
     if(role == 'Profissional'){
       pages = [
         {
-          name: 'Buscar Vagas', options: [  ], link: 'preproject'
+          name: 'Buscar Vagas', options: [  ], link: 'perfil/clinic'
         },
         {
           name: 'Vagas aceitas', options: [ ], link: ''
@@ -127,7 +127,7 @@ const HeaderComponent = () => {
               <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                 {isAuthorized && pages.map((page) => (
                   <Button
-                    onClick={(event) => handleMenu(event, page.options)}
+                    onClick={(event) => page.link ? handleMenuClick(page.link) : handleMenu(event, page.options)}
                     key={page.name}
                     sx={{ ml: 5, my: 2, display: 'block' }}
                   >
