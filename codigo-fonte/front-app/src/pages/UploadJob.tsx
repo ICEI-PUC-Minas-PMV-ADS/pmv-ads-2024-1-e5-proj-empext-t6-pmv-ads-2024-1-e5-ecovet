@@ -54,9 +54,10 @@ const TyphographyLabel = styled(Typography)({
 const FormBox = styled(Box)({
   backgroundColor: "#fff",
   padding: "25px 35px",
-  boxShadow:
-    "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)",
+  // boxShadow:
+  //   "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)",
   borderRadius: "10px",
+boxShadow: "0 0 0 .2px rgba(0, 0, 0, .5)"
 });
 
 type TextinputTestProps = {
@@ -132,7 +133,7 @@ const UploadJob = () => {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container fixed>
+      <Container className="container-flexgrow" fixed>
         <Grid mt={4} container >
           <Grid xs={12} md={8} xl={6} item>
             <FormBox>
