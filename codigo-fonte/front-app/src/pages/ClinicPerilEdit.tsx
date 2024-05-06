@@ -175,9 +175,8 @@ const ClinicPerfilEdit = () => {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container fixed maxWidth={"xl"}>
+      <Container className="container-flexgrow" fixed maxWidth={"xl"}>
 
-        {/* /////////////////////DAKI PARA BAIXO//////////////////////////// */}
         <Stack direction={"column"} paddingY={"20px"}>
           <Grid container flex={1}>
             <Grid
@@ -312,7 +311,6 @@ const ClinicPerfilEdit = () => {
             </Grid>
           </Grid>
         </Stack>
-                 {/* /////////////////////DAKI PARA CIMA//////////////////////////// */}
         <ClinicPerfilModal open={open} setOpen={setOpen} />
       </Container>
     </React.Fragment>

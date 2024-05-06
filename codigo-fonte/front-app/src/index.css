@@ -23,3 +23,7 @@ body {
   font-family: red-hat-display;
   src: url('/public/fonts/RedHatDisplay-VariableFont_wght.ttf');
 }
+
+.container-flexgrow {
+  flex: 1 1 0
+}
