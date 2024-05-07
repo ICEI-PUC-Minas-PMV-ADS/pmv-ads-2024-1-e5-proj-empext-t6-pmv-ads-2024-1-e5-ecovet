@@ -9,18 +9,14 @@ import {
   CircularProgress,
   Container,
   Modal,
+  Pagination,
   Stack,
   styled,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
-
 import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
 import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
-import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
-import CallOutlinedIcon from "@mui/icons-material/CallOutlined";
 import EditNoteIcon from "@mui/icons-material/EditNote";
-import PlaceIcon from "@mui/icons-material/Place";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 import JobCard from "../component/JobCard";
@@ -147,8 +143,8 @@ const InfoTypography = styled(Typography)({
 const ClinicPerfilEdit = () => {
   const [isLoading, setIsloading] = useState<Boolean>(false);
   const [open, setOpen] = React.useState(false);
-
-  const theme = useTheme();
+  const [totalCount, setTotalCount] = useState(fakeData.length);
+  const [currentPage, setCurrentPage] = useState(1)
   const navigate = useNavigate();
 
   //tipagem improvisada
@@ -157,6 +153,21 @@ const ClinicPerfilEdit = () => {
     navigate("/upload-job", { state: { job: item } });
   };
   //
+
+  //// paginação
+  const itemPerPage = 20
+  const startIndex = (currentPage - 1) * itemPerPage;
+  const endIndex = Math.min(startIndex + itemPerPage, fakeData.length);
+  const visibleData = fakeData.slice(startIndex, endIndex);
+
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setCurrentPage(value);
+  };
+
+  //////
 
   if (isLoading) {
     return (
@@ -247,8 +258,8 @@ const ClinicPerfilEdit = () => {
               gap={"12px"}
               flexWrap={"wrap"}
             >
-              {fakeUser.jobs && fakeUser.jobs.length ? (
-                fakeUser.jobs.map((item) => (
+              {visibleData && visibleData.length ? (
+                visibleData.map((item) => (
                   <Box>
                     {" "}
                     <JobCard job={item} />
@@ -307,6 +318,26 @@ const ClinicPerfilEdit = () => {
                 ))
               ) : (
                 <TypographyMold>Nao há vagas criadas</TypographyMold>
+              )}
+            </Grid>
+
+            <Grid
+              item
+              md={12}
+              xs={20}
+              lg={12}
+              display={"flex"}
+              alignItems={"center"}
+              justifyContent={"center"}
+              padding={5}
+            >
+              {totalCount > 0 && totalCount > itemPerPage && (
+                <Pagination
+                  page={currentPage}
+                  onChange={handlePageChange}
+                  count={Math.ceil(totalCount / itemPerPage)}
+                  color="primary"
+                />
               )}
             </Grid>
           </Grid>
