@@ -1,250 +1,28 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
-import FormControl from "@mui/material/FormControl";
 import Typography from "@mui/material/Typography";
-import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import AutoAwesomeSharpIcon from "@mui/icons-material/AutoAwesomeSharp";
 import TuneIcon from "@mui/icons-material/Tune";
 import {
   Box,
-  Checkbox,
   CircularProgress,
   Container,
   CssBaseline,
-  Fab,
-  FormControlLabel,
-  FormGroup,
-  FormHelperText,
   Pagination,
   Stack,
   Tooltip,
   styled,
   useMediaQuery,
 } from "@mui/material";
+import { filtrarTrabalhos } from "../services/agent";
 
 import ListBox from "../component/ListBox";
 import JobCard from "../component/JobCard";
 import FilterDrawer from "../component/FilterDrawer";
-
-const CheckboxLabel = ({
-  title,
-  experienceFilter,
-}: {
-  title: string;
-  experienceFilter?: boolean;
-}) => {
-  return (
-    <Box
-      display={"flex"}
-      justifyContent={"space-between"}
-      alignItems={"center"}
-    >
-      <Box gap={"8px"} display={"flex"}>
-        {!experienceFilter ? (
-          <WorkOutlineIcon fontSize="small" />
-        ) : (
-          <AutoAwesomeSharpIcon fontSize="small" />
-        )}
-        <Typography
-          fontFamily={"red-hat-display"}
-          fontSize={"16px"}
-          fontWeight={800}
-        >
-          {title}
-        </Typography>
-      </Box>
-
-      <ExpandMoreIcon fontSize="small" />
-    </Box>
-  );
-};
-
-const CssFormControlLabel = styled(FormControlLabel)({
-  "& .MuiTypography-root": {
-    fontFamily: "red-hat-display",
-  },
-});
+import FilterFindjob from "../component/FilterFindJob";
 
 const TypographyMold = styled(Typography)({
   fontFamily: "red-hat-display",
 });
-
-type FilterFindjobProps = {
-  setState: React.Dispatch<any>;
-  state: {
-    veterinario: boolean;
-    auxiliar: boolean;
-    anestesista: boolean;
-    cirurgiao: boolean;
-  };
-  setExperience: React.Dispatch<any>;
-  experience: {
-    under1year: boolean;
-    between1to2years: boolean;
-    between2to6years: boolean;
-    moreThan6years: boolean;
-  };
-};
-
-function FilterFindjob({
-  state,
-  setState,
-  experience,
-  setExperience,
-}: FilterFindjobProps) {
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState({
-      ...state,
-      [event.target.name]: event.target.checked,
-    });
-  };
-
-  const handlechangeExpirience = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setExperience({
-      ...experience,
-      [event.target.name]: event.target.checked,
-    });
-  };
-
-  const { between1to2years, moreThan6years, between2to6years, under1year } =
-    experience;
-  const error =
-    [between1to2years, moreThan6years, between2to6years, under1year].filter(
-      (v) => v
-    ).length > 1;
-  return (
-    <>
-      <Typography
-        marginBottom={"8px"}
-        color={"#1e293b"}
-        fontFamily={"red-hat-display"}
-        fontSize={"18px"}
-        fontWeight={600}
-      >
-        Filtros de busca
-      </Typography>
-
-      <CheckboxLabel title="Job Types" />
-
-      <FormControl
-        sx={{ marginBottom: "40px" }}
-        component="fieldset"
-        variant="standard"
-      >
-        <FormGroup
-          sx={{
-            "& .MuiFormControlLabel-root": {
-              marginBottom: "-8px",
-            },
-          }}
-        >
-          <CssFormControlLabel
-            control={
-              <Checkbox
-                checked={state.veterinario}
-                onChange={handleChange}
-                name="veterinario"
-              />
-            }
-            label="Veterinário Geral"
-          />
-          <CssFormControlLabel
-            control={
-              <Checkbox
-                checked={state.auxiliar}
-                onChange={handleChange}
-                name="auxiliar"
-              />
-            }
-            label="Auxiliar Cirúrgico"
-          />
-          <CssFormControlLabel
-            control={
-              <Checkbox
-                checked={state.anestesista}
-                onChange={handleChange}
-                name="anestesista"
-              />
-            }
-            label="Técnico anestesista"
-          />
-
-          <CssFormControlLabel
-            control={
-              <Checkbox
-                checked={state.cirurgiao}
-                onChange={handleChange}
-                name="cirurgiao"
-              />
-            }
-            label="Cirurgião"
-          />
-        </FormGroup>
-      </FormControl>
-
-      <CheckboxLabel title="Experiência" experienceFilter />
-      <FormControl component="fieldset" variant="standard" error={error}>
-        <FormGroup
-          sx={{
-            "& .MuiFormControlLabel-root": {
-              marginBottom: "-8px",
-            },
-          }}
-        >
-          <CssFormControlLabel
-            control={
-              <Checkbox
-                checked={experience.under1year}
-                onChange={handlechangeExpirience}
-                name="under1year"
-              />
-            }
-            label="Menos de 1 ano"
-          />
-          <CssFormControlLabel
-            control={
-              <Checkbox
-                checked={experience.between1to2years}
-                onChange={handlechangeExpirience}
-                name="between1to2years"
-              />
-            }
-            label="Entre 1 à 2 anos"
-          />
-          <CssFormControlLabel
-            control={
-              <Checkbox
-                checked={experience.between2to6years}
-                onChange={handlechangeExpirience}
-                name="between2to6years"
-              />
-            }
-            label="Entre 2 à 6 anos"
-          />
-
-          <CssFormControlLabel
-            control={
-              <Checkbox
-                checked={experience.moreThan6years}
-                onChange={handlechangeExpirience}
-                name="moreThan6years"
-              />
-            }
-            label="Mais de 6 anos"
-          />
-          {error && (
-            <FormHelperText>
-              Você deve selecionar apenas uma opção.
-            </FormHelperText>
-          )}
-        </FormGroup>
-      </FormControl>
-    </>
-  );
-}
 
 const fakeData = [
   {
@@ -278,6 +56,7 @@ const fakeData = [
 const FindJob = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [jobLocation, setJobLocation] = useState("");
+  const [data, setData] = useState<typeof fakeData>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [totalCount, setTotalCount] = useState(fakeData.length);
   const [currentPage, setCurrentPage] = useState(1);
@@ -287,7 +66,7 @@ const FindJob = () => {
     veterinario: false,
     auxiliar: false,
     anestesista: false,
-    cirurgiao: false
+    cirurgiao: false,
   });
   const [experience, setExperience] = useState({
     under1year: false,
@@ -318,18 +97,25 @@ const FindJob = () => {
     setIsLoading(true);
 
     // função que filtra os resultados do back
-    try {
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-    }
+    const fetchJobs = async () => {
+      try {
+        const response = await filtrarTrabalhos(state, experience);
+        setData(response);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+        setIsLoading(false);
+      }
+    };
+
+    fetchJobs();
   }, [state, experience]);
 
-  const itemPerPage = 20
+  const itemPerPage = 20;
 
   const startIndex = (currentPage - 1) * itemPerPage;
   const endIndex = Math.min(startIndex + itemPerPage, fakeData.length);
-  const visibleData = fakeData.slice(startIndex, endIndex);
+  const visibleData = data.slice(startIndex, endIndex);
 
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
@@ -490,11 +276,14 @@ const FindJob = () => {
                 justifyContent={"center"}
                 padding={5}
               >
-                {
-                  totalCount > 0 && totalCount > itemPerPage && (
-                    <Pagination page={currentPage} onChange={handlePageChange} count={Math.ceil(totalCount / itemPerPage)} color="primary" />
-                  )
-                }
+                {totalCount > 0 && totalCount > itemPerPage && (
+                  <Pagination
+                    page={currentPage}
+                    onChange={handlePageChange}
+                    count={Math.ceil(totalCount / itemPerPage)}
+                    color="primary"
+                  />
+                )}
               </Grid>
             </Grid>
           </Box>

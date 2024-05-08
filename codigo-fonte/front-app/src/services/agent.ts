@@ -35,3 +35,30 @@ export const cadastrarVeterinario = async (data?: any) => {
 export const setUserToken = (accessToken: any) => {
     access_token =  accessToken
 }
+
+export const filtrarTrabalhos = async (jobFilters: any, experienceFilters: any) => {
+    const queryString = new URLSearchParams({
+        veterinario: jobFilters.veterinario,
+        auxiliar: jobFilters.auxiliar,
+        anestesista: jobFilters.anestesista,
+        cirurgiao: jobFilters.cirurgiao,
+        under1year: experienceFilters.under1year,
+        between1to2years: experienceFilters.between1to2years,
+        between2to6years: experienceFilters.between2to6years,
+        moreThan6years: experienceFilters.moreThan6years
+    }).toString()
+
+    // url está correta?
+    const response = await fetch(`${BASE_URL}/buscarTrabalhos?${queryString}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+
+    if(!response.ok){
+        throw new Error("Falha ao buscar trabalhos")
+    }
+
+    return response.json()
+}
