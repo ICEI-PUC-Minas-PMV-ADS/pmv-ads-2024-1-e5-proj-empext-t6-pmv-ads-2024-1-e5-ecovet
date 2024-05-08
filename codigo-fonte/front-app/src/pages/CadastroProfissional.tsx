@@ -102,7 +102,7 @@ const CadastroProfissionalPage = () => {
 
           <Grid item xs={12}>
             <Typography>Senha</Typography>
-            <TextField id="filled-basic" style={{width: '100%'}} label="Digite sua senha" variant="outlined" onChange={(e) => setSenha(e.target.value)}/>
+            <TextField id="filled-basic"  type='password'  style={{width: '100%'}} label="Digite sua senha" variant="outlined" onChange={(e) => setSenha(e.target.value)}/>
           </Grid>
 
           <Grid item xs={12}>

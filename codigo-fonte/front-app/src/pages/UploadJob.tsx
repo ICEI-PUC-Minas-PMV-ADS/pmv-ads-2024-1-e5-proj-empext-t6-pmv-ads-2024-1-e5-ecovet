@@ -9,7 +9,7 @@ import { useTheme } from "@mui/material/styles";
 import { Box, Container, styled } from "@mui/material";
 import { useLocation } from "react-router-dom";
 
-import JobCard from "../component/JobCard";
+import JobCard from "../component/jobcard";
 
 type Jobs = {
   
