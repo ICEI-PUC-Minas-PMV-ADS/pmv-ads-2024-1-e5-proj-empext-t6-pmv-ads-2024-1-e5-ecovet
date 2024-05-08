@@ -325,9 +325,9 @@ const LogUpCompany = () => {
 
           <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
-              <TextFieldLabel title="Password" margin>
+              <TextFieldLabel title="Senha" margin>
                 <TextFieldLabel.Field
-                  placeholder="Password"
+                  placeholder="Senha"
                   name="password"
                   size="small"
                   fullWidth
@@ -354,9 +354,9 @@ const LogUpCompany = () => {
             </Grid>
 
             <Grid item xs={12} md={6}>
-              <TextFieldLabel title="Confirmar password" margin>
+              <TextFieldLabel title="Confirmar Senha" margin>
                 <TextFieldLabel.Field
-                  placeholder="Confirma password"
+                  placeholder="Confirmar Senha"
                   name="confirmPass"
                   size="small"
                   fullWidth
