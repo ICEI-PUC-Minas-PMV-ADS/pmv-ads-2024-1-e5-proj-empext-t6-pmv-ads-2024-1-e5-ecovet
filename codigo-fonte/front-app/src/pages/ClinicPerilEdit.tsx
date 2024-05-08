@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -21,6 +21,7 @@ import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 import JobCard from "../component/JobCard";
 import ClinicPerfilModal from "../component/ClinicPerfilModal";
+import { getAllUserJobs } from "../services/agent";
 
 // FAKE DATA
 const fakeData = [
@@ -142,9 +143,12 @@ const InfoTypography = styled(Typography)({
 
 const ClinicPerfilEdit = () => {
   const [isLoading, setIsloading] = useState<Boolean>(false);
+  // tipagem improvisada
+  const [data, setData] = useState<typeof fakeData>([]);
+
   const [open, setOpen] = React.useState(false);
   const [totalCount, setTotalCount] = useState(fakeData.length);
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
 
   //tipagem improvisada
@@ -155,10 +159,10 @@ const ClinicPerfilEdit = () => {
   //
 
   //// paginação
-  const itemPerPage = 20
+  const itemPerPage = 20;
   const startIndex = (currentPage - 1) * itemPerPage;
   const endIndex = Math.min(startIndex + itemPerPage, fakeData.length);
-  const visibleData = fakeData.slice(startIndex, endIndex);
+  const visibleData = data.slice(startIndex, endIndex);
 
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
@@ -169,25 +173,25 @@ const ClinicPerfilEdit = () => {
 
   //////
 
-  if (isLoading) {
-    return (
-      <Box
-        flex={1}
-        display={"flex"}
-        alignItems={"center"}
-        justifyContent={"center"}
-        sx={{ marginY: "200px" }}
-      >
-        <CircularProgress />
-      </Box>
-    );
-  }
+  useEffect(() => {
+    setIsloading(true);
+    const fetchAllUserJobs = async () => {
+      try {
+        const response = await getAllUserJobs();
+        setData(response);
+        setIsloading(false);
+      } catch (error) {
+        console.log(error);
+        setIsloading(false);
+      }
+    };
+    fetchAllUserJobs();
+  }, []);
 
   return (
     <React.Fragment>
       <CssBaseline />
       <Container className="container-flexgrow" fixed maxWidth={"xl"}>
-
         <Stack direction={"column"} paddingY={"20px"}>
           <Grid container flex={1}>
             <Grid
@@ -211,7 +215,7 @@ const ClinicPerfilEdit = () => {
               >
                 Bem-vindo, clinica EcoVet
               </TypographyMold>
-                
+
               <Box
                 display={"flex"}
                 alignItems={"center"}
@@ -249,97 +253,113 @@ const ClinicPerfilEdit = () => {
               </TypographyMold>
             </Grid>
 
-            <Grid
-              item
-              md={12}
-              xs={20}
-              lg={12}
-              display={"flex"}
-              gap={"12px"}
-              flexWrap={"wrap"}
-            >
-              {visibleData && visibleData.length ? (
-                visibleData.map((item) => (
-                  <Box>
-                    {" "}
-                    <JobCard job={item} />
-                    <Box
-                      display={"flex"}
-                      justifyContent={"space-between"}
-                      alignItems={"center"}
-                      paddingX={"20px"}
-                      marginTop={"10px"}
-                    >
-                      <Button
-                        sx={{
-                          fontSize: "14px",
-                          textTransform: "none",
-                          color: "#000",
-                          fontFamily: "red-hat-display",
-                          fontWeight: 400,
-                        }}
-                        startIcon={
-                          <EditNoteIcon
+            {isLoading ? (
+              <Box
+                flex={1}
+                display={"flex"}
+                alignItems={"center"}
+                justifyContent={"center"}
+                sx={{ marginY: "200px" }}
+              >
+                <CircularProgress />
+              </Box>
+            ) : (
+              <>
+                <Grid
+                  item
+                  md={12}
+                  xs={20}
+                  lg={12}
+                  display={"flex"}
+                  gap={"12px"}
+                  flexWrap={"wrap"}
+                >
+                  {visibleData && visibleData.length ? (
+                    visibleData.map((item) => (
+                      <Box>
+                        {" "}
+                        <JobCard job={item} />
+                        <Box
+                          display={"flex"}
+                          justifyContent={"space-between"}
+                          alignItems={"center"}
+                          paddingX={"20px"}
+                          marginTop={"10px"}
+                        >
+                          <Button
                             sx={{
-                              color: "#1E3A8A",
-                              width: "35px",
-                              height: "35px",
+                              fontSize: "14px",
+                              textTransform: "none",
+                              color: "#000",
+                              fontFamily: "red-hat-display",
+                              fontWeight: 400,
                             }}
-                          />
-                        }
-                        onClick={() => handleEditJob(item)}
-                      >
-                        Editar
-                      </Button>
+                            startIcon={
+                              <EditNoteIcon
+                                sx={{
+                                  color: "#1E3A8A",
+                                  width: "35px",
+                                  height: "35px",
+                                }}
+                              />
+                            }
+                            onClick={() => handleEditJob(item)}
+                          >
+                            Editar
+                          </Button>
 
-                      <Button
-                        sx={{
-                          fontSize: "14px",
-                          textTransform: "none",
-                          color: "#000",
-                          fontFamily: "red-hat-display",
-                          fontWeight: 400,
-                        }}
-                        startIcon={
-                          <HighlightOffIcon
+                          <Button
                             sx={{
-                              color: "#991B1B",
-                              width: "35px",
-                              height: "35px",
+                              fontSize: "14px",
+                              textTransform: "none",
+                              color: "#000",
+                              fontFamily: "red-hat-display",
+                              fontWeight: 400,
                             }}
-                          />
-                        }
-                        onClick={() => handleDeleteJob(item)}
-                      >
-                        Apagar
-                      </Button>
-                    </Box>
-                  </Box>
-                ))
-              ) : (
-                <TypographyMold>Nao há vagas criadas</TypographyMold>
-              )}
-            </Grid>
+                            startIcon={
+                              <HighlightOffIcon
+                                sx={{
+                                  color: "#991B1B",
+                                  width: "35px",
+                                  height: "35px",
+                                }}
+                              />
+                            }
+                            onClick={() => handleDeleteJob(item)}
+                          >
+                            Apagar
+                          </Button>
+                        </Box>
+                      </Box>
+                    ))
+                  ) : (
+                    <TypographyMold>
+                      Nao há vagas criadas ainda 😓{" "}
+                    </TypographyMold>
+                  )}
+                </Grid>
 
-            <Grid
-              item
-              md={12}
-              xs={20}
-              lg={12}
-              display={"flex"}
-              alignItems={"center"}
-              justifyContent={"center"}
-              padding={5}
-            >
-              {totalCount > 0 && totalCount > itemPerPage && (
-                <Pagination
-                  page={currentPage}
-                  onChange={handlePageChange}
-                  count={Math.ceil(totalCount / itemPerPage)}
-                  color="primary"
-                />
-              )}
-            </Grid>
+                {totalCount > 0 && totalCount > itemPerPage && (
+                  <Grid
+                    item
+                    md={12}
+                    xs={20}
+                    lg={12}
+                    display={"flex"}
+                    alignItems={"center"}
+                    justifyContent={"center"}
+                    padding={5}
+                  >
+                    <Pagination
+                      page={currentPage}
+                      onChange={handlePageChange}
+                      count={Math.ceil(totalCount / itemPerPage)}
+                      color="primary"
+                    />
+                  </Grid>
+                )}
+              </>
+            )}
           </Grid>
         </Stack>
         <ClinicPerfilModal open={open} setOpen={setOpen} />
