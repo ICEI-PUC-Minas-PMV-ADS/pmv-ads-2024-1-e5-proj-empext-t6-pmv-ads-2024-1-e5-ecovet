@@ -16,6 +16,7 @@ import {
   FormControlLabel,
   FormGroup,
   FormHelperText,
+  Pagination,
   Stack,
   Tooltip,
   styled,
@@ -189,7 +190,7 @@ function FilterFindjob({
         <FormGroup
           sx={{
             "& .MuiFormControlLabel-root": {
-              marginBottom: "-12px",
+              marginBottom: "-8px",
             },
           }}
         >
@@ -277,7 +278,9 @@ const fakeData = [
 const FindJob = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [jobLocation, setJobLocation] = useState("");
-  const [isLoading, setEsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [totalCount, setTotalCount] = useState(fakeData.length);
+  const [currentPage, setCurrentPage] = useState(1);
   const [open, setOpen] = useState(false);
   const [sort, setSort] = useState("Novo");
   const [state, setState] = React.useState({
@@ -310,6 +313,30 @@ const FindJob = () => {
       setOpen(false);
     }
   }, [smallScrell]);
+
+  useEffect(() => {
+    setIsLoading(true);
+
+    // função que filtra os resultados do back
+    try {
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+    }
+  }, [state, experience]);
+
+  const itemPerPage = 20
+
+  const startIndex = (currentPage - 1) * itemPerPage;
+  const endIndex = Math.min(startIndex + itemPerPage, fakeData.length);
+  const visibleData = fakeData.slice(startIndex, endIndex);
+
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setCurrentPage(value);
+  };
 
   return (
     <React.Fragment>
@@ -429,13 +456,13 @@ const FindJob = () => {
                 gap={"16px"}
               >
                 {!isLoading ? (
-                  fakeData && fakeData.length ? (
-                    fakeData.map((item, index) => (
+                  visibleData && visibleData.length ? (
+                    visibleData.map((item, index) => (
                       <JobCard job={item} key={index} />
                     ))
                   ) : (
                     <TypographyMold sx={{ flex: 1, textAlign: "center" }}>
-                      No data yet 😓{" "}
+                      No data 😓{" "}
                     </TypographyMold>
                   )
                 ) : (
@@ -451,6 +478,23 @@ const FindJob = () => {
                     <CircularProgress />
                   </Box>
                 )}
+              </Grid>
+
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={12}
+                display={"flex"}
+                alignItems={"center"}
+                justifyContent={"center"}
+                padding={5}
+              >
+                {
+                  totalCount > 0 && totalCount > itemPerPage && (
+                    <Pagination page={currentPage} onChange={handlePageChange} count={Math.ceil(totalCount / itemPerPage)} color="primary" />
+                  )
+                }
               </Grid>
             </Grid>
           </Box>
