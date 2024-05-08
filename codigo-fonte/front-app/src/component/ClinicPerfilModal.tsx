@@ -5,26 +5,12 @@ import {
   Box,
   Grid,
   Modal,
-  Stack,
   TextField,
   TextFieldProps,
   Typography,
   styled,
 } from "@mui/material";
-
-// FAKE DATA
-const fakeUser = {
-  id: 1,
-  name: "John Dove",
-  address: "California",
-  email: "email@example.com",
-  contact: "99 9999 9999",
-  perfil:
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry...",
-  jobs: [],
-};
-
-////////
+import { updateUser } from "../services/agent";
 
 const TypographyMold = styled(Typography)({
   fontFamily: "red-hat-display",
@@ -62,16 +48,31 @@ type Props = {
   setOpen(bool: boolean): void;
 };
 
+// FAKE DATA
+const fakeUser = {
+  id: "1",
+  name: "John Dove",
+  address: "California",
+  email: "email@example.com",
+  contact: "99 9999 9999",
+  disponibility: "Free",
+  perfil:
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry...",
+};
+
 const initialValues = {
+  id: "",
   name: "",
   address: "",
   email: "",
   contact: "",
+  disponibility: "",
   perfil: "",
 };
 
 const ClinicPerfilModal = ({ open, setOpen }: Props) => {
-  const [formValues, setFormValues] = React.useState(initialValues);
+  //necessita do user data. Redux??? localstorage???
+  const [formValues, setFormValues] = React.useState(fakeUser);
   const [alert, setAlert] = React.useState<boolean>(false);
 
   const handleChange = (
@@ -86,10 +87,12 @@ const ClinicPerfilModal = ({ open, setOpen }: Props) => {
 
   const sendForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    setAlert(true);
-    console.log(formValues);
-    setFormValues(initialValues);
+    try {
+      await updateUser(formValues);
+      setAlert(true);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -113,6 +116,7 @@ const ClinicPerfilModal = ({ open, setOpen }: Props) => {
           padding: "20px",
           border: "none",
           borderRadius: "20px",
+          
         }}
       >
         {alert && (
@@ -147,6 +151,19 @@ const ClinicPerfilModal = ({ open, setOpen }: Props) => {
             />
           </TextFieldLabel>
 
+          <TextFieldLabel title="E-mail">
+            <TextFieldLabel.Field
+              placeholder="e-mail"
+              name="email"
+              size="small"
+              fullWidth
+              value={formValues.email}
+              onChange={handleChange}
+              required
+              type="email"
+            />
+          </TextFieldLabel>
+
           <TextFieldLabel title="Endereço">
             <TextFieldLabel.Field
               placeholder="endereço"
@@ -176,16 +193,16 @@ const ClinicPerfilModal = ({ open, setOpen }: Props) => {
             </Grid>
 
             <Grid xs={12} sm={6} md={6} xl={6} item>
-              <TextFieldLabel title="Contato">
+              <TextFieldLabel title="Disponibilidade">
                 <TextFieldLabel.Field
-                  placeholder="contato"
-                  name="contact"
+                  placeholder="disponibilidade"
+                  name="disponibility"
                   size="small"
                   fullWidth
-                  value={formValues.contact}
+                  value={formValues.disponibility}
                   onChange={handleChange}
                   required
-                  type="tel"
+                  type="text"
                 />
               </TextFieldLabel>
             </Grid>
@@ -203,17 +220,29 @@ const ClinicPerfilModal = ({ open, setOpen }: Props) => {
               required
             />
           </TextFieldLabel>
+          <Box gap={2} display={"flex"}>
+            <Button
+              sx={{
+                marginTop: "35px",
+                padding: "8px 30px",
+              }}
+              type="submit"
+              variant="contained"
+            >
+              Salvar
+            </Button>
 
-          <Button
-            sx={{
-              marginTop: "35px",
-              padding: "8px 30px",
-            }}
-            type="submit"
-            variant="contained"
-          >
-            Salvar
-          </Button>
+            <Button
+              sx={{
+                marginTop: "35px",
+                padding: "8px 30px",
+              }}
+              onClick={() => setOpen(false)}
+              variant="contained"
+            >
+              Fechar
+            </Button>
+          </Box>
         </form>
       </Box>
     </Modal>

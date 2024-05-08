@@ -48,3 +48,19 @@ export const getAllUserJobs = async () => {
 
   return data;
 };
+
+export const updateUser = async (formValue: any) => {
+  const response = await fetch("end-point", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formValue),
+  });
+
+  if (!response.ok) {
+    throw new Error("Erro ao editar perfil");
+  }
+
+  return await response.json();
+};
