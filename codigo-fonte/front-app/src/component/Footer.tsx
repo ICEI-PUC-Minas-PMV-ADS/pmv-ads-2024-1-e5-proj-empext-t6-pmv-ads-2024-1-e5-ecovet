@@ -7,7 +7,7 @@ import {
   styled,
 } from "@mui/material";
 import React from "react";
-import { clinicFooterLinks } from "../utils/data";
+import { clinicFooterLinks, professionalFooterLinks } from "../services/utils";
 import { Link } from "react-router-dom";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
@@ -15,6 +15,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 const isUserLogged = true;
+const whoIsLogged: string = "clinic";
 
 const TypographyModel = styled(Typography)({
   fontFamily: "red-hat-display",
@@ -142,9 +143,59 @@ const Footer = () => {
                   Links Rápidos
                 </TypographyModel>
                 <Box paddingY={3}>
-                  {isUserLogged &&
-                    clinicFooterLinks.map((item) => (
-                      <Link to={item.path}>
+                  {isUserLogged ? (
+                    whoIsLogged === "clinic" ? (
+                      clinicFooterLinks.map((item) => (
+                        <Link
+                          style={{ textDecoration: "none" }}
+                          to={item.path}
+                          key={item.path}
+                        >
+                          <CssTypography
+                            sx={{
+                              color: "#EDEDED",
+                              fontSize: "16px",
+                              opacity: 0.7,
+                              transition: "all 0.3s ease",
+                              "&:hover": {
+                                opacity: 1,
+                                transform: "scale(1.1)",
+                              },
+                            }}
+                          >
+                            {item.link}
+                          </CssTypography>
+                        </Link>
+                      ))
+                    ) : (
+                      professionalFooterLinks.map((item) => (
+                        <Link
+                          style={{ textDecoration: "none" }}
+                          to={item.path}
+                          key={item.path}
+                        >
+                          <CssTypography
+                            sx={{
+                              color: "#EDEDED",
+                              fontSize: "16px",
+                              opacity: 0.7,
+                              transition: "all 0.3s ease",
+                              "&:hover": {
+                                opacity: 1,
+                                transform: "scale(1.1)",
+                              },
+                            }}
+                          >
+                            {item.link}
+                          </CssTypography>
+                        </Link>
+                      ))
+                    )
+                  ) : (
+                    <>
+                      {/* Links para quando o usuário não está logado */}
+                      {/* Exemplo: */}
+                      <Link style={{ textDecoration: "none" }} to="/login">
                         <CssTypography
                           sx={{
                             color: "#EDEDED",
@@ -157,10 +208,11 @@ const Footer = () => {
                             },
                           }}
                         >
-                          {item.link}
+                          Login
                         </CssTypography>
                       </Link>
-                    ))}
+                    </>
+                  )}
                 </Box>
               </Box>
             </Grid>

@@ -27,3 +27,25 @@ export const inputValidation = (fields: any) =>
     field.error = field.validation ? field.validation(field.value) : false
     return field
   })
+
+  export const clinicFooterLinks = [{
+    id: 1,
+    link: "Buscar Vagas",
+    path: "/encontaremprego"
+  },
+  {
+    id: 2,
+    link: "Postar Vagas",
+    path: "/upload-job"
+  },{
+    id: 3,
+    link: "Vagas encerradas",
+    path: "/"
+  }]
+
+  export const professionalFooterLinks = [{
+    id: 1,
+    link: "Buscar Vagas",
+    path: "/"
+  },
+]
