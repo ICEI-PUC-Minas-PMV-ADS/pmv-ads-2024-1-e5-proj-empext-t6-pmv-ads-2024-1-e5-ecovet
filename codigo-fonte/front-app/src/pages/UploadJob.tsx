@@ -6,39 +6,19 @@ import Typography from "@mui/material/Typography";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField, { TextFieldProps } from "@mui/material/TextField";
 import { useTheme } from "@mui/material/styles";
-import { Box, Container, styled } from "@mui/material";
+import { Box, CircularProgress, Container, styled } from "@mui/material";
 import { useLocation } from "react-router-dom";
 
 import JobCard from "../component/JobCard";
+import { getUserJobs } from "../services/agent";
 
 type Jobs = {
-  
-    id: string;
-    title: string;
-    location: string;
-    description: string;
-    data: string;
-}[]
-
-
-const jobs: Jobs | null = [
-  {
-    id: "1",
-    title: "Enfermeiro para cirurgia",
-    location: "Belo Horizonte MG",
-    description:
-      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
-    data: "a 1 segundo atrás",
-  },
-  {
-    id: "2",
-    title: "Enfermeiro para cirurgia",
-    location: "Belo Horizonte MG",
-    description:
-      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
-    data: "a 1 segundo atrás",
-  },
-];
+  id: string;
+  title: string;
+  location: string;
+  description: string;
+  data: string;
+}[];
 
 const TypographyForCardBox = styled(Typography)({
   fontFamily: "red-hat-display",
@@ -57,7 +37,7 @@ const FormBox = styled(Box)({
   // boxShadow:
   //   "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)",
   borderRadius: "10px",
-boxShadow: "0 0 0 .2px rgba(0, 0, 0, .5)"
+  boxShadow: "0 0 0 .2px rgba(0, 0, 0, .5)",
 });
 
 type TextinputTestProps = {
@@ -87,11 +67,13 @@ const initialValues = {
   value: "",
   experience: "",
   description: "",
-  responsibilities: "",
+  requirements: "",
 };
 
 const UploadJob = () => {
   const [formValues, setFormValues] = useState(initialValues);
+  const [jobs, setJobs] = useState<any[]>([]);
+  const [loading, setLoadind] = useState(false);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -115,6 +97,22 @@ const UploadJob = () => {
     }
   }, [job]);
 
+  useEffect(() => {
+    setLoadind(true);
+
+    const getJobs = async () => {
+      try {
+        const data = await getUserJobs();
+        setJobs(data);
+        setLoadind(false);
+      } catch (error) {
+        setLoadind(false);
+      }
+    };
+
+    getJobs();
+  }, []);
+
   const sendForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -133,8 +131,8 @@ const UploadJob = () => {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container className="container-flexgrow" fixed>
-        <Grid mt={4} container >
+      <Container className="container-flexgrow">
+        <Grid mt={4} container>
           <Grid xs={12} md={8} xl={6} item>
             <FormBox>
               <Typography
@@ -213,12 +211,12 @@ const UploadJob = () => {
                   />
                 </TextFieldLabel>
 
-                <TextFieldLabel title="Responsabilidades" margin>
+                <TextFieldLabel title="Requisitos" margin>
                   <TextFieldLabel.Field
                     rows={6}
-                    name="responsibilities"
+                    name="requirements"
                     size="small"
-                    value={formValues.responsibilities}
+                    value={formValues.requirements}
                     onChange={handleChange}
                     fullWidth
                     multiline
@@ -247,7 +245,8 @@ const UploadJob = () => {
             xl={6}
             sx={{
               paddingTop: { md: "30px" },
-              paddingLeft: {md: "10px"}
+              paddingLeft: { md: "10px" },
+              marginTop: { xs: 6, md: 0 },
             }}
             spacing={4}
           >
@@ -255,16 +254,34 @@ const UploadJob = () => {
               Postagens Recentes
             </TypographyForCardBox>
 
-            {jobs && jobs.length ? jobs.map((item, index) => (
-              <Box key={item.id} sx={{ mt: index > 0 ? 2 : 0 }}>
-                <JobCard job={item} />
+            {loading ? (
+              <Box
+                sx={{
+                  display: "flex",
+                  padding: { xs: "30px 0 0 0", md: 10 },
+                  alignItems: { xs: "center", sm: "" },
+                  justifyContent: { xs: "center", sm: "" },
+                }}
+              >
+                <CircularProgress />
               </Box>
-            )) : <Typography variant="body2" sx={{
-              fontFamily: "red-hat-display",
-              opacity: "50%"
-            }}>Não há vagas criadas</Typography>}
-
-           
+            ) : jobs && jobs.length ? (
+              jobs.map((item, index) => (
+                <Box key={item.id} sx={{ mt: index > 0 ? 2 : 0 }}>
+                  <JobCard job={item} />
+                </Box>
+              ))
+            ) : (
+              <Typography
+                variant="body2"
+                sx={{
+                  fontFamily: "red-hat-display",
+                  opacity: "50%",
+                }}
+              >
+                Não há vagas criadas ainda
+              </Typography>
+            )}
           </Grid>
         </Grid>
       </Container>

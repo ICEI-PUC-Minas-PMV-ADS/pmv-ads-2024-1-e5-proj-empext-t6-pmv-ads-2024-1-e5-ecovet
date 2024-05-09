@@ -26,3 +26,15 @@ export const post = async (url: string, data?: any) => {
 export const setUserToken = (accessToken: any) => {
     access_token =  accessToken
 }
+
+export const getUserJobs = async () => {
+    const response = await fetch("end-point")
+
+    if(!response.ok){
+        throw new Error("Erro ao carregar dados")
+    }
+
+    const data =await response.json()
+
+    return data
+}
