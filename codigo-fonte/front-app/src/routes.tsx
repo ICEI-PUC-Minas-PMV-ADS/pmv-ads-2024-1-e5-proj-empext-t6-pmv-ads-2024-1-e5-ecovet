@@ -15,6 +15,7 @@ import UploadJob from './pages/UploadJob';
 import LogUpCompany from './pages/LogUpCompany';
 import ClinicPerfilEdit from './pages/ClinicPerilEdit';
 import CadastroClinicaPage from './pages/CadastroClinica';
+import LandingPage from './pages/LandingPage';
 
 
 
@@ -61,8 +62,11 @@ const router = createBrowserRouter([
   {
     path: "/perfil/clinic",
     element: <AuthorizedPage children={<ClinicPerfilEdit />}/>
+  },
+  {
+    path: "/landingpage",
+    element: <AuthorizedPage children={<LandingPage />}/>
   }
-
 
 ]);
 
