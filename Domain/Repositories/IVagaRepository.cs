@@ -13,5 +13,16 @@ namespace Domain.Repositories
         /// Cadastrar vaga. 
         /// </sumary>
         Task InserirVagaAsync(Vaga vaga);
+
+        /// <summary>
+        /// Obter vagas postadas pela clínica.
+        /// </summary>
+        /// <returns>
+        ///      Obter as vagas que foram postadas pela clínica.
+        /// </returns>
+        /// <param>
+        /// Email clinica
+        /// </param>
+        Task<IEnumerable<Vaga>> ObterVagasClinicaAsync(int idClinica);
     }
 }

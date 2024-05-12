@@ -5,6 +5,7 @@ using Domain.Dto;
 using Domain.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace back_app.Controller
 {
@@ -40,6 +41,30 @@ namespace back_app.Controller
         public async Task<IActionResult> ObterVagas()
         {
             var retorno = await vagaService.ObterVagasAsync();
+
+            return Ok(mapper.Map<IEnumerable<VagaModel>>(retorno));
+        } 
+        /// <summary>
+        /// Obter vagas clinica.
+        /// </summary>
+        /// <response code="200">Lista de resultados.</response>
+        /// <response code="400">
+        ///     Dados inválidos
+        /// </response>
+        /// <response code="500">Erro interno.</response>
+        [HttpGet("obterVagasClinica"), AllowAnonymous]
+        [ProducesResponseType(typeof(IEnumerable<VagaModel>), 200)]
+        [Authorize]
+        public async Task<IActionResult> ObterVagasClinicaAsync()
+        {
+            var userId = User.FindFirst("IdUsuario")?.Value;
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                return Unauthorized(); 
+            }
+
+            var retorno = await vagaService.ObterVagasClinicaAsync(int.Parse(userId));
 
             return Ok(mapper.Map<IEnumerable<VagaModel>>(retorno));
         }

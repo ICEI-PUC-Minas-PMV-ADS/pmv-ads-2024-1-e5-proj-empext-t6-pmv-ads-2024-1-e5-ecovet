@@ -24,5 +24,10 @@ namespace DbAdapter.Repositories
         {
             return await ecoVetContext.Vagas.ToListAsync();
         }
+
+        public async Task<IEnumerable<Vaga>> ObterVagasClinicaAsync(int idClinica)
+        {
+            return await ecoVetContext.Vagas.Where(clinica => clinica.IDClinicaVeterinaria == idClinica).ToListAsync();
+        }
     }
 }
