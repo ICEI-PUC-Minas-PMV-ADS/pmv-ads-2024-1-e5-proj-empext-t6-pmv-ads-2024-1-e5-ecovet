@@ -16,10 +16,7 @@ const getToken = createAsyncThunk(
 const getUserFromStorage = createAsyncThunk(
   'get/user/storage',
   async () => {
-    let teste = ls.get('user');
-    console.log("teste")
-    console.log(teste)
-    return teste
+    return ls.get('user');
   },
 )
 
@@ -55,7 +52,7 @@ export const userSlice = createSlice({
       .addCase(getUserFromStorage.fulfilled, (state, { payload }: any) => {
         console.log("getUserFromStorage")
         console.log(payload)
-        state = payload
+        state = payload != null ? payload : initialState
         console.log("state")
         console.log(state)
       })

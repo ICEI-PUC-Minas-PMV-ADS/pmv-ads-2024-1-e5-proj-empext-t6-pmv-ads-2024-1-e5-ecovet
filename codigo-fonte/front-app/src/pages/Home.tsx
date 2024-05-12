@@ -15,13 +15,6 @@ const HomePage = () => {
   const navigate = useNavigate();
  
 
-  useEffect(() => {
-    if(!isAuthorized ){
-      navigate('/login')
-    }
-  },[])
-
-
   return (
     <PageContainerComponent title="" style={{ marginLeft: isMobile ? 60 : 3000 }}>
     </PageContainerComponent>
