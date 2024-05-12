@@ -11,7 +11,7 @@ namespace Domain.Services
         /// <returns>
         ///      Booleano usuario encontrado.
         /// </returns>
-        Task<bool> LoginClinica(string email, string senha);
+        Task<ClinicaVeterinaria> LoginClinica(string email, string senha);
 
         /// <summary>
         /// Processo de login veterinário.
@@ -19,6 +19,6 @@ namespace Domain.Services
         /// <returns>
         ///      Booleano usuario encontrado.        
         /// </returns>
-        Task<bool> LoginVeterinario(string email, string senha);
+        Task<ProfissionalVeterinario> LoginVeterinario(string email, string senha);
     }
 }
