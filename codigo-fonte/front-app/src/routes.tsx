@@ -20,7 +20,7 @@ import CadastroClinicaPage from './pages/CadastroClinica';
 const router = createBrowserRouter([ 
   {
     path: "/",
-    element: <AuthorizedPage children={<HomePage />} role='user'/>
+    element: <HomePage />
   },
   {
     path: "/login",
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
     element: <AuthorizedPage children={<VetClinicInitialPage />}/>
   },  // estamos aqui
   {
-    path: "upload-job",
+    path: "/upload-job",
     element: <AuthorizedPage children={<UploadJob />} />
   },
   {

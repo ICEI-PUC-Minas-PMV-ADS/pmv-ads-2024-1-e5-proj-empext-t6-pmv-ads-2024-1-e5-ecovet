@@ -3,8 +3,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import type { AppDispatch, RootState } from '../reducers/store'
 import Box from '@mui/material/Box';
 import HeaderComponent from './Header';
-import { authorizeUser, getUserFromStorage } from '../reducers/userReducer'
+import { authorizeUser } from '../reducers/userReducer'
 import { useNavigate } from "react-router-dom";
+var ls = require('local-storage');
 
 const AuthorizedPage = ({children, userRole}: any) => {
   const {isAuthorized, role} = useSelector((state: RootState) => state.user)
@@ -13,15 +14,18 @@ const AuthorizedPage = ({children, userRole}: any) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getUserFromStorage())
+    let user = ls.get('user')
+    if(user != null&& user.isAuthorized != false){
+      dispatch(authorizeUser(user))
+    }
   }, []) 
 
 
   useEffect(() => {
+    console.log("isAuthorized")
+    console.log(isAuthorized)
     if(!isAuthorized ){
-      navigate('/login')
-    }else{
-      role == 'Clínica' ? navigate('/clinica') : navigate('/')
+      navigate('/')
     }
   },[isAuthorized]) 
 
@@ -34,8 +38,6 @@ const AuthorizedPage = ({children, userRole}: any) => {
   return (
     <Box
     style={{ 
-      backgroundImage: `url("img/bg.jpg")`,
-      backgroundColor: 'red !important',
       height: '100vh',
     }}>
       <HeaderComponent  />

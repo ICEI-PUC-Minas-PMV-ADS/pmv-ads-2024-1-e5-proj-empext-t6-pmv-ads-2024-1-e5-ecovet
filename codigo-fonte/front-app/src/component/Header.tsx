@@ -56,7 +56,7 @@ const HeaderComponent = () => {
 
   let pages = [
     {
-      name: 'Minhas vagas', options: [  ], link: 'perfil/clinic'
+      name: 'Minhas vagas', options: [  ], link: 'clinica'
     },
     {
       name: 'Procurar Veterinários', options: [ ], link: 'preproject'

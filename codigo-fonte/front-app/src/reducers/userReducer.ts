@@ -13,28 +13,32 @@ const getToken = createAsyncThunk(
   },
 )
 
-const getUserFromStorage = createAsyncThunk(
-  'get/user/storage',
-  async () => {
-    return ls.get('user');
-  },
-)
+// const getUserFromStorage = createAsyncThunk(
+//   'get/user/storage',
+//   async () => {
+//     return ls.get('user');
+//   },
+// )
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
     authorizeUser: (state, { payload }) => {
+      console.log(">>>>>>>>>>>>> authorizeUser")
       state.isAuthorized = true
       state.token = payload.token
       state.name = payload.name
-      state.userName = payload.username
+      state.id = payload.id
+      state.userName = payload.userName
       state.role = payload.tipoLogin === 1 ? 'Clínica' : 'Profissional'
+      setUserToken(payload.token)
       ls('user', state);
     },
     logout: (state) => {
       console.log("logout")
       state.isAuthorized = false
+      ls('user', null);
     },
     getUser: (state) => {
       return state
@@ -49,17 +53,16 @@ export const userSlice = createSlice({
         console.log("state")
         console.log(state)
       })
-      .addCase(getUserFromStorage.fulfilled, (state, { payload }: any) => {
-        console.log("getUserFromStorage")
-        console.log(payload)
-        state = payload != null ? payload : initialState
-        console.log("state")
-        console.log(state)
-      })
+      // .addCase(getUserFromStorage.fulfilled, (state, { payload }: any) => {
+      //   let preState = payload != null ? payload : initialState
+      //   // authorizeUser(preState)
+      //   console.log("state")
+      //   console.log(state)
+      // })
   },
 })
 
-export { getToken, getUserFromStorage }
+export { getToken }
 
 export const { logout, getUser, authorizeUser } = userSlice.actions
 

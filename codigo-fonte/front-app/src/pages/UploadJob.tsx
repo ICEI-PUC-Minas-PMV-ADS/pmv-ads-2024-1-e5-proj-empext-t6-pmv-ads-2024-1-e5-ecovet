@@ -83,6 +83,8 @@ const TextFieldLabel: React.FC<TextinputTestProps> & {
 TextFieldLabel.Field = TextField;
 
 const initialValues = {
+  idVaga: 0,
+  idClinicaVeterinaria: 0,
   TituloVaga: "",
   Descricao: "",
   Requisitos: "",
@@ -114,10 +116,12 @@ const UploadJob = () => {
 
     try {
       const response = await post("Vaga/cadastrarVaga", formValues);
-      if (response.ok) {
-        const data = await response.json();
+      console.log("response")
+      console.log(response)
+      if (response.status == 200) {
+        // const data = await response.json();
         alert("Vaga criada com sucesso!");
-        navigate("/perfil/clinic");
+        navigate("/clinica");
       } else {
         alert("Falha ao criar a vaga. Tente novamente.");
       }

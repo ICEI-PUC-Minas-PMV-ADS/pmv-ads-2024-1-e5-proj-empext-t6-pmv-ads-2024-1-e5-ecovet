@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { logout } from '../reducers/userReducer'
 
 const UserMenuComponent = ({field}: any) => {
-  const { name, email, role } = useSelector((state: RootState) => state.user)
+  const { name, userName, role } = useSelector((state: RootState) => state.user)
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate();
@@ -55,7 +55,7 @@ const UserMenuComponent = ({field}: any) => {
               aria-label="account of current user" 
               aria-controls="menu-appbar" 
               aria-haspopup="true">
-              <Typography>{role}</Typography>
+              <Typography>{userName}</Typography>
             </Grid>
           </Grid>
 
