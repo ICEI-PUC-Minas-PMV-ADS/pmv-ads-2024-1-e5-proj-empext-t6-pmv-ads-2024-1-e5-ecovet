@@ -78,11 +78,14 @@ namespace back_app.Controller
         /// </response>
         /// <response code="500">Erro interno.</response>
         [HttpPost("cadastrarVaga")]
+        [Authorize]
         [ProducesResponseType(typeof(IActionResult), 200)]
         public async Task<IActionResult> CadastrarVaga([FromBody] VagaModel vagaModel)
         {
             var vaga = mapper.Map<Vaga>(vagaModel);
-            
+
+            vaga.IDClinicaVeterinaria = int.Parse(User?.FindFirst("IdUsuario")?.Value);
+
             await vagaService.InserirVagaAsync(vaga);
 
             return Ok();
