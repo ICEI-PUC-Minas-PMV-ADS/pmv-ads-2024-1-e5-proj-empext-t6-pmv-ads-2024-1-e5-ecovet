@@ -51,7 +51,7 @@ const LoginPage = () => {
           name: email,
           tipoLogin
         }))
-        tipoLogin === 1 ? navigate('/clinica') : navigate('/')
+        // tipoLogin === 1 ? navigate('/clinica') : navigate('/')
       } else {
         alert('Falha no login');
       }

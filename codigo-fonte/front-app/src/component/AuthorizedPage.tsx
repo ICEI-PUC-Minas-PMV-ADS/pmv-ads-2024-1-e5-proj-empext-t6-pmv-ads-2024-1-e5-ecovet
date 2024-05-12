@@ -7,7 +7,7 @@ import { authorizeUser, getUserFromStorage } from '../reducers/userReducer'
 import { useNavigate } from "react-router-dom";
 
 const AuthorizedPage = ({children, userRole}: any) => {
-  const isAuthorized = useSelector((state: RootState) => state.user.isAuthorized)
+  const {isAuthorized, role} = useSelector((state: RootState) => state.user)
   const token = useSelector((state: RootState) => state.user.token)
   const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate();
@@ -20,6 +20,8 @@ const AuthorizedPage = ({children, userRole}: any) => {
   useEffect(() => {
     if(!isAuthorized ){
       navigate('/login')
+    }else{
+      role == 'Clínica' ? navigate('/clinica') : navigate('/')
     }
   },[isAuthorized]) 
 
