@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { UserState } from '../types'
 import { setUserToken } from "../services/agent"
+var ls = require('local-storage');
 
 const initialState: UserState = { isAuthorized: false}
 
@@ -12,21 +13,27 @@ const getToken = createAsyncThunk(
   },
 )
 
+const getUserFromStorage = createAsyncThunk(
+  'get/user/storage',
+  async () => {
+    let teste = ls.get('user');
+    console.log("teste")
+    console.log(teste)
+    return teste
+  },
+)
+
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
     authorizeUser: (state, { payload }) => {
-      console.log(">>> authorizeUser")
-      console.log(payload)
       state.isAuthorized = true
       state.token = payload.token
       state.name = payload.name
       state.userName = payload.username
       state.role = payload.tipoLogin === 1 ? 'Clínica' : 'Profissional'
-      console.log(">>> state")
-      console.log(state)
-      // state.userRegistrationId = data.localAccountId
+      ls('user', state);
     },
     logout: (state) => {
       console.log("logout")
@@ -45,10 +52,17 @@ export const userSlice = createSlice({
         console.log("state")
         console.log(state)
       })
+      .addCase(getUserFromStorage.fulfilled, (state, { payload }: any) => {
+        console.log("getUserFromStorage")
+        console.log(payload)
+        state = payload
+        console.log("state")
+        console.log(state)
+      })
   },
 })
 
-export { getToken }
+export { getToken, getUserFromStorage }
 
 export const { logout, getUser, authorizeUser } = userSlice.actions
 

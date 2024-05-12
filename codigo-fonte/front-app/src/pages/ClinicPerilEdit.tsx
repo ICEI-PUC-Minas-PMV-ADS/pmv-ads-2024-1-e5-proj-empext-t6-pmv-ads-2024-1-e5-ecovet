@@ -3,6 +3,8 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import CssBaseline from "@mui/material/CssBaseline";
+import type { AppDispatch, RootState } from '../reducers/store'
+import { useSelector, useDispatch } from 'react-redux'
 
 import {
   Box,
@@ -117,7 +119,8 @@ const InfoTypography = styled(Typography)({
   fontFamily: "red-hat-display",
 });
 
-const ClinicPerfilEdit = () => {
+const VetClinicInitialPage = () => {
+  const { name } = useSelector((state: RootState) => state.user)
   const [isLoading, setIsloading] = useState<Boolean>(false);
   const [open, setOpen] = React.useState(false);
 
@@ -170,7 +173,7 @@ const ClinicPerfilEdit = () => {
                 fontWeight={"600"}
                 color={"#4b5563"}
               >
-                Bem-vindo, clinica EcoVet
+                Bem-vindo, { name }
               </TypographyMold>
 
               <Box
@@ -258,4 +261,4 @@ const ClinicPerfilEdit = () => {
   );
 };
 
-export default ClinicPerfilEdit;
+export default VetClinicInitialPage;
