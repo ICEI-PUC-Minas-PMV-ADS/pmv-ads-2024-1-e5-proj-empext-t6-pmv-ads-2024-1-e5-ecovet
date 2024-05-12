@@ -30,7 +30,7 @@ public class AuthController : ControllerBase
             if (usuarioRetornado != null)
             {
                 user.Id = usuarioRetornado.IDClinica;
-
+                user.NomeUsuario = usuarioRetornado.Nome;
                 return Ok(new
                 {
                     token = await GenerateToken(user)
@@ -44,6 +44,8 @@ public class AuthController : ControllerBase
             if (usuarioRetornado != null)
             {
                 user.Id = usuarioRetornado.IDProfissional;
+                user.NomeUsuario = usuarioRetornado.Nome;
+
                 return Ok(new
                 {
                     token = await GenerateToken(user)
@@ -59,6 +61,7 @@ public class AuthController : ControllerBase
         var claims = new[]
         {
             new Claim(ClaimTypes.Email, user.Email),
+            new Claim("NomeUsuario", user.NomeUsuario),
             new Claim("IdUsuario", user.Id.ToString()),
             new Claim("Tipo", user.TipoLogin.ToString())
         };
