@@ -24,5 +24,13 @@ namespace Domain.Repositories
         /// Email clinica
         /// </param>
         Task<IEnumerable<Vaga>> ObterVagasClinicaAsync(int idClinica);
+
+        /// <summary>
+        /// Deletar vaga.
+        /// </summary>
+        /// <param>
+        /// id da vaga
+        /// </param>
+        Task DeletarVagaAsync(int idVaga);
     }
 }

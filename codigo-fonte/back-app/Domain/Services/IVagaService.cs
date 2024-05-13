@@ -31,5 +31,14 @@ namespace Domain.Services
         /// Cadastrar vaga. 
         /// </sumary>
         Task InserirVagaAsync(Vaga vaga);
+
+        /// <summary>
+        /// Deletar vaga.
+        /// </summary>
+        /// <param>
+        /// id da vaga
+        /// </param>
+        Task DeletarVagaAsync(int idVaga);
+
     }
 }

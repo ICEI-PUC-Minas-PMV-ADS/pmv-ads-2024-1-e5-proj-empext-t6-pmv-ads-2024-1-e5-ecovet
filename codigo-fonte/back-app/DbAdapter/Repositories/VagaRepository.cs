@@ -13,6 +13,22 @@ namespace DbAdapter.Repositories
             this.ecoVetContext = ecoVetContext;
         }
 
+        public async Task DeletarVagaAsync(int idVaga)
+        {
+            var vaga = await ecoVetContext.Vagas.FirstOrDefaultAsync(v => v.IDVaga == idVaga);
+
+            if (vaga != null)
+            {
+                ecoVetContext.Vagas.Remove(vaga);
+                await ecoVetContext.SaveChangesAsync();
+            }
+            else
+            {
+                throw new Exception("Vaga não encontrada.");
+            }
+
+        }
+
         public async Task InserirVagaAsync(Vaga vaga)
         {
             ecoVetContext.Vagas.Add(vaga);

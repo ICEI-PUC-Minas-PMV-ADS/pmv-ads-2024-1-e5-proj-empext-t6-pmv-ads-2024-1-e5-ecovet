@@ -18,6 +18,11 @@ namespace Application
                                  throw new ArgumentNullException(nameof(clinicaVeterinariaRepository)); ;
         }
 
+        public async Task DeletarVagaAsync(int idVaga)
+        {
+            await vagaRepository.DeletarVagaAsync(idVaga);
+        }
+
         public async Task InserirVagaAsync(Vaga vaga)
         {
             await vagaRepository.InserirVagaAsync(vaga);
