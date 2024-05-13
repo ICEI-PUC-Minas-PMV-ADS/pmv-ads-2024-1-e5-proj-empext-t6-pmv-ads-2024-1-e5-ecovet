@@ -8,18 +8,20 @@ import TextField, { TextFieldProps } from "@mui/material/TextField";
 import { useTheme } from "@mui/material/styles";
 import { Box, Container, styled } from "@mui/material";
 import { useLocation } from "react-router-dom";
-
+import { post } from "../services/agent";
 import JobCard from "../component/JobCard";
+import { useSelector, useDispatch } from "react-redux";
+import type { AppDispatch, RootState } from "../reducers/store";
+import { setDialog, setDialogIdle } from "../reducers/dialogReducer";
+import { useNavigate } from "react-router-dom";
 
 type Jobs = {
-  
-    id: string;
-    title: string;
-    location: string;
-    description: string;
-    data: string;
-}[]
-
+  id: string;
+  title: string;
+  location: string;
+  description: string;
+  data: string;
+}[];
 
 const jobs: Jobs | null = [
   {
@@ -81,19 +83,19 @@ const TextFieldLabel: React.FC<TextinputTestProps> & {
 TextFieldLabel.Field = TextField;
 
 const initialValues = {
-  title: "",
-  type: "",
-  value: "",
-  experience: "",
-  description: "",
-  responsibilities: "",
+  idVaga: 0,
+  idClinicaVeterinaria: 0,
+  TituloVaga: "",
+  Descricao: "",
+  Requisitos: "",
+  PeriodoDeDisponibilidade: "",
 };
 
 const UploadJob = () => {
   const [formValues, setFormValues] = useState(initialValues);
+  const navigate = useNavigate();
 
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const location = useLocation();
   const job = location.state ? location.state.job : null;
@@ -106,6 +108,27 @@ const UploadJob = () => {
       ...prev,
       [name]: value,
     }));
+    console.log({ formValues });
+  };
+
+  const sendForm = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const response = await post("Vaga/cadastrarVaga", formValues);
+      console.log("response")
+      console.log(response)
+      if (response.status == 200) {
+        // const data = await response.json();
+        alert("Vaga criada com sucesso!");
+        navigate("/clinica");
+      } else {
+        alert("Falha ao criar a vaga. Tente novamente.");
+      }
+    } catch (error) {
+      console.error("Erro na criação da vaga:", error);
+      alert("Erro no servidor. Por favor, tente mais tarde.");
+    }
   };
 
   useEffect(() => {
@@ -113,27 +136,11 @@ const UploadJob = () => {
       setFormValues(job);
     }
   }, [job]);
-
-  const sendForm = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    // editar job
-    if (job) {
-      console.log(formValues);
-      setFormValues(initialValues);
-      return;
-    }
-
-    // fluxo para criar job
-    console.log(formValues);
-    setFormValues(initialValues);
-  };
-
   return (
     <React.Fragment>
       <CssBaseline />
       <Container fixed>
-        <Grid mt={4} container >
+        <Grid mt={4} container>
           <Grid xs={12} md={8} xl={6} item>
             <FormBox>
               <Typography
@@ -147,52 +154,22 @@ const UploadJob = () => {
               <form onSubmit={sendForm}>
                 <TextFieldLabel title="Título da vaga">
                   <TextFieldLabel.Field
-                    placeholder="título"
-                    name="title"
+                    placeholder="Título da vaga"
+                    name="TituloVaga"
                     size="small"
                     fullWidth
-                    value={formValues.title}
+                    value={formValues.TituloVaga}
                     onChange={handleChange}
                     required
                   />
                 </TextFieldLabel>
 
-                <Grid container spacing={2}>
-                  <Grid item xs={12} md={6}>
-                    <TextFieldLabel title="Tipo da vaga" margin>
-                      <TextFieldLabel.Field
-                        placeholder="Tipo da vaga"
-                        name="type"
-                        size="small"
-                        fullWidth
-                        value={formValues.type}
-                        onChange={handleChange}
-                        required
-                      />
-                    </TextFieldLabel>
-                  </Grid>
-
-                  <Grid item xs={12} md={6}>
-                    <TextFieldLabel title="Valor" margin>
-                      <TextFieldLabel.Field
-                        placeholder="Valor"
-                        name="value"
-                        size="small"
-                        fullWidth
-                        value={formValues.value}
-                        onChange={handleChange}
-                        required
-                      />
-                    </TextFieldLabel>
-                  </Grid>
-                </Grid>
-
-                <TextFieldLabel title="Experiencia" margin>
+                <TextFieldLabel title="Requisitos" margin>
                   <TextFieldLabel.Field
-                    placeholder="Experência"
-                    name="experience"
+                    placeholder="Requisitos"
+                    name="Requisitos"
                     size="small"
-                    value={formValues.experience}
+                    value={formValues.Requisitos}
                     onChange={handleChange}
                     fullWidth
                     required
@@ -202,9 +179,9 @@ const UploadJob = () => {
                 <TextFieldLabel title="Descrição da vaga" margin>
                   <TextFieldLabel.Field
                     rows={6}
-                    name="description"
+                    name="Descricao"
                     size="small"
-                    value={formValues.description}
+                    value={formValues.Descricao}
                     onChange={handleChange}
                     fullWidth
                     multiline
@@ -212,15 +189,14 @@ const UploadJob = () => {
                   />
                 </TextFieldLabel>
 
-                <TextFieldLabel title="Responsabilidades" margin>
+                <TextFieldLabel title="Periodo De Disponibilidade" margin>
                   <TextFieldLabel.Field
-                    rows={6}
-                    name="responsibilities"
+                    placeholder="Periodo De Disponibilidade"
+                    name="PeriodoDeDisponibilidade"
                     size="small"
-                    value={formValues.responsibilities}
+                    value={formValues.PeriodoDeDisponibilidade}
                     onChange={handleChange}
                     fullWidth
-                    multiline
                     required
                   />
                 </TextFieldLabel>
@@ -246,7 +222,7 @@ const UploadJob = () => {
             xl={6}
             sx={{
               paddingTop: { md: "30px" },
-              paddingLeft: {md: "10px"}
+              paddingLeft: { md: "10px" },
             }}
             spacing={4}
           >
@@ -254,16 +230,23 @@ const UploadJob = () => {
               Postagens Recentes
             </TypographyForCardBox>
 
-            {jobs && jobs.length ? jobs.map((item, index) => (
-              <Box key={item.id} sx={{ mt: index > 0 ? 2 : 0 }}>
-                <JobCard job={item} />
-              </Box>
-            )) : <Typography variant="body2" sx={{
-              fontFamily: "red-hat-display",
-              opacity: "50%"
-            }}>Não há vagas criadas</Typography>}
-
-           
+            {jobs && jobs.length ? (
+              jobs.map((item, index) => (
+                <Box key={item.id} sx={{ mt: index > 0 ? 2 : 0 }}>
+                  <JobCard job={item} />
+                </Box>
+              ))
+            ) : (
+              <Typography
+                variant="body2"
+                sx={{
+                  fontFamily: "red-hat-display",
+                  opacity: "50%",
+                }}
+              >
+                Não há vagas criadas
+              </Typography>
+            )}
           </Grid>
         </Grid>
       </Container>

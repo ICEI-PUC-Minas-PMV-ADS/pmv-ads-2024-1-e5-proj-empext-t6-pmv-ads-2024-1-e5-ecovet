@@ -20,5 +20,6 @@ export interface UserState {
     userRegistrationId?: number,
     userType?: string,
     role?: string,
+    id?: number, 
     token?: string
 }

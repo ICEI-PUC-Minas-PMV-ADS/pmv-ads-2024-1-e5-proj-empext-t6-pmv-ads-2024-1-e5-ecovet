@@ -42,5 +42,7 @@ export const login = async (data?: any) => {
 }
 
 export const setUserToken = (accessToken: any) => {
+    console.log("set token")
+    console.log(accessToken)
     access_token =  accessToken
 }

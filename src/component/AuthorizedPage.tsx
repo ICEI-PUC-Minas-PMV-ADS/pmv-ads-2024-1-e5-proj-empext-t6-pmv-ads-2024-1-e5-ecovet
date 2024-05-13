@@ -3,27 +3,41 @@ import { useSelector, useDispatch } from 'react-redux'
 import type { AppDispatch, RootState } from '../reducers/store'
 import Box from '@mui/material/Box';
 import HeaderComponent from './Header';
-import { authorizeUser, getToken } from '../reducers/userReducer'
+import { authorizeUser } from '../reducers/userReducer'
+import { useNavigate } from "react-router-dom";
+var ls = require('local-storage');
 
 const AuthorizedPage = ({children, userRole}: any) => {
-  const isAuthorized = useSelector((state: RootState) => state.user.isAuthorized)
+  const {isAuthorized, role} = useSelector((state: RootState) => state.user)
   const token = useSelector((state: RootState) => state.user.token)
   const dispatch = useDispatch<AppDispatch>()
+  const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   dispatch(authorizeUser({userRole, instance, accounts}))
-  // }, [instance]) 
+  useEffect(() => {
+    let user = ls.get('user')
+    if(user != null&& user.isAuthorized != false){
+      dispatch(authorizeUser(user))
+    }
+  }, []) 
+
+
+  useEffect(() => {
+    console.log("isAuthorized")
+    console.log(isAuthorized)
+    if(!isAuthorized ){
+      navigate('/')
+    }
+  },[isAuthorized]) 
 
   // useEffect(() => {
   //   console.log(">>>>>> isAuthorized")
+  //   console.log(isAuthorized)
   //   // dispatch(getToken({instance, accounts}))
   // },[isAuthorized]) 
   
   return (
     <Box
     style={{ 
-      backgroundImage: `url("img/bg.jpg")`,
-      backgroundColor: 'red !important',
       height: '100vh',
     }}>
       <HeaderComponent  />
