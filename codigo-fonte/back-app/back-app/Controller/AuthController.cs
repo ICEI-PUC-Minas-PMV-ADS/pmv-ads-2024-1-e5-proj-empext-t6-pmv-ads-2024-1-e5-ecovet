@@ -20,6 +20,7 @@ public class AuthController : ControllerBase
         _authService = authService;
     }
 
+    //Comentario teste
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] UserLoginModel user)
     {
