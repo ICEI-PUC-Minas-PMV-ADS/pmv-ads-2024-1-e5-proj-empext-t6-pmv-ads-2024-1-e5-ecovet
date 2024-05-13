@@ -129,163 +129,166 @@ const UploadJob = () => {
   };
 
   return (
-    <React.Fragment>
-      <CssBaseline />
-      <Container className="container-flexgrow">
-        <Grid mt={4} container>
-          <Grid xs={12} md={8} xl={6} item>
-            <FormBox>
-              <Typography
-                fontSize={"24px"}
-                sx={{ fontFamily: "red-hat-display", fontWeight: 600 }}
-                variant="h4"
-                color="#6B7280"
-              >
-                Criar Vaga
-              </Typography>
-              <form onSubmit={sendForm}>
-                <TextFieldLabel title="Título da vaga">
-                  <TextFieldLabel.Field
-                    placeholder="título"
-                    name="title"
-                    size="small"
-                    fullWidth
-                    value={formValues.title}
-                    onChange={handleChange}
-                    required
-                  />
-                </TextFieldLabel>
-
-                <Grid container spacing={2}>
-                  <Grid item xs={12} md={6}>
-                    <TextFieldLabel title="Tipo da vaga" margin>
-                      <TextFieldLabel.Field
-                        placeholder="Tipo da vaga"
-                        name="type"
-                        size="small"
-                        fullWidth
-                        value={formValues.type}
-                        onChange={handleChange}
-                        required
-                      />
-                    </TextFieldLabel>
-                  </Grid>
-
-                  <Grid item xs={12} md={6}>
-                    <TextFieldLabel title="Valor" margin>
-                      <TextFieldLabel.Field
-                        placeholder="Valor"
-                        name="value"
-                        size="small"
-                        fullWidth
-                        value={formValues.value}
-                        onChange={handleChange}
-                        required
-                      />
-                    </TextFieldLabel>
-                  </Grid>
-                </Grid>
-
-                <TextFieldLabel title="Experiencia" margin>
-                  <TextFieldLabel.Field
-                    placeholder="Experência"
-                    name="experience"
-                    size="small"
-                    value={formValues.experience}
-                    onChange={handleChange}
-                    fullWidth
-                    required
-                  />
-                </TextFieldLabel>
-
-                <TextFieldLabel title="Descrição da vaga" margin>
-                  <TextFieldLabel.Field
-                    rows={6}
-                    name="description"
-                    size="small"
-                    value={formValues.description}
-                    onChange={handleChange}
-                    fullWidth
-                    multiline
-                    required
-                  />
-                </TextFieldLabel>
-
-                <TextFieldLabel title="Requisitos" margin>
-                  <TextFieldLabel.Field
-                    rows={6}
-                    name="requirements"
-                    size="small"
-                    value={formValues.requirements}
-                    onChange={handleChange}
-                    fullWidth
-                    multiline
-                    required
-                  />
-                </TextFieldLabel>
-
-                <Button
-                  sx={{
-                    marginTop: "35px",
-                    padding: "8px 30px",
-                  }}
-                  type="submit"
-                  variant="contained"
+    <Box bgcolor={"white"}>
+      <React.Fragment>
+        <CssBaseline />
+        <Container className="container-flexgrow">
+          <Grid mt={4} container>
+            <Grid xs={12} md={8} xl={6} item>
+              <FormBox>
+                <Typography
+                  fontSize={"24px"}
+                  sx={{ fontFamily: "red-hat-display", fontWeight: 600 }}
+                  variant="h4"
+                  color="#6B7280"
                 >
-                  Criar
-                </Button>
-              </form>
-            </FormBox>
-          </Grid>
+                  Criar Vaga
+                </Typography>
+                <form onSubmit={sendForm}>
+                  <TextFieldLabel title="Título da vaga">
+                    <TextFieldLabel.Field
+                      placeholder="título"
+                      name="title"
+                      size="small"
+                      fullWidth
+                      value={formValues.title}
+                      onChange={handleChange}
+                      required
+                    />
+                  </TextFieldLabel>
 
-          <Grid
-            item
-            xs={12}
-            md={4}
-            xl={6}
-            sx={{
-              paddingTop: { md: "30px" },
-              paddingLeft: { md: "10px" },
-              marginTop: { xs: 6, md: 0 },
-            }}
-            spacing={4}
-          >
-            <TypographyForCardBox mb={"10px"} variant="h5" color={"#000"}>
-              Postagens Recentes
-            </TypographyForCardBox>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} md={6}>
+                      <TextFieldLabel title="Tipo da vaga" margin>
+                        <TextFieldLabel.Field
+                          placeholder="Tipo da vaga"
+                          name="type"
+                          size="small"
+                          fullWidth
+                          value={formValues.type}
+                          onChange={handleChange}
+                          required
+                        />
+                      </TextFieldLabel>
+                    </Grid>
 
-            {loading ? (
-              <Box
-                sx={{
-                  display: "flex",
-                  padding: { xs: "30px 0 0 0", md: 10 },
-                  alignItems: { xs: "center", sm: "" },
-                  justifyContent: { xs: "center", sm: "" },
-                }}
-              >
-                <CircularProgress />
-              </Box>
-            ) : jobs && jobs.length ? (
-              jobs.map((item, index) => (
-                <Box key={item.id} sx={{ mt: index > 0 ? 2 : 0 }}>
-                  <JobCard job={item} />
+                    <Grid item xs={12} md={6}>
+                      <TextFieldLabel title="Valor" margin>
+                        <TextFieldLabel.Field
+                          placeholder="Valor"
+                          name="value"
+                          size="small"
+                          fullWidth
+                          value={formValues.value}
+                          onChange={handleChange}
+                          required
+                        />
+                      </TextFieldLabel>
+                    </Grid>
+                  </Grid>
+
+                  <TextFieldLabel title="Experiencia" margin>
+                    <TextFieldLabel.Field
+                      placeholder="Experência"
+                      name="experience"
+                      size="small"
+                      value={formValues.experience}
+                      onChange={handleChange}
+                      fullWidth
+                      required
+                    />
+                  </TextFieldLabel>
+
+                  <TextFieldLabel title="Descrição da vaga" margin>
+                    <TextFieldLabel.Field
+                      rows={6}
+                      name="description"
+                      size="small"
+                      value={formValues.description}
+                      onChange={handleChange}
+                      fullWidth
+                      multiline
+                      required
+                    />
+                  </TextFieldLabel>
+
+                  <TextFieldLabel title="Requisitos" margin>
+                    <TextFieldLabel.Field
+                      rows={6}
+                      name="requirements"
+                      size="small"
+                      value={formValues.requirements}
+                      onChange={handleChange}
+                      fullWidth
+                      multiline
+                      required
+                    />
+                  </TextFieldLabel>
+
+                  <Button
+                    sx={{
+                      marginTop: "35px",
+                      padding: "8px 30px",
+                    }}
+                    type="submit"
+                    variant="contained"
+                  >
+                    Criar
+                  </Button>
+                </form>
+              </FormBox>
+            </Grid>
+
+            <Grid
+              item
+              xs={12}
+              md={4}
+              xl={6}
+              sx={{
+                paddingTop: { md: "30px" },
+                paddingLeft: { md: "10px" },
+                marginTop: { xs: 6, md: 0 },
+                backgroundColor: "transparent",
+              }}
+              spacing={4}
+            >
+              <TypographyForCardBox mb={"10px"} variant="h5" color={"#000"}>
+                Postagens Recentes
+              </TypographyForCardBox>
+
+              {loading ? (
+                <Box
+                  sx={{
+                    display: "flex",
+                    padding: { xs: "30px 0 0 0", md: 10 },
+                    alignItems: { xs: "center", sm: "" },
+                    justifyContent: { xs: "center", sm: "" },
+                  }}
+                >
+                  <CircularProgress />
                 </Box>
-              ))
-            ) : (
-              <Typography
-                variant="body2"
-                sx={{
-                  fontFamily: "red-hat-display",
-                  opacity: "50%",
-                }}
-              >
-                Não há vagas criadas ainda
-              </Typography>
-            )}
+              ) : jobs && jobs.length ? (
+                jobs.map((item, index) => (
+                  <Box key={item.id} sx={{ mt: index > 0 ? 2 : 0 }}>
+                    <JobCard job={item} />
+                  </Box>
+                ))
+              ) : (
+                <Typography
+                  variant="body2"
+                  sx={{
+                    fontFamily: "red-hat-display",
+                    opacity: "50%",
+                  }}
+                >
+                  Não há vagas criadas ainda
+                </Typography>
+              )}
+            </Grid>
           </Grid>
-        </Grid>
-      </Container>
-    </React.Fragment>
+        </Container>
+      </React.Fragment>
+    </Box>
   );
 };
 
