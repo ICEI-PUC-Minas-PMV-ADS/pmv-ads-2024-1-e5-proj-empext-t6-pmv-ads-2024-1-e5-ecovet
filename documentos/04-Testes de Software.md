@@ -48,6 +48,7 @@ Evidência de teste CT 01  - Resultado ok
 ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/3fa7f01f-2aec-4f59-9e5b-246412de089d)
 Evidencia criado:
 ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/49650eac-63ce-486b-9363-6ae09ad9bf49)
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/82f89c44-f0a7-471c-865f-23152c0e43b4)
 
 
 Evidência de teste CT 02  - Resultado ok
