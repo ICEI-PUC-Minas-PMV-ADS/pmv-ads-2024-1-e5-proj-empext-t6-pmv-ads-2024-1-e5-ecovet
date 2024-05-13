@@ -44,8 +44,29 @@
 |Critério de Êxito | Login realizado  |
  
 # Evidências de Testes de Software
-Evidência de teste CT 01  - Resultado clinica ok
+Evidência de teste CT 01  - Resultado ok
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/3fa7f01f-2aec-4f59-9e5b-246412de089d)
+Evidencia criado:
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/49650eac-63ce-486b-9363-6ae09ad9bf49)
 
 
+Evidência de teste CT 02  - Resultado ok
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/04db2f97-8cd6-406f-8eab-84ed87cce454)
 
+Evidencia:
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/5b4ebac6-308c-42c0-b8e0-fff9b9eb873b)
+
+
+Evidência de teste CT 03  - Resultado ok
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/970b4a38-0239-4ddd-8dd5-9c5561689d20)
+
+Evidencia:
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/6938d420-e9d8-4778-9fca-65c325a22163)
+
+
+Evidência de teste CT 04  - Resultado ok
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/e6f46273-2568-4fa0-a22b-5150e75a44aa)
+
+Evidencia:
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/1230f0b9-6abf-4dd4-a435-4587e545a012)
 
