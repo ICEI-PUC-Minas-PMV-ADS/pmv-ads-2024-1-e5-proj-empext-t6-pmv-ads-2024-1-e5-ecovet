@@ -4,54 +4,47 @@
 
 | **Caso de Teste** 	| **CT-01 – Cadastro da cliníca veterinária** 	|
 |:---:	|:---:	|
-|	Requisito Associado 	| RF-002 - Realizar cadastro na aplicação |
+|	Requisito Associado 	| RF-002 - Permitir que as clínicas criem e gerenciem seus perfis	 |
 | Objetivo do Teste 	| Verificar inserção dos dados informados pela cliníca veterinária. |
 |Critério de Êxito | Persistência dos dados no BD  |
 
 
 | **Caso de Teste** 	| **CT-02 – Realizar login  clínica** 	   |
 |:---:	|:---:	|
-|	Requisito Associado 	| RF-002 - Realizar login na aplicação |
+|	Requisito Associado 	| Permitir que as clínicas criem e gerenciem seus perfis	 |
 | Objetivo do Teste 	| Verificar inserção dos dados informados pela cliníca veterinária. |
 |Critério de Êxito | Login realizado  |
 
 
 | **Caso de Teste** 	| **CT-03 – Cadastro do profissional** 	|
 |:---:	|:---: |
-|	Requisito Associado 	| RF-001 - Realizar cadastro na aplicação |
+|	Requisito Associado 	| RF-001 - Permitir que os veterinários criem e gerenciem seus perfis |
 | Objetivo do Teste 	| Verificar inserção dos dados informados pelo profissional.    |
 |Critério de Êxito | Persistência dos dados no BD  |
 
 
 | **Caso de Teste** 	| **CT-04 – Realizar login  profissional** 	|
 |:---:	|:---:	|
-|	Requisito Associado 	| RF-001 - Realizar login na aplicação |
+|	Requisito Associado 	| RF-001 - Permitir que os veterinários criem e gerenciem seus perfis |
 | Objetivo do Teste 	| Verificar inserção dos dados informados pelo profissional. |
 |Critério de Êxito | Login realizado  |
 
 
 | **Caso de Teste** 	| **CT-05 – Cadastro de vaga** 	|
 |:---:	|:---:	|
-|	Requisito Associado 	| RF-001 - Realizar login na aplicação |
+|	Requisito Associado 	|RF-004 - Permitir que os veterinários busquem e se candidatem a oportunidades de trabalho |
+| Objetivo do Teste 	| Verificar inserção dos dados informados pelo profissional. |
+|Critério de Êxito | Login realizado  |
+
+
+| **Caso de Teste** 	| **CT-06 – Listar Vagas cadastradas** 	|
+|:---:	|:---:	|
+|	Requisito Associado 	| RF-004 - Permitir que os veterinários busquem e se candidatem a oportunidades de trabalho |
 | Objetivo do Teste 	| Verificar inserção dos dados informados pelo profissional. |
 |Critério de Êxito | Login realizado  |
  
 # Evidências de Testes de Software
-Evidência de teste CT 01  - Resultado clinica ok, cadastro de profissional houve inconsistência 
-![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/1414226f-6e30-4300-9901-ef01c2781d48)
-
-Evidência de teste CT 02 - Resultado ok
-![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/78057aa0-ca48-4494-97b8-2396c34f0f14)
-
-![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/20ce866a-477c-4ab1-8008-03614b38603f)
-
-![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/27342887-c7fa-4ddb-8ddc-a672fa2d9496)
-
-
-Evidência de teste CT 03 - Cadastro de currículo, resultado de cadastro de currículo
-![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/08fadde5-c996-4dc1-8860-5057bef2789c)
-Evidencia CT 05 - Criação de Vaga resultado concluído
-![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/0b359b6b-c999-4779-85a2-cfb0ad4c1914)
+Evidência de teste CT 01  - Resultado clinica ok
 
 
 
