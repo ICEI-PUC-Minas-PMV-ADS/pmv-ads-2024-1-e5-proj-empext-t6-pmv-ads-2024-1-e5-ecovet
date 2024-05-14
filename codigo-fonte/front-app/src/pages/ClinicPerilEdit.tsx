@@ -189,182 +189,184 @@ const ClinicPerfilEdit = () => {
   }, []);
 
   return (
-    <React.Fragment>
-      <CssBaseline />
-      <Container className="container-flexgrow" fixed maxWidth={"xl"}>
-        <Stack direction={"column"} paddingY={"20px"}>
-          <Grid container flex={1}>
-            <Grid
-              item
-              md={12}
-              xs={12}
-              sx={{
-                display: "flex",
-                flexDirection: { xs: "column", md: "row" },
-                alignItems: { md: "center" },
-                width: "100%",
-              }}
-              gap={"12px"}
-              justifyContent={"space-between"}
-            >
-              <TypographyMold
-                variant="h2"
-                fontSize={"20px"}
-                fontWeight={"600"}
-                color={"#4b5563"}
+    <Box bgcolor={"white"}>
+      <React.Fragment>
+        <CssBaseline />
+        <Container className="container-flexgrow" fixed maxWidth={"xl"}>
+          <Stack direction={"column"} paddingY={"20px"}>
+            <Grid container flex={1}>
+              <Grid
+                item
+                md={12}
+                xs={12}
+                sx={{
+                  display: "flex",
+                  flexDirection: { xs: "column", md: "row" },
+                  alignItems: { md: "center" },
+                  width: "100%",
+                }}
+                gap={"12px"}
+                justifyContent={"space-between"}
               >
-                Bem-vindo, clinica EcoVet
-              </TypographyMold>
-
-              <Box
-                display={"flex"}
-                alignItems={"center"}
-                justifyContent={"center"}
-                sx={{ paddingY: { xs: "20px", md: "0px" } }}
-                gap={"20px"}
-              >
-                <EditButton
-                  variant="contained"
-                  endIcon={<DriveFileRenameOutlineIcon />}
-                  onClick={() => setOpen(true)}
-                />
-                <UploadButton
-                  variant="outlined"
-                  endIcon={<FileUploadOutlinedIcon />}
-                  onClick={() => navigate("/upload-job")}
+                <TypographyMold
+                  variant="h2"
+                  fontSize={"20px"}
+                  fontWeight={"600"}
+                  color={"#4b5563"}
                 >
-                  Upload vaga
-                </UploadButton>
-              </Box>
-            </Grid>
-          </Grid>
+                  Bem-vindo, clinica EcoVet
+                </TypographyMold>
 
-          <Grid
-            container
-            flex={1}
-            display={"flex"}
-            flexDirection={"column"}
-            gap={"6px"}
-            marginTop={"80px"}
-          >
-            <Grid item md={12} xs={20} lg={12}>
-              <TypographyMold fontSize={"16px"} variant="h6">
-                Vagas Criadas
-              </TypographyMold>
-            </Grid>
-
-            {isLoading ? (
-              <Box
-                flex={1}
-                display={"flex"}
-                alignItems={"center"}
-                justifyContent={"center"}
-                sx={{ marginY: "200px" }}
-              >
-                <CircularProgress />
-              </Box>
-            ) : (
-              <>
-                <Grid
-                  item
-                  md={12}
-                  xs={20}
-                  lg={12}
+                <Box
                   display={"flex"}
-                  gap={"12px"}
-                  flexWrap={"wrap"}
+                  alignItems={"center"}
+                  justifyContent={"center"}
+                  sx={{ paddingY: { xs: "20px", md: "0px" } }}
+                  gap={"20px"}
                 >
-                  {visibleData && visibleData.length ? (
-                    visibleData.map((item) => (
-                      <Box>
-                        {" "}
-                        <JobCard job={item} />
-                        <Box
-                          display={"flex"}
-                          justifyContent={"space-between"}
-                          alignItems={"center"}
-                          paddingX={"20px"}
-                          marginTop={"10px"}
-                        >
-                          <Button
-                            sx={{
-                              fontSize: "14px",
-                              textTransform: "none",
-                              color: "#000",
-                              fontFamily: "red-hat-display",
-                              fontWeight: 400,
-                            }}
-                            startIcon={
-                              <EditNoteIcon
-                                sx={{
-                                  color: "#1E3A8A",
-                                  width: "35px",
-                                  height: "35px",
-                                }}
-                              />
-                            }
-                            onClick={() => handleEditJob(item)}
-                          >
-                            Editar
-                          </Button>
+                  <EditButton
+                    variant="contained"
+                    endIcon={<DriveFileRenameOutlineIcon />}
+                    onClick={() => setOpen(true)}
+                  />
+                  <UploadButton
+                    variant="outlined"
+                    endIcon={<FileUploadOutlinedIcon />}
+                    onClick={() => navigate("/upload-job")}
+                  >
+                    Upload vaga
+                  </UploadButton>
+                </Box>
+              </Grid>
+            </Grid>
 
-                          <Button
-                            sx={{
-                              fontSize: "14px",
-                              textTransform: "none",
-                              color: "#000",
-                              fontFamily: "red-hat-display",
-                              fontWeight: 400,
-                            }}
-                            startIcon={
-                              <HighlightOffIcon
-                                sx={{
-                                  color: "#991B1B",
-                                  width: "35px",
-                                  height: "35px",
-                                }}
-                              />
-                            }
-                            onClick={() => handleDeleteJob(item)}
-                          >
-                            Apagar
-                          </Button>
-                        </Box>
-                      </Box>
-                    ))
-                  ) : (
-                    <TypographyMold>
-                      Nao há vagas criadas ainda 😓{" "}
-                    </TypographyMold>
-                  )}
-                </Grid>
+            <Grid
+              container
+              flex={1}
+              display={"flex"}
+              flexDirection={"column"}
+              gap={"6px"}
+              marginTop={"80px"}
+            >
+              <Grid item md={12} xs={20} lg={12}>
+                <TypographyMold fontSize={"16px"} variant="h6">
+                  Vagas Criadas
+                </TypographyMold>
+              </Grid>
 
-                {totalCount > 0 && totalCount > itemPerPage && (
+              {isLoading ? (
+                <Box
+                  flex={1}
+                  display={"flex"}
+                  alignItems={"center"}
+                  justifyContent={"center"}
+                  sx={{ marginY: "200px" }}
+                >
+                  <CircularProgress />
+                </Box>
+              ) : (
+                <>
                   <Grid
                     item
                     md={12}
                     xs={20}
                     lg={12}
                     display={"flex"}
-                    alignItems={"center"}
-                    justifyContent={"center"}
-                    padding={5}
+                    gap={"12px"}
+                    flexWrap={"wrap"}
                   >
-                    <Pagination
-                      page={currentPage}
-                      onChange={handlePageChange}
-                      count={Math.ceil(totalCount / itemPerPage)}
-                      color="primary"
-                    />
+                    {visibleData && visibleData.length ? (
+                      visibleData.map((item) => (
+                        <Box>
+                          {" "}
+                          <JobCard job={item} />
+                          <Box
+                            display={"flex"}
+                            justifyContent={"space-between"}
+                            alignItems={"center"}
+                            paddingX={"20px"}
+                            marginTop={"10px"}
+                          >
+                            <Button
+                              sx={{
+                                fontSize: "14px",
+                                textTransform: "none",
+                                color: "#000",
+                                fontFamily: "red-hat-display",
+                                fontWeight: 400,
+                              }}
+                              startIcon={
+                                <EditNoteIcon
+                                  sx={{
+                                    color: "#1E3A8A",
+                                    width: "35px",
+                                    height: "35px",
+                                  }}
+                                />
+                              }
+                              onClick={() => handleEditJob(item)}
+                            >
+                              Editar
+                            </Button>
+
+                            <Button
+                              sx={{
+                                fontSize: "14px",
+                                textTransform: "none",
+                                color: "#000",
+                                fontFamily: "red-hat-display",
+                                fontWeight: 400,
+                              }}
+                              startIcon={
+                                <HighlightOffIcon
+                                  sx={{
+                                    color: "#991B1B",
+                                    width: "35px",
+                                    height: "35px",
+                                  }}
+                                />
+                              }
+                              onClick={() => handleDeleteJob(item)}
+                            >
+                              Apagar
+                            </Button>
+                          </Box>
+                        </Box>
+                      ))
+                    ) : (
+                      <TypographyMold>
+                        Nao há vagas criadas ainda 😓{" "}
+                      </TypographyMold>
+                    )}
                   </Grid>
-                )}
-              </>
-            )}
-          </Grid>
-        </Stack>
-        <ClinicPerfilModal open={open} setOpen={setOpen} />
-      </Container>
-    </React.Fragment>
+
+                  {totalCount > 0 && totalCount > itemPerPage && (
+                    <Grid
+                      item
+                      md={12}
+                      xs={20}
+                      lg={12}
+                      display={"flex"}
+                      alignItems={"center"}
+                      justifyContent={"center"}
+                      padding={5}
+                    >
+                      <Pagination
+                        page={currentPage}
+                        onChange={handlePageChange}
+                        count={Math.ceil(totalCount / itemPerPage)}
+                        color="primary"
+                      />
+                    </Grid>
+                  )}
+                </>
+              )}
+            </Grid>
+          </Stack>
+          <ClinicPerfilModal open={open} setOpen={setOpen} />
+        </Container>
+      </React.Fragment>
+    </Box>
   );
 };
 
