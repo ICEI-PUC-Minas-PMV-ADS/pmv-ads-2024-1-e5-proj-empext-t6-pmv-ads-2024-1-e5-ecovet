@@ -88,22 +88,22 @@ function JobCard({ job }: JobCardPropss) {
             <Typography
               variant="h6"
               fontSize={"14px"}
+              paddingX={"4px"}
+              color={"#6b7280"}
+            >
+              Período de disponibilidade
+            </Typography>
+            <Typography
+              variant="body1"
               bgcolor={"#1d4fd826"}
               color={"#1d4fd8"}
-              paddingX={"4px"}
+              fontSize={"14px"}
+              fontFamily={"red-hat-display"}
               sx={{
                 borderRadius: "4px",
                 fontWeight: "600",
                 fontFamily: "red-hat-display",
               }}
-            >
-              Full-Time
-            </Typography>
-            <Typography
-              variant="body1"
-              fontSize={"14px"}
-              color={"#6b7280"}
-              fontFamily={"red-hat-display"}
             >
               {data}
             </Typography>

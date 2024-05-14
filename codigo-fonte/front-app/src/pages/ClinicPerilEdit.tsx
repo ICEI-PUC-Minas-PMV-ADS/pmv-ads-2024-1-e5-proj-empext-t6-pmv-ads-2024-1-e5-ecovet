@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -24,49 +24,9 @@ import CallOutlinedIcon from "@mui/icons-material/CallOutlined";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import PlaceIcon from "@mui/icons-material/Place";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-
 import JobCard from "../component/JobCard";
 import ClinicPerfilModal from "../component/ClinicPerfilModal";
-
-// FAKE DATA
-const fakeData = [
-  {
-    id: "1",
-    title: "Enfermeiro para cirurgia",
-    location: "Belo Horizonte MG",
-    value: "a combinar",
-    type: "urgent",
-    experience: "2 years",
-    description:
-      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
-    responsibilities:
-      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
-    data: "a 1 segundo atrás",
-  },
-  {
-    id: "2",
-    title: "Enfermeiro para cirurgia",
-    location: "Belo Horizonte MG",
-    value: "a combinar",
-    type: "urgent",
-    experience: "2 years",
-    description:
-      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
-    responsibilities:
-      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
-    data: "a 1 segundo atrás",
-  },
-];
-//////////
-
-const fakeUser = {
-  id: 1,
-  name: "John Dove",
-  location: "California",
-  email: "email@example.com",
-  contact: "99 9999 9999",
-  jobs: fakeData,
-};
+import { get } from '../services/agent'
 
 const TypographyMold = styled(Typography)({
   fontFamily: "red-hat-display",
@@ -95,44 +55,33 @@ const UploadButton = styled(Button)(({ theme }) => ({
   fontWeight: "normal",
 }));
 
-const InfoBox = styled(Box)({
-  display: "flex",
-  gap: "4px",
-  alignItems: "center",
-  padding: "4px 12px",
-});
-
-const JobsPostLenght = styled(Box)(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  [theme.breakpoints.up("xs")]: {
-    padding: "40px",
-  },
-  [theme.breakpoints.up("md")]: {
-    padding: "0px",
-  },
-}));
-
-const InfoTypography = styled(Typography)({
-  fontSize: "14px",
-  fontFamily: "red-hat-display",
-});
 
 const VetClinicInitialPage = () => {
+  const {isAuthorized, role} = useSelector((state: RootState) => state.user)
+  const dispatch = useDispatch<AppDispatch>();
   const { name } = useSelector((state: RootState) => state.user)
   const [isLoading, setIsloading] = useState<Boolean>(false);
+  const [jobs, setJobs] = useState([]);
   const [open, setOpen] = React.useState(false);
 
-  const theme = useTheme();
   const navigate = useNavigate();
 
-  //tipagem improvisada
-  const handleDeleteJob = async (item: (typeof fakeData)[0]) => {};
-  const handleEditJob = async (item: (typeof fakeData)[0]) => {
-    navigate("/upload-job", { state: { job: item } });
-  };
-  //
+  const getJobs = async() => {
+    setIsloading(true)
+    const response = await get("Vaga/obterVagasClinica");
+    console.log("response")
+    console.log(response)
+    if(response.status = 200){
+      setJobs(response)
+    }else{
+
+    }
+    setIsloading(false)
+  }
+
+  useEffect(() => {
+    getJobs()
+  },[isAuthorized]) 
 
   if (isLoading) {
     return (
@@ -196,62 +145,34 @@ const VetClinicInitialPage = () => {
                   Upload vaga
                 </UploadButton>
               </Box>
-            </Grid>
-
-            {/* PESSOAL RESOLVER TIRAR  */}
-            {/* <Grid
-              flex={1}
-              item
-              md={12}
-              xs={12}
-              sx={{
-                display: "flex",
-                flexDirection: { xs: "column", md: "row" },
-                justifyContent: { xs: "start", md: "space-between" },
-                marginTop: { xs: "20px", md: "32px" },
-              }}
-            >
-              <InfoBox>
-                <PlaceIcon
-                  sx={{ color: "#475569", width: "16px", height: "16px" }}
-                />
-                <InfoTypography>
-                  {fakeUser.location || "No location"}
-                </InfoTypography>
-              </InfoBox>
-
-              <InfoBox>
-                <EmailOutlinedIcon
-                  sx={{ color: "#475569", width: "16px", height: "16px" }}
-                />
-                <InfoTypography>
-                  {fakeUser.email || "No email provide"}
-                </InfoTypography>
-              </InfoBox>
-
-              <InfoBox>
-                <CallOutlinedIcon
-                  sx={{ color: "#475569", width: "16px", height: "16px" }}
-                />
-                <InfoTypography>
-                  {fakeUser.contact || "No contact"}
-                </InfoTypography>
-              </InfoBox>
-
-              <JobsPostLenght>
-                <TypographyMold fontSize={"20px"}>
-                  {fakeUser.jobs.length ? fakeUser.jobs.length : "0"}
-                </TypographyMold>
-                <TypographyMold color={"#2563eb"} fontSize={"14px"}>
-                  Vagas postadas
-                </TypographyMold>
-              </JobsPostLenght>
-            </Grid> */}
-            {/* PESSOAL RESOLVER TIRAR   */}
- 
+            </Grid> 
           </Grid>
-            
-            {/* COLOCAR O GRID QUE RENDERIZA OS CARD ABAIXO  */}
+          <Grid container flex={1} style={{marginTop : '3em'}}>
+          <Grid item>
+            <Typography variant="subtitle1">Minhas Vagas Cadastradas</Typography>
+          </Grid>
+          </Grid>
+          <Grid container flex={1} spacing={8} style={{marginTop : '-2em'}}>
+          {
+              jobs?.length != 0 ? 
+                jobs.map((job) =>
+                  <Grid item>
+                    <JobCard job={{
+                      //@ts-ignore
+                      id: job.idVaga,
+                      //@ts-ignore
+                      title: job.tituloVaga,
+                      location: "localizaçao",
+                      //@ts-ignore
+                      description: job.descricao,
+                      //@ts-ignore
+                      data: job.periodoDeDisponibilidade,
+                    }} />
+                  </Grid >
+                )
+              : null
+            }
+          </Grid>
           
         </Stack>
 

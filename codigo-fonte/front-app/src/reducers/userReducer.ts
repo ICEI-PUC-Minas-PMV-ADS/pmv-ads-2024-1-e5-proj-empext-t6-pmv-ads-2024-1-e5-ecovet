@@ -33,6 +33,8 @@ export const userSlice = createSlice({
       state.userName = payload.userName
       state.role = payload.tipoLogin === 1 ? 'Clínica' : 'Profissional'
       setUserToken(payload.token)
+      console.log(">>>>>>>>>>>>> authorizeUser result")
+      console.log(state)
       ls('user', state);
     },
     logout: (state) => {

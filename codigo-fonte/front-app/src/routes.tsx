@@ -24,7 +24,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <AuthorizedPage children={<LoginPage />} role='user'/>
+    element: <LoginPage />
   },
   {
     path: "/clinica",
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/cadastro/base",
-    element: <AuthorizedPage><LogUpCompany /></AuthorizedPage>
+    element: <LogUpCompany />
   },
   {
     path: "/login",
@@ -53,10 +53,6 @@ const router = createBrowserRouter([
   {
     path: "/alertaredefinirsenha",
     element: <AuthorizedPage children={<AlertaSenhaPage />} role='user'/>
-  },
-  {
-    path: "/upload-job",
-    element: <AuthorizedPage children={<UploadJob />} />
   },
   {
     path: "/cadastroveterinario",//passo 1 de cadastro de usuario

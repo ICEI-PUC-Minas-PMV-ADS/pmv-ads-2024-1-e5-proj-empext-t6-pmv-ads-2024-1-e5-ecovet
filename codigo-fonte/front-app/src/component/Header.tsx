@@ -33,7 +33,8 @@ const HeaderComponent = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [menuOptions, setMenuOptions] = useState([]);
+  const [menuOptions, setMenuOptions] = useState<any>([]);
+  const [pages, setPages] = useState([]);
   const navigate = useNavigate();
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>, options: any) => {
@@ -54,27 +55,34 @@ const HeaderComponent = () => {
     setMenuOptions([])
   }
 
-  let pages = [
-    {
-      name: 'Minhas vagas', options: [  ], link: 'clinica'
-    },
-    {
-      name: 'Procurar Veterinários', options: [ ], link: 'preproject'
-    }
-  ];
 
   useEffect(() => {
+    console.log(">>>>> role")
+    console.log(role)
     if(role == 'Profissional'){
-      pages = [
+      setPages([
+        //@ts-ignore
         {
           name: 'Buscar Vagas', options: [  ], link: 'perfil/clinic'
         },
+        //@ts-ignore
         {
           name: 'Vagas aceitas', options: [ ], link: ''
         }
-      ];
+      ])
+    }else{
+      setPages([
+        //@ts-ignore
+        {
+          name: 'Minhas vagas', options: [  ], link: 'clinica'
+        },
+        //@ts-ignore
+        {
+          name: 'Procurar Veterinários', options: [ ], link: 'preproject'
+        }
+      ])
     }
-  }, []) 
+  }, [role]) 
 
 
   return (
@@ -125,13 +133,19 @@ const HeaderComponent = () => {
           
             <Box>
               <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                {isAuthorized && pages.map((page) => (
+                {isAuthorized && pages && pages.map((page) => (
+
                   <Button
+                  //@ts-ignore
                     onClick={(event) => page.link ? handleMenuClick(page.link) : handleMenu(event, page.options)}
+                    //@ts-ignore
                     key={page.name}
                     sx={{ ml: 5, my: 2, display: 'block' }}
                   >
-                    {page.name}
+                    {
+                      //@ts-ignore
+                      page.name
+                    }
                   </Button>
                 ))}
               </Box>

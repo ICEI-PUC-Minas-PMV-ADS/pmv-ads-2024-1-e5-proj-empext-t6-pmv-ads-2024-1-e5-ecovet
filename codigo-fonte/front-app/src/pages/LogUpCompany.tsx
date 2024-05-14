@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { styled, useTheme } from "@mui/material/styles";
 import { IconButton, InputAdornment } from "@mui/material";
 import type { AppDispatch, RootState } from "../reducers/store";
+import { post } from '../services/agent'
 
 const TyphographyLabel = styled(Typography)({
   fontSize: "14px",
@@ -60,27 +61,27 @@ const style2 = {
 interface FormValues {
   email: string | null;
   companyName?: string | null;
-  address: string | null;
-  phone: string | null;
-  perfil: string | null;
-  password: string | null;
+  endereco: string | null;
+  telefone: string | null;
+  descricaoDosServicos: string | null;
+  senha: string | null;
   confirmPass: string | null;
-  name?: string | null;
-  especiality?: string | null;
-  disponibility?: string | null;
+  nome?: string | null;
+  especialidade?: string | null;
+  disponibilidade?: string | null;
 }
 
 const initialValues = {
   email: "",
   companyName: "",
-  address: "",
-  phone: "",
-  perfil: "",
-  password: "",
+  endereco: "",
+  telefone: "",
+  descricaoDosServicos: "",
+  senha: "",
   confirmPass: "",
-  name: "",
-  especiality: "",
-  disponibility: "",
+  nome: "",
+  especialidade: "",
+  disponibilidade: "",
 };
 
 const LogUpCompany = () => {
@@ -114,6 +115,7 @@ const LogUpCompany = () => {
   };
 
   const sendForm = async (e: React.FormEvent<HTMLFormElement>) => {
+    console.log("oooi");
     e.preventDefault();
 
     const data = new FormData(e.currentTarget);
@@ -124,10 +126,15 @@ const LogUpCompany = () => {
     } else {
       console.log("professional");
     }
-
-    // if(formValue.password !== formValue.confirmPass) return
-
     console.log(formValue);
+
+
+    const response = await post("ClinicaVeterinaria/cadastrarClinicaVeterinaria",{
+      idClinica: 0,
+      ...formValue
+    });
+    console.log("ClinicaVeterinaria/cadastrarClinicaVeterinaria")
+    console.log(response)
   };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -139,13 +146,13 @@ const LogUpCompany = () => {
   };
 
   useEffect(() => {
-    if(formValue.password !== formValue.confirmPass || formValue.confirmPass === "" || formValue.password === ""){
+    if(formValue.senha === formValue.confirmPass && formValue.confirmPass !== "" && formValue.senha !== ""){
       setCheckPassword(true)
     } else {
       setCheckPassword(false)
     }
   }, [
-    formValue.confirmPass, formValue.password
+    formValue.confirmPass, formValue.senha
   ])
 
   return (
@@ -185,28 +192,27 @@ const LogUpCompany = () => {
           </Grid>
 
           {isClinic ? (
-            <TextFieldLabel title="Nome de empresa">
+            <TextFieldLabel title="Nome da clínica">
               <TextFieldLabel.Field
                 placeholder="nome de empresa"
-                name="companyName"
+                name="nome"
                 size="small"
                 fullWidth
                 type="text"
-                value={formValue.companyName}
+                value={formValue.nome}
                 onChange={handleChange}
                 required
               />
             </TextFieldLabel>
           ) : (
-            <TextFieldLabel title="Nome ">
+            <TextFieldLabel title="Nome">
               <TextFieldLabel.Field
-                placeholder="nome"
-                name="name"
+                name="nome"
                 size="small"
                 fullWidth
                 required
                 onChange={handleChange}
-                value={formValue.name}
+                value={formValue.nome}
                 type="text"
               />
             </TextFieldLabel>
@@ -214,7 +220,6 @@ const LogUpCompany = () => {
 
           <TextFieldLabel title="Endereço de e-mail">
             <TextFieldLabel.Field
-              placeholder="email@example.com"
               name="email"
               size="small"
               type="email"
@@ -227,11 +232,10 @@ const LogUpCompany = () => {
 
           <TextFieldLabel title="Endereço">
             <TextFieldLabel.Field
-              placeholder="Endereço"
-              name="address"
+              name="endereco"
               size="small"
               type="text"
-              value={formValue.address}
+              value={formValue.endereco}
               onChange={handleChange}
               fullWidth
               required
@@ -240,11 +244,10 @@ const LogUpCompany = () => {
 
           <TextFieldLabel title="Telefone">
             <TextFieldLabel.Field
-              placeholder="Telefone"
-              name="phone"
+              name="telefone"
               size="small"
               type="tel"
-              value={formValue.phone}
+              value={formValue.telefone}
               onChange={handleChange}
               required
             />
@@ -254,11 +257,11 @@ const LogUpCompany = () => {
             <TextFieldLabel title="Sobre a clínica" margin>
               <TextFieldLabel.Field
                 rows={6}
-                name="perfil"
+                name="descricaoDosServicos"
                 size="small"
                 fullWidth
                 multiline
-                value={formValue.perfil}
+                value={formValue.descricaoDosServicos}
                 onChange={handleChange}
                 required
               />
@@ -270,10 +273,10 @@ const LogUpCompany = () => {
               <TextFieldLabel title="Especialidade">
                 <TextFieldLabel.Field
                   placeholder="Especialidade"
-                  name="especiality"
+                  name="especialidade"
                   size="small"
                   type="text"
-                  value={formValue.especiality}
+                  value={formValue.especialidade}
                   onChange={handleChange}
                   required
                   fullWidth
@@ -282,11 +285,10 @@ const LogUpCompany = () => {
 
               <TextFieldLabel title="Disponibilidade">
                 <TextFieldLabel.Field
-                  placeholder="disponibilidade"
-                  name="disponibility"
+                  name="disponibilidade"
                   size="small"
                   type="text"
-                  value={formValue.disponibility}
+                  value={formValue.disponibilidade}
                   onChange={handleChange}
                   required
                   fullWidth
@@ -297,14 +299,13 @@ const LogUpCompany = () => {
 
           <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
-              <TextFieldLabel title="Password" margin>
+              <TextFieldLabel title="Senha" margin>
                 <TextFieldLabel.Field
-                  placeholder="Password"
-                  name="password"
+                  name="senha"
                   size="small"
                   fullWidth
                   required
-                  value={formValue.password}
+                  value={formValue.senha}
                   onChange={handleChange}
                   type={showPassword ? "text" : "password"}
                   InputProps={{
@@ -326,9 +327,8 @@ const LogUpCompany = () => {
             </Grid>
 
             <Grid item xs={12} md={6}>
-              <TextFieldLabel title="Confirmar password" margin>
+              <TextFieldLabel title="Confirmar Senha" margin>
                 <TextFieldLabel.Field
-                  placeholder="Confirma password"
                   name="confirmPass"
                   size="small"
                   fullWidth
@@ -363,7 +363,7 @@ const LogUpCompany = () => {
               textTransform: "none",
             
             }}
-            disabled={checkPassword ? true : false}
+            disabled={!checkPassword}
             type="submit"
             variant="contained"
           >
