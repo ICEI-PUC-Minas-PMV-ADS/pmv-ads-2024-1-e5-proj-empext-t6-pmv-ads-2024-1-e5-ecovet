@@ -238,9 +238,19 @@ const Footer = () => {
                 </TypographyModel>
 
                 <Box>
-                  <CssTypography>Email: Contato@gmail.com</CssTypography>
+                  <CssTypography>Email: polly_m.s@hotmail.com</CssTypography>
 
-                  <CssTypography>Contato: (31) 99999-9999</CssTypography>
+                  <a href="https://api.whatsapp.com/send?phone=5531992080297">
+                    <CssTypography
+                      sx={{
+                        "&:hover": {
+                          color: "white",
+                        },
+                      }}
+                    >
+                      Contato: (31) 99208-0297
+                    </CssTypography>
+                  </a>
                 </Box>
                 <Box
                   display={"flex"}
@@ -248,20 +258,12 @@ const Footer = () => {
                   justifyContent={"center"}
                   alignItems={"center"}
                 >
-                  <a href="#" target="_blank" rel="noreferrer">
-                    <FacebookIcon sx={iconStyle} />
-                  </a>
-
-                  <a href="#" target="_blank" rel="noreferrer">
-                    <TwitterIcon sx={iconStyle} />
-                  </a>
-
-                  <a href="#" target="_blank" rel="noreferrer">
+                  <a
+                    href="https://www.instagram.com/pollymxavier?igsh=MWwwNzl5ZGhxMmxsbQ=="
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <InstagramIcon sx={iconStyle} />
-                  </a>
-
-                  <a href="#" target="_blank" rel="noreferrer">
-                    <LinkedInIcon sx={iconStyle} />
                   </a>
                 </Box>
               </Box>
