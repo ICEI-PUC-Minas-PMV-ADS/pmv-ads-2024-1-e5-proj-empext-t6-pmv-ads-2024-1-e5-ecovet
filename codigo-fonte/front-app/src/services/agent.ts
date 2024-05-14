@@ -46,3 +46,14 @@ export const setUserToken = (accessToken: any) => {
     console.log(accessToken)
     access_token =  accessToken
 }
+
+export const getAllUserJobs = async () => {
+    const response = await fetch(`${BASE_URL}/jobs`);
+    if (!response.ok) {
+      throw new Error("Erro ao buscar vagas");
+    }
+  
+    const data = await response.json();
+  
+    return data;
+  };

@@ -10,6 +10,7 @@ import { authorizeUser } from '../reducers/userReducer'
 
 import { Container, CssBaseline, Box, Stack, styled } from "@mui/material";
 import Typography from "@mui/material/Typography";
+import Footer from '../component/Footer';
 
 var ls = require('local-storage');
 
@@ -97,6 +98,7 @@ const HomePage = () => {
           </Stack>
         </Container>
       </PageContainerComponent>
+      <Footer />
     </Box>
   )
 }
