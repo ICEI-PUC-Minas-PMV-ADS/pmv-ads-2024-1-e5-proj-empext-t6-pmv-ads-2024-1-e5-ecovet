@@ -13,6 +13,7 @@ import {
   Modal,
   Stack,
   styled,
+  Pagination
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
@@ -63,8 +64,22 @@ const VetClinicInitialPage = () => {
   const [isLoading, setIsloading] = useState<Boolean>(false);
   const [jobs, setJobs] = useState([]);
   const [open, setOpen] = React.useState(false);
-
+  const [totalCount, setTotalCount] = useState(20);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [data, setData] = useState([]);
+  const itemPerPage = 20;
+  const startIndex = (currentPage - 1) * itemPerPage;
+  const endIndex = Math.min(startIndex + itemPerPage, itemPerPage);
+  const visibleData = data.slice(startIndex, endIndex);
   const navigate = useNavigate();
+
+
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setCurrentPage(value);
+  };
 
   const getJobs = async() => {
     setIsloading(true)
@@ -168,10 +183,81 @@ const VetClinicInitialPage = () => {
                       //@ts-ignore
                       data: job.periodoDeDisponibilidade,
                     }} />
+                      <Box
+                            display={"flex"}
+                            justifyContent={"space-between"}
+                            alignItems={"center"}
+                            paddingX={"20px"}
+                            marginTop={"10px"}
+                          >
+                            <Button
+                              sx={{
+                                fontSize: "14px",
+                                textTransform: "none",
+                                color: "#000",
+                                fontFamily: "red-hat-display",
+                                fontWeight: 400,
+                              }}
+                              startIcon={
+                                <EditNoteIcon
+                                  sx={{
+                                    color: "#1E3A8A",
+                                    width: "35px",
+                                    height: "35px",
+                                  }}
+                                />
+                              }
+                              // onClick={() => handleEditJob(item)}
+                            >
+                              Editar
+                            </Button>
+
+                            <Button
+                              sx={{
+                                fontSize: "14px",
+                                textTransform: "none",
+                                color: "#000",
+                                fontFamily: "red-hat-display",
+                                fontWeight: 400,
+                              }}
+                              startIcon={
+                                <HighlightOffIcon
+                                  sx={{
+                                    color: "#991B1B",
+                                    width: "35px",
+                                    height: "35px",
+                                  }}
+                                />
+                              }
+                              // onClick={() => handleDeleteJob(item)}
+                            >
+                              Apagar
+                            </Button>
+                          </Box>
                   </Grid >
                 )
-              : null
+              :                      
+            <TypographyMold>
+              Nao há vagas criadas ainda 😓{" "}
+            </TypographyMold>
             }
+                  <Grid
+                      item
+                      md={12}
+                      xs={20}
+                      lg={12}
+                      display={"flex"}
+                      alignItems={"center"}
+                      justifyContent={"center"}
+                      padding={5}
+                    >
+                      <Pagination
+                        page={currentPage}
+                        onChange={handlePageChange}
+                        count={Math.ceil(totalCount / itemPerPage)}
+                        color="primary"
+                      />
+                    </Grid>
           </Grid>
           
         </Stack>
