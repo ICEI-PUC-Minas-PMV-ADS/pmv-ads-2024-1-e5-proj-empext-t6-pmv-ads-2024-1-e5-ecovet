@@ -15,7 +15,7 @@ import UploadJob from './pages/UploadJob';
 import LogUpCompany from './pages/LogUpCompany';
 import VetClinicInitialPage from './pages/ClinicPerilEdit';
 import CadastroClinicaPage from './pages/CadastroClinica';
-
+import ProfissionalVeterinario from './pages/ProfissionalVeterinario';
 
 const router = createBrowserRouter([ 
   {
@@ -56,10 +56,12 @@ const router = createBrowserRouter([
   },
   {
     path: "/cadastroveterinario",//passo 1 de cadastro de usuario
-    element: <AuthorizedPage children={<CadastroProfissionalPage />} role='user'/>
+    element: <AuthorizedPage children={<CadastroProfissionalPage />} role='user'/>,
+  },
+  {
+    path: "/veterinario",
+    element: <AuthorizedPage children={<ProfissionalVeterinario />} role='user'/>
   }
-
-
 ]);
 
 export default router;

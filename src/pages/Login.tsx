@@ -107,7 +107,7 @@ const LoginPage = () => {
           id: decoded.IdUsuario,
           tipoLogin: tipoLogin ? 1 : 0
         }))
-        tipoLogin ? navigate('/clinica') : navigate('/')
+        tipoLogin ? navigate('/clinica') : navigate('/veterinario')
       } else {
         alert('Falha no login');
       }
