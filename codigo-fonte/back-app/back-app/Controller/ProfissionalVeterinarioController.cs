@@ -38,26 +38,104 @@ namespace back_app.Controller
             return Ok(mapper.Map<IEnumerable<ProfissionalVeterinarioModel>>(result));
         }
 
-
         /// <summary>
         /// Cadastro de profissional veterinário.
         /// </summary>
-        /// <response code="200">Lista de resultados.</response>
-        /// <response code="400">
-        ///     Dados inválidos
-        /// </response>
+        /// <response code="200">Profissional veterinário cadastrado com sucesso.</response>
+        /// <response code="400">Dados inválidos.</response>
         /// <response code="500">Erro interno.</response>
         [HttpPost("cadastrarProfissionalVeterinario")]
         [ProducesResponseType(typeof(IActionResult), 200)]
+        [ProducesResponseType(typeof(IActionResult), 400)]
+        [ProducesResponseType(typeof(IActionResult), 500)]
         public async Task<IActionResult> CadastrarProfissionalVeterinario([FromBody] ProfissionalVeterinarioModel profissionalVeterinarioModel)
         {
+            if (profissionalVeterinarioModel == null)
+            {
+                return BadRequest("Dados inválidos.");
+            }
+
             var veterinario = mapper.Map<ProfissionalVeterinario>(profissionalVeterinarioModel);
 
-            await profissionalVeterinarioService.InserirProfissionalVeterinarioAsync(veterinario);
-
-            return Ok();
+            try
+            {
+                await profissionalVeterinarioService.InserirProfissionalVeterinarioAsync(veterinario);
+                return Ok("Profissional veterinário cadastrado com sucesso.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno: {ex.Message}");
+            }
         }
 
+        /// <summary>
+        /// Atualizar informações de um profissional veterinário.
+        /// </summary>
+        /// <param name="id">Id do profissional veterinário.</param>
+        /// <param name="profissionalVeterinarioModel">Dados do profissional veterinário a serem atualizados.</param>
+        /// <response code="200">Profissional veterinário atualizado com sucesso.</response>
+        /// <response code="400">Dados inválidos.</response>
+        /// <response code="404">Profissional veterinário não encontrado.</response>
+        /// <response code="500">Erro interno.</response>
+        [HttpPut("atualizarProfissionalVeterinario/{id}")]
+        [ProducesResponseType(typeof(IActionResult), 200)]
+        [ProducesResponseType(typeof(IActionResult), 400)]
+        [ProducesResponseType(typeof(IActionResult), 404)]
+        [ProducesResponseType(typeof(IActionResult), 500)]
+        public async Task<IActionResult> AtualizarProfissionalVeterinario(int id, [FromBody] ProfissionalVeterinarioModel profissionalVeterinarioModel)
+        {
+            if (profissionalVeterinarioModel == null)
+            {
+                return BadRequest("Dados inválidos.");
+            }
 
+            var veterinarioExistente = await profissionalVeterinarioService.ObterProfissionalVeterinarioPorId(id);
+            if (veterinarioExistente == null)
+            {
+                return NotFound("Profissional veterinário não encontrado.");
+            }
+
+            var veterinarioAtualizado = mapper.Map(profissionalVeterinarioModel, veterinarioExistente);
+
+            try
+            {
+                await profissionalVeterinarioService.AtualizarProfissionalVeterinarioAsync(veterinarioAtualizado);
+                return Ok("Profissional veterinário atualizado com sucesso.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Excluir um profissional veterinário.
+        /// </summary>
+        /// <param name="id">Id do profissional veterinário a ser excluído.</param>
+        /// <response code="200">Profissional veterinário excluído com sucesso.</response>
+        /// <response code="404">Profissional veterinário não encontrado.</response>
+        /// <response code="500">Erro interno.</response>
+        [HttpDelete("excluirProfissionalVeterinario/{id}")]
+        [ProducesResponseType(typeof(IActionResult), 200)]
+        [ProducesResponseType(typeof(IActionResult), 404)]
+        [ProducesResponseType(typeof(IActionResult), 500)]
+        public async Task<IActionResult> ExcluirProfissionalVeterinario(int id)
+        {
+            var veterinarioExistente = await profissionalVeterinarioService.ObterProfissionalVeterinarioPorId(id);
+            if (veterinarioExistente == null)
+            {
+                return NotFound("Profissional veterinário não encontrado.");
+            }
+
+            try
+            {
+                await profissionalVeterinarioService.ExcluirProfissionalVeterinarioAsync(id);
+                return Ok("Profissional veterinário excluído com sucesso.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno: {ex.Message}");
+            }
+        }
     }
 }
