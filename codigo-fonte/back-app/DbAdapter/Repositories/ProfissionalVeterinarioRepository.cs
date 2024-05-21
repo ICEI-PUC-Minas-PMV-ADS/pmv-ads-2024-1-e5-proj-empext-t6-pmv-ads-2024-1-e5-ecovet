@@ -16,7 +16,6 @@ namespace DbAdapter.Repositories
         public async Task InserirProfissionalVeterinarioAsync(ProfissionalVeterinario profissionalVeterinario)
         {
             ecoVetContext.ProfissionaisVeterinarios.Add(profissionalVeterinario);
-
             await ecoVetContext.SaveChangesAsync();
         }
 
@@ -29,6 +28,27 @@ namespace DbAdapter.Repositories
         {
             return await ecoVetContext.ProfissionaisVeterinarios
                         .FirstOrDefaultAsync(v => v.Email == email && v.Senha == senha);
+        }
+
+        public async Task<ProfissionalVeterinario> ObterProfissionalVeterinarioPorId(int id)
+        {
+            return await ecoVetContext.ProfissionaisVeterinarios.FindAsync(id);
+        }
+
+        public async Task AtualizarProfissionalVeterinarioAsync(ProfissionalVeterinario profissionalVeterinario)
+        {
+            ecoVetContext.ProfissionaisVeterinarios.Update(profissionalVeterinario);
+            await ecoVetContext.SaveChangesAsync();
+        }
+
+        public async Task ExcluirProfissionalVeterinarioAsync(int id)
+        {
+            var profissionalVeterinario = await ObterProfissionalVeterinarioPorId(id);
+            if (profissionalVeterinario != null)
+            {
+                ecoVetContext.ProfissionaisVeterinarios.Remove(profissionalVeterinario);
+                await ecoVetContext.SaveChangesAsync();
+            }
         }
     }
 }

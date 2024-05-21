@@ -16,7 +16,7 @@ namespace Application
 
         public async Task InserirClinicaAsync(ClinicaVeterinaria clinicaVeterinaria)
         {
-            await clinicaVeterinariaRepository.InserirClinicaAsync(clinicaVeterinaria);    
+            await clinicaVeterinariaRepository.InserirClinicaAsync(clinicaVeterinaria);
         }
 
         public async Task<IEnumerable<ClinicaVeterinaria>> ObterClinicasVeterinariasAsync()
@@ -27,6 +27,16 @@ namespace Application
         public async Task<ClinicaVeterinaria> ObterClinicasVeterinariasPorIdAsync(int idClinicaVeterinaria)
         {
             return await clinicaVeterinariaRepository.ObterClinicasVeterinariasPorIdAsync(idClinicaVeterinaria);
+        }
+
+        public async Task AtualizarClinicaAsync(ClinicaVeterinaria clinicaVeterinaria)
+        {
+            await clinicaVeterinariaRepository.AtualizarClinicaAsync(clinicaVeterinaria);
+        }
+
+        public async Task ExcluirClinicaAsync(int idClinicaVeterinaria)
+        {
+            await clinicaVeterinariaRepository.ExcluirClinicaAsync(idClinicaVeterinaria);
         }
     }
 }
