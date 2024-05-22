@@ -1,30 +1,16 @@
-import * as React from "react";
+import React, { useState, useEffect } from 'react';
 import Button from "@mui/material/Button";
 import {
   Alert,
   Box,
   Grid,
   Modal,
-  Stack,
-  TextField,
-  TextFieldProps,
   Typography,
+  TextField,
   styled,
 } from "@mui/material";
-
-// FAKE DATA
-const fakeUser = {
-  id: 1,
-  name: "John Dove",
-  address: "California",
-  email: "email@example.com",
-  contact: "99 9999 9999",
-  perfil:
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry...",
-  jobs: [],
-};
-
-////////
+import { get, put } from '../services/agent';
+var ls = require('local-storage');
 
 const TypographyMold = styled(Typography)({
   fontFamily: "red-hat-display",
@@ -43,7 +29,7 @@ type TextinputTestProps = {
 };
 
 const TextFieldLabel: React.FC<TextinputTestProps> & {
-  Field: React.FC<TextFieldProps>;
+  Field: React.FC<any>; // Aceita qualquer prop de TextField
 } = ({ children, title, margin }) => {
   return (
     <>
@@ -62,18 +48,82 @@ type Props = {
   setOpen(bool: boolean): void;
 };
 
-const initialValues = {
-  name: "",
-  address: "",
-  email: "",
-  contact: "",
-  perfil: "",
+interface ClinicaVeterinariaModel {
+  IDClinica: number;
+  Nome: string;
+  Endereco: string;
+  Senha: string;
+  Telefone: string;
+  Email: string;
+  DescricaoDosServicos: string;
+}
+
+const initialValues: ClinicaVeterinariaModel = {
+  IDClinica: 0,
+  Nome: "",
+  Endereco: "",
+  Senha: "",
+  Telefone: "",
+  Email: "",
+  DescricaoDosServicos: "",
 };
 
-const ClinicPerfilModal = ({ open, setOpen }: Props) => {
-  const [formValues, setFormValues] = React.useState(initialValues);
-  const [alert, setAlert] = React.useState<boolean>(false);
+const ClinicPerfilModal: React.FC<Props> = ({ open, setOpen }) => {
+  const [formValues, setFormValues] = useState<ClinicaVeterinariaModel>(initialValues);
+  const [alert, setAlert] = useState<boolean>(false);
+  const [userLogado, setUserLogado] = useState<any>();
+  const [loading, setLoading] = useState<boolean>(true);
 
+  useEffect(() => {
+    const userFromStorage = ls.get('user');
+    setUserLogado(userFromStorage);
+  }, []);
+
+  useEffect(() => {
+    if (open && userLogado) {
+      getUser();
+    }
+  }, [open, userLogado]);
+
+  useEffect(() => {
+    console.log({ formValues });
+  }, [formValues]);
+
+  const getUser = async () => {
+    if (userLogado && userLogado.id) {
+      setLoading(true);
+      const response = await get(`ClinicaVeterinaria/obterClinicaVeterinariaPorId/${userLogado.id}`);
+      if (response != null) {
+        const clinicaData = {
+          IDClinica: response.idClinica,
+          Nome: response.nome,
+          Endereco: response.endereco,
+          Senha: response.senha,
+          Telefone: response.telefone,
+          Email: response.email,
+          DescricaoDosServicos: response.descricaoDosServicos,
+        };
+        setFormValues(clinicaData);
+        setLoading(false);
+      } else {
+        console.error('Erro ao obter dados da clínica');
+        setLoading(false);
+      }
+    }
+  };
+  const sendForm = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await put(`ClinicaVeterinaria/atualizarClinicaVeterinaria/${formValues.IDClinica}`, formValues);
+      if (response.status === 200) {
+        setAlert(true);
+        console.log('Clínica atualizada com sucesso:', response);
+      }
+    } catch (error) {
+      console.error('Erro ao atualizar a clínica:', error);
+      // Aqui você pode exibir uma mensagem de erro para o usuário, se desejar
+    }
+  };
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -84,13 +134,7 @@ const ClinicPerfilModal = ({ open, setOpen }: Props) => {
     }));
   };
 
-  const sendForm = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
 
-    setAlert(true);
-    console.log(formValues);
-    setFormValues(initialValues);
-  };
 
   return (
     <Modal
@@ -133,15 +177,17 @@ const ClinicPerfilModal = ({ open, setOpen }: Props) => {
         <TypographyMold fontSize={"18px"} id="modal-modal-title" variant="h6">
           Editar perfil da clínica
         </TypographyMold>
-
+        {loading ? (
+            <Typography>Carregando...</Typography>
+          ) : (
         <form onSubmit={sendForm}>
           <TextFieldLabel title="Nome da clínica">
             <TextFieldLabel.Field
               placeholder="nome"
-              name="name"
+              name="Nome"
               size="small"
               fullWidth
-              value={formValues.name}
+              value={formValues.Nome}
               onChange={handleChange}
               required
             />
@@ -150,10 +196,10 @@ const ClinicPerfilModal = ({ open, setOpen }: Props) => {
           <TextFieldLabel title="Endereço">
             <TextFieldLabel.Field
               placeholder="endereço"
-              name="address"
+              name="Endereco"
               size="small"
               fullWidth
-              value={formValues.address}
+              value={formValues.Endereco}
               onChange={handleChange}
               required
             />
@@ -161,13 +207,13 @@ const ClinicPerfilModal = ({ open, setOpen }: Props) => {
 
           <Grid container spacing={1}>
             <Grid xs={12} md={6} xl={6} sm={6} item>
-              <TextFieldLabel title="Contato">
+              <TextFieldLabel title="Telefone">
                 <TextFieldLabel.Field
-                  placeholder="contato"
-                  name="contact"
+                  placeholder="telefone"
+                  name="Telefone"
                   size="small"
                   fullWidth
-                  value={formValues.contact}
+                  value={formValues.Telefone}
                   onChange={handleChange}
                   required
                   type="tel"
@@ -176,27 +222,27 @@ const ClinicPerfilModal = ({ open, setOpen }: Props) => {
             </Grid>
 
             <Grid xs={12} sm={6} md={6} xl={6} item>
-              <TextFieldLabel title="Contato">
+              <TextFieldLabel title="Email">
                 <TextFieldLabel.Field
-                  placeholder="contato"
-                  name="contact"
+                  placeholder="email"
+                  name="Email"
                   size="small"
                   fullWidth
-                  value={formValues.contact}
+                  value={formValues.Email}
                   onChange={handleChange}
                   required
-                  type="tel"
+                  type="email"
                 />
               </TextFieldLabel>
             </Grid>
           </Grid>
 
-          <TextFieldLabel title="Sobre a clínica" margin>
+          <TextFieldLabel title="Descrição dos Serviços" margin>
             <TextFieldLabel.Field
               rows={6}
-              name="perfil"
+              name="DescricaoDosServicos"
               size="small"
-              value={formValues.perfil}
+              value={formValues.DescricaoDosServicos}
               onChange={handleChange}
               fullWidth
               multiline
@@ -215,6 +261,8 @@ const ClinicPerfilModal = ({ open, setOpen }: Props) => {
             Salvar
           </Button>
         </form>
+          )}
+
       </Box>
     </Modal>
   );

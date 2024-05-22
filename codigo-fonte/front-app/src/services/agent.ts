@@ -22,6 +22,16 @@ export const post = async (url: string, data?: any) => {
         body: JSON.stringify(data)
     })
 }
+export const put = async (url: string, data?: any) => {
+    return await fetch(`${BASE_URL}/${url}`,{
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            'Authorization' : `Bearer ${access_token}`            
+        },
+        body: JSON.stringify(data)
+    })
+}
 export const cadastrarVeterinario = async (data?: any) => {
     return await fetch(`${BASE_URL}/ProfissionalVeterinario/cadastrarProfissionalVeterinario`,{
         method: "POST",
