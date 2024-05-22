@@ -75,13 +75,11 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 |RF-002| Permitir que as clínicas criem e gerenciem seus perfis	   | ALTA |
 |RF-003| Permitir que as clínicas postem oportunidades de trabalho	| ALTA |
 |RF-004| Permitir que os veterinários busquem e se candidatem a oportunidades de trabalho	| ALTA |
-|RF-005| Fornecer um sistema de mensagens para que veterinários e clínicas possam se comunicar		| Média |
-|RF-006| Permitir que as clínicas e os veterinários deixem avaliações uns dos outros		   | Baixa |
-|RF-007| Fornecer um sistema de notificações para alertar os veterinários sobre novas oportunidades de trabalho		 | ALTA |
-|RF-008| Permitir que as clínicas vejam os perfis dos veterinários antes de contratá-los		| ALTA |
-|RF-009|Permitir que os veterinários vejam informações sobre a clínica antes de se candidatarem a uma oportunidade			| ALTA |
-|RF-010|Permitir que os usuários alterem suas informações de perfil, incluindo foto de perfil, experiência, habilidades, etc.				| Baixa |
-|RF-011|Permitir que veterinários encontrem outros veterinários 			| ALTA |
+|RF-005| Fornecer um sistema de notificações para alertar os veterinários sobre novas oportunidades de trabalho		 | ALTA |
+|RF-006| Permitir que as clínicas vejam os perfis dos veterinários antes de contratá-los		| ALTA |
+|RF-007|Permitir que os veterinários vejam informações sobre a clínica antes de se candidatarem a uma oportunidade			| ALTA |
+|RF-08|Permitir que os usuários alterem suas informações de perfil, incluindo foto de perfil, experiência, habilidades, etc.				| Baixa |
+|RF-09|Permitir que veterinários encontrem outros veterinários 			| ALTA |
 
 ### Requisitos não Funcionais
 
