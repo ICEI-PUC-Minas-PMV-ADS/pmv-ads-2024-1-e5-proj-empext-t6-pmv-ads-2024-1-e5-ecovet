@@ -26,7 +26,6 @@ import EditNoteIcon from "@mui/icons-material/EditNote";
 import PlaceIcon from "@mui/icons-material/Place";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import JobCard from "../component/JobCard";
-import ClinicPerfilModal from "../component/ClinicPerfilModal";
 import { get } from '../services/agent'
 
 const TypographyMold = styled(Typography)({
@@ -63,7 +62,6 @@ const VetClinicInitialPage = () => {
   const { name } = useSelector((state: RootState) => state.user)
   const [isLoading, setIsloading] = useState<Boolean>(false);
   const [jobs, setJobs] = useState([]);
-  const [open, setOpen] = React.useState(false);
   const [totalCount, setTotalCount] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
   const [data, setData] = useState([]);
@@ -94,6 +92,8 @@ const VetClinicInitialPage = () => {
     setIsloading(false)
   }
 
+
+  
   useEffect(() => {
     getJobs()
   },[isAuthorized]) 
@@ -147,11 +147,7 @@ const VetClinicInitialPage = () => {
                 sx={{ paddingY: { xs: "20px", md: "0px" } }}
                 gap={"20px"}
               >
-                <EditButton
-                  variant="contained"
-                  endIcon={<DriveFileRenameOutlineIcon />}
-                  onClick={() => setOpen(true)}
-                />
+
                 <UploadButton
                   variant="outlined"
                   endIcon={<FileUploadOutlinedIcon />}
@@ -262,7 +258,6 @@ const VetClinicInitialPage = () => {
           
         </Stack>
 
-        <ClinicPerfilModal open={open} setOpen={setOpen} />
       </Container>
     </React.Fragment>
   );

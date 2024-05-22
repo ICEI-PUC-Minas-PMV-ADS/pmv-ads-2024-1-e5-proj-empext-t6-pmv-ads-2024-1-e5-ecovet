@@ -113,11 +113,16 @@ namespace back_app.Controller
                 return NotFound("Clínica veterinária não encontrada.");
             }
 
-            var clinicaAtualizada = mapper.Map(clinicaVeterinariaModel, clinicaExistente);
+            clinicaExistente.Nome = clinicaVeterinariaModel.Nome;
+            clinicaExistente.Endereco = clinicaVeterinariaModel.Endereco;
+            clinicaExistente.Senha = clinicaVeterinariaModel.Senha;
+            clinicaExistente.Telefone = clinicaVeterinariaModel.Telefone;
+            clinicaExistente.Email = clinicaVeterinariaModel.Email;
+            clinicaExistente.DescricaoDosServicos = clinicaVeterinariaModel.DescricaoDosServicos;
 
             try
             {
-                await clinicaVeterinariaService.AtualizarClinicaAsync(clinicaAtualizada);
+                await clinicaVeterinariaService.AtualizarClinicaAsync(clinicaExistente);
                 return Ok("Clínica veterinária atualizada com sucesso.");
             }
             catch (Exception ex)
@@ -125,6 +130,7 @@ namespace back_app.Controller
                 return StatusCode(500, $"Erro interno: {ex.Message}");
             }
         }
+
 
         /// <summary>
         /// Excluir clínica veterinária.
