@@ -89,24 +89,27 @@ const LoginPage = () => {
     };
   
     try {
-    const response = await post("Auth/login",userData);
+      const response = await post("Auth/login",userData);
       if (response.ok) {
         const data = await response.json();
-        console.log("Auth/login"); 
-        console.log(data); 
         const decoded = jwtDecode(data.token);
-        console.log("decoded"); 
-        console.log(decoded); 
-
-        dispatch(authorizeUser({
+        
+        
+        const objetoUser = {
           token: data.token,
           userName: email,
           //@ts-ignore
           name: decoded.NomeUsuario,
           //@ts-ignore
           id: decoded.IdUsuario,
+          //@ts-ignore
           tipoLogin: tipoLogin ? 1 : 0
-        }))
+        }
+
+        console.log({objetoUser})
+        
+        dispatch(authorizeUser(objetoUser))
+        
         tipoLogin ? navigate('/clinica') : navigate('/veterinario')
       } else {
         alert('Falha no login');

@@ -82,8 +82,6 @@ const VetClinicInitialPage = () => {
   const getJobs = async() => {
     setIsloading(true)
     const response = await get("Vaga/obterVagasClinica");
-    console.log("response")
-    console.log(response)
     if(response.status = 200){
       setJobs(response)
     }else{
