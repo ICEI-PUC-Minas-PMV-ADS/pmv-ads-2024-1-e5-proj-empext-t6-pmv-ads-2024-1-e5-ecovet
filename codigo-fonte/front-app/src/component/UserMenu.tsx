@@ -14,6 +14,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useNavigate } from "react-router-dom";
 import { logout } from '../reducers/userReducer';
 import ClinicPerfilModal from './ClinicPerfilModal';
+import VeterinarioPerfilModal from './VeterinarioPerfilModal';
 
 var ls = require('local-storage');
 
@@ -23,6 +24,7 @@ const UserMenuComponent = ({ field }: any) => {
   const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate();
   const [openModalEditarClinica, setOpenModalEditarClinica] = useState(false);
+  const [openModalEditarVeterinario, setOpenModalEditarVeterinario] = useState(false);
   const [user, setUser] = useState<any>();
 
   useEffect(() => {
@@ -39,7 +41,17 @@ const UserMenuComponent = ({ field }: any) => {
   };
 
   const editarPerfil = () => {
-    setOpenModalEditarClinica(true);
+    console.log({user})
+
+    if(user.role == "Clínica")
+    {
+      setOpenModalEditarClinica(true);
+
+    }
+    else
+    {
+      setOpenModalEditarVeterinario(true);
+    }
   };
 
   const handleLogout = () => {
@@ -97,6 +109,10 @@ const UserMenuComponent = ({ field }: any) => {
       <ClinicPerfilModal
         open={openModalEditarClinica}
         setOpen={() => setOpenModalEditarClinica(false)}
+      />
+      <VeterinarioPerfilModal
+        open={openModalEditarVeterinario}
+        setOpen={() => setOpenModalEditarVeterinario(false)}
       />
       </div>
     </Box>

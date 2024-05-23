@@ -108,7 +108,6 @@ const UploadJob = () => {
       ...prev,
       [name]: value,
     }));
-    console.log({ formValues });
   };
 
   const sendForm = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -116,8 +115,6 @@ const UploadJob = () => {
 
     try {
       const response = await post("Vaga/cadastrarVaga", formValues);
-      console.log("response")
-      console.log(response)
       if (response.status == 200) {
         // const data = await response.json();
         alert("Vaga criada com sucesso!");

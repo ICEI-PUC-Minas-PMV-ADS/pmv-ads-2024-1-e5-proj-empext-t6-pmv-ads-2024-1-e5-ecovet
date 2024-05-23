@@ -16,7 +16,6 @@ import {
     const handleChange = (event: SelectChangeEvent) => {
       setSort(event.target.value as string);
     };
-    console.log(sort);
     return (
       <FormControl sx={{
         width: {xs: "128px", md: "160px"},

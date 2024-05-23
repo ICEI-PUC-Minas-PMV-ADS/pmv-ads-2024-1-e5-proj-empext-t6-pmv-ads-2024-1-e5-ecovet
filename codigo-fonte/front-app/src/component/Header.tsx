@@ -58,8 +58,6 @@ const HeaderComponent = () => {
 
 
   useEffect(() => {
-    console.log(">>>>> role")
-    console.log(role)
     if(role == 'Profissional'){
       setPages([
         //@ts-ignore

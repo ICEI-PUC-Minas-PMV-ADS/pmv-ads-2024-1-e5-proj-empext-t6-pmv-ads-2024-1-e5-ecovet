@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Application;
+using AutoMapper;
 using back_app.Models;
 using Domain.Dto;
 using Domain.Services;
@@ -38,6 +39,31 @@ namespace back_app.Controller
             return Ok(mapper.Map<IEnumerable<ProfissionalVeterinarioModel>>(result));
         }
 
+        /// <summary>
+        /// Obter profissional veterinário por ID.
+        /// </summary>
+        /// <response code="200">Lista de resultados.</response>
+        /// <response code="400">
+        ///     Dados inválidos
+        /// </response>
+        /// <param name="id">ID da profissional veterinário.</param>
+        /// <response code="200">profissional veterinário encontrada.</response>
+        /// <response code="404">profissional veterinário não encontrada.</response>
+        /// <response code="500">Erro interno.</response>
+        [HttpGet("obterProfissionalVeterinarioPorId/{id}")]
+        [ProducesResponseType(typeof(ClinicaVeterinariaModel), 200)]
+        [ProducesResponseType(typeof(IActionResult), 404)]
+        [ProducesResponseType(typeof(IActionResult), 500)]
+        public async Task<IActionResult> ObterProfissionalVeterinarioPorId(int id)
+        {
+            var profissionalVeterinario = await profissionalVeterinarioService.ObterProfissionalVeterinarioPorId(id);
+
+            if (profissionalVeterinario == null)
+            {
+                return NotFound("Profissional veterinário não encontrada.");
+            }
+            return Ok(mapper.Map<ProfissionalVeterinarioModel>(profissionalVeterinario));
+        }
         /// <summary>
         /// Cadastro de profissional veterinário.
         /// </summary>

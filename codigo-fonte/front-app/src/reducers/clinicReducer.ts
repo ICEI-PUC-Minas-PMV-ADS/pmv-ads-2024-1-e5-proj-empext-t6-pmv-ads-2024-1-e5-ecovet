@@ -10,18 +10,16 @@ export const clinicSlice = createSlice({
   initialState,
   reducers: {
     authorizeUser: (state, { payload }) => {
-      console.log(">>>>>>>>>>>>> authorizeUser")
       state.isAuthorized = true
       state.token = payload.token
       state.name = payload.name
       state.id = payload.id
       state.userName = payload.userName
-      state.role = payload.tipoLogin === 1 ? 'Clínica' : 'Profissional'
+      state.role = payload.tipoLogin
       setUserToken(payload.token)
       ls('user', state);
     },
     logout: (state) => {
-      console.log("logout")
       state.isAuthorized = false
       ls('user', null);
     },

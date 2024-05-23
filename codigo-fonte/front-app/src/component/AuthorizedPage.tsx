@@ -13,28 +13,12 @@ const AuthorizedPage = ({children, userRole}: any) => {
   const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate();
 
-  useEffect(() => {
-    let user = ls.get('user')
-    if(user != null&& user.isAuthorized != false){
-      dispatch(authorizeUser(user))
-    }
-  }, []) 
-
 
   useEffect(() => {
-    console.log("isAuthorized")
-    console.log(isAuthorized)
     if(!isAuthorized ){
       navigate('/')
     }
   },[isAuthorized]) 
-
-  // useEffect(() => {
-  //   console.log(">>>>>> isAuthorized")
-  //   console.log(isAuthorized)
-  //   // dispatch(getToken({instance, accounts}))
-  // },[isAuthorized]) 
-  
   return (
     <Box
     style={{ 
