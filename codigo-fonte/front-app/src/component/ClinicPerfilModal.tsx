@@ -9,7 +9,12 @@ import {
   TextField,
   styled,
 } from "@mui/material";
-import { get, put } from '../services/agent';
+import { get, put, del } from '../services/agent';
+import { useNavigate } from "react-router-dom";
+import { logout } from '../reducers/userReducer';
+import type { AppDispatch, RootState } from '../reducers/store'
+import { useSelector, useDispatch } from 'react-redux'
+
 var ls = require('local-storage');
 
 const TypographyMold = styled(Typography)({
@@ -29,7 +34,7 @@ type TextinputTestProps = {
 };
 
 const TextFieldLabel: React.FC<TextinputTestProps> & {
-  Field: React.FC<any>; // Aceita qualquer prop de TextField
+  Field: React.FC<any>;
 } = ({ children, title, margin }) => {
   return (
     <>
@@ -73,6 +78,10 @@ const ClinicPerfilModal: React.FC<Props> = ({ open, setOpen }) => {
   const [alert, setAlert] = useState<boolean>(false);
   const [userLogado, setUserLogado] = useState<any>();
   const [loading, setLoading] = useState<boolean>(true);
+  const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>()
+
 
   useEffect(() => {
     const userFromStorage = ls.get('user');
@@ -84,10 +93,6 @@ const ClinicPerfilModal: React.FC<Props> = ({ open, setOpen }) => {
       getUser();
     }
   }, [open, userLogado]);
-
-  useEffect(() => {
-    console.log({ formValues });
-  }, [formValues]);
 
   const getUser = async () => {
     if (userLogado && userLogado.id) {
@@ -111,6 +116,7 @@ const ClinicPerfilModal: React.FC<Props> = ({ open, setOpen }) => {
       }
     }
   };
+
   const sendForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -118,10 +124,10 @@ const ClinicPerfilModal: React.FC<Props> = ({ open, setOpen }) => {
       if (response.status === 200) {
         setAlert(true);
         console.log('Clínica atualizada com sucesso:', response);
+        navigate('/clinica')
       }
     } catch (error) {
       console.error('Erro ao atualizar a clínica:', error);
-      // Aqui você pode exibir uma mensagem de erro para o usuário, se desejar
     }
   };
   const handleChange = (
@@ -134,7 +140,20 @@ const ClinicPerfilModal: React.FC<Props> = ({ open, setOpen }) => {
     }));
   };
 
-
+  const handleDeleteAccount = async () => {
+    try {
+      const response = await del(`ClinicaVeterinaria/excluirClinicaVeterinaria/${formValues.IDClinica}`);
+      if (response.status === 200) {
+        setAlert(true);
+        setDeleteModalOpen(false);
+        console.log('Conta deletada com sucesso:', response);
+        dispatch(logout())
+        navigate('/')
+      }
+    } catch (error) {
+      console.error('Erro ao deletar a conta:', error);
+    }
+  };
 
   return (
     <Modal
@@ -178,8 +197,8 @@ const ClinicPerfilModal: React.FC<Props> = ({ open, setOpen }) => {
           Editar perfil da clínica
         </TypographyMold>
         {loading ? (
-            <Typography>Carregando...</Typography>
-          ) : (
+        <Typography>Carregando...</Typography>
+      ) : (
         <form onSubmit={sendForm}>
           <TextFieldLabel title="Nome da clínica">
             <TextFieldLabel.Field
@@ -261,8 +280,70 @@ const ClinicPerfilModal: React.FC<Props> = ({ open, setOpen }) => {
             Salvar
           </Button>
         </form>
-          )}
+      )}
+        {!loading && (
+          <Button
+          sx={{
+            marginTop: "20px",
+            padding: "8px 30px",
+            backgroundColor: "red",
+          }}
+          variant="contained"
+          onClick={() => setDeleteModalOpen(true)}
+        >
+          Deletar minha conta
+        </Button>
+        )}
 
+      <Modal
+        open={deleteModalOpen}
+        onClose={() => setDeleteModalOpen(false)}
+        aria-labelledby="delete-modal-title"
+        aria-describedby="delete-modal-description"
+      >
+        <Box
+          sx={{
+            position: "absolute" as "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: { xs: "95%", sm: "450px", md: "450px" },
+            backgroundColor: "white",
+            padding: "20px",
+            border: "none",
+            borderRadius: "20px",
+          }}
+        >
+          <TypographyMold fontSize={"18px"} id="delete-modal-title" variant="h6">
+            Confirmar Deleção de Conta
+          </TypographyMold>
+          <TypographyMold id="delete-modal-description">
+            Você tem certeza que deseja deletar sua conta? Esta ação não pode ser desfeita.
+          </TypographyMold>
+          <Button
+            sx={{
+              marginTop: "20px",
+              padding: "8px 30px",
+              backgroundColor: "red",
+            }}
+            variant="contained"
+            onClick={handleDeleteAccount}
+          >
+            Confirmar
+          </Button>
+          <Button
+            sx={{
+              marginTop: "20px",
+              padding: "8px 30px",
+              marginLeft: "10px",
+            }}
+            variant="contained"
+            onClick={() => setDeleteModalOpen(false)}
+          >
+            Cancelar
+          </Button>
+        </Box>
+      </Modal>
       </Box>
     </Modal>
   );
