@@ -16,7 +16,6 @@ namespace DbAdapter.Repositories
         public async Task InserirClinicaAsync(ClinicaVeterinaria clinicaVeterinaria)
         {
             ecoVetContext.ClinicasVeterinarias.Add(clinicaVeterinaria);
-
             await ecoVetContext.SaveChangesAsync();
         }
 
@@ -28,12 +27,28 @@ namespace DbAdapter.Repositories
 
         public async Task<IEnumerable<ClinicaVeterinaria>> ObterClinicasVeterinariasAsync()
         {
-           return await ecoVetContext.ClinicasVeterinarias.ToListAsync(); 
+            return await ecoVetContext.ClinicasVeterinarias.ToListAsync();
         }
 
         public async Task<ClinicaVeterinaria> ObterClinicasVeterinariasPorIdAsync(int idClinicaVeterinaria)
         {
             return await ecoVetContext.ClinicasVeterinarias.FirstOrDefaultAsync(c => c.IDClinica == idClinicaVeterinaria);
+        }
+
+        public async Task AtualizarClinicaAsync(ClinicaVeterinaria clinicaVeterinaria)
+        {
+            ecoVetContext.ClinicasVeterinarias.Update(clinicaVeterinaria);
+            await ecoVetContext.SaveChangesAsync();
+        }
+
+        public async Task ExcluirClinicaAsync(int idClinicaVeterinaria)
+        {
+            var clinicaVeterinaria = await ObterClinicasVeterinariasPorIdAsync(idClinicaVeterinaria);
+            if (clinicaVeterinaria != null)
+            {
+                ecoVetContext.ClinicasVeterinarias.Remove(clinicaVeterinaria);
+                await ecoVetContext.SaveChangesAsync();
+            }
         }
     }
 }

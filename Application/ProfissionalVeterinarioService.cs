@@ -23,5 +23,20 @@ namespace Application
         {
             return await profissionalVeterinarioRepository.ObterProfissionaisVeterinarios();
         }
+
+        public async Task<ProfissionalVeterinario> ObterProfissionalVeterinarioPorId(int id)
+        {
+            return await profissionalVeterinarioRepository.ObterProfissionalVeterinarioPorId(id);
+        }
+
+        public async Task AtualizarProfissionalVeterinarioAsync(ProfissionalVeterinario profissionalVeterinario)
+        {
+            await profissionalVeterinarioRepository.AtualizarProfissionalVeterinarioAsync(profissionalVeterinario);
+        }
+
+        public async Task ExcluirProfissionalVeterinarioAsync(int id)
+        {
+            await profissionalVeterinarioRepository.ExcluirProfissionalVeterinarioAsync(id);
+        }
     }
 }

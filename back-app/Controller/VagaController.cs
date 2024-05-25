@@ -1,11 +1,8 @@
-﻿using Application;
-using AutoMapper;
-using back_app.Models;
+﻿using AutoMapper;
 using Domain.Dto;
 using Domain.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace back_app.Controller
 {
@@ -37,7 +34,6 @@ namespace back_app.Controller
         /// <response code="500">Erro interno.</response>
         [HttpGet("obterVagas"), AllowAnonymous]
         [ProducesResponseType(typeof(IEnumerable<VagaModel>), 200)]
-        [Authorize]
         public async Task<IActionResult> ObterVagas()
         {
             var retorno = await vagaService.ObterVagasAsync();
@@ -54,7 +50,6 @@ namespace back_app.Controller
         /// <response code="500">Erro interno.</response>
         [HttpGet("obterVagasClinica"), AllowAnonymous]
         [ProducesResponseType(typeof(IEnumerable<VagaModel>), 200)]
-        [Authorize]
         public async Task<IActionResult> ObterVagasClinicaAsync()
         {
             var userId = User.FindFirst("IdUsuario")?.Value;
@@ -78,7 +73,7 @@ namespace back_app.Controller
         /// </response>
         /// <response code="500">Erro interno.</response>
         [HttpPost("cadastrarVaga")]
-        [Authorize]
+        [Authorize(Policy = "ClinicaOnly")]
         [ProducesResponseType(typeof(IActionResult), 200)]
         public async Task<IActionResult> CadastrarVaga([FromBody] VagaModel vagaModel)
         {
@@ -87,6 +82,24 @@ namespace back_app.Controller
             vaga.IDClinicaVeterinaria = int.Parse(User?.FindFirst("IdUsuario")?.Value);
 
             await vagaService.InserirVagaAsync(vaga);
+
+            return Ok();
+        }   
+        
+        /// <summary>
+        /// Deletar vaga.
+        /// </summary>
+        /// <response code="200">Lista de resultados.</response>
+        /// <response code="400">
+        ///     Dados inválidos
+        /// </response>
+        /// <response code="500">Erro interno.</response>
+        [HttpPost("deletarVaga")]
+        [Authorize(Policy = "ClinicaOnly")]
+        [ProducesResponseType(typeof(IActionResult), 200)]
+        public async Task<IActionResult> DeletarVaga(int idVaga)
+        {
+            await vagaService.DeletarVagaAsync(idVaga);
 
             return Ok();
         }

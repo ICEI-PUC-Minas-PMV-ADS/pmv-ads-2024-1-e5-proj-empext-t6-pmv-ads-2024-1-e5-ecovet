@@ -40,7 +40,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("VeterinarioOnly", policy =>
+    policy.RequireClaim("Tipo", "Veterinario"));
+    options.AddPolicy("ClinicaOnly", policy =>
+        policy.RequireClaim("Tipo", "Clinica"));
+
+});
 
 builder.Services.AddSwaggerGen(c =>
 {

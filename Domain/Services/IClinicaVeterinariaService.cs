@@ -20,7 +20,20 @@ namespace Domain.Services
         Task<IEnumerable<ClinicaVeterinaria>> ObterClinicasVeterinariasAsync();
 
         #endregion
+
+        /// <summary>
+        /// Inserir clinica veterinária.
+        /// </summary>
         Task InserirClinicaAsync(ClinicaVeterinaria clinicaVeterinaria);
 
+        /// <summary>
+        /// Atualizar clinica veterinária.
+        /// </summary>
+        Task AtualizarClinicaAsync(ClinicaVeterinaria clinicaVeterinaria);
+
+        /// <summary>
+        /// Excluir clinica veterinária.
+        /// </summary>
+        Task ExcluirClinicaAsync(int idClinicaVeterinaria);
     }
 }
