@@ -160,7 +160,7 @@ const LogUpCompany = () => {
     >
       <DialogComponent
         open={isDialogOpen}
-        handleClose={() => dispatch(setDialogIdle())}
+        handleClose={() => {}}
       >
         <form onSubmit={sendForm}>
           <Grid container spacing={2}>
