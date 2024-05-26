@@ -115,7 +115,6 @@ const LogUpCompany = () => {
   };
 
   const sendForm = async (e: React.FormEvent<HTMLFormElement>) => {
-    console.log("oooi");
     e.preventDefault();
 
     const data = new FormData(e.currentTarget);
@@ -133,8 +132,7 @@ const LogUpCompany = () => {
       idClinica: 0,
       ...formValue
     });
-    console.log("ClinicaVeterinaria/cadastrarClinicaVeterinaria")
-    console.log(response)
+
   };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);

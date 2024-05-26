@@ -12,13 +12,25 @@ import Avatar from '@mui/material/Avatar';
 import { deepOrange, deepPurple } from '@mui/material/colors';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useNavigate } from "react-router-dom";
-import { logout } from '../reducers/userReducer'
+import { logout } from '../reducers/userReducer';
+import ClinicPerfilModal from './ClinicPerfilModal';
+import VeterinarioPerfilModal from './VeterinarioPerfilModal';
 
-const UserMenuComponent = ({field}: any) => {
+var ls = require('local-storage');
+
+const UserMenuComponent = ({ field }: any) => {
   const { name, userName, role } = useSelector((state: RootState) => state.user)
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate();
+  const [openModalEditarClinica, setOpenModalEditarClinica] = useState(false);
+  const [openModalEditarVeterinario, setOpenModalEditarVeterinario] = useState(false);
+  const [user, setUser] = useState<any>();
+
+  useEffect(() => {
+    const userFromStorage = ls.get('user');
+    setUser(userFromStorage);
+  }, []);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -28,6 +40,19 @@ const UserMenuComponent = ({field}: any) => {
     setAnchorEl(null);
   };
 
+  const editarPerfil = () => {
+    console.log({user})
+
+    if(user.role == "Clínica")
+    {
+      setOpenModalEditarClinica(true);
+
+    }
+    else
+    {
+      setOpenModalEditarVeterinario(true);
+    }
+  };
 
   const handleLogout = () => {
     dispatch(logout())
@@ -47,16 +72,11 @@ const UserMenuComponent = ({field}: any) => {
           columnSpacing={{ xs: 2, sm: 2, md: 2 }}
           style={{cursor: "pointer"}}
           onClick={handleMenu}>
-          <Grid item xs={7} container>
+          <Grid item xs={8} container>
             <Grid item xs={12}>
               <Typography>{name}</Typography>
             </Grid>
-            <Grid item xs={12} 
-              aria-label="account of current user" 
-              aria-controls="menu-appbar" 
-              aria-haspopup="true">
-              <Typography>{userName}</Typography>
-            </Grid>
+
           </Grid>
 
           <Grid item xs={2}>
@@ -83,9 +103,17 @@ const UserMenuComponent = ({field}: any) => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClose}>Configurações</MenuItem>
+          <MenuItem onClick={editarPerfil}>Configurações</MenuItem>
           <MenuItem onClick={handleLogout}>Sair</MenuItem>
         </Menu>
+      <ClinicPerfilModal
+        open={openModalEditarClinica}
+        setOpen={() => setOpenModalEditarClinica(false)}
+      />
+      <VeterinarioPerfilModal
+        open={openModalEditarVeterinario}
+        setOpen={() => setOpenModalEditarVeterinario(false)}
+      />
       </div>
     </Box>
   );

@@ -34,7 +34,7 @@ type TextinputTestProps = {
 };
 
 const TextFieldLabel: React.FC<TextinputTestProps> & {
-  Field: React.FC<any>;
+  Field: React.FC<any>; // Aceita qualquer prop de TextField
 } = ({ children, title, margin }) => {
   return (
     <>
@@ -53,36 +53,36 @@ type Props = {
   setOpen(bool: boolean): void;
 };
 
-interface ClinicaVeterinariaModel {
-  IDClinica: number;
+interface VeterinarioModel {
+  IDProfissional: number;
   Nome: string;
-  Endereco: string;
+  Especialidade: string;
   Senha: string;
   Telefone: string;
   Email: string;
-  DescricaoDosServicos: string;
+  Disponibilidade: string;
+  Localizacao: string;
 }
 
-const initialValues: ClinicaVeterinariaModel = {
-  IDClinica: 0,
+const initialValues: VeterinarioModel = {
+  IDProfissional: 0,
   Nome: "",
-  Endereco: "",
+  Especialidade: "",
   Senha: "",
   Telefone: "",
   Email: "",
-  DescricaoDosServicos: "",
+  Disponibilidade: "",
+  Localizacao: "",
 };
 
-const ClinicPerfilModal: React.FC<Props> = ({ open, setOpen }) => {
-  const [formValues, setFormValues] = useState<ClinicaVeterinariaModel>(initialValues);
+const VeterinarioPerfilModal : React.FC<Props> = ({ open, setOpen }) => {
+  const [formValues, setFormValues] = useState<VeterinarioModel>(initialValues);
   const [alert, setAlert] = useState<boolean>(false);
   const [userLogado, setUserLogado] = useState<any>();
   const [loading, setLoading] = useState<boolean>(true);
   const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
-  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>()
-
-
+  const navigate = useNavigate();
   useEffect(() => {
     const userFromStorage = ls.get('user');
     setUserLogado(userFromStorage);
@@ -94,40 +94,40 @@ const ClinicPerfilModal: React.FC<Props> = ({ open, setOpen }) => {
     }
   }, [open, userLogado]);
 
+
   const getUser = async () => {
     if (userLogado && userLogado.id) {
       setLoading(true);
-      const response = await get(`ClinicaVeterinaria/obterClinicaVeterinariaPorId/${userLogado.id}`);
+      const response = await get(`ProfissionalVeterinario/obterProfissionalVeterinarioPorId/${userLogado.id}`);
       if (response != null) {
-        const clinicaData = {
-          IDClinica: response.idClinica,
+        const veterinarioData = {
+          IDProfissional: response.idProfissional,
           Nome: response.nome,
-          Endereco: response.endereco,
+          Especialidade: response.especialidade,
           Senha: response.senha,
           Telefone: response.telefone,
           Email: response.email,
-          DescricaoDosServicos: response.descricaoDosServicos,
+          Disponibilidade: response.disponibilidade,
+          Localizacao: response.localizacao,
         };
-        setFormValues(clinicaData);
+        setFormValues(veterinarioData);
         setLoading(false);
       } else {
-        console.error('Erro ao obter dados da clínica');
+        console.error('Erro ao obter dados da veterinario');
         setLoading(false);
       }
     }
   };
-
   const sendForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await put(`ClinicaVeterinaria/atualizarClinicaVeterinaria/${formValues.IDClinica}`, formValues);
+      const response = await put(`ProfissionalVeterinario/atualizarProfissionalVeterinario/${formValues.IDProfissional}`, formValues);
       if (response.status === 200) {
         setAlert(true);
-        console.log('Clínica atualizada com sucesso:', response);
-        navigate('/clinica')
+        console.log('Veterinário atualizado com sucesso:', response);
       }
     } catch (error) {
-      console.error('Erro ao atualizar a clínica:', error);
+      console.error('Erro ao atualizar o Veterinário:', error);
     }
   };
   const handleChange = (
@@ -139,10 +139,9 @@ const ClinicPerfilModal: React.FC<Props> = ({ open, setOpen }) => {
       [name]: value,
     }));
   };
-
   const handleDeleteAccount = async () => {
     try {
-      const response = await del(`ClinicaVeterinaria/excluirClinicaVeterinaria/${formValues.IDClinica}`);
+      const response = await del(`ProfissionalVeterinario/excluirProfissionalVeterinario/${formValues.IDProfissional}`);
       if (response.status === 200) {
         setAlert(true);
         setDeleteModalOpen(false);
@@ -154,6 +153,7 @@ const ClinicPerfilModal: React.FC<Props> = ({ open, setOpen }) => {
       console.error('Erro ao deletar a conta:', error);
     }
   };
+
 
   return (
     <Modal
@@ -194,13 +194,13 @@ const ClinicPerfilModal: React.FC<Props> = ({ open, setOpen }) => {
           </Alert>
         )}
         <TypographyMold fontSize={"18px"} id="modal-modal-title" variant="h6">
-          Editar perfil da clínica
+          Editar perfil do Veterinário
         </TypographyMold>
         {loading ? (
-        <Typography>Carregando...</Typography>
-      ) : (
+            <Typography>Carregando...</Typography>
+          ) : (
         <form onSubmit={sendForm}>
-          <TextFieldLabel title="Nome da clínica">
+          <TextFieldLabel title="Nome do Veterinário">
             <TextFieldLabel.Field
               placeholder="nome"
               name="Nome"
@@ -212,13 +212,13 @@ const ClinicPerfilModal: React.FC<Props> = ({ open, setOpen }) => {
             />
           </TextFieldLabel>
 
-          <TextFieldLabel title="Endereço">
+          <TextFieldLabel title="Especialidade">
             <TextFieldLabel.Field
-              placeholder="endereço"
-              name="Endereco"
+              placeholder="Especialidade"
+              name="Especialidade"
               size="small"
               fullWidth
-              value={formValues.Endereco}
+              value={formValues.Especialidade}
               onChange={handleChange}
               required
             />
@@ -256,12 +256,25 @@ const ClinicPerfilModal: React.FC<Props> = ({ open, setOpen }) => {
             </Grid>
           </Grid>
 
-          <TextFieldLabel title="Descrição dos Serviços" margin>
+          <TextFieldLabel title="Disponibilidade " margin>
             <TextFieldLabel.Field
               rows={6}
-              name="DescricaoDosServicos"
+              name="Disponibilidade"
               size="small"
-              value={formValues.DescricaoDosServicos}
+              value={formValues.Disponibilidade }
+              onChange={handleChange}
+              fullWidth
+              multiline
+              required
+            />
+          </TextFieldLabel>
+
+          <TextFieldLabel title="Localizacao " margin>
+            <TextFieldLabel.Field
+              rows={6}
+              name="Localizacao"
+              size="small"
+              value={formValues.Localizacao }
               onChange={handleChange}
               fullWidth
               multiline
@@ -280,73 +293,74 @@ const ClinicPerfilModal: React.FC<Props> = ({ open, setOpen }) => {
             Salvar
           </Button>
         </form>
-      )}
-        {!loading && (
-          <Button
-          sx={{
-            marginTop: "20px",
-            padding: "8px 30px",
-            backgroundColor: "red",
-          }}
-          variant="contained"
-          onClick={() => setDeleteModalOpen(true)}
-        >
-          Deletar minha conta
-        </Button>
-        )}
-
-      <Modal
-        open={deleteModalOpen}
-        onClose={() => setDeleteModalOpen(false)}
-        aria-labelledby="delete-modal-title"
-        aria-describedby="delete-modal-description"
-      >
-        <Box
-          sx={{
-            position: "absolute" as "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: { xs: "95%", sm: "450px", md: "450px" },
-            backgroundColor: "white",
-            padding: "20px",
-            border: "none",
-            borderRadius: "20px",
-          }}
-        >
-          <TypographyMold fontSize={"18px"} id="delete-modal-title" variant="h6">
-            Confirmar Deleção de Conta
-          </TypographyMold>
-          <TypographyMold id="delete-modal-description">
-            Você tem certeza que deseja deletar sua conta? Esta ação não pode ser desfeita.
-          </TypographyMold>
-          <Button
+          )}
+      {!loading && (
+            <Button
             sx={{
               marginTop: "20px",
               padding: "8px 30px",
               backgroundColor: "red",
             }}
             variant="contained"
-            onClick={handleDeleteAccount}
+            onClick={() => setDeleteModalOpen(true)}
           >
-            Confirmar
+            Deletar minha conta
           </Button>
-          <Button
+          )}
+
+        <Modal
+          open={deleteModalOpen}
+          onClose={() => setDeleteModalOpen(false)}
+          aria-labelledby="delete-modal-title"
+          aria-describedby="delete-modal-description"
+        >
+          <Box
             sx={{
-              marginTop: "20px",
-              padding: "8px 30px",
-              marginLeft: "10px",
+              position: "absolute" as "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: { xs: "95%", sm: "450px", md: "450px" },
+              backgroundColor: "white",
+              padding: "20px",
+              border: "none",
+              borderRadius: "20px",
             }}
-            variant="contained"
-            onClick={() => setDeleteModalOpen(false)}
           >
-            Cancelar
-          </Button>
-        </Box>
-      </Modal>
+            <TypographyMold fontSize={"18px"} id="delete-modal-title" variant="h6">
+              Confirmar Deleção de Conta
+            </TypographyMold>
+            <TypographyMold id="delete-modal-description">
+              Você tem certeza que deseja deletar sua conta? Esta ação não pode ser desfeita.
+            </TypographyMold>
+            <Button
+              sx={{
+                marginTop: "20px",
+                padding: "8px 30px",
+                backgroundColor: "red",
+              }}
+              variant="contained"
+              onClick={handleDeleteAccount}
+            >
+              Confirmar
+            </Button>
+            <Button
+              sx={{
+                marginTop: "20px",
+                padding: "8px 30px",
+                marginLeft: "10px",
+              }}
+              variant="contained"
+              onClick={() => setDeleteModalOpen(false)}
+            >
+              Cancelar
+            </Button>
+          </Box>
+        </Modal>
       </Box>
     </Modal>
+    
   );
 };
 
-export default ClinicPerfilModal;
+export default VeterinarioPerfilModal ;
