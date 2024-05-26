@@ -12,7 +12,7 @@ import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import FormControl from '@mui/material/FormControl';
 import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
 
 
 const EsqueciSenhaPage = () => {
@@ -30,7 +30,7 @@ const EsqueciSenhaPage = () => {
 
   return (
     <PageContainerComponent title="" style={{ marginLeft: isMobile ? 60 : 3000 }}>
-      <DialogComponent open={isDialogOpen} handleClose={() => dispatch(setDialogIdle())} >
+      <DialogComponent open={isDialogOpen} handleClose={() => {}} >
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Typography>E-mail</Typography>
@@ -40,7 +40,7 @@ const EsqueciSenhaPage = () => {
             <Button variant="contained" style={{width: '100%'}} >Redefinir senha</Button>
           </Grid>
           <Grid item xs={12}>
-              <Typography>Para retornar  <Link href="#">clique aqui</Link></Typography>
+              <Typography>Para retornar  <Link to="/login">Clique aqui</Link></Typography>
           </Grid>
         </Grid>
 

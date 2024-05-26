@@ -131,7 +131,7 @@ const LoginPage = () => {
         style={{ 
           marginLeft: isMobile ? 60 : 3000, 
         }}>
-        <DialogComponent open={isDialogOpen} handleClose={() => dispatch(setDialogIdle())} >
+        <DialogComponent open={isDialogOpen} handleClose={() => {}} >
           {/*  mexer só daqui pra baixo */}
 
           <Grid container spacing={2}>
@@ -166,7 +166,7 @@ const LoginPage = () => {
               <Button variant="contained" style={{width: '100%'}}   onClick={handleSubmit} >Entrar</Button>
             </Grid>
             <Grid item xs={12}>
-                <Typography>Esqueceu a senha?<Link to="/">Clique aqui</Link></Typography>
+                <Typography>Esqueceu a senha?<Link to="/esquecisenha">Clique aqui</Link></Typography>
                 <Typography>Não tem conta?<Link to="/cadastro/base">Clique aqui</Link></Typography>
             </Grid>
           </Grid>

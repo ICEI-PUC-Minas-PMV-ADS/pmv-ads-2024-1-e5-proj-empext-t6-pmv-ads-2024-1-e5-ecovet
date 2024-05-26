@@ -48,7 +48,7 @@ const router = createBrowserRouter([
   }, 
   {
     path: "/esquecisenha",
-    element: <AuthorizedPage children={<EsqueciSenhaPage />} role='user'/>
+    element: <EsqueciSenhaPage />
   },  
   {
     path: "/alertaredefinirsenha",
