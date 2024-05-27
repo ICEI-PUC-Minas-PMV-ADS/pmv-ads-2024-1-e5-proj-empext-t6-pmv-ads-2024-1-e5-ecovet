@@ -3,15 +3,17 @@ import {
   Box,
   Container,
   CssBaseline,
+  Grid,
   Stack,
   Typography,
   styled,
+  useMediaQuery,
 } from "@mui/material";
 import { useParams } from "react-router-dom";
 
-// import PerfilOnwerVersion from "../component/PerfilOnwerVersion";
-// import PerfilCommonVersion from "../component/PerfilCommonVersion";
-// import MoreProfessionalList from "../component/MoreProfessionalList";
+import PerfilOnwerVersion from "../component/PerfilOnwerVersion";
+import PerfilCommonVersion from "../component/PerfilCommonVersion";
+import MoreProfessionalList from "../component/MoreProfessionalList";
 
 // deve ser MODIFACADO OU DELETADO apos back end //
 const isThePerfilOnwerLogged = false;
@@ -41,9 +43,10 @@ const fakeProfessional = {
 };
 /////
 
-
 const ProfessionalPerfil = () => {
   const [professional, setProfessional] = useState<Professional | null>(null);
+
+  const isTooSmallScrell = useMediaQuery("(max-width: 1000px)");
 
   const { id } = useParams<{ id: string }>();
 
@@ -61,7 +64,7 @@ const ProfessionalPerfil = () => {
       <React.Fragment>
         <CssBaseline />
         <Container maxWidth={"xl"}>
-          <Stack
+          {/* <Stack
             direction={"row"}
             sx={{
               marginTop: "20px",
@@ -69,7 +72,7 @@ const ProfessionalPerfil = () => {
             }}
             spacing={4}
           >
-            {/* <Box maxWidth={"770px"}>
+            <Box maxWidth={"770px"}>
               {professional ? (
                 isThePerfilOnwerLogged ? (
                   <PerfilOnwerVersion professional={professional} />
@@ -81,8 +84,27 @@ const ProfessionalPerfil = () => {
               )}
             </Box>
 
-            <MoreProfessionalList /> */}
-          </Stack>
+            <MoreProfessionalList />
+          </Stack> */}
+          <Grid container>
+            <Grid item sm={10} md={isTooSmallScrell ? 9 : 7}>
+              <Box>
+                {professional ? (
+                  isThePerfilOnwerLogged ? (
+                    <PerfilOnwerVersion professional={professional} />
+                  ) : (
+                    <PerfilCommonVersion professional={professional} />
+                  )
+                ) : (
+                  <></>
+                )}
+              </Box>
+            </Grid>
+
+            <Grid item md={5}>
+            <MoreProfessionalList />
+            </Grid>
+          </Grid>
         </Container>
       </React.Fragment>
     </div>

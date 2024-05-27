@@ -46,6 +46,7 @@ function JobCard({ job }: JobCardPropss) {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
+    
           }}
         >
           <Box display={"flex"} gap={"12px"}>
