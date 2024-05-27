@@ -23,7 +23,7 @@ namespace Domain.Services
         /// <param>
         /// Email clinica
         /// </param>
-        Task<IEnumerable<Vaga>> ObterVagasClinicaAsync(int idClinica);
+        Task<IEnumerable<ObterVagaComClinica>> ObterVagasClinicaAsync(int idClinica);
 
         #endregion
 

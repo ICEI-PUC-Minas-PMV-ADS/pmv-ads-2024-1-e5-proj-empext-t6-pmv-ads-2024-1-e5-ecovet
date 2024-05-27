@@ -33,7 +33,7 @@ namespace Application
             return await vagaRepository.ObterVagasAsync();
         }
 
-        public async Task<IEnumerable<Vaga>> ObterVagasClinicaAsync(int idClinica)
+        public async Task<IEnumerable<ObterVagaComClinica>> ObterVagasClinicaAsync(int idClinica)
         {
             return await vagaRepository.ObterVagasClinicaAsync(idClinica);
         }

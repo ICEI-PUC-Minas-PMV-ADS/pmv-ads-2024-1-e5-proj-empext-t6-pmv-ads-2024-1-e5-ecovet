@@ -61,7 +61,7 @@ namespace back_app.Controller
 
             var retorno = await vagaService.ObterVagasClinicaAsync(int.Parse(userId));
 
-            return Ok(mapper.Map<IEnumerable<VagaModel>>(retorno));
+            return Ok(mapper.Map<IEnumerable<ObterVagaComClinicaModel>>(retorno));
         }
 
         /// <summary>
