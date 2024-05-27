@@ -5,6 +5,10 @@ import Typography from "@mui/material/Typography";
 import CssBaseline from "@mui/material/CssBaseline";
 import type { AppDispatch, RootState } from '../reducers/store'
 import { useSelector, useDispatch } from 'react-redux'
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
 
 import {
   Box,
@@ -111,8 +115,6 @@ const VetClinicInitialPage = () => {
   }
 
   return (
-    <React.Fragment>
-      <CssBaseline />
       <Container fixed maxWidth={"xl"}>
         <Stack direction={"column"} paddingY={"20px"}>
           <Grid container flex={1}>
@@ -164,70 +166,9 @@ const VetClinicInitialPage = () => {
           <Grid container flex={1} spacing={8} style={{marginTop : '-2em'}}>
           {
               jobs?.length != 0 ? 
-                jobs.map((job) =>
-                  <Grid item>
-                    <JobCard job={{
-                      //@ts-ignore
-                      id: job.idVaga,
-                      //@ts-ignore
-                      title: job.tituloVaga,
-                      location: "localizaçao",
-                      //@ts-ignore
-                      description: job.descricao,
-                      //@ts-ignore
-                      data: job.periodoDeDisponibilidade,
-                    }} />
-                      <Box
-                            display={"flex"}
-                            justifyContent={"space-between"}
-                            alignItems={"center"}
-                            paddingX={"20px"}
-                            marginTop={"10px"}
-                          >
-                            <Button
-                              sx={{
-                                fontSize: "14px",
-                                textTransform: "none",
-                                color: "#000",
-                                fontFamily: "red-hat-display",
-                                fontWeight: 400,
-                              }}
-                              startIcon={
-                                <EditNoteIcon
-                                  sx={{
-                                    color: "#1E3A8A",
-                                    width: "35px",
-                                    height: "35px",
-                                  }}
-                                />
-                              }
-                              // onClick={() => handleEditJob(item)}
-                            >
-                              Editar
-                            </Button>
-
-                            <Button
-                              sx={{
-                                fontSize: "14px",
-                                textTransform: "none",
-                                color: "#000",
-                                fontFamily: "red-hat-display",
-                                fontWeight: 400,
-                              }}
-                              startIcon={
-                                <HighlightOffIcon
-                                  sx={{
-                                    color: "#991B1B",
-                                    width: "35px",
-                                    height: "35px",
-                                  }}
-                                />
-                              }
-                              // onClick={() => handleDeleteJob(item)}
-                            >
-                              Apagar
-                            </Button>
-                          </Box>
+                jobs.map((job: any) =>
+                  <Grid item style={{marginTop : '-2em'}}>          
+                    <JobCard job={job} role={role}/>
                   </Grid >
                 )
               :                      
@@ -257,7 +198,6 @@ const VetClinicInitialPage = () => {
         </Stack>
 
       </Container>
-    </React.Fragment>
   );
 };
 

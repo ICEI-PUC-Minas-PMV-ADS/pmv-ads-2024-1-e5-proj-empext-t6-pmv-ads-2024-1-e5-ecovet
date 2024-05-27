@@ -15,10 +15,20 @@ const AuthorizedPage = ({children, userRole}: any) => {
 
 
   useEffect(() => {
+    const userFromStorage = ls.get('user');
+    console.log(">>>>>>>>> userFromStorage")
+    console.log(userFromStorage)
+    // setUser(userFromStorage);
+  }, []);
+
+
+
+  useEffect(() => {
     if(!isAuthorized ){
       navigate('/')
     }
   },[isAuthorized]) 
+
   return (
     <Box
     style={{ 
