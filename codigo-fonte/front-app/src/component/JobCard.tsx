@@ -20,7 +20,7 @@ const JobCard = ({job, role}: any) => {
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            N
+            {job.clinicaVaga.nome?.substring(0, 1)}
           </Avatar>
         }
         action={
@@ -28,8 +28,8 @@ const JobCard = ({job, role}: any) => {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Nome da petshop"
-        subheader="Data da publicação"
+        title={job.clinicaVaga.nome}
+        subheader={job.clinicaVaga.endereco}
       />
       <CardMedia
         sx={{ height: 140 }}
