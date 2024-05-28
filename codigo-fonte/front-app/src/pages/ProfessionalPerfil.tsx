@@ -16,7 +16,7 @@ import PerfilCommonVersion from "../component/PerfilCommonVersion";
 import MoreProfessionalList from "../component/MoreProfessionalList";
 
 // deve ser MODIFACADO OU DELETADO apos back end //
-const isThePerfilOnwerLogged = false;
+const isThePerfilOnwerLogged = true;
 
 interface Professional {
   id: string;

@@ -55,34 +55,27 @@ const CheckedJobsList = () => {
     <Box
       display={"flex"}
       flexWrap={"wrap"}
-      gap={2}
+      gap={5}
       alignItems={"center"}
       justifyContent={"center"}
     >
       {loading ? (
-        <Box >
+        <Box>
           <CircularProgress color="inherit" />
         </Box>
       ) : jobs && jobs.length ? (
-        <>
-          {visibleData.map((item, index) => (
-            <JobCard key={index} job={item} />
-          ))}
-          {totalCount > 0 && totalCount > itemPerPage && (
-            <Pagination
-              page={currentPage}
-              onChange={handlePageChange}
-              count={Math.ceil(totalCount / itemPerPage)}
-              color="primary"
-            />
-          )}
-        </>
+        visibleData.map((item, index) => <JobCard job={item} key={index} />)
       ) : (
-        <>
-          <TypographyModel>Ainda não há candidaturas 😓 </TypographyModel>
-        </>
+        <TypographyModel>Ainda não há candidaturas 😓 </TypographyModel>
       )}
-
+      {totalCount > 0 && totalCount > itemPerPage && (
+        <Pagination
+          page={currentPage}
+          onChange={handlePageChange}
+          count={Math.ceil(totalCount / itemPerPage)}
+          color="primary"
+        />
+      )}
     </Box>
   );
 };

@@ -14,11 +14,11 @@ const AuthorizedPage = ({ children, userRole }: any) => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if(!isAuthorized ){
-      navigate('/')
-    }
-  },[isAuthorized])
+  // useEffect(() => {
+  //   if(!isAuthorized ){
+  //     navigate('/')
+  //   }
+  // },[isAuthorized])
   return (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <HeaderComponent />
