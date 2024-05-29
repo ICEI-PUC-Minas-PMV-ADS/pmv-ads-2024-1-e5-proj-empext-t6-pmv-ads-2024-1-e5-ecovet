@@ -64,28 +64,6 @@ const ProfessionalPerfil = () => {
       <React.Fragment>
         <CssBaseline />
         <Container maxWidth={"xl"}>
-          {/* <Stack
-            direction={"row"}
-            sx={{
-              marginTop: "20px",
-              marginBottom: "100px",
-            }}
-            spacing={4}
-          >
-            <Box maxWidth={"770px"}>
-              {professional ? (
-                isThePerfilOnwerLogged ? (
-                  <PerfilOnwerVersion professional={professional} />
-                ) : (
-                  <PerfilCommonVersion professional={professional} />
-                )
-              ) : (
-          <></>
-              )}
-            </Box>
-
-            <MoreProfessionalList />
-          </Stack> */}
           <Grid container>
             <Grid item sm={10} md={isTooSmallScrell ? 9 : 7}>
               <Box>

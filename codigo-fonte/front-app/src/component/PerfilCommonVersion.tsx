@@ -37,7 +37,6 @@ const PerfilCommonVersion = ({ professional }: PerfilCommonVersionProps) => {
     <Box>
       <Box
         bgcolor={"#172554"}
-
         height={"150px"}
         borderRadius={"10px"}
         position={"relative"}
@@ -71,10 +70,9 @@ const PerfilCommonVersion = ({ professional }: PerfilCommonVersionProps) => {
       </Box>
       <AboutSection professional={professional} />
 
-              <Box padding={"0 100px"} marginTop={"200px"}>
-
-      <MoreProfessionalsBottonList />
-              </Box>
+      <Box padding={"0 100px"} marginTop={"200px"}>
+        <MoreProfessionalsBottonList />
+      </Box>
     </Box>
   );
 };

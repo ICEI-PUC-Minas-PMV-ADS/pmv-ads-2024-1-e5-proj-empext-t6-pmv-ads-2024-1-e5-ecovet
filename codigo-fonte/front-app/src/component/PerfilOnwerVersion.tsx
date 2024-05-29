@@ -4,6 +4,7 @@ import { Box, Typography, styled } from "@mui/material";
 import TabMenu from "./TabMenu";
 import AboutSection from "./AboutSection";
 import CheckedJobsList from "./CheckedJobsList";
+import MoreProfessionalsBottonList from "./MoreProfessionalsButtonList";
 
 const BoxAvatar = styled(Box)({
   width: "100px",
@@ -126,6 +127,10 @@ const PerfilOnwerVersion = ({ professional }: PerfilOnwerVersionProps) => {
           <CustomTabPanel value={tabIndex} index={1}>
             <CheckedJobsList />
           </CustomTabPanel>
+        </Box>
+
+        <Box padding={"0 100px"} marginTop={"200px"}>
+          <MoreProfessionalsBottonList />
         </Box>
       </Box>
     </Box>

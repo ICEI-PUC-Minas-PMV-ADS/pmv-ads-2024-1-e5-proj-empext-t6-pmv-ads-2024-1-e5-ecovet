@@ -45,7 +45,7 @@ const CheckedJobsList = () => {
     getJobs();
   }, []);
 
-  useEffect(() => {
+  useEffect(() => { 
     if (jobs) {
       setTotalCount(jobs.length);
     }
@@ -64,11 +64,12 @@ const CheckedJobsList = () => {
           <CircularProgress color="inherit" />
         </Box>
       ) : jobs && jobs.length ? (
+        <>
+      {
+
         visibleData.map((item, index) => <JobCard job={item} key={index} />)
-      ) : (
-        <TypographyModel>Ainda não há candidaturas 😓 </TypographyModel>
-      )}
-      {totalCount > 0 && totalCount > itemPerPage && (
+      }
+          {totalCount > 0 && totalCount > itemPerPage && (
         <Pagination
           page={currentPage}
           onChange={handlePageChange}
@@ -76,6 +77,11 @@ const CheckedJobsList = () => {
           color="primary"
         />
       )}
+        </>
+      ) : (
+        <TypographyModel>Ainda não há candidaturas 😓 </TypographyModel>
+      )}
+  
     </Box>
   );
 };
