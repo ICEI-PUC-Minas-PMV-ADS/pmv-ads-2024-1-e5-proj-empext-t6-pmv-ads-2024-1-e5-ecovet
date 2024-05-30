@@ -11,12 +11,41 @@ import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import { red } from '@mui/material/colors';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
 
-const JobCard = ({job, role}: any) => {
+const JobCard = ({job, role, handleDeleteJob}: any) => {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget)
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  
   console.log("job")
   console.log(job)
   return (   
     <Card sx={{ width: 345, minHeight: 300 }}>
+      <Menu
+        id="menu-appbar"
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem onClick={()=>{}}>Editar</MenuItem>
+        <MenuItem onClick={()=>handleDeleteJob(job.idVaga)}>Apagar</MenuItem>
+      </Menu>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -24,7 +53,8 @@ const JobCard = ({job, role}: any) => {
           </Avatar>
         }
         action={
-          role == 'Clínica' && <IconButton aria-label="settings">
+          role == 'Clínica' && 
+          <IconButton aria-label="settings" onClick={(event) => handleMenu(event)}>
             <MoreVertIcon />
           </IconButton>
         }

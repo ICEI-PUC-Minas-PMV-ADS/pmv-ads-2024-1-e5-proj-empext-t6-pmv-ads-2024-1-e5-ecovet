@@ -95,6 +95,11 @@ const VetClinicInitialPage = () => {
   }
 
 
+  const handleDeleteJob = (idVaga: number) => {
+    console.log("=== handleDeleteJob")
+    console.log(idVaga)
+  };
+
   
   useEffect(() => {
     getJobs()
@@ -168,7 +173,7 @@ const VetClinicInitialPage = () => {
               jobs?.length != 0 ? 
                 jobs.map((job: any) =>
                   <Grid item style={{marginTop : '-2em'}}>          
-                    <JobCard job={job} role={role}/>
+                    <JobCard job={job} role={role} handleDeleteJob={handleDeleteJob}/>
                   </Grid >
                 )
               :                      
