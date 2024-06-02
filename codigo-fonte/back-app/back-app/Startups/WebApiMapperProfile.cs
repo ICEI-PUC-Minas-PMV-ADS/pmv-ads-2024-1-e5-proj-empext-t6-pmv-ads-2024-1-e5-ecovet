@@ -19,6 +19,7 @@ namespace back_app.Startups
                 CreateMap<ProfissionalVeterinario, ProfissionalVeterinarioModel>();
                 CreateMap<ProfissionalVeterinarioModel, ProfissionalVeterinario>();
                 CreateMap<ObterVagaComClinica, ObterVagaComClinicaModel>().ReverseMap();
+                CreateMap<ObterCandidaturasComVagaEVeterinario, ObterCandidaturasComVagaEVeterinarioModel>().ReverseMap();
 
             }
         }
