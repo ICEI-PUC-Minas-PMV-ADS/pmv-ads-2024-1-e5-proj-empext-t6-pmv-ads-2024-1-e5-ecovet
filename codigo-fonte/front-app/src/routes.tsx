@@ -16,6 +16,7 @@ import LogUpCompany from './pages/LogUpCompany';
 import VetClinicInitialPage from './pages/ClinicPerilEdit';
 import CadastroClinicaPage from './pages/CadastroClinica';
 import ProfissionalVeterinario from './pages/ProfissionalVeterinario';
+import VerCandidaturas from './pages/VerCandidaturas';
 
 const router = createBrowserRouter([ 
   {
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
   {
     path: "/veterinario",
     element: <AuthorizedPage children={<ProfissionalVeterinario />} role='user'/>
+  },
+  {
+    path: "/candidaturas/:idVaga",
+    element: <AuthorizedPage children={<VerCandidaturas />}/> 
   }
 ]);
 

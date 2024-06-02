@@ -118,7 +118,9 @@ const VetClinicInitialPage = () => {
       </Box>
     );
   }
-
+  const clickCandidaturasVaga = (idVaga : number) => {
+    navigate(`/candidaturas/${idVaga}`);
+  };
   return (
       <Container fixed maxWidth={"xl"}>
         <Stack direction={"column"} paddingY={"20px"}>
@@ -172,8 +174,10 @@ const VetClinicInitialPage = () => {
           {
               jobs?.length != 0 ? 
                 jobs.map((job: any) =>
-                  <Grid item style={{marginTop : '-2em'}}>          
-                    <JobCard job={job} role={role} handleDeleteJob={handleDeleteJob}/>
+                  <Grid item style={{marginTop : '-2em'}} >          
+                    <div style={{cursor:'pointer'}} onClick={() => clickCandidaturasVaga(job.idVaga)}>
+                      <JobCard job={job} role={role} handleDeleteJob={handleDeleteJob}   />
+                    </div>
                   </Grid >
                 )
               :                      

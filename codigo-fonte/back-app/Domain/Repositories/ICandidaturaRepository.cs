@@ -43,7 +43,7 @@ namespace Domain.Repositories
         /// Obtém as candidaturas associadas a uma determinada vaga.
         /// </summary>
         /// <param name="idVaga">ID da vaga.</param>
-        Task<IEnumerable<Candidatura>> ObterCandidaturasPorVagaAsync(int idVaga);
+        Task<IEnumerable<ObterCandidaturasComVagaEVeterinario>> ObterCandidaturasPorVagaAsync(int idVaga);
 
         /// <summary>
         /// Atualiza o status de uma candidatura.
