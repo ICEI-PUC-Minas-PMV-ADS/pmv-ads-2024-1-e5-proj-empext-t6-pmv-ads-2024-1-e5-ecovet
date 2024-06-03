@@ -129,9 +129,11 @@ const PerfilOnwerVersion = ({ professional }: PerfilOnwerVersionProps) => {
           </CustomTabPanel>
         </Box>
 
-        <Box padding={"0 100px"} marginTop={"200px"}>
+
+      {/* SECCTION DE BAIXO QUE MOSTRA MAIS VETERINÁRIOS, DISPOSITÍVEIS PEQUENOS */}
+        {/* <Box padding={"0 100px"} marginTop={"200px"}>
           <MoreProfessionalsBottonList />
-        </Box>
+        </Box> */}
       </Box>
     </Box>
   );

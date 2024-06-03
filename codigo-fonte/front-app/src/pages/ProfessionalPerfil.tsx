@@ -109,7 +109,8 @@ const ProfessionalPerfil = () => {
             </Grid>
 
             <Grid item md={5}>
-            <MoreProfessionalList />
+              {/* MENU DIREITO QUE MOSTRA MAIS VETERINÁRIOS */}
+            {/* <MoreProfessionalList /> */}
             </Grid>
           </Grid>
         </Container>

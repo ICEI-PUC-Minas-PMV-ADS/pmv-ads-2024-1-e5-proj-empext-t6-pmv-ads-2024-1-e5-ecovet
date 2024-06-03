@@ -70,9 +70,10 @@ const PerfilCommonVersion = ({ professional }: PerfilCommonVersionProps) => {
       </Box>
       <AboutSection professional={professional} />
 
-      <Box padding={"0 100px"} marginTop={"200px"}>
+      {/* SECCTION DE BAIXO QUE MOSTRA MAIS VETERINÁRIOS, DISPOSITÍVEIS PEQUENOS */}
+      {/* <Box padding={"0 100px"} marginTop={"200px"}>
         <MoreProfessionalsBottonList />
-      </Box>
+      </Box> */}
     </Box>
   );
 };
