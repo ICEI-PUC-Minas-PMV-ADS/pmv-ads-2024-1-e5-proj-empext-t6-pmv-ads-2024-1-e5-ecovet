@@ -36,7 +36,7 @@ const AboutSection = ({ professional }: AboutSectionProps) => {
             borderRadius={"10px"}
           >
             <TypographyModel fontSize={"16px"} fontWeight={800}>
-              Sobre
+              Disponibilidade
             </TypographyModel>
             <TypographyModel
               color={"#ADB5BD"}
