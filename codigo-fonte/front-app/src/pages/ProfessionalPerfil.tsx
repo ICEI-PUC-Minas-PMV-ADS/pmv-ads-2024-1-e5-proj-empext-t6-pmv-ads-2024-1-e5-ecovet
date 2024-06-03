@@ -18,8 +18,6 @@ import { get } from "../services/agent";
 import type { AppDispatch, RootState } from '../reducers/store'
 import { useSelector } from 'react-redux'
 
-// deve ser MODIFACADO OU DELETADO apos back end //
-const isThePerfilOnwerLogged = true;
 
 interface Professional {
   id: any;
@@ -28,8 +26,9 @@ interface Professional {
   avatar: any;
   contact: any;
   about: any;
-  experience: any; // Tornar experience obrigatória
+  experience: any; 
   job: any;
+  localizacao: any
 }
 
 const fakeProfessional = {
@@ -39,6 +38,7 @@ const fakeProfessional = {
   avatar: "/img/avatar.png",
   contact: "99 9999 9999",
   job: "Enfermeiro",
+  localizacao: "onde:?",
   about:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor, ornare at commodo non, feugiat non nisi. Phasellus faucibus mollis pharetra. Proin blandit ac massa sed rhoncus",
   experience:
@@ -69,7 +69,8 @@ const ProfessionalPerfil = () => {
             about: response.disponibilidade,
             job: response.especialidade,
             avatar: "/img/avatar.png",
-            experience: response.experiencia || "", // Usar valor padrão se não houver experiência
+            experience: response.experiencia || "", 
+            localizacao: "aqui" // MUDAR
           };
 
           setProfessional(professionalResponse);

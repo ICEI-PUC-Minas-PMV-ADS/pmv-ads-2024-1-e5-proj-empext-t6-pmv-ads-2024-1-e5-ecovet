@@ -53,6 +53,7 @@ type PerfilOnwerVersionProps = {
     experience: any;
     contact: any;
     job: any;
+    localizacao: any
   } | null;
 };
 

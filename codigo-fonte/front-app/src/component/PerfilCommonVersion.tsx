@@ -15,6 +15,7 @@ type PerfilCommonVersionProps = {
     experience: any;
     contact: any;
     job: any;
+    localizacao: any
   };
 };
 

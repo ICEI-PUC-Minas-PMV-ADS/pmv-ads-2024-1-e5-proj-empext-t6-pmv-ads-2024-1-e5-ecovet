@@ -3,6 +3,7 @@ import { Box, Grid, Typography, styled } from "@mui/material";
 
 import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
 import WorkOutlineOutlinedIcon from '@mui/icons-material/WorkOutlineOutlined';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 const TypographyModel = styled(Typography)({
   fontFamily: "red-hat-display",
@@ -17,7 +18,8 @@ type AboutSectionProps = {
     contact: any;
     about: any;
     experience: any;
-    job: any
+    job: any,
+    localizacao: any
   } | null;
 };
 
@@ -25,7 +27,7 @@ const AboutSection = ({ professional }: AboutSectionProps) => {
   return (
     <Box>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={3} md={3}>
+        <Grid item xs={12} sm={12} md={12}>
           <Box
             sx={{
               padding: "10px 10px",
@@ -42,7 +44,7 @@ const AboutSection = ({ professional }: AboutSectionProps) => {
               textAlign={"justify"}
     
               sx={{
-                minHeight: {xs: "", sm: "200px"}
+                minHeight: {xs: "", sm: "150px"}
               }}
             >
               {professional?.about}
@@ -50,7 +52,8 @@ const AboutSection = ({ professional }: AboutSectionProps) => {
           </Box>
         </Grid>
 
-        <Grid item xs={12} sm={9} md={9}>
+              {/* PARTE EXPERIÊNCIA */}
+        {/* <Grid item xs={12} sm={9} md={9}>
           <Box
             sx={{
               padding: {xs: "10px 10px", sm : "10px 30px"}
@@ -77,7 +80,7 @@ const AboutSection = ({ professional }: AboutSectionProps) => {
               {professional?.experience}
             </TypographyModel>
           </Box>
-        </Grid>
+        </Grid> */}
       </Grid>
 
       <Box sx={{
@@ -86,15 +89,22 @@ const AboutSection = ({ professional }: AboutSectionProps) => {
         gap: "10px",
         padding: "10px 10px"
       }}>
-        <Box display={"flex"}gap={1}>
-          <CallOutlinedIcon />
-          <TypographyModel>{professional?.contact}</TypographyModel>
+         <Box display={"flex"} gap={1} flexDirection={"column"}>
+          <Box display={"flex"} gap={1}>
+            <CallOutlinedIcon />
+            <TypographyModel>{professional?.contact}</TypographyModel>
+          </Box>
+          <Box display={"flex"} gap={1}>
+            <WorkOutlineOutlinedIcon />
+            <TypographyModel>{professional?.job}</TypographyModel>
+          </Box>
+
+          <Box display={"flex"} gap={1}>
+            <LocationOnIcon />
+            <TypographyModel>{professional?.localizacao}</TypographyModel>
+          </Box>
         </Box>
-        
-        <Box display={"flex"}gap={1}>
-          <WorkOutlineOutlinedIcon />
-          <TypographyModel>{professional?.job}</TypographyModel>
-        </Box>
+    
       </Box>
     </Box>
   );
