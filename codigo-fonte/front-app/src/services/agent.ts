@@ -1,4 +1,4 @@
-// const BASE_URL = "https://localhost:7115"; //local
+//const BASE_URL = "https://localhost:7115"; //local
 const BASE_URL = "https://ecovet-api-a70660ac3f23.herokuapp.com"; //hml
 
 let access_token = ''

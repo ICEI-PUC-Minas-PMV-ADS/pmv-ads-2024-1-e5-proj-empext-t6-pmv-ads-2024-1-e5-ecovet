@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
-import type { AppDispatch, RootState } from '../reducers/store'
-import Box from '@mui/material/Box';
-import HeaderComponent from './Header';
-import { authorizeUser } from '../reducers/userReducer'
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import type { AppDispatch, RootState } from "../reducers/store";
+import Box from "@mui/material/Box";
+import HeaderComponent from "./Header";
+import { authorizeUser } from "../reducers/userReducer";
 import { useNavigate } from "react-router-dom";
-var ls = require('local-storage');
+import Footer from "./Footer";
+var ls = require("local-storage");
 
-const AuthorizedPage = ({children, userRole}: any) => {
-  const {isAuthorized, role} = useSelector((state: RootState) => state.user)
-  const token = useSelector((state: RootState) => state.user.token)
-  const dispatch = useDispatch<AppDispatch>()
+const AuthorizedPage = ({ children, userRole }: any) => {
+  const { isAuthorized, role } = useSelector((state: RootState) => state.user);
+  const token = useSelector((state: RootState) => state.user.token);
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-
 
   useEffect(() => {
     const userFromStorage = ls.get('user');
@@ -27,17 +27,17 @@ const AuthorizedPage = ({children, userRole}: any) => {
     if(!isAuthorized ){
       navigate('/')
     }
-  },[isAuthorized]) 
+  },[isAuthorized])
 
   return (
-    <Box
-    style={{ 
-      height: '100vh',
-    }}>
-      <HeaderComponent  />
-      {children}
-    </Box> 
-  )
-}
+    <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+      <HeaderComponent />
 
-export default AuthorizedPage
+      {children}
+
+      <Footer />
+    </Box>
+  );
+};
+
+export default AuthorizedPage;

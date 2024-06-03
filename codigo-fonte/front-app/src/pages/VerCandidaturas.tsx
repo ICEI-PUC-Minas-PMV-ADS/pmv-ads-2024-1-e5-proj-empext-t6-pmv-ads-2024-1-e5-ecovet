@@ -22,6 +22,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import JobCard from "../component/JobCard";
 import { useParams } from "react-router-dom";
 import { del, get } from "../services/agent";
+import { useNavigate } from "react-router-dom";
 
 type Candidatura = {
   idCandidatura: number;
@@ -89,6 +90,8 @@ const VerCandidaturas = () => {
   const [selectedCandidaturaId, setSelectedCandidaturaId] = useState<
     number | null
   >(null);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchCandidaturas = async () => {
@@ -177,6 +180,11 @@ const VerCandidaturas = () => {
                   variant="contained"
                   color="primary"
                   sx={{ marginRight: "10px" }}
+                  onClick = {() =>
+                    {
+                      navigate(`/perfilprofessional/publico/${candidatura.profissionalVeterinario?.idProfissional}`);
+                    }
+                  }
                 >
                   Ver Perfil
                 </Button>
