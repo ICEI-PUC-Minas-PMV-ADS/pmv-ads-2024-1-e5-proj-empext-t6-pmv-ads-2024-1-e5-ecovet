@@ -22,6 +22,7 @@ import Switch from '@mui/material/Switch';
 import Stack from '@mui/material/Stack';
 import HeaderComponent from '../component/Header';
 import { styled } from '@mui/material/styles';
+import Alert from '@mui/material/Alert';
 
 const AntSwitch = styled(Switch)(({ theme }) => ({
   width: 28,
@@ -71,6 +72,7 @@ const LoginPage = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [email, setEmail] = useState('');
+  const [loginError, setLoginError] = useState('');
   const [senha, setSenha] = useState('');
   const [tipoLogin, setTipoLogin] = useState(true);
   const navigate = useNavigate();
@@ -112,7 +114,7 @@ const LoginPage = () => {
         
         tipoLogin ? navigate('/clinica') : navigate('/veterinario')
       } else {
-        alert('Falha no login');
+        setLoginError("Credenciais inválidas")
       }
     } catch (error) {
       console.error("Erro no login:", error);
@@ -135,6 +137,12 @@ const LoginPage = () => {
           {/*  mexer só daqui pra baixo */}
 
           <Grid container spacing={2}>
+            {
+              loginError? 
+              <Grid item xs={12}>
+                <Alert severity="error">{loginError}</Alert>
+              </Grid> : null
+            }
             <Grid item xs={12}>
               {/* <InputLabel id="tipo-login-label" style={{marginBottom:'10px'}}>Tipo de Login</InputLabel> */}
               <FormControl fullWidth>

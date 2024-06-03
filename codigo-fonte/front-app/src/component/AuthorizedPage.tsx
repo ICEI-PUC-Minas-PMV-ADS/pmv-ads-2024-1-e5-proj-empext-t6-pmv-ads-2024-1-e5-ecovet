@@ -15,10 +15,20 @@ const AuthorizedPage = ({ children, userRole }: any) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const userFromStorage = ls.get('user');
+    console.log(">>>>>>>>> userFromStorage")
+    console.log(userFromStorage)
+    // setUser(userFromStorage);
+  }, []);
+
+
+
+  useEffect(() => {
     if(!isAuthorized ){
       navigate('/')
     }
   },[isAuthorized])
+
   return (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <HeaderComponent />

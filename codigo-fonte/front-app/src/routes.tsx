@@ -17,6 +17,7 @@ import VetClinicInitialPage from './pages/ClinicPerilEdit';
 import CadastroClinicaPage from './pages/CadastroClinica';
 import ProfissionalVeterinario from './pages/ProfissionalVeterinario';
 import ProfessionalPerfil from './pages/ProfessionalPerfil';
+import VerCandidaturas from './pages/VerCandidaturas';
 
 const router = createBrowserRouter([ 
   {
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
     path: "/perfilprofessional/publico/:id",
     element: <AuthorizedPage children={<ProfessionalPerfil />} />,
   },
+  {
+    path: "/candidaturas/:idVaga",
+    element: <AuthorizedPage children={<VerCandidaturas />}/> 
+  }
 ]);
 
 export default router;

@@ -7,7 +7,7 @@ namespace Domain.Repositories
         /// <summary>
         /// Obtem as vagas.
         /// </summary>
-        Task<IEnumerable<Vaga>> ObterVagasAsync();
+        Task<IEnumerable<ObterVagaComClinica>> ObterVagasAsync();
 
         /// <sumary>
         /// Cadastrar vaga. 
@@ -23,7 +23,7 @@ namespace Domain.Repositories
         /// <param>
         /// Email clinica
         /// </param>
-        Task<IEnumerable<Vaga>> ObterVagasClinicaAsync(int idClinica);
+        Task<IEnumerable<ObterVagaComClinica>> ObterVagasClinicaAsync(int idClinica);
 
         /// <summary>
         /// Deletar vaga.

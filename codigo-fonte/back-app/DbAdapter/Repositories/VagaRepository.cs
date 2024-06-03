@@ -36,14 +36,43 @@ namespace DbAdapter.Repositories
             await ecoVetContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Vaga>> ObterVagasAsync()
+        public async Task<IEnumerable<ObterVagaComClinica>> ObterVagasAsync()
         {
-            return await ecoVetContext.Vagas.ToListAsync();
+            var vagasComClinicas = await (from vaga in ecoVetContext.Vagas
+                                          join clinica in ecoVetContext.ClinicasVeterinarias
+                                          on vaga.IDClinicaVeterinaria equals clinica.IDClinica
+                                          select new ObterVagaComClinica
+                                          {
+                                              IDVaga = vaga.IDVaga,
+                                              TituloVaga = vaga.TituloVaga,
+                                              Descricao = vaga.Descricao,
+                                              Requisitos = vaga.Requisitos,
+                                              PeriodoDeDisponibilidade = vaga.PeriodoDeDisponibilidade,
+                                              IDClinicaVeterinaria = vaga.IDClinicaVeterinaria,
+                                              ClinicaVaga = clinica
+                                          }).ToListAsync();
+
+            return vagasComClinicas;
         }
 
-        public async Task<IEnumerable<Vaga>> ObterVagasClinicaAsync(int idClinica)
+        public async Task<IEnumerable<ObterVagaComClinica>> ObterVagasClinicaAsync(int idClinica)
         {
-            return await ecoVetContext.Vagas.Where(clinica => clinica.IDClinicaVeterinaria == idClinica).ToListAsync();
+            var vagasComClinicas = await (from vaga in ecoVetContext.Vagas
+                                          join clinica in ecoVetContext.ClinicasVeterinarias
+                                          on vaga.IDClinicaVeterinaria equals clinica.IDClinica
+                                          where vaga.IDClinicaVeterinaria == idClinica
+                                          select new ObterVagaComClinica
+                                          {
+                                              IDVaga = vaga.IDVaga,
+                                              TituloVaga = vaga.TituloVaga,
+                                              Descricao = vaga.Descricao,
+                                              Requisitos = vaga.Requisitos,
+                                              PeriodoDeDisponibilidade = vaga.PeriodoDeDisponibilidade,
+                                              IDClinicaVeterinaria = vaga.IDClinicaVeterinaria,
+                                              ClinicaVaga = clinica
+                                          }).ToListAsync();
+
+            return vagasComClinicas;
         }
     }
 }

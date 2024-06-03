@@ -18,6 +18,8 @@ namespace back_app.Startups
                 CreateMap<CandidaturaModel, Candidatura>();
                 CreateMap<ProfissionalVeterinario, ProfissionalVeterinarioModel>();
                 CreateMap<ProfissionalVeterinarioModel, ProfissionalVeterinario>();
+                CreateMap<ObterVagaComClinica, ObterVagaComClinicaModel>().ReverseMap();
+                CreateMap<ObterCandidaturasComVagaEVeterinario, ObterCandidaturasComVagaEVeterinarioModel>().ReverseMap();
 
             }
         }
