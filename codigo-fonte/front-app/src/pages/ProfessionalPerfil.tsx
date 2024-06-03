@@ -14,19 +14,22 @@ import { useParams } from "react-router-dom";
 import PerfilOnwerVersion from "../component/PerfilOnwerVersion";
 import PerfilCommonVersion from "../component/PerfilCommonVersion";
 import MoreProfessionalList from "../component/MoreProfessionalList";
+import { get } from "../services/agent";
+import type { AppDispatch, RootState } from '../reducers/store'
+import { useSelector } from 'react-redux'
 
 // deve ser MODIFACADO OU DELETADO apos back end //
 const isThePerfilOnwerLogged = true;
 
 interface Professional {
-  id: string;
-  name: string;
-  email: string;
-  avatar: string;
-  contact: string;
-  about: string;
-  experience: string;
-  job: string;
+  id: any;
+  name: any;
+  email: any;
+  avatar: any;
+  contact: any;
+  about: any;
+  experience: any; // Tornar experience obrigatória
+  job: any;
 }
 
 const fakeProfessional = {
@@ -46,18 +49,40 @@ const fakeProfessional = {
 const ProfessionalPerfil = () => {
   const [professional, setProfessional] = useState<Professional | null>(null);
 
-  const isTooSmallScrell = useMediaQuery("(max-width: 1000px)");
-
-  const { id } = useParams<{ id: string }>();
-
+  const isTooSmallScreen = useMediaQuery("(max-width: 1000px)");
+  const { name, id, userName, role } = useSelector((state: RootState) => state.user)
+  const { idVeterinario } = useParams();
+  
+  console.log('id logado', id);
   useEffect(() => {
-    const getClinicData = async () => {
-      const response = fakeProfessional;
-      setProfessional(response);
+    const fetchVeterinario = async () => {
+      try {
+        const response = await get(
+          `ProfissionalVeterinario/obterProfissionalVeterinarioPorId/${idVeterinario}`
+        );
+        if (response) {
+          const professionalResponse: Professional = {
+            id: response.idProfissional,
+            name: response.nome,
+            email: response.email,
+            contact: response.telefone,
+            about: response.disponibilidade,
+            job: response.especialidade,
+            avatar: "/img/avatar.png",
+            experience: response.experiencia || "", // Usar valor padrão se não houver experiência
+          };
+
+          setProfessional(professionalResponse);
+        } else {
+          console.error("Erro ao obter dados do veterinário");
+        }
+      } catch (error) {
+        console.error("Erro ao buscar veterinário:", error);
+      }
     };
 
-    getClinicData();
-  }, []);
+    fetchVeterinario();
+  }, [idVeterinario]);
 
   return (
     <div className="container-flexgrow" style={{ backgroundColor: "white" }}>
@@ -65,13 +90,17 @@ const ProfessionalPerfil = () => {
         <CssBaseline />
         <Container maxWidth={"xl"}>
           <Grid container>
-            <Grid item sm={10} md={isTooSmallScrell ? 9 : 7}>
-              <Box>
+            <Grid item sm={10} md={isTooSmallScreen ? 9 : 7}>
+            <Box>
                 {professional ? (
-                  isThePerfilOnwerLogged ? (
+                  role === "Clínica" ? (
+                    <PerfilCommonVersion professional={professional} />
+                  ) : role === "Profissional" && id !== professional.id ? (
+                    <PerfilCommonVersion professional={professional} />
+                  ) : role === "Profissional" && id === professional.id ? (
                     <PerfilOnwerVersion professional={professional} />
                   ) : (
-                    <PerfilCommonVersion professional={professional} />
+                    <></>
                   )
                 ) : (
                   <></>

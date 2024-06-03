@@ -10,14 +10,14 @@ const TypographyModel = styled(Typography)({
 
 type AboutSectionProps = {
   professional: {
-    id: string;
-    name: string;
-    email: string;
-    avatar: string;
-    contact: string;
-    about: string;
-    experience: string;
-    job: string
+    id: any;
+    name: any;
+    email: any;
+    avatar: any;
+    contact: any;
+    about: any;
+    experience: any;
+    job: any
   } | null;
 };
 

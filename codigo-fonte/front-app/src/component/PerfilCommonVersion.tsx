@@ -7,14 +7,14 @@ import MoreProfessionalsBottonList from "./MoreProfessionalsButtonList";
 
 type PerfilCommonVersionProps = {
   professional: {
-    id: string;
-    name: string;
-    email: string;
-    avatar: string;
-    about: string;
-    experience: string;
-    contact: string;
-    job: string;
+    id: any;
+    name: any;
+    email: any;
+    avatar: any;
+    about: any;
+    experience: any;
+    contact: any;
+    job: any;
   };
 };
 

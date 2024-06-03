@@ -65,7 +65,7 @@ const router = createBrowserRouter([
     element: <AuthorizedPage children={<ProfissionalVeterinario />} role='user'/>
   },
   {
-    path: "/perfilprofessional/publico/:id",
+    path: "/perfilprofessional/publico/:idVeterinario",
     element: <AuthorizedPage children={<ProfessionalPerfil />} />,
   },
   {
