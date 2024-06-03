@@ -230,7 +230,7 @@ const UploadJob = () => {
             {jobs && jobs.length ? (
               jobs.map((item, index) => (
                 <Box key={item.id} sx={{ mt: index > 0 ? 2 : 0 }}>
-                  <JobCard job={item} />
+                  {/* <JobCard job={item} /> */}
                 </Box>
               ))
             ) : (

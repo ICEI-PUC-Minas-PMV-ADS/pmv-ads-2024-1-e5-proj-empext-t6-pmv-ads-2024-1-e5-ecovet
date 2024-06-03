@@ -29,6 +29,7 @@ export const userSlice = createSlice({
       state.name = payload.name
       state.id = payload.id
       state.userName = payload.userName
+      state.tipoLogin = payload.tipoLogin
       state.role = payload.tipoLogin === 1 ? 'Clínica' : 'Profissional'
       setUserToken(payload.token)
       ls('user', state);

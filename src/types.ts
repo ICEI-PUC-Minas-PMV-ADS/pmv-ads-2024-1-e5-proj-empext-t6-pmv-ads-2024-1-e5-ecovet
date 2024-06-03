@@ -14,6 +14,7 @@ export interface LoadingState {
 
 export interface UserState {
     name?: string,
+    tipoLogin?: number,
     userName?: string,
     email?: string,
     isAuthorized: boolean,
