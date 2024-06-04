@@ -47,7 +47,7 @@ namespace back_app.Controller
         public async Task<IActionResult> ObterCandidaturasPorVeterinario(int idVeterinario)
         {
             var candidaturas = await candidaturaService.ObterCandidaturasPorVeterinarioAsync(idVeterinario);
-            return Ok(mapper.Map<IEnumerable<CandidaturaModel>>(candidaturas));
+            return Ok(mapper.Map<IEnumerable<ObterCandidaturasComVagaEVeterinarioModel>>(candidaturas));
         }
 
         [HttpGet("Vaga/{idVaga}")]
