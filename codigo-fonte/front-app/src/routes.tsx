@@ -18,6 +18,7 @@ import CadastroClinicaPage from './pages/CadastroClinica';
 import ProfissionalVeterinario from './pages/ProfissionalVeterinario';
 import ProfessionalPerfil from './pages/ProfessionalPerfil';
 import VerCandidaturas from './pages/VerCandidaturas';
+import JobDetail from './pages/JobDetail';
 
 const router = createBrowserRouter([ 
   {
@@ -73,8 +74,8 @@ const router = createBrowserRouter([
     element: <AuthorizedPage children={<VerCandidaturas />}/> 
   },
   {
-    path: "/job/:idJob",
-    element: <AuthorizedPage children={<VerCandidaturas />}/> 
+    path: "/vaga/:idJob",
+    element: <AuthorizedPage children={<JobDetail />}/> 
   }
 ]);
 
