@@ -71,6 +71,10 @@ const router = createBrowserRouter([
   {
     path: "/candidaturas/:idVaga",
     element: <AuthorizedPage children={<VerCandidaturas />}/> 
+  },
+  {
+    path: "/job/:idJob",
+    element: <AuthorizedPage children={<VerCandidaturas />}/> 
   }
 ]);
 
