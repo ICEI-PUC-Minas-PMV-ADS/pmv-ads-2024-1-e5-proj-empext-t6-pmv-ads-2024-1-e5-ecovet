@@ -18,6 +18,7 @@ import CadastroClinicaPage from './pages/CadastroClinica';
 import ProfissionalVeterinario from './pages/ProfissionalVeterinario';
 import ProfessionalPerfil from './pages/ProfessionalPerfil';
 import VerCandidaturas from './pages/VerCandidaturas';
+import Finduser from './pages/Finduser';
 
 const router = createBrowserRouter([ 
   {
@@ -71,7 +72,12 @@ const router = createBrowserRouter([
   {
     path: "/candidaturas/:idVaga",
     element: <AuthorizedPage children={<VerCandidaturas />}/> 
+  },
+  {
+    path: "/finduser",
+    element: <AuthorizedPage children={<Finduser />}/> 
   }
+
 ]);
 
 export default router;
