@@ -39,20 +39,39 @@ const fakeClinicWithHisJob = {
 
 const fakeJobCardData = [
   {
-    id: "2",
+    idVaga: "2",
     tituloVaga: "Enfermeiro para cirurgia",
-    nome: "Clinica Ecovet",
+
   location: "Belo Horizonte MG",
   value: "a combinar",
   type: "urgent",
   experience: "2 years",
-  description:
+  descricao:
     "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
   responsibilities:
     "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
   
     clinicaVaga: {
-      
+      nome: "Clinica Ecovet",
+      endereco: "Belo Horizonte MG"
+    }
+  },
+  {
+    idVaga: "2",
+    tituloVaga: "Enfermeiro para cirurgia",
+
+  location: "Belo Horizonte MG",
+  value: "a combinar",
+  type: "urgent",
+  experience: "2 years",
+  descricao:
+    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
+  responsibilities:
+    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
+  
+    clinicaVaga: {
+      nome: "Clinica Ecovet",
+      endereco: "Belo Horizonte MG"
     }
   }
 ]
@@ -108,6 +127,22 @@ const buttonStyle2 = {
   },
 };
 
+const buttonStyle3 = {
+  boxShadow: "none",
+  backgroundColor: "#FF0000",
+  color: "white",
+  border: "1px solid #D1D5DB",
+  "&:hover": {
+    backgroundColor: "#CC0000",
+    border: "1px solid #FF3333",
+  },
+  "&:active": {
+    backgroundColor: "#660000",
+  },
+};
+
+const isAplicatedOnJob = false
+
 const JobDetail = () => {
   const [selected, setSelected] = useState("0");
   const [similarJobs, setSimilarJobs] = useState<any[] | null>(null);
@@ -125,9 +160,9 @@ const JobDetail = () => {
 
     const fetchSimilarJobs = async () => {
       try {
-        // const jobsData = fakeData.slice(0, 6);
-        // setSimilarJobs(jobsData);
-        // setLoadingSimilarJobs(false);
+        const jobsData = fakeJobCardData.slice(0, 6);
+        setSimilarJobs(jobsData);
+        setLoadingSimilarJobs(false);
       } catch (error) {
         console.log(error);
         setLoadingSimilarJobs(false);
@@ -152,6 +187,15 @@ const JobDetail = () => {
     };
     getJobDetail();
   }, []);
+
+  const setAplication = async () => {
+    // FAZER APLICAÇAO NA VAGA
+  }
+
+  const cancelAplication = async () => {
+      // CANCELAR APLICAÇAO NA VAGA
+      
+  }
 
   return (
     <div className="container-flexgrow" style={{ backgroundColor: "white" }}>
@@ -342,6 +386,20 @@ const JobDetail = () => {
                       </>
                     )}
                   </Box>
+
+
+                  <Box marginY={4}>
+                   <CssButton
+                       onClick={isAplicatedOnJob ? cancelAplication : setAplication}
+                       variant="contained"
+                       fullWidth
+                       sx={isAplicatedOnJob ? buttonStyle3 :
+                        buttonStyle1
+                       }
+                   > {
+                    isAplicatedOnJob ? "Cancerlar canditatura" : "Aplicar Agora"
+                   }</CssButton>
+                  </Box>
                   <Divider />
                 </>
               )}
@@ -350,13 +408,14 @@ const JobDetail = () => {
 
 
           <Grid
-            padding={"20px"}
+       
             sx={{
               marginTop: { xs: "80px", sm: "0px" },
             }}
             item
             sm={12}
             md={6}
+      
           >
               <TypographyMold
               sx={{
@@ -383,9 +442,9 @@ const JobDetail = () => {
             ) : similarJobs && similarJobs.length ? (
               <>
                 <Box display={"flex"} flexWrap={"wrap"} gap={"16px"}>
-                  {/* {similarJobs.map((item) => (
+                  {similarJobs.map((item) => (
                     <JobCard job={item} key={item.id} />
-                  ))} */}
+                  ))}
                 </Box>
               </>
             ) : (
