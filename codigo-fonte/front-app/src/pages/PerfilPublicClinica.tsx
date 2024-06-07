@@ -17,7 +17,6 @@ import ListaClinica from "../component/ListaClinica";
 import BotaoClinica from "../component/BotaoClinica";
 import Footer from "../component/Footer";
 
-
 // deve ser MODIFACADO OU DELETADO apos back end //
 const isThePerfilOnwerLogged = false;
 
@@ -36,10 +35,10 @@ const fakeClinica = {
   id: "1",
   name: "Clínica Pet",
   email: "email@example.com",
-  avatar: "codigo-fonte\front-app\src\img\clinica.png",
+  avatar: "codigo-fonte\front-appsrcimgclinica.png",
   job: "São Paulo / SP",
   contact: "11 2222 2222",
-  
+
   about:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor, ornare at commodo non, feugiat non nisi. Phasellus faucibus mollis pharetra. Proin blandit ac massa sed rhoncus",
   experience:
@@ -47,11 +46,10 @@ const fakeClinica = {
 };
 /////
 
-
 const PerfilPublicClinica = () => {
   const [clinica, setClinica] = useState<Clinica | null>(null);
 
-  const { id } = useParams<{ id: string }>();
+  const { idClinica } = useParams();
 
   useEffect(() => {
     const getClinicData = async () => {
@@ -76,29 +74,25 @@ const PerfilPublicClinica = () => {
             spacing={4}
           >
             <Box maxWidth={"770px"}>
-              {clinica ? (
+              {/* {clinica ? (
                 isThePerfilOnwerLogged ? (
                   <Perfil clinica={clinica} />
                 ) : (
                   <PerfilComum clinica={clinica} />
                 )
               ) : (
-          <></>
-              )}
+                <></>
+              )} */}
+
+              {clinica && <PerfilComum clinica={clinica} />}
             </Box>
 
             <ListaClinica />
-         
           </Stack>
-          
         </Container>
-        
       </React.Fragment>
-    <Footer/>
     </div>
-    
   );
-  
 };
 
 export default PerfilPublicClinica;

@@ -33,7 +33,7 @@ const TypographyModel = styled(Typography)({
   fontFamily: "red-hat-display",
 });
 
-const PrimeiraVersaoPerfil = ({ clinica: clinica }: PrimeiraVersaoProps) => {
+const PrimeiraVersaoPerfil = ({ clinica }: PrimeiraVersaoProps) => {
   return (
     <Box>
       <Box

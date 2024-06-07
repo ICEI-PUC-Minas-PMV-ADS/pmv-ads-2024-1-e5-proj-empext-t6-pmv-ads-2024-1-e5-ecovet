@@ -1,8 +1,8 @@
-import React from "react";
-import { Box, Grid, Typography, styled } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Box, CircularProgress, Grid, Typography, styled } from "@mui/material";
 
-import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
-import WorkOutlineOutlinedIcon from '@mui/icons-material/WorkOutlineOutlined';
+import CallOutlinedIcon from "@mui/icons-material/CallOutlined";
+import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
 import JobCard from "./JobCard";
 import { fakeData } from "../services/dadosfake";
 
@@ -10,7 +10,7 @@ const TypographyModel = styled(Typography)({
   fontFamily: "red-hat-display",
 });
 
-type SecaoProps = {
+type Secao = {
   clinica: {
     id: string;
     name: string;
@@ -19,117 +19,116 @@ type SecaoProps = {
     contact: string;
     about: string;
     experience: string;
-    job: string
+    job: string;
   } | null;
 };
 
-const AboutSection = ({ clinica: clinica }: SecaoProps) => {
-  return (
-    <Box>
+const SecaoProps = ({ clinica }: Secao) => {
+  const [clinicJobs, setClinicJobs] = useState<any[] | []>([]);
+  const [loading, setLoading] = useState(false);
 
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={3} md={3}>
-          <Box sx={{
+  useEffect(() => {
+    setLoading(true);
+
+    const getClinicJobs = async () => {
+      const responseDAta = fakeData;
+      setClinicJobs(responseDAta);
+      setLoading(false);
+    };
+
+    getClinicJobs();
+  }, []);
+
+  return (
+    <Grid container spacing={2}>
+      <Grid item xs={12} sm={3} md={3}>
+        <Box
+          sx={{
             display: "flex",
             flexDirection: "column",
             gap: "10px",
-            padding: "10px 10px"
-          }}>
-            <Box display={"flex"} gap={1}>
-              <CallOutlinedIcon />
-              <TypographyModel>{clinica?.contact}</TypographyModel>
-            </Box>
-
-            <Box display={"flex"} gap={1}>
-              <WorkOutlineOutlinedIcon />
-              <TypographyModel>{clinica?.job}</TypographyModel>
-            </Box>
+            padding: "10px 10px",
+            border: "1px solid #E1E8ED",
+            minHeight: { xs: "", sm: "200px" },
+            borderRadius: "10px",
+          }}
+        >
+          <Box display={"flex"} gap={1}>
+            <CallOutlinedIcon />
+            <TypographyModel>{clinica?.contact}</TypographyModel>
           </Box>
 
-        </Grid >
-        <Grid item xs={12} sm={6} md={9}>
-          <Box
-            sx={{
-              padding: "10px 10px",
-            }}
-            border={"1px solid #E1E8ED"}
-            borderRadius={"10px"}
-          >
-            <TypographyModel fontSize={"16px"} fontWeight={800}>
-              Sobre há clínica
-            </TypographyModel>
-            <TypographyModel
-              color={"#ADB5BD"}
-              fontSize={"14px"}
-              textAlign={"justify"}
-
-              sx={{
-                minHeight: { xs: "", sm: "200px" }
-              }}
-            >
-              {clinica?.about}
-            </TypographyModel>
+          <Box display={"flex"} gap={1}>
+            <WorkOutlineOutlinedIcon />
+            <TypographyModel>{clinica?.job}</TypographyModel>
           </Box>
-
-
-          <Box >
-            <TypographyModel sx={{
-              padding: "20px 0px",
-            }} fontSize={"16px"} fontWeight={800}>
-              Vagas recentes dessa clinica
-            </TypographyModel>
-
-
-            <Box sx={{ padding: "0px" }}>
-              <Box sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                marginBottom: "20px" 
-              }}>
-                <Box sx={{ padding: "10px 0px" }}>
-                  <JobCard job={fakeData[0]} />
-                </Box>
-                <Box sx={{ padding: "10px 0px" }}>
-                  <JobCard job={fakeData[1]} />
-                </Box>
-              </Box>
-              <Box sx={{
-                display: "flex",
-                justifyContent: "space-between"
-              }}>
-                <Box sx={{ padding: "10px 0px" }}>
-                  <JobCard job={fakeData[2]} />
-                </Box>
-                <Box sx={{ padding: "10px 0px" }}>
-                  <JobCard job={fakeData[3]} />
-                </Box>
-                
-              </Box>
-            </Box>
-
-
-
-           
-
-           
-
-
-
-          </Box>
-
-
-
-
-        </Grid>
-
-
-
-
+        </Box>
       </Grid>
 
+      <Grid item xs={12} sm={9} md={9}>
+        <Box
+          sx={{
+            padding: "10px 10px",
+            minHeight: { xs: "", sm: "200px" },
+          }}
+          border={"1px solid #E1E8ED"}
+          borderRadius={"10px"}
+        >
+          <TypographyModel fontSize={"16px"} fontWeight={800}>
+            Sobre há clínica
+          </TypographyModel>
+          <TypographyModel
+            color={"#ADB5BD"}
+            fontSize={"14px"}
+            textAlign={"justify"}
+            sx={{}}
+          >
+            {clinica?.about}
+          </TypographyModel>
+        </Box>
 
-    </Box>
+        <Box
+          sx={{
+            marginTop: 5,
+          }}
+        >
+          <TypographyModel sx={{}} fontSize={"16px"} fontWeight={800}>
+            Vagas recentes dessa clinica
+          </TypographyModel>
+
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "flex-start",
+              flexWrap: "wrap",
+              alignItems: "center",
+              gap: 3,
+              padding: "10px 0",
+            }}
+          >
+            {loading ? (
+              <Box
+                width={"100%"}
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <CircularProgress />
+              </Box>
+            ) : clinicJobs && clinicJobs.length ? (
+              clinicJobs
+                .slice(0, 3)
+                .map((item, index) => <JobCard job={item} key={index} />)
+            ) : (
+              <TypographyModel> Ainda não há vagas criadas 😓 </TypographyModel>
+            )}
+          </Box>
+        </Box>
+      </Grid>
+    </Grid>
   );
 };
 
-export default AboutSection;
+export default SecaoProps;

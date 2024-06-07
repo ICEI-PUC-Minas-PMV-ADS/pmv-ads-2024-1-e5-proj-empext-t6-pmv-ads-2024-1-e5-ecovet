@@ -2,9 +2,10 @@ import React from "react";
 import { Box, Typography, styled } from "@mui/material";
 
 import TabMenu from "./Menu";
-import AboutSection from "./SecaoProps";
+
 import ListaDeVagas from "./ListaDeVagas";
 import BotaoClinica from "./BotaoClinica";
+import SecaoProps from "./SecaoProps";
 
 const BoxAvatar = styled(Box)({
   width: "100px",
@@ -56,7 +57,7 @@ type PerfilProps = {
   } | null;
 };
 
-const PerfilOnlineClinica = ({ clinica: clinica }: PerfilProps) => {
+const PerfilOnlineClinica = ({ clinica }: PerfilProps) => {
   const [tabIndex, setTabIndex] = React.useState(0);
   return (
     <Box>
@@ -93,7 +94,7 @@ const PerfilOnlineClinica = ({ clinica: clinica }: PerfilProps) => {
                   width: "100%",
                   height: "100%",
                 }}
-                src={clinica?.avatar}
+                src={"img/avatar.png"}
                 alt="perfil"
               />
             </BoxAvatar>
@@ -121,7 +122,7 @@ const PerfilOnlineClinica = ({ clinica: clinica }: PerfilProps) => {
         <Box>
           <TabMenu tabIndex={tabIndex} setTabIndex={setTabIndex} />
           <CustomTabPanel value={tabIndex} index={0}>
-            <AboutSection clinica={clinica} />
+            <SecaoProps clinica={clinica} />
           </CustomTabPanel>
 
           <CustomTabPanel value={tabIndex} index={1}>
