@@ -2,6 +2,7 @@ import { Box, Button, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+
 const BoxAvatar = styled(Box)({
   width: "78px",
   height: "78px",
@@ -47,10 +48,14 @@ const UserBox = ({
           loading="lazy"
         />
       </BoxAvatar>
-      <TypographyModel>{nome}</TypographyModel>
-      <TypographyModel>
+
+      <TypographyModel fontSize={"14px"} fontWeight={600}>
+        {nome}
+      </TypographyModel>
+      <TypographyModel fontSize={"13px"} fontWeight={100}>
         {profissao === 0 ? "Profissional" : "Clínica"}
       </TypographyModel>
+
       <Button
         variant="contained"
         sx={{

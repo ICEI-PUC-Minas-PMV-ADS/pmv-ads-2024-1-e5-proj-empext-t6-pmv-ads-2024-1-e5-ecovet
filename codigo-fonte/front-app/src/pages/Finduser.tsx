@@ -16,13 +16,10 @@ import {
   styled,
 } from "@mui/material";
 import React, { KeyboardEvent, useEffect, useState } from "react";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import DirectionsIcon from "@mui/icons-material/Directions";
-import { UsbTwoTone } from "@mui/icons-material";
 import UserBox from "../component/UserBox";
 
-const usersData = [
+const usersData: any = [
   {
     id: 1,
     name: "John Dove",
@@ -201,18 +198,35 @@ const Finduser = () => {
   const [tipo, setTipo] = React.useState("");
   const [totalCount, setTotalCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [users, setUsers] = useState<any[] | null>(null);
+  const [allUsers, setAllUsers] = useState<any[]>([]); // Estado para todos os usuários
+  const [filteredUsers, setFilteredUsers] = useState<any[]>([])
+
   useEffect(() => {
     const getUsers = async () => {
-      setUsers(usersData);
-      setTotalCount(usersData.length);
+      
+      try {
+        const data = usersData
+        if(data){
+          setAllUsers(data);
+          setFilteredUsers(data);
+          setTotalCount(data.length);
+
+        } else {
+          setAllUsers([]);
+          setFilteredUsers([]);
+        }
+      } catch (error) {
+        console.log("error", error)
+      }
     };
 
     getUsers();
   }, []);
+
   const startIndex = (currentPage - 1) * itemPerPage;
-  const endIndex = Math.min(startIndex + itemPerPage, usersData.length);
-  const visibleData = usersData.slice(startIndex, endIndex);
+  const endIndex = Math.min(startIndex + itemPerPage, filteredUsers!.length);
+  const visibleData = filteredUsers!.slice(startIndex, endIndex);
+
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
     value: number
@@ -221,7 +235,20 @@ const Finduser = () => {
   };
 
   const handleChange = (event: SelectChangeEvent) => {
-    setTipo(event.target.value as string);
+    const selectedType = event.target.value as string
+    setTipo(selectedType);
+
+    const filterUsers: any = selectedType && allUsers && allUsers.length && selectedType !== "todos" ? 
+    allUsers?.filter(user => {
+      if(selectedType === "clinica" && user.role === 1) return true
+      if(selectedType === "profissional" && user.role === 0) return true
+      return false
+    })
+    : allUsers
+
+    setFilteredUsers(filterUsers);
+    setTotalCount(filterUsers?.length)
+    setCurrentPage(1)
   };
 
   return (
@@ -268,6 +295,7 @@ const Finduser = () => {
                         label="Tipo"
                         onChange={handleChange}
                       >
+                           <MenuItem value={"todos"}>Todos</MenuItem>
                         <MenuItem value={"clinica"}>Clinica</MenuItem>
                         <MenuItem value={"profissional"}>Profissional</MenuItem>
                       </Select>
@@ -292,7 +320,7 @@ const Finduser = () => {
               }}
             >
               {visibleData &&
-                visibleData.length &&
+                visibleData.length ?
                 visibleData.map((item, index) => (
                   <UserBox
                     nome={item.name}
@@ -300,7 +328,8 @@ const Finduser = () => {
                     id={item.id}
                     key={index}
                   />
-                ))}
+                )): <Box>
+                  <TypographyModel>Sem  resultados 😓 </TypographyModel></Box>}
             </Grid>
             <Grid
               sx={{
