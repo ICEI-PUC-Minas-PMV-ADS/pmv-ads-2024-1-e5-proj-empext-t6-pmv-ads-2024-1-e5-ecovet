@@ -14,11 +14,11 @@ const AuthorizedPage = ({children, userRole}: any) => {
   const navigate = useNavigate();
 
 
-  useEffect(() => {
-    if(!isAuthorized ){
-      navigate('/')
-    }
-  },[isAuthorized]) 
+  // useEffect(() => {
+  //   if(!isAuthorized ){
+  //     navigate('/')
+  //   }
+  // },[isAuthorized]) 
   return (
     <Box
     style={{ 
