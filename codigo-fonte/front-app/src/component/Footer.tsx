@@ -134,87 +134,8 @@ const Footer = () => {
               sm={4}
               xs={12}
             >
-              <Box>
-                <TypographyModel
-                  fontSize={"16px"}
-                  fontWeight={800}
-                  color={"white"}
-                >
-                  Links Rápidos
-                </TypographyModel>
-                <Box paddingY={3}>
-                  {isUserLogged ? (
-                    whoIsLogged === "clinic" ? (
-                      clinicFooterLinks.map((item) => (
-                        <Link
-                          style={{ textDecoration: "none" }}
-                          to={item.path}
-                          key={item.path}
-                        >
-                          <CssTypography
-                            sx={{
-                              color: "#EDEDED",
-                              fontSize: "16px",
-                              opacity: 0.7,
-                              transition: "all 0.3s ease",
-                              "&:hover": {
-                                opacity: 1,
-                                transform: "scale(1.1)",
-                              },
-                            }}
-                          >
-                            {item.link}
-                          </CssTypography>
-                        </Link>
-                      ))
-                    ) : (
-                      professionalFooterLinks.map((item) => (
-                        <Link
-                          style={{ textDecoration: "none" }}
-                          to={item.path}
-                          key={item.path}
-                        >
-                          <CssTypography
-                            sx={{
-                              color: "#EDEDED",
-                              fontSize: "16px",
-                              opacity: 0.7,
-                              transition: "all 0.3s ease",
-                              "&:hover": {
-                                opacity: 1,
-                                transform: "scale(1.1)",
-                              },
-                            }}
-                          >
-                            {item.link}
-                          </CssTypography>
-                        </Link>
-                      ))
-                    )
-                  ) : (
-                    <>
-                      {/* Links para quando o usuário não está logado */}
-                      {/* Exemplo: */}
-                      <Link style={{ textDecoration: "none" }} to="/login">
-                        <CssTypography
-                          sx={{
-                            color: "#EDEDED",
-                            fontSize: "16px",
-                            opacity: 0.7,
-                            transition: "all 0.3s ease",
-                            "&:hover": {
-                              opacity: 1,
-                              transform: "scale(1.1)",
-                            },
-                          }}
-                        >
-                          Login
-                        </CssTypography>
-                      </Link>
-                    </>
-                  )}
-                </Box>
-              </Box>
+            
+              
             </Grid>
 
             <Grid
