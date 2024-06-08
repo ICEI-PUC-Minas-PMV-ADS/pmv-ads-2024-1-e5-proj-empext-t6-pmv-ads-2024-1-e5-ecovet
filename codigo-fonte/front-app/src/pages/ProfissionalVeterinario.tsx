@@ -16,6 +16,8 @@ import Link from "@mui/material/Link";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AutoAwesomeSharpIcon from "@mui/icons-material/AutoAwesomeSharp";
+import { get } from '../services/agent'
+import JobCard from "../component/JobCard";
 import {
   Box,
   Checkbox,
@@ -244,9 +246,12 @@ function FilterFindjob({
 }
 
 const ProfissionalVeterinario = () => {
+  const {isAuthorized, role, id} = useSelector((state: RootState) => state.user)
   const [searchQuery, setSearchQuery] = useState("");
   const [jobLocation, setJobLocation] = useState("");
-  const [isLoading, setEsLoading] = useState(false)
+  const [isLoading, setIsloading] = useState<Boolean>(false);
+  const [countJobs, setCountJobs] = useState(0);
+  const [jobs, setJobs] = useState([]);
   const [sort, setSort] = useState("Novo")
   const [state, setState] = React.useState({
     gilad: false,
@@ -270,6 +275,23 @@ const ProfissionalVeterinario = () => {
     }
   };
 
+
+  const getJobs = async() => {
+    setIsloading(true)
+    const response = await get(`Candidatura/Veterinario/${id}`);
+    if(response.status = 200){
+      setJobs(response)
+      setCountJobs(response.length)
+      // setJobs(response)
+    }else{
+
+    }
+    setIsloading(false)
+  }
+
+  useEffect(() => {
+    getJobs()
+  },[isAuthorized]) 
 
   if (isLoading) {
     return (
@@ -329,7 +351,7 @@ const ProfissionalVeterinario = () => {
                 >
                   <TypographyMold sx={{ fontSize: { xs: "14px", sm: "16px" } }}>
                     Mostrando{" "}
-                    <span style={{ fontWeight: 600 }}>1.902 vagas</span>
+                    <span style={{ fontWeight: 600 }}>{countJobs} vagas</span>
                   </TypographyMold>
 
                   <Box
@@ -349,10 +371,26 @@ const ProfissionalVeterinario = () => {
                     }}>Filtrar por: </TypographyMold>
 
                       <ListBox sort={sort} setSort={setSort} />
-
                   </Box>
                 </Box>
               </Grid>
+              <Grid item xs={12} sm={12} md={12} >
+                {
+                  jobs?.length != 0 ? 
+                    jobs.map((job: any) =>
+                      <Grid item style={{marginTop : '-2em'}} >          
+                        <div style={{cursor:'pointer'}} onClick={() => {}}>
+                          <JobCard job={job} role={role} handleDeleteJob={() => {}}   />
+                        </div>
+                      </Grid >
+                    )
+                  :                      
+                  <TypographyMold>
+                    Nao há vagas criadas ainda 😓{" "}
+                  </TypographyMold>
+                }
+              </Grid>
+
             </Grid>
           </Box>
         </Stack>

@@ -65,7 +65,7 @@ const HeaderComponent = () => {
       setPages([
         //@ts-ignore
         {
-          name: 'Buscar Vagas', options: [  ], link: 'perfil/clinic'
+          name: 'Buscar Vagas', options: [  ], link: 'veterinario'
         },
         //@ts-ignore
         {
