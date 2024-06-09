@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Application;
+using AutoMapper;
 using back_app.Models;
 using Domain.Dto;
 using Domain.Services;
@@ -12,12 +13,15 @@ namespace back_app.Controller
     {
         private readonly IMapper mapper;
         private readonly IClinicaVeterinariaService clinicaVeterinariaService;
+        private readonly IVagaService vagaService;
 
-        public ClinicaVeterinariaController(IMapper mapper, IClinicaVeterinariaService clinicaVeterinariaService)
+        public ClinicaVeterinariaController(IMapper mapper, IClinicaVeterinariaService clinicaVeterinariaService, IVagaService vagaService)
         {
             this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             this.clinicaVeterinariaService = clinicaVeterinariaService ??
                         throw new ArgumentNullException(nameof(clinicaVeterinariaService));
+            this.vagaService = vagaService ??
+                        throw new ArgumentNullException(nameof(vagaService)) ;
         }
 
         /// <summary>
@@ -55,7 +59,22 @@ namespace back_app.Controller
             }
             return Ok(mapper.Map<ClinicaVeterinariaModel>(clinica));
         }
+        /// <summary>
+        /// Obter vagas clinica.
+        /// </summary>
+        /// <response code="200">Lista de resultados.</response>
+        /// <response code="400">
+        ///     Dados inválidos
+        /// </response>
+        /// <response code="500">Erro interno.</response>
+        [HttpGet("{idClinica}/Vagas"), AllowAnonymous]
+        [ProducesResponseType(typeof(IEnumerable<VagaModel>), 200)]
+        public async Task<IActionResult> ObterVagasClinicaAsync(int idClinica)
+        {
+            var retorno = await vagaService.ObterVagasClinicaAsync(idClinica);
 
+            return Ok(mapper.Map<IEnumerable<ObterVagaComClinicaModel>>(retorno));
+        }
         /// <summary>
         /// Cadastro de clínica veterinária.
         /// </summary>
