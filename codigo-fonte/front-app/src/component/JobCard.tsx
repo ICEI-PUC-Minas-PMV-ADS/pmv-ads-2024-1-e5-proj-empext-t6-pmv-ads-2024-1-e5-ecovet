@@ -103,11 +103,6 @@ const JobCard = ({job, role, handleDeleteJob}: any) => {
           color="text.secondary">
           - {job.requisitos}
         </Typography>
-        <Typography 
-          variant="body2" 
-          color="text.secondary">
-          - {job.experiencia}
-        </Typography>
         <Chip label={decisorExp(job.experiencia)} color="success" variant="outlined" />
       </CardContent>
       {

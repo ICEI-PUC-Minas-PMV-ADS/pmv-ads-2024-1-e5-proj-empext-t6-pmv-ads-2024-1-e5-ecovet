@@ -186,6 +186,7 @@ const ProfissionalVeterinario = () => {
     moreThan6years: false,
   });
 
+
   const sendSearch = () => {
     console.log("values", { searchQuery, jobLocation });
     if (searchQuery === "" || jobLocation === "") return;
@@ -197,7 +198,8 @@ const ProfissionalVeterinario = () => {
   };
 
   const filter = (job: any) => {
-    return job.experiencia == 2 && job
+    let filter = expirience.under1year ? 1 : expirience.between1to2years ? 2 : expirience.between2to6years ? 3 : expirience.moreThan6years ? 4 : null
+    return filter ? job.experiencia == filter && job : job
   }
 
   const getJobs = async() => {
