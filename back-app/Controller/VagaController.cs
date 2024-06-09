@@ -62,6 +62,23 @@ namespace back_app.Controller
             var retorno = await vagaService.ObterVagasClinicaAsync(int.Parse(userId));
 
             return Ok(mapper.Map<IEnumerable<ObterVagaComClinicaModel>>(retorno));
+        }        
+        
+        /// <summary>
+        /// Obter vaga.
+        /// </summary>
+        /// <response code="200">Lista de resultados.</response>
+        /// <response code="400">
+        ///     Dados inválidos
+        /// </response>
+        /// <response code="500">Erro interno.</response>
+        [HttpGet("{idVaga}"), AllowAnonymous]
+        [ProducesResponseType(typeof(IEnumerable<VagaModel>), 200)]
+        public async Task<IActionResult> ObterVagaAsync(int idVaga)
+        {
+            var retorno = await vagaService.ObterVaga(idVaga);
+
+            return Ok(mapper.Map<ObterVagaComClinicaModel>(retorno));
         }
 
         /// <summary>

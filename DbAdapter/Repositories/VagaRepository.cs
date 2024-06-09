@@ -36,6 +36,27 @@ namespace DbAdapter.Repositories
             await ecoVetContext.SaveChangesAsync();
         }
 
+        public async Task<ObterVagaComClinica> ObterVaga(int idVaga)
+        {
+            var vagaRetorno = await (from vaga in ecoVetContext.Vagas
+                                         join clinica in ecoVetContext.ClinicasVeterinarias
+                                         on vaga.IDClinicaVeterinaria equals clinica.IDClinica
+                                         where vaga.IDVaga == idVaga
+                                         select new ObterVagaComClinica
+                                         {
+                                             IDVaga = vaga.IDVaga,
+                                             TituloVaga = vaga.TituloVaga,
+                                             Descricao = vaga.Descricao,
+                                             Requisitos = vaga.Requisitos,
+                                             PeriodoDeDisponibilidade = vaga.PeriodoDeDisponibilidade,
+                                             IDClinicaVeterinaria = vaga.IDClinicaVeterinaria,
+                                             Experiencia = vaga.Experiencia,
+                                             ClinicaVaga = clinica
+                                         }).FirstOrDefaultAsync();
+
+            return vagaRetorno;
+        }
+
         public async Task<IEnumerable<ObterVagaComClinica>> ObterVagasAsync()
         {
             var vagasComClinicas = await (from vaga in ecoVetContext.Vagas

@@ -25,6 +25,10 @@ namespace Domain.Services
         /// </param>
         Task<IEnumerable<ObterVagaComClinica>> ObterVagasClinicaAsync(int idClinica);
 
+        /// <summary>
+        /// Obter vaga.
+        /// </summary>
+        Task<ObterVagaComClinica> ObterVaga(int idVaga);
         #endregion
 
         /// <sumary>
