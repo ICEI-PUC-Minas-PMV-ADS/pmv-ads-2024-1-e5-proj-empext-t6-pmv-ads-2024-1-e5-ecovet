@@ -21,7 +21,7 @@ namespace back_app.Controller
                                       throw new ArgumentNullException(nameof(candidaturaService));
         }
 
-        [HttpGet("obterCandidaturas")]
+        [HttpGet()]
         [ProducesResponseType(typeof(IEnumerable<CandidaturaModel>), 200)]
         [Authorize]
         public async Task<IActionResult> ObterCandidaturas()
@@ -42,20 +42,20 @@ namespace back_app.Controller
             return Ok(mapper.Map<CandidaturaModel>(candidatura));
         }
 
-        [HttpGet("porVeterinario/{idVeterinario}")]
+        [HttpGet("Veterinario/{idVeterinario}")]
         [ProducesResponseType(typeof(IEnumerable<CandidaturaModel>), 200)]
         public async Task<IActionResult> ObterCandidaturasPorVeterinario(int idVeterinario)
         {
             var candidaturas = await candidaturaService.ObterCandidaturasPorVeterinarioAsync(idVeterinario);
-            return Ok(mapper.Map<IEnumerable<CandidaturaModel>>(candidaturas));
+            return Ok(mapper.Map<IEnumerable<ObterCandidaturasComVagaEVeterinarioModel>>(candidaturas));
         }
 
-        [HttpGet("obterCandidaturaPorVaga/{idVaga}")]
+        [HttpGet("Vaga/{idVaga}")]
         [ProducesResponseType(typeof(IEnumerable<CandidaturaModel>), 200)]
         public async Task<IActionResult> ObterCandidaturasPorVaga(int idVaga)
         {
             var candidaturas = await candidaturaService.ObterCandidaturasPorVagaAsync(idVaga);
-            return Ok(mapper.Map<IEnumerable<CandidaturaModel>>(candidaturas));
+            return Ok(mapper.Map<IEnumerable<ObterCandidaturasComVagaEVeterinarioModel>>(candidaturas));
         }
 
         [HttpPost("cadastrarCandidatura")]
@@ -108,7 +108,7 @@ namespace back_app.Controller
                 return NotFound("Candidatura não encontrada.");
 
             await candidaturaService.DeletarCandidaturaAsync(id);
-            return NoContent();
+            return Ok();
         }
     }
 }

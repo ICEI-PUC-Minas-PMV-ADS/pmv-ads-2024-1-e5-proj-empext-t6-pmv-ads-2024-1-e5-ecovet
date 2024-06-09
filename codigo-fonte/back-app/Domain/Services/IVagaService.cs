@@ -12,7 +12,7 @@ namespace Domain.Services
         /// <returns>
         ///      Lista de vagas encontrados conforme critério de pesquisa.
         /// </returns>
-        Task<IEnumerable<Vaga>> ObterVagasAsync();     
+        Task<IEnumerable<ObterVagaComClinica>> ObterVagasAsync();     
         
         /// <summary>
         /// Obter vagas postadas pela clínica.
@@ -23,7 +23,7 @@ namespace Domain.Services
         /// <param>
         /// Email clinica
         /// </param>
-        Task<IEnumerable<Vaga>> ObterVagasClinicaAsync(int idClinica);
+        Task<IEnumerable<ObterVagaComClinica>> ObterVagasClinicaAsync(int idClinica);
 
         #endregion
 

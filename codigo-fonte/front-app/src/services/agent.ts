@@ -1,15 +1,20 @@
-const BASE_URL = "https://localhost:7115";
+//const BASE_URL = "https://localhost:7115"; //local
+const BASE_URL = "https://ecovet-api-a70660ac3f23.herokuapp.com"; //hml
 
 let access_token = ''
 
 export const get = async (url: string) => {
+    console.log("====== get")
+    console.log(url)
     return await fetch(`${BASE_URL}/${url}`,{
         method: "GET",
         headers: {
             'Authorization' : `Bearer ${access_token}`            
         },
     })
-    .then(response => response.json())
+    .then(response => {
+        return response.json()
+    })
 }
 
 export const post = async (url: string, data?: any) => {

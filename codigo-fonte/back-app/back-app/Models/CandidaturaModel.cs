@@ -1,6 +1,4 @@
-﻿using Domain.Dto;
-
-namespace back_app.Models
+﻿namespace back_app.Models
 {
     public class CandidaturaModel
     {

@@ -28,6 +28,7 @@ import LoginPage from '../pages/Login';
 const HeaderComponent = () => {
   const isLoading = useSelector((state: RootState) => state.loading.isLoading)
   const isAuthorized = useSelector((state: RootState) => state.user.isAuthorized)
+  const user = useSelector((state: RootState) => state.user)
   const role = useSelector((state: RootState) => state.user.role)
   const isDialogOpen = useSelector((state: RootState) => state.dialog.isOpen)
   const dispatch = useDispatch<AppDispatch>()
@@ -58,6 +59,8 @@ const HeaderComponent = () => {
 
 
   useEffect(() => {
+    console.log("======= USER")
+    console.log(user)
     if(role == 'Profissional'){
       setPages([
         //@ts-ignore
@@ -69,7 +72,7 @@ const HeaderComponent = () => {
           name: 'Vagas aceitas', options: [ ], link: ''
         }
       ])
-    }else{
+    }else if(role == 'Clínica'){
       setPages([
         //@ts-ignore
         {
@@ -77,7 +80,7 @@ const HeaderComponent = () => {
         },
         //@ts-ignore
         {
-          name: 'Procurar Veterinários', options: [ ], link: 'preproject'
+          name: 'Candidaturas às Vagas', options: [ ], link: 'preproject'
         }
       ])
     }

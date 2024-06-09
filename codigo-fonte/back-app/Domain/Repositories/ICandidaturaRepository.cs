@@ -37,13 +37,13 @@ namespace Domain.Repositories
         /// Obtém as candidaturas de um determinado profissional veterinário.
         /// </summary>
         /// <param name="idProfissionalVeterinario">ID do profissional veterinário.</param>
-        Task<IEnumerable<Candidatura>> ObterCandidaturasPorVeterinarioAsync(int idProfissionalVeterinario);
+        Task<IEnumerable<ObterCandidaturasComVagaEVeterinario>> ObterCandidaturasPorVeterinarioAsync(int idProfissionalVeterinario);
 
         /// <summary>
         /// Obtém as candidaturas associadas a uma determinada vaga.
         /// </summary>
         /// <param name="idVaga">ID da vaga.</param>
-        Task<IEnumerable<Candidatura>> ObterCandidaturasPorVagaAsync(int idVaga);
+        Task<IEnumerable<ObterCandidaturasComVagaEVeterinario>> ObterCandidaturasPorVagaAsync(int idVaga);
 
         /// <summary>
         /// Atualiza o status de uma candidatura.

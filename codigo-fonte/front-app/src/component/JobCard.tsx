@@ -1,116 +1,89 @@
-import { Box, CardMedia, Paper, Typography, styled } from "@mui/material";
-import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import CardHeader from '@mui/material/CardHeader';
+import Avatar from '@mui/material/Avatar';
+import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import { red } from '@mui/material/colors';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
 
-const CardTitle = styled(Typography)({
-  fontSize: "18px",
-  fontWeight: "600",
-  overflow: "hidden",
-  textOverflow: "ellipsis",
-  whiteSpace: "nowrap",
-  fontFamily: "red-hat-display",
-});
-
-type JobCardPropss = {
-  job: {
-    id: string;
-    title: string;
-    location: string;
-    description: string;
-    data: string;
+const JobCard = ({job, role, handleDeleteJob}: any) => {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget)
   };
-};
-
-function JobCard({ job }: JobCardPropss) {
-  const { description, data, location, title } = job;
-  return (
-    <Box>
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          "& > :not(style)": {
-            width: { xs: "100%", md: "16rem", xl: "18rem" },
-            height: { xs: "16rem", md: "16rem", xl: "18rem" },
-            padding: "16px",
-            borderRadius: "6px",
-          },
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  
+  console.log("job")
+  console.log(job)
+  return (   
+    <Card sx={{ width: 345, minHeight: 300 }}>
+      <Menu
+        id="menu-appbar"
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
         }}
-        bgcolor={"white"}
-        display={"flex"}
-        flexDirection={"column"}
-        justifyContent={"space-between"}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
       >
-        <Paper
-          elevation={1}
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-          }}
-        >
-          <Box display={"flex"} gap={"12px"}>
-            <CardMedia
-              component={"img"}
-              image={"/logo512.png"}
-              alt="tste"
-              sx={{ width: "64px", height: "64px" }}
-            />
-
-            <Box sx={{ overflow: "hidden" }}>
-              <CardTitle variant="h6">{title}</CardTitle>
-              <Box display={"flex"} alignItems={"center"} gap={"4px"}>
-                <FmdGoodOutlinedIcon fontSize="small" />
-                <Typography variant="body1" sx={{ fontSize: "0.875rem" }}>
-                  {location}
-                </Typography>
-              </Box>
-            </Box>
-          </Box>
-
-          <Box>
-            <Typography
-              variant="body1"
-              sx={{
-                textAlign: "justify",
-                fontSize: "14px",
-                fontFamily: "red-hat-display",
-              }}
-            >
-              {description.slice(0, 150) + "..."}
-            </Typography>
-          </Box>
-
-          <Box
-            display={"flex"}
-            alignItems={"center"}
-            justifyContent={"space-between"}
-          >
-            <Typography
-              variant="h6"
-              fontSize={"14px"}
-              paddingX={"4px"}
-              color={"#6b7280"}
-            >
-              Período de disponibilidade
-            </Typography>
-            <Typography
-              variant="body1"
-              bgcolor={"#1d4fd826"}
-              color={"#1d4fd8"}
-              fontSize={"14px"}
-              fontFamily={"red-hat-display"}
-              sx={{
-                borderRadius: "4px",
-                fontWeight: "600",
-                fontFamily: "red-hat-display",
-              }}
-            >
-              {data}
-            </Typography>
-          </Box>
-        </Paper>
-      </Box>
-    </Box>
+        <MenuItem onClick={()=>{}}>Editar</MenuItem>
+        <MenuItem onClick={()=>handleDeleteJob(job.idVaga)}>Apagar</MenuItem>
+      </Menu>
+      <CardHeader
+        avatar={
+          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+            {job.clinicaVaga.nome?.substring(0, 1)}
+          </Avatar>
+        }
+        action={
+          role == 'Clínica' && 
+          <IconButton aria-label="settings" onClick={(event) => handleMenu(event)}>
+            <MoreVertIcon />
+          </IconButton>
+        }
+        title={job.clinicaVaga.nome}
+        subheader={job.clinicaVaga.endereco}
+      />
+      <CardMedia
+        sx={{ height: 140 }}
+        image="https://firstaff.ie/wp-content/uploads/2020/10/job-search-in-newspaper-vector.jpg"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          {job.tituloVaga}
+        </Typography>
+        <Typography 
+          variant="body2" 
+          color="text.secondary" 
+          sx={{ height: 50 }}>
+          {job.descricao}
+        </Typography>
+      </CardContent>
+      {
+        role == 'Profissional' &&
+        <CardActions>
+          <Button size="small">Me candidatar</Button>
+        </CardActions>
+        
+      }
+    </Card>
   );
 }
 

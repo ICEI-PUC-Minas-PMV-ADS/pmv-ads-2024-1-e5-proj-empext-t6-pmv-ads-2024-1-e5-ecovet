@@ -25,12 +25,13 @@ const UserMenuComponent = ({ field }: any) => {
   const navigate = useNavigate();
   const [openModalEditarClinica, setOpenModalEditarClinica] = useState(false);
   const [openModalEditarVeterinario, setOpenModalEditarVeterinario] = useState(false);
-  const [user, setUser] = useState<any>();
+  // const [user, setUser] = useState<any>();
 
-  useEffect(() => {
-    const userFromStorage = ls.get('user');
-    setUser(userFromStorage);
-  }, []);
+  // useEffect(() => {
+  //   const userFromStorage = ls.get('user');
+  //   console.log(userFromStorage)
+  //   setUser(userFromStorage);
+  // }, []);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -41,9 +42,7 @@ const UserMenuComponent = ({ field }: any) => {
   };
 
   const editarPerfil = () => {
-    console.log({user})
-
-    if(user.role == "Clínica")
+    if(role == "Clínica")
     {
       setOpenModalEditarClinica(true);
 

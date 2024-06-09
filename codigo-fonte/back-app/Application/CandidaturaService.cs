@@ -36,12 +36,12 @@ namespace Application
             return candidatura;
         }
 
-        public async Task<IEnumerable<Candidatura>> ObterCandidaturasPorVeterinarioAsync(int idProfissionalVeterinario)
+        public async Task<IEnumerable<ObterCandidaturasComVagaEVeterinario>> ObterCandidaturasPorVeterinarioAsync(int idProfissionalVeterinario)
         {
             return await candidaturaRepository.ObterCandidaturasPorVeterinarioAsync(idProfissionalVeterinario);
         }
 
-        public async Task<IEnumerable<Candidatura>> ObterCandidaturasPorVagaAsync(int idVaga)
+        public async Task<IEnumerable<ObterCandidaturasComVagaEVeterinario>> ObterCandidaturasPorVagaAsync(int idVaga)
         {
             return await candidaturaRepository.ObterCandidaturasPorVagaAsync(idVaga);
         }
