@@ -2,17 +2,9 @@ import React, { useEffect, useState } from "react";
 import PageContainerComponent from "../component/PageContainer";
 import type { AppDispatch, RootState } from "../reducers/store";
 import { useSelector, useDispatch } from "react-redux";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
-import { setDialog, setDialogIdle } from "../reducers/dialogReducer";
-import { title } from "process";
-import DialogComponent from "../component/Dialog";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import FormControl from "@mui/material/FormControl";
 import Typography from "@mui/material/Typography";
-import Link from "@mui/material/Link";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AutoAwesomeSharpIcon from "@mui/icons-material/AutoAwesomeSharp";
@@ -27,16 +19,10 @@ import {
   FormControlLabel,
   FormGroup,
   FormHelperText,
-  FormLabel,
-  InputLabel,
-  MenuItem,
-  Select,
-  Modal,
   Stack,
   styled,
 } from "@mui/material";
 
-import { BlockLike } from "typescript";
 import ListBox from "../component/ListBox";
 
 const CheckboxLabel = ({
@@ -83,12 +69,6 @@ const TypographyMold = styled(Typography)({
 });
 
 type FilterFindjobProps = {
-  setState: React.Dispatch<any>;
-  state: {
-    gilad: boolean;
-    jason: boolean;
-    antoine: boolean;
-  };
   setExpirience: React.Dispatch<any>;
   expirience: {
     under1year: boolean;
@@ -99,18 +79,9 @@ type FilterFindjobProps = {
 };
 
 function FilterFindjob({
-  state,
-  setState,
   expirience,
   setExpirience,
 }: FilterFindjobProps) {
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState({
-      ...state,
-      [event.target.name]: event.target.checked,
-    });
-  };
-
   const handlechangeExpirience = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -137,53 +108,6 @@ function FilterFindjob({
       >
         Filtros de busca
       </Typography>
-
-      <CheckboxLabel title="Job Types" />
-
-      <FormControl
-        sx={{ marginBottom: "40px" }}
-        component="fieldset"
-        variant="standard"
-      >
-        <FormGroup
-          sx={{
-            "& .MuiFormControlLabel-root": {
-              marginBottom: "-8px",
-            },
-          }}
-        >
-          <CssFormControlLabel
-            control={
-              <Checkbox
-                checked={state.gilad}
-                onChange={handleChange}
-                name="gilad"
-              />
-            }
-            label="Gilad Gray"
-          />
-          <CssFormControlLabel
-            control={
-              <Checkbox
-                checked={state.jason}
-                onChange={handleChange}
-                name="jason"
-              />
-            }
-            label="Jason Killian"
-          />
-          <CssFormControlLabel
-            control={
-              <Checkbox
-                checked={state.antoine}
-                onChange={handleChange}
-                name="antoine"
-              />
-            }
-            label="Antoine Llorca"
-          />
-        </FormGroup>
-      </FormControl>
 
       <CheckboxLabel title="Experiência" experienceFilter />
       <FormControl component="fieldset" variant="standard" error={error}>
@@ -254,11 +178,7 @@ const ProfissionalVeterinario = () => {
   const [countJobs, setCountJobs] = useState(0);
   const [jobs, setJobs] = useState([]);
   const [sort, setSort] = useState("Novo")
-  const [state, setState] = React.useState({
-    gilad: false,
-    jason: false,
-    antoine: false,
-  });
+
   const [expirience, setExpirience] = useState({
     under1year: false,
     between1to2years: false,
@@ -276,6 +196,9 @@ const ProfissionalVeterinario = () => {
     }
   };
 
+  const filter = (job: any) => {
+    return job.experiencia == 2 && job
+  }
 
   const getJobs = async() => {
     setIsloading(true)
@@ -334,8 +257,6 @@ const ProfissionalVeterinario = () => {
             }}
           >
             <FilterFindjob
-              state={state}
-              setState={setState}
               expirience={expirience}
               setExpirience={setExpirience}
             />
@@ -382,7 +303,7 @@ const ProfissionalVeterinario = () => {
               <Grid item container xs={12} sm={12} md={12} flex={1} spacing={8} style={{marginTop : '-2em'}}>
                 {
                   jobs?.length != 0 ? 
-                    jobs.map((job: any) =>
+                    jobs.filter(x => filter(x)).map((job: any) =>
                       <Grid item style={{marginTop : '-2em'}} >          
                         <div>
                           <JobCard job={job} role={role} handleDeleteJob={() => {}}   />

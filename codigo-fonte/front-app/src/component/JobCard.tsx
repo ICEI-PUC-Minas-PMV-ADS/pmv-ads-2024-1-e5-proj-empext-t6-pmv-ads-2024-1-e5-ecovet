@@ -18,6 +18,7 @@ import type { AppDispatch, RootState } from '../reducers/store'
 import { useSelector, useDispatch } from 'react-redux'
 import { setDialog, setDialogIdle } from '../reducers/dialogReducer'
 import { useNavigate } from "react-router-dom";
+import Chip from '@mui/material/Chip';
 
 const JobCard = ({job, role, handleDeleteJob}: any) => {
   const isDialogOpen = useSelector((state: RootState) => state.dialog.isOpen)
@@ -45,6 +46,23 @@ const JobCard = ({job, role, handleDeleteJob}: any) => {
 
   }
 
+  const decisorExp = (exp: number) =>{
+    switch(exp){
+      case 1: { 
+        return "Menos de 1 ano de experiência"
+      } 
+      case 2: { 
+        return "Entre 1 à 2 anos de experiência"
+      } 
+      case 3: { 
+        return "Entre 2 à 6 anos de experiência"
+      } 
+      default: { 
+        return "Mais de 6 anos de experiência"
+      } 
+    }
+  }
+
   return (   
     <Card sx={{ width: 345, minHeight: 300 }}>
       <DialogComponent open={isDialogOpen} handleClose={() => dispatch(setDialogIdle())} />
@@ -65,12 +83,32 @@ const JobCard = ({job, role, handleDeleteJob}: any) => {
         <Typography gutterBottom variant="h5" component="div">
           {job.tituloVaga}
         </Typography>
+
+
+
         <Typography 
           variant="body2" 
           color="text.secondary" 
           sx={{ height: 50 }}>
           {job.descricao}
         </Typography>
+
+        <Typography 
+          variant="body2" 
+          color="text">
+          Requisitos:
+        </Typography>
+        <Typography 
+          variant="body2" 
+          color="text.secondary">
+          - {job.requisitos}
+        </Typography>
+        <Typography 
+          variant="body2" 
+          color="text.secondary">
+          - {job.experiencia}
+        </Typography>
+        <Chip label={decisorExp(job.experiencia)} color="success" variant="outlined" />
       </CardContent>
       {
         role == 'Profissional' ? 
