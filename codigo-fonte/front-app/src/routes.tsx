@@ -79,7 +79,7 @@ const router = createBrowserRouter([
     element: <AuthorizedPage children={<VerCandidaturas />}/> 
   },
   {
-    path: "/vaga/:idJob",
+    path: "clinica/:idClinic/vaga/:idJob",
     element: <AuthorizedPage children={<JobDetail />}/> 
   }
 
