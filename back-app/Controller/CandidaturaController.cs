@@ -58,7 +58,7 @@ namespace back_app.Controller
             return Ok(mapper.Map<IEnumerable<ObterCandidaturasComVagaEVeterinarioModel>>(candidaturas));
         }
 
-        [HttpPost("")]
+        [HttpPost]
         [ProducesResponseType(201)]
         public async Task<IActionResult> CadastrarCandidatura([FromBody] CandidaturaModel candidaturaModel)
         {
