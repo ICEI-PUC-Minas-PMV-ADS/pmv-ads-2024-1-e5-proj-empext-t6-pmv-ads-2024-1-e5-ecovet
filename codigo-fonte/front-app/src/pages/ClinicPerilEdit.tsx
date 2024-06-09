@@ -108,7 +108,7 @@ const VetClinicInitialPage = () => {
       const response = await del(`Vaga/${currentJob.idVaga}`);
       if (response.status === 200) {
         console.log('Vaga deletada com sucesso:', response);
-        navigate('/')
+        getJobs()
       }
     } catch (error) {
       console.error('Erro ao deletar a conta:', error);

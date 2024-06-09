@@ -17,9 +17,11 @@ import DialogComponent from '../component/Dialog'
 import type { AppDispatch, RootState } from '../reducers/store'
 import { useSelector, useDispatch } from 'react-redux'
 import { setDialog, setDialogIdle } from '../reducers/dialogReducer'
+import { useNavigate } from "react-router-dom";
 
 const JobCard = ({job, role, handleDeleteJob}: any) => {
   const isDialogOpen = useSelector((state: RootState) => state.dialog.isOpen)
+  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -36,7 +38,7 @@ const JobCard = ({job, role, handleDeleteJob}: any) => {
   }
 
   const verCandidaturas = (idvaga : string) =>{
-
+    navigate(`/candidaturas/${idvaga}`)
   }
 
   const editarVaga = (idvaga : string) =>{
@@ -77,7 +79,6 @@ const JobCard = ({job, role, handleDeleteJob}: any) => {
         </CardActions> :
         <CardActions>
         <Button size="small" onClick={() => verCandidaturas(job.idVaga)}>Ver Candidaturas</Button>
-        <Button size="small" onClick={() => editarVaga(job.idVaga)}>Editar</Button>
         <Button size="small" color="error" onClick={() => handleDeleteJob(job.idVaga, job.tituloVaga)}>Deletar</Button>
         </CardActions>
         
