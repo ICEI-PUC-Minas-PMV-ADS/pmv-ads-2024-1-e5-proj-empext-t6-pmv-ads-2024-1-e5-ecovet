@@ -1,4 +1,6 @@
-﻿namespace Domain.Dto
+﻿using Domain.Dto.Enum;
+
+namespace Domain.Dto
 {
     public class ObterVagaComClinica
     {
@@ -8,7 +10,7 @@
         public string Requisitos { get; set; }
         public string PeriodoDeDisponibilidade { get; set; }
         public int IDClinicaVeterinaria { get; set; }
-
+        public ExperienciaEnum Experiencia { get; set; }
         public ClinicaVeterinaria ClinicaVaga { get; set; }
     }
 }

@@ -33,11 +33,23 @@ namespace DbAdapter.Repositories
             return await ecoVetContext.Candidaturas.FirstOrDefaultAsync(c => c.IDCandidatura == idCandidatura);
         }
 
-        public async Task<IEnumerable<Candidatura>> ObterCandidaturasPorVeterinarioAsync(int idProfissionalVeterinario)
+        public async Task<IEnumerable<ObterCandidaturasComVagaEVeterinario>> ObterCandidaturasPorVeterinarioAsync(int idProfissionalVeterinario)
         {
-            return await ecoVetContext.Candidaturas
-                                      .Where(c => c.IdProfissionalVeterinario == idProfissionalVeterinario)
-                                      .ToListAsync();
+
+            var result = await (from c in ecoVetContext.Candidaturas
+                                join p in ecoVetContext.ProfissionaisVeterinarios on c.IdProfissionalVeterinario equals p.IDProfissional
+                                join v in ecoVetContext.Vagas on c.IdVaga equals v.IDVaga
+                                join clinica in ecoVetContext.ClinicasVeterinarias on v.IDClinicaVeterinaria equals clinica.IDClinica
+                                where p.IDProfissional == idProfissionalVeterinario
+                                select new ObterCandidaturasComVagaEVeterinario
+                                {
+                                    Candidatura = c,
+                                    Vaga = v,
+                                    ClinicaVeterinaria = clinica
+                                }).ToListAsync();
+
+
+            return result;
         }
 
         public async Task<IEnumerable<ObterCandidaturasComVagaEVeterinario>> ObterCandidaturasPorVagaAsync(int idVaga)

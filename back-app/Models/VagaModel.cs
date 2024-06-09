@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Domain.Dto.Enum;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Dto
 {
@@ -12,5 +13,7 @@ namespace Domain.Dto
         public string Requisitos { get; set; }
         public string PeriodoDeDisponibilidade { get; set; }
         public int IdClinicaVeterinaria { get; set; }
+        public ExperienciaEnumModel Experiencia { get; set; }
+
     }
 }

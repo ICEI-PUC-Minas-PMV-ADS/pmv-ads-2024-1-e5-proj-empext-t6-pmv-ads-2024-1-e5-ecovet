@@ -49,6 +49,7 @@ namespace DbAdapter.Repositories
                                               Requisitos = vaga.Requisitos,
                                               PeriodoDeDisponibilidade = vaga.PeriodoDeDisponibilidade,
                                               IDClinicaVeterinaria = vaga.IDClinicaVeterinaria,
+                                              Experiencia = vaga.Experiencia,
                                               ClinicaVaga = clinica
                                           }).ToListAsync();
 
