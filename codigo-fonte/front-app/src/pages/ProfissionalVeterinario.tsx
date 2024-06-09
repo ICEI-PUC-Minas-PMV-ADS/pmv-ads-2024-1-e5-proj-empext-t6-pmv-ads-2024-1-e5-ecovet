@@ -278,7 +278,8 @@ const ProfissionalVeterinario = () => {
 
   const getJobs = async() => {
     setIsloading(true)
-    const response = await get(`Candidatura/Veterinario/${id}`);
+    // const response = await get(`Candidatura/Veterinario/${id}`);
+    const response = await get(`Vaga/obterVagas`);
     if(response.status = 200){
       setJobs(response)
       setCountJobs(response.length)
@@ -374,12 +375,14 @@ const ProfissionalVeterinario = () => {
                   </Box>
                 </Box>
               </Grid>
-              <Grid item xs={12} sm={12} md={12} >
+
+
+              <Grid item container xs={12} sm={12} md={12} flex={1} spacing={8} style={{marginTop : '-2em'}}>
                 {
                   jobs?.length != 0 ? 
                     jobs.map((job: any) =>
                       <Grid item style={{marginTop : '-2em'}} >          
-                        <div style={{cursor:'pointer'}} onClick={() => {}}>
+                        <div>
                           <JobCard job={job} role={role} handleDeleteJob={() => {}}   />
                         </div>
                       </Grid >

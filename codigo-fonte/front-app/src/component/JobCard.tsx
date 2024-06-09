@@ -28,7 +28,7 @@ const JobCard = ({job, role, handleDeleteJob}: any) => {
   console.log(job)
   return (   
     <Card sx={{ width: 345, minHeight: 300 }}>
-      <Menu
+      {/* <Menu
         id="menu-appbar"
         anchorEl={anchorEl}
         anchorOrigin={{
@@ -45,18 +45,12 @@ const JobCard = ({job, role, handleDeleteJob}: any) => {
       >
         <MenuItem onClick={()=>{}}>Editar</MenuItem>
         <MenuItem onClick={()=>handleDeleteJob(job.idVaga)}>Apagar</MenuItem>
-      </Menu>
+      </Menu> */}
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
             {job.clinicaVaga.nome?.substring(0, 1)}
           </Avatar>
-        }
-        action={
-          role == 'Clínica' && 
-          <IconButton aria-label="settings" onClick={(event) => handleMenu(event)}>
-            <MoreVertIcon />
-          </IconButton>
         }
         title={job.clinicaVaga.nome}
         subheader={job.clinicaVaga.endereco}
@@ -77,9 +71,13 @@ const JobCard = ({job, role, handleDeleteJob}: any) => {
         </Typography>
       </CardContent>
       {
-        role == 'Profissional' &&
+        role == 'Profissional' ? 
         <CardActions>
-          <Button size="small">Me candidatar</Button>
+          <Button size="small" onClick={() => clickCandidaturasVaga(job.idVaga)}>Me candidatar</Button>
+        </CardActions> :
+        <CardActions>
+        <Button size="small" onClick={() => clickCandidaturasVaga(job.idVaga)}>Candidaturas</Button>
+        <Button size="small" onClick={() => clickCandidaturasVaga(job.idVaga)}>Editar</Button>
         </CardActions>
         
       }

@@ -175,7 +175,8 @@ const VetClinicInitialPage = () => {
               jobs?.length != 0 ? 
                 jobs.map((job: any) =>
                   <Grid item style={{marginTop : '-2em'}} >          
-                    <div style={{cursor:'pointer'}} onClick={() => clickCandidaturasVaga(job.idVaga)}>
+                    {/* <div style={{cursor:'pointer'}} onClick={() => clickCandidaturasVaga(job.idVaga)}> */}
+                    <div>
                       <JobCard job={job} role={role} handleDeleteJob={handleDeleteJob}   />
                     </div>
                   </Grid >
