@@ -92,7 +92,7 @@ const SecaoProps = ({ clinica }: Secao) => {
             marginTop: 5,
           }}
         >
-          <TypographyModel sx={{}} fontSize={"16px"} fontWeight={800}>
+          {/* <TypographyModel sx={{}} fontSize={"16px"} fontWeight={800}>
             Vagas recentes dessa clinica
           </TypographyModel>
 
@@ -120,11 +120,14 @@ const SecaoProps = ({ clinica }: Secao) => {
             ) : clinicJobs && clinicJobs.length ? (
               clinicJobs
                 .slice(0, 3)
-                .map((item, index) => <JobCard job={item} key={index} />)
+                .map((item, index) =><JobCard job={item} key={index} />
+            
+              
+              )
             ) : (
               <TypographyModel> Ainda não há vagas criadas 😓 </TypographyModel>
             )}
-          </Box>
+          </Box> */}
         </Box>
       </Grid>
     </Grid>
