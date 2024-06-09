@@ -13,70 +13,11 @@ import {
 } from "@mui/material";
 import { useParams } from "react-router-dom";
 import JobCard from "../component/JobCard";
+import { get, post } from '../services/agent'
+import Chip from '@mui/material/Chip';
+import { useSelector, useDispatch } from "react-redux";
+import type { AppDispatch, RootState } from '../reducers/store'
 
-// DELETAR FAKE DATA
-const fakeClinicWithHisJob = {
-  id: "2",
-  title: "Enfermeiro para cirurgia",
-  location: "Belo Horizonte MG",
-  value: "a combinar",
-  type: "urgent",
-  experience: "2 years",
-  description:
-    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
-  responsibilities:
-    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
-  clinic: {
-    id: 1,
-    name: "John Dove",
-    location: "California",
-    email: "email@example.com",
-    contact: "99 9999 9999",
-    description:
-      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
-  },
-};
-
-const fakeJobCardData = [
-  {
-    idVaga: "2",
-    tituloVaga: "Enfermeiro para cirurgia",
-
-  location: "Belo Horizonte MG",
-  value: "a combinar",
-  type: "urgent",
-  experience: "2 years",
-  descricao:
-    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
-  responsibilities:
-    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
-  
-    clinicaVaga: {
-      nome: "Clinica Ecovet",
-      endereco: "Belo Horizonte MG"
-    }
-  },
-  {
-    idVaga: "2",
-    tituloVaga: "Enfermeiro para cirurgia",
-
-  location: "Belo Horizonte MG",
-  value: "a combinar",
-  type: "urgent",
-  experience: "2 years",
-  descricao:
-    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
-  responsibilities:
-    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
-  
-    clinicaVaga: {
-      nome: "Clinica Ecovet",
-      endereco: "Belo Horizonte MG"
-    }
-  }
-]
-
-///////////////////////
 
 const TypographyMold = styled(Typography)({
   fontFamily: "red-hat-display",
@@ -144,50 +85,75 @@ const buttonStyle3 = {
 const isAplicatedOnJob = false
 
 const JobDetail = () => {
+  const {isAuthorized, role, id} = useSelector((state: RootState) => state.user)
   const [selected, setSelected] = useState("0");
   const [similarJobs, setSimilarJobs] = useState<any[] | null>(null);
   const [loadingSimilarJobs, setLoadingSimilarJobs] = useState(false);
   const [jobDetail, setJobDetail] = useState<any | null>(null);
   const [loadind, setLoading] = useState(false);
 
-  const { idJob } = useParams();
+  const { idClinic, idJob } = useParams();
 
   const isSmallScreen = useMediaQuery("(max-width:800px)");
 
-  // carregar vagas similares
-  useEffect(() => {
-    setLoadingSimilarJobs(true);
 
-    const fetchSimilarJobs = async () => {
-      try {
-        const jobsData = fakeJobCardData.slice(0, 6);
-        setSimilarJobs(jobsData);
-        setLoadingSimilarJobs(false);
-      } catch (error) {
-        console.log(error);
-        setLoadingSimilarJobs(false);
-      }
+
+  const getJobFromClinic = async(idclinica: number) =>{
+    console.log(` === =====  getJobFromClinic ${idclinica}`)
+    const response = await get(`ClinicaVeterinaria/${idclinica}/vagas`);
+    if(response.status = 200){
+      setSimilarJobs(response)
+    }else{
+
+    }
+  }
+
+  const getJobDetail = async(idvaga: number) =>{
+    const response = await get(`Vaga/${idvaga}`);
+    if(response.status = 200){
+      setJobDetail(response)
+      console.log("response.clinicaVaga")
+      console.log(response.clinicaVaga.idClinica)
+    }else{
+
+    }
+  }
+
+
+  const jobApplication = async(jobDetail: any) =>{
+    const application = {
+      status: 'Aberto',
+      idProfissionalVeterinario: id,
+      idVaga: jobDetail.idVaga
     };
-    fetchSimilarJobs();
-  }, []);
+
+    try {
+      const response = await post('Candidatura', application);
+      if (response.ok) {
+        // Tratamento de sucesso
+        alert('Cadastro realizado com sucesso!');
+      } else {
+        // Tratamento de erro
+        alert('Erro ao realizar o cadastro.');
+      }
+    } catch (error) {
+      console.error("Erro ao cadastrar profissional veterinário:", error);
+      alert('Erro ao conectar com o servidor.');
+    }
+
+  }
 
   // carrega detalhe da vaga
   useEffect(() => {
-    setLoading(true);
-
-    const getJobDetail = async () => {
-      try {
-        const JobDetailData = fakeClinicWithHisJob;
-        setJobDetail(JobDetailData);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
-      }
-    };
-    getJobDetail();
+    //@ts-ignore
+    getJobDetail(parseInt(idJob));
+    //@ts-ignore
+    getJobFromClinic(parseInt(idClinic));
   }, []);
 
+
+
+  
   const setAplication = async () => {
     // FAZER APLICAÇAO NA VAGA
   }
@@ -195,6 +161,23 @@ const JobDetail = () => {
   const cancelAplication = async () => {
       // CANCELAR APLICAÇAO NA VAGA
       
+  }
+
+  const decisorExp = (exp: number) =>{
+    switch(exp){
+      case 1: { 
+        return "Menos de 1 ano de experiência"
+      } 
+      case 2: { 
+        return "Entre 1 à 2 anos de experiência"
+      } 
+      case 3: { 
+        return "Entre 2 à 6 anos de experiência"
+      } 
+      default: { 
+        return "Mais de 6 anos de experiência"
+      } 
+    }
   }
 
   return (
@@ -246,15 +229,15 @@ const JobDetail = () => {
                         <TypographyMold
                           sx={{ fontSize: "20px", fontWeight: 600 }}
                         >
-                          {jobDetail.title}
+                          {jobDetail.tituloVaga}
                         </TypographyMold>
                         <TypographyMold sx={{ fontSize: "16px" }}>
-                          {jobDetail.location}
+                          {jobDetail.clinicaVaga.endereco}
                         </TypographyMold>
                         <TypographyMold
                           sx={{ fontSize: "16px", color: "#2563eb" }}
                         >
-                          Nome clínica
+                          {jobDetail.clinicaVaga.nome}
                         </TypographyMold>
                         <TypographyMold
                           sx={{ fontSize: "14px", color: "#6b7280" }}
@@ -339,7 +322,7 @@ const JobDetail = () => {
                             fontSize={"16px"}
                             textAlign={"justify"}
                           >
-                            {jobDetail.description}
+                            {jobDetail.descricao}
                           </TypographyMold>
                         </Box>
 
@@ -349,13 +332,19 @@ const JobDetail = () => {
                             fontWeight={600}
                             marginTop={"32px"}
                           >
-                            Requerimentos
+                            Requisitos
                           </TypographyMold>
                           <TypographyMold
                             textAlign={"justify"}
                             fontSize={"16px"}
                           >
-                            {jobDetail.responsibilities}
+                            {jobDetail.requisitos}
+                          </TypographyMold>
+                          <TypographyMold
+                            textAlign={"justify"}
+                            fontSize={"16px"}
+                          >
+                            <Chip label={decisorExp(jobDetail.experiencia)} color="success" variant="outlined" />
                           </TypographyMold>
                         </Box>
                       </>
@@ -367,13 +356,13 @@ const JobDetail = () => {
                           flexDirection={"column"}
                         >
                           <TypographyMold fontSize={"16px"}>
-                            {jobDetail.clinic.name}
+                            {jobDetail.clinicaVaga.nome}
                           </TypographyMold>
                           <TypographyMold>
-                            {jobDetail.clinic.location}
+                            {jobDetail.clinicaVaga.endereco}
                           </TypographyMold>
                           <TypographyMold>
-                            {jobDetail.clinic.email}
+                          {jobDetail.clinicaVaga.email}
                           </TypographyMold>
                         </Box>
 
@@ -381,7 +370,7 @@ const JobDetail = () => {
                           Sobre a clínica
                         </TypographyMold>
                         <TypographyMold>
-                          {jobDetail.clinic.description}
+                          {jobDetail.clinicaVaga.descricaoDosServicos}
                         </TypographyMold>
                       </>
                     )}
@@ -390,7 +379,7 @@ const JobDetail = () => {
 
                   <Box marginY={4}>
                    <CssButton
-                       onClick={isAplicatedOnJob ? cancelAplication : setAplication}
+                       onClick={() => jobApplication(jobDetail)}
                        variant="contained"
                        fullWidth
                        sx={isAplicatedOnJob ? buttonStyle3 :
@@ -424,7 +413,7 @@ const JobDetail = () => {
                 opacity: 0.7,
               }}
             >
-              Vagas similares
+              Mais vagas da clínica
             </TypographyMold>
 
             {loadingSimilarJobs ? (
@@ -443,7 +432,7 @@ const JobDetail = () => {
               <>
                 <Box display={"flex"} flexWrap={"wrap"} gap={"16px"}>
                   {similarJobs.map((item) => (
-                    <JobCard job={item} key={item.id} />
+                    <JobCard job={item} role={role} key={item.id} />
                   ))}
                 </Box>
               </>
