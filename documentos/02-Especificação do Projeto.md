@@ -71,7 +71,6 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 |ID    | Descrição do Requisito  | Prioridade |
 |------|-----------------------------------------|----|
-
 |RF-001| Permitir que os veterinários criem e gerenciem seus perfis	 | ALTA | 
 |RF-002| Permitir que as clínicas criem e gerenciem seus perfis	   | ALTA |
 |RF-003| Permitir que as clínicas postem oportunidades de trabalho	| ALTA |
