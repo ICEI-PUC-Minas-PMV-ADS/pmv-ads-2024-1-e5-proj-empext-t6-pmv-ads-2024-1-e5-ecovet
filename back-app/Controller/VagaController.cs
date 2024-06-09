@@ -94,7 +94,7 @@ namespace back_app.Controller
         ///     Dados inválidos
         /// </response>
         /// <response code="500">Erro interno.</response>
-        [HttpPost("deletarVaga")]
+        [HttpDelete("{idVaga}")]
         [Authorize(Policy = "ClinicaOnly")]
         [ProducesResponseType(typeof(IActionResult), 200)]
         public async Task<IActionResult> DeletarVaga(int idVaga)
