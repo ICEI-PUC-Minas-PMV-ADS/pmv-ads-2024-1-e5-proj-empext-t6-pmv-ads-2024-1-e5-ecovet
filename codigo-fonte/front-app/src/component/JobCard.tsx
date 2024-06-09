@@ -20,7 +20,9 @@ import { setDialog, setDialogIdle } from '../reducers/dialogReducer'
 import { useNavigate } from "react-router-dom";
 import Chip from '@mui/material/Chip';
 
-const JobCard = ({job, role, handleDeleteJob}: any) => {
+const JobCard = ({job, role, handleDeleteJob, applied}: any) => {
+  console.log(">>>>>>>>>>>>>>>>>>>> JOB")
+  console.log(job)
   const isDialogOpen = useSelector((state: RootState) => state.dialog.isOpen)
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -107,15 +109,16 @@ const JobCard = ({job, role, handleDeleteJob}: any) => {
         <Chip label={decisorExp(job.experiencia)} color="success" variant="outlined" />
       </CardContent>
       {
-        role == 'Profissional' ? 
+        role == 'Profissional' && !applied ? 
         <CardActions>
           <Button size="small" onClick={() => candidaturaVaga(job.clinicaVaga.idClinica ,job.idVaga)}>Ver mais</Button>
-        </CardActions> :
+        </CardActions> 
+        : role == 'Clínica' ?  
         <CardActions>
         <Button size="small" onClick={() => verCandidaturas(job.idVaga)}>Ver Candidaturas</Button>
         <Button size="small" color="error" onClick={() => handleDeleteJob(job.idVaga, job.tituloVaga)}>Deletar</Button>
         </CardActions>
-        
+        : null
       }
     </Card>
   );

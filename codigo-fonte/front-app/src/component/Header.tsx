@@ -73,10 +73,6 @@ const HeaderComponent = () => {
         //@ts-ignore
         {
           name: 'Minhas vagas', options: [  ], link: 'clinica'
-        },
-        //@ts-ignore
-        {
-          name: 'Candidaturas às Vagas', options: [ ], link: 'preproject'
         }
       ])
     }

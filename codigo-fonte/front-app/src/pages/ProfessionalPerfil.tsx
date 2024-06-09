@@ -84,7 +84,7 @@ const ProfessionalPerfil = () => {
                 profissional &&
                 <Box>
                     {
-                        role === "Clínica" ? <PerfilCommonVersion professional={profissional} /> : 
+                        role == "Clínica" ? <PerfilCommonVersion professional={profissional} /> : 
                         id == profissional.id ? <PerfilOnwerVersion professional={profissional} /> : 
                         <PerfilCommonVersion professional={profissional} />
                     }
