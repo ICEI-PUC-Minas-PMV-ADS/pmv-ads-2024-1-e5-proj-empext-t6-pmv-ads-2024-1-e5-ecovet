@@ -16,8 +16,10 @@ import LogUpCompany from './pages/LogUpCompany';
 import VetClinicInitialPage from './pages/ClinicPerilEdit';
 import CadastroClinicaPage from './pages/CadastroClinica';
 import ProfissionalVeterinario from './pages/ProfissionalVeterinario';
+import PerfilPublicClinica from './pages/PerfilPublicClinica';
 import ProfessionalPerfil from './pages/ProfessionalPerfil';
 import VerCandidaturas from './pages/VerCandidaturas';
+import JobDetail from './pages/JobDetail';
 
 const router = createBrowserRouter([ 
   {
@@ -65,13 +67,22 @@ const router = createBrowserRouter([
     element: <AuthorizedPage children={<ProfissionalVeterinario />} role='user'/>
   },
   {
+    path: "/perfilpublicclinica/:idClinica",
+    element: <AuthorizedPage children={<PerfilPublicClinica />} role='user'/>
+  },
+  {
     path: "/perfilprofessional/publico/:idVeterinario",
     element: <AuthorizedPage children={<ProfessionalPerfil />} />,
   },
   {
     path: "/candidaturas/:idVaga",
     element: <AuthorizedPage children={<VerCandidaturas />}/> 
+  },
+  {
+    path: "/vaga/:idJob",
+    element: <AuthorizedPage children={<JobDetail />}/> 
   }
+
 ]);
 
 export default router;

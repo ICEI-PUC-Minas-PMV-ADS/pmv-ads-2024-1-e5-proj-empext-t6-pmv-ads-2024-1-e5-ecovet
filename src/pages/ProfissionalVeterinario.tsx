@@ -2,20 +2,14 @@ import React, { useEffect, useState } from "react";
 import PageContainerComponent from "../component/PageContainer";
 import type { AppDispatch, RootState } from "../reducers/store";
 import { useSelector, useDispatch } from "react-redux";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
-import { setDialog, setDialogIdle } from "../reducers/dialogReducer";
-import { title } from "process";
-import DialogComponent from "../component/Dialog";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import FormControl from "@mui/material/FormControl";
 import Typography from "@mui/material/Typography";
-import Link from "@mui/material/Link";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AutoAwesomeSharpIcon from "@mui/icons-material/AutoAwesomeSharp";
+import { get } from '../services/agent'
+import JobCard from "../component/JobCard";
 import {
   Box,
   Checkbox,
@@ -25,15 +19,10 @@ import {
   FormControlLabel,
   FormGroup,
   FormHelperText,
-  FormLabel,
-  InputLabel,
-  MenuItem,
-  Select,
   Stack,
   styled,
 } from "@mui/material";
 
-import { BlockLike } from "typescript";
 import ListBox from "../component/ListBox";
 
 const CheckboxLabel = ({
@@ -80,12 +69,6 @@ const TypographyMold = styled(Typography)({
 });
 
 type FilterFindjobProps = {
-  setState: React.Dispatch<any>;
-  state: {
-    gilad: boolean;
-    jason: boolean;
-    antoine: boolean;
-  };
   setExpirience: React.Dispatch<any>;
   expirience: {
     under1year: boolean;
@@ -96,18 +79,9 @@ type FilterFindjobProps = {
 };
 
 function FilterFindjob({
-  state,
-  setState,
   expirience,
   setExpirience,
 }: FilterFindjobProps) {
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState({
-      ...state,
-      [event.target.name]: event.target.checked,
-    });
-  };
-
   const handlechangeExpirience = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -134,53 +108,6 @@ function FilterFindjob({
       >
         Filtros de busca
       </Typography>
-
-      <CheckboxLabel title="Job Types" />
-
-      <FormControl
-        sx={{ marginBottom: "40px" }}
-        component="fieldset"
-        variant="standard"
-      >
-        <FormGroup
-          sx={{
-            "& .MuiFormControlLabel-root": {
-              marginBottom: "-8px",
-            },
-          }}
-        >
-          <CssFormControlLabel
-            control={
-              <Checkbox
-                checked={state.gilad}
-                onChange={handleChange}
-                name="gilad"
-              />
-            }
-            label="Gilad Gray"
-          />
-          <CssFormControlLabel
-            control={
-              <Checkbox
-                checked={state.jason}
-                onChange={handleChange}
-                name="jason"
-              />
-            }
-            label="Jason Killian"
-          />
-          <CssFormControlLabel
-            control={
-              <Checkbox
-                checked={state.antoine}
-                onChange={handleChange}
-                name="antoine"
-              />
-            }
-            label="Antoine Llorca"
-          />
-        </FormGroup>
-      </FormControl>
 
       <CheckboxLabel title="Experiência" experienceFilter />
       <FormControl component="fieldset" variant="standard" error={error}>
@@ -244,21 +171,21 @@ function FilterFindjob({
 }
 
 const ProfissionalVeterinario = () => {
+  const {isAuthorized, role, id} = useSelector((state: RootState) => state.user)
   const [searchQuery, setSearchQuery] = useState("");
   const [jobLocation, setJobLocation] = useState("");
-  const [isLoading, setEsLoading] = useState(false)
+  const [isLoading, setIsloading] = useState<Boolean>(false);
+  const [countJobs, setCountJobs] = useState(0);
+  const [jobs, setJobs] = useState([]);
   const [sort, setSort] = useState("Novo")
-  const [state, setState] = React.useState({
-    gilad: false,
-    jason: false,
-    antoine: false,
-  });
+
   const [expirience, setExpirience] = useState({
     under1year: false,
     between1to2years: false,
     between2to6years: false,
     moreThan6years: false,
   });
+
 
   const sendSearch = () => {
     console.log("values", { searchQuery, jobLocation });
@@ -270,6 +197,28 @@ const ProfissionalVeterinario = () => {
     }
   };
 
+  const filter = (job: any) => {
+    let filter = expirience.under1year ? 1 : expirience.between1to2years ? 2 : expirience.between2to6years ? 3 : expirience.moreThan6years ? 4 : null
+    return filter ? job.experiencia == filter && job : job
+  }
+
+  const getJobs = async() => {
+    setIsloading(true)
+    // const response = await get(`Candidatura/Veterinario/${id}`);
+    const response = await get(`Vaga/obterVagas`);
+    if(response.status = 200){
+      setJobs(response)
+      setCountJobs(response.length)
+      // setJobs(response)
+    }else{
+
+    }
+    setIsloading(false)
+  }
+
+  useEffect(() => {
+    getJobs()
+  },[isAuthorized]) 
 
   if (isLoading) {
     return (
@@ -310,8 +259,6 @@ const ProfissionalVeterinario = () => {
             }}
           >
             <FilterFindjob
-              state={state}
-              setState={setState}
               expirience={expirience}
               setExpirience={setExpirience}
             />
@@ -329,7 +276,7 @@ const ProfissionalVeterinario = () => {
                 >
                   <TypographyMold sx={{ fontSize: { xs: "14px", sm: "16px" } }}>
                     Mostrando{" "}
-                    <span style={{ fontWeight: 600 }}>1.902 vagas</span>
+                    <span style={{ fontWeight: 600 }}>{countJobs} vagas</span>
                   </TypographyMold>
 
                   <Box
@@ -349,10 +296,29 @@ const ProfissionalVeterinario = () => {
                     }}>Filtrar por: </TypographyMold>
 
                       <ListBox sort={sort} setSort={setSort} />
-
                   </Box>
                 </Box>
               </Grid>
+
+              
+              {/* Grid de vagas */}
+              <Grid item container xs={12} sm={12} md={12} flex={1} spacing={8} style={{marginTop : '-2em'}}>
+                {
+                  jobs?.length != 0 ? 
+                    jobs.filter(x => filter(x)).map((job: any) =>
+                      <Grid item style={{marginTop : '-2em'}} >          
+                        <div>
+                          <JobCard job={job} role={role} handleDeleteJob={() => {}}   />
+                        </div>
+                      </Grid >
+                    )
+                  :                      
+                  <TypographyMold>
+                    Nao há vagas criadas ainda 😓{" "}
+                  </TypographyMold>
+                }
+              </Grid>
+
             </Grid>
           </Box>
         </Stack>

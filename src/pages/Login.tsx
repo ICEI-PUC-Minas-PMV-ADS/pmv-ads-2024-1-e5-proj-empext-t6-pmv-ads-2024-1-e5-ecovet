@@ -77,6 +77,11 @@ const LoginPage = () => {
   const [tipoLogin, setTipoLogin] = useState(true);
   const navigate = useNavigate();
 
+
+  useEffect(() => {
+    dispatch(setDialogIdle())
+  }, []) 
+
   useEffect(() => {
     dispatch(setDialog({
       title: 'Fazer login',

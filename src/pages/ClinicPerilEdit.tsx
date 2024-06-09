@@ -30,7 +30,7 @@ import EditNoteIcon from "@mui/icons-material/EditNote";
 import PlaceIcon from "@mui/icons-material/Place";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import JobCard from "../component/JobCard";
-import { get } from '../services/agent'
+import { get, del } from '../services/agent'
 
 const TypographyMold = styled(Typography)({
   fontFamily: "red-hat-display",
@@ -62,9 +62,11 @@ const UploadButton = styled(Button)(({ theme }) => ({
 
 const VetClinicInitialPage = () => {
   const {isAuthorized, role} = useSelector((state: RootState) => state.user)
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const { name } = useSelector((state: RootState) => state.user)
   const [isLoading, setIsloading] = useState<Boolean>(false);
+  const [currentJob, setCurrentJob] = useState({ idVaga: 0, tituloVaga: ''});
   const [jobs, setJobs] = useState([]);
   const [totalCount, setTotalCount] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
@@ -94,10 +96,30 @@ const VetClinicInitialPage = () => {
     setIsloading(false)
   }
 
+  const handleSetModalIsOpen = async () => {
+    setModalIsOpen(!modalIsOpen)
+  };
 
-  const handleDeleteJob = (idVaga: number) => {
-    console.log("=== handleDeleteJob")
-    console.log(idVaga)
+
+  const deleteJob = async () => {
+    console.log(currentJob.idVaga)
+    handleSetModalIsOpen()
+    try {
+      const response = await del(`Vaga/${currentJob.idVaga}`);
+      if (response.status === 200) {
+        console.log('Vaga deletada com sucesso:', response);
+        getJobs()
+      }
+    } catch (error) {
+      console.error('Erro ao deletar a conta:', error);
+    }
+  };
+
+  const handleDeleteJob = async (idVaga: number, tituloVaga: string) => {
+    handleSetModalIsOpen()
+    setCurrentJob({
+      idVaga, tituloVaga
+    })
   };
 
   
@@ -123,6 +145,57 @@ const VetClinicInitialPage = () => {
   };
   return (
       <Container fixed maxWidth={"xl"}>
+
+        <Modal
+            open={modalIsOpen}
+            onClose={() => handleSetModalIsOpen}
+            aria-labelledby="delete-modal-title"
+            aria-describedby="delete-modal-description"
+          >
+            <Box
+              sx={{
+                position: "absolute" as "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                width: { xs: "95%", sm: "450px", md: "450px" },
+                backgroundColor: "white",
+                padding: "20px",
+                border: "none",
+                borderRadius: "20px",
+              }}
+            >
+              <TypographyMold fontSize={"18px"} id="delete-modal-title" variant="h6">
+                Confirmar Deleção da Vaga
+              </TypographyMold>
+              <TypographyMold id="delete-modal-description">
+                Você tem certeza que deseja deletar: {currentJob.tituloVaga}? Esta ação não pode ser desfeita.
+              </TypographyMold>
+              <Button
+                sx={{
+                  marginTop: "20px",
+                  padding: "8px 30px",
+                  backgroundColor: "red",
+                }}
+                variant="contained"
+                onClick={() => deleteJob()}
+              >
+                Confirmar
+              </Button>
+              <Button
+                sx={{
+                  marginTop: "20px",
+                  padding: "8px 30px",
+                  marginLeft: "10px",
+                }}
+                variant="contained"
+                onClick={() => handleSetModalIsOpen()}
+              >
+                Cancelar
+              </Button>
+            </Box>
+          </Modal>
+
         <Stack direction={"column"} paddingY={"20px"}>
           <Grid container flex={1}>
             <Grid
@@ -175,7 +248,8 @@ const VetClinicInitialPage = () => {
               jobs?.length != 0 ? 
                 jobs.map((job: any) =>
                   <Grid item style={{marginTop : '-2em'}} >          
-                    <div style={{cursor:'pointer'}} onClick={() => clickCandidaturasVaga(job.idVaga)}>
+                    {/* <div style={{cursor:'pointer'}} onClick={() => clickCandidaturasVaga(job.idVaga)}> */}
+                    <div>
                       <JobCard job={job} role={role} handleDeleteJob={handleDeleteJob}   />
                     </div>
                   </Grid >
