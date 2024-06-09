@@ -35,6 +35,7 @@ const JobCard = ({job, role, handleDeleteJob}: any) => {
   };
 
   const candidaturaVaga = (idvaga : string) =>{
+    navigate(`/vaga/${idvaga}`)
 
   }
 
@@ -108,7 +109,7 @@ const JobCard = ({job, role, handleDeleteJob}: any) => {
       {
         role == 'Profissional' ? 
         <CardActions>
-          <Button size="small" onClick={() => candidaturaVaga(job.idVaga)}>Me candidatar</Button>
+          <Button size="small" onClick={() => candidaturaVaga(job.idVaga)}>Ver mais</Button>
         </CardActions> :
         <CardActions>
         <Button size="small" onClick={() => verCandidaturas(job.idVaga)}>Ver Candidaturas</Button>
