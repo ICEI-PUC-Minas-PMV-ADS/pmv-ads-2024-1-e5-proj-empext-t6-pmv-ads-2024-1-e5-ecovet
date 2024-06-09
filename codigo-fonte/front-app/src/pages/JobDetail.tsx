@@ -122,9 +122,9 @@ const JobDetail = () => {
 
   const jobApplication = async(jobDetail: any) =>{
     const application = {
-      Status: 'Aberto',
-      IdProfissionalVeterinario: id,
-      IdVaga: jobDetail.idVaga
+      status: 'Aberto',
+      idProfissionalVeterinario: id,
+      idVaga: jobDetail.idVaga
     };
 
     try {
