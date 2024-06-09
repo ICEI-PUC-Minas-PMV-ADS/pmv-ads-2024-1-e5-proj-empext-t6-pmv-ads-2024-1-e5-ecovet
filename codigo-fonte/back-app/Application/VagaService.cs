@@ -28,6 +28,11 @@ namespace Application
             await vagaRepository.InserirVagaAsync(vaga);
         }
 
+        public async Task<ObterVagaComClinica> ObterVaga(int idVaga)
+        {
+            return await vagaRepository.ObterVaga(idVaga);
+        }
+
         public async Task<IEnumerable<ObterVagaComClinica>> ObterVagasAsync()
         {
             return await vagaRepository.ObterVagasAsync();
