@@ -6,4 +6,4 @@ Você deve colocar aqui todas as atas dos encontros realizados com o parceiro.
 
 [Reuniao.Etapa.3.docx](https://github.com/user-attachments/files/15748109/Reuniao.Etapa.3.docx)
 
-[Reuniao.Etapa.4.docx](https://github.com/user-attachments/files/15754108/Reuniao.Etapa.4.docx)
+[Reuniao.Etapa.4.docx](https://github.com/user-attachments/files/15754175/Reuniao.Etapa.4.docx)
