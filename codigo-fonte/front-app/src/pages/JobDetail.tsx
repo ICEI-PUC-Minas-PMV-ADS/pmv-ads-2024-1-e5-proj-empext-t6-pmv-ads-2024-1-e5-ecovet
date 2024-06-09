@@ -13,6 +13,8 @@ import {
 } from "@mui/material";
 import { useParams } from "react-router-dom";
 import JobCard from "../component/JobCard";
+import { get } from '../services/agent'
+import Chip from '@mui/material/Chip';
 
 // DELETAR FAKE DATA
 const fakeClinicWithHisJob = {
@@ -173,21 +175,18 @@ const JobDetail = () => {
 
   // carrega detalhe da vaga
   useEffect(() => {
-    setLoading(true);
-
-    const getJobDetail = async () => {
-      try {
-        const JobDetailData = fakeClinicWithHisJob;
-        setJobDetail(JobDetailData);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
-      }
-    };
-    getJobDetail();
+    getJobDetail(232);
   }, []);
 
+
+  const getJobDetail = async(idvaga: number) =>{
+    const response = await get(`Vaga/${idvaga}`);
+    if(response.status = 200){
+      setJobDetail(response)
+    }else{
+
+    }
+  }
   const setAplication = async () => {
     // FAZER APLICAÇAO NA VAGA
   }
@@ -195,6 +194,23 @@ const JobDetail = () => {
   const cancelAplication = async () => {
       // CANCELAR APLICAÇAO NA VAGA
       
+  }
+
+  const decisorExp = (exp: number) =>{
+    switch(exp){
+      case 1: { 
+        return "Menos de 1 ano de experiência"
+      } 
+      case 2: { 
+        return "Entre 1 à 2 anos de experiência"
+      } 
+      case 3: { 
+        return "Entre 2 à 6 anos de experiência"
+      } 
+      default: { 
+        return "Mais de 6 anos de experiência"
+      } 
+    }
   }
 
   return (
@@ -246,15 +262,15 @@ const JobDetail = () => {
                         <TypographyMold
                           sx={{ fontSize: "20px", fontWeight: 600 }}
                         >
-                          {jobDetail.title}
+                          {jobDetail.tituloVaga}
                         </TypographyMold>
                         <TypographyMold sx={{ fontSize: "16px" }}>
-                          {jobDetail.location}
+                          {jobDetail.clinicaVaga.endereco}
                         </TypographyMold>
                         <TypographyMold
                           sx={{ fontSize: "16px", color: "#2563eb" }}
                         >
-                          Nome clínica
+                          {jobDetail.clinicaVaga.nome}
                         </TypographyMold>
                         <TypographyMold
                           sx={{ fontSize: "14px", color: "#6b7280" }}
@@ -339,7 +355,7 @@ const JobDetail = () => {
                             fontSize={"16px"}
                             textAlign={"justify"}
                           >
-                            {jobDetail.description}
+                            {jobDetail.descricao}
                           </TypographyMold>
                         </Box>
 
@@ -349,13 +365,19 @@ const JobDetail = () => {
                             fontWeight={600}
                             marginTop={"32px"}
                           >
-                            Requerimentos
+                            Requisitos
                           </TypographyMold>
                           <TypographyMold
                             textAlign={"justify"}
                             fontSize={"16px"}
                           >
-                            {jobDetail.responsibilities}
+                            {jobDetail.requisitos}
+                          </TypographyMold>
+                          <TypographyMold
+                            textAlign={"justify"}
+                            fontSize={"16px"}
+                          >
+                            <Chip label={decisorExp(jobDetail.experiencia)} color="success" variant="outlined" />
                           </TypographyMold>
                         </Box>
                       </>
@@ -367,13 +389,13 @@ const JobDetail = () => {
                           flexDirection={"column"}
                         >
                           <TypographyMold fontSize={"16px"}>
-                            {jobDetail.clinic.name}
+                            {jobDetail.clinicaVaga.nome}
                           </TypographyMold>
                           <TypographyMold>
-                            {jobDetail.clinic.location}
+                            {jobDetail.clinicaVaga.endereco}
                           </TypographyMold>
                           <TypographyMold>
-                            {jobDetail.clinic.email}
+                          {jobDetail.clinicaVaga.email}
                           </TypographyMold>
                         </Box>
 
@@ -381,7 +403,7 @@ const JobDetail = () => {
                           Sobre a clínica
                         </TypographyMold>
                         <TypographyMold>
-                          {jobDetail.clinic.description}
+                          {jobDetail.clinicaVaga.descricaoDosServicos}
                         </TypographyMold>
                       </>
                     )}
