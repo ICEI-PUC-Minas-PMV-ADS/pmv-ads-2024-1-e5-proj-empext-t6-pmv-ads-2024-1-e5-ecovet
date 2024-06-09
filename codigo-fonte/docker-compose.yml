@@ -1,0 +1,11 @@
+version: '3'
+
+services:      
+  teste-pgadmin-compose:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "16543:80"
+      - "5432:5432"

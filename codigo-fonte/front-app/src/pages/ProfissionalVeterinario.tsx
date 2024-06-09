@@ -31,6 +31,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  Modal,
   Stack,
   styled,
 } from "@mui/material";
@@ -376,7 +377,8 @@ const ProfissionalVeterinario = () => {
                 </Box>
               </Grid>
 
-
+              
+              {/* Grid de vagas */}
               <Grid item container xs={12} sm={12} md={12} flex={1} spacing={8} style={{marginTop : '-2em'}}>
                 {
                   jobs?.length != 0 ? 
