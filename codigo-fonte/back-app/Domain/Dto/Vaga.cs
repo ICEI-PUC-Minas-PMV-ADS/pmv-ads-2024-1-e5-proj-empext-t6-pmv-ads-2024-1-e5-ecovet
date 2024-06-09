@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Domain.Dto.Enum;
 
 namespace Domain.Dto
 {
@@ -11,7 +12,7 @@ namespace Domain.Dto
         public string Descricao { get; set; }
         public string Requisitos { get; set; }
         public string PeriodoDeDisponibilidade { get; set; }
+        public ExperienciaEnum Experiencia { get; set; }
         public int IDClinicaVeterinaria { get; set; }
-
     }
 }
