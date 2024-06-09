@@ -43,7 +43,7 @@
 | *Critério de Êxito* | Todas as vagas cadastradas são listadas corretamente, mostrando as informações completas. |
 
 
-| **Caso de Teste** 	| **CT-07 – Candidadto consegue se candidatas à vaga** 	|
+| **Caso de Teste** 	| **CT-07 – Candidato consegue se candidatasr à vaga** 	|
 |:---:	|:---:	|
 |	Requisito Associado 	| RF-004 - Permitir que os veterinários busquem e se candidatem a oportunidades de trabalho |
 | Objetivo do Teste 	| Verificar inserção dos dados informados pelo profissional. |
@@ -71,14 +71,14 @@
 |Critério de Êxito | Login realizado  |
 
 
-| **Caso de Teste** 	| **CT-10 – Visualizar o perfil da Clínica** 	|
+| **Caso de Teste** 	| **CT-11 – Visualizar o perfil da Clínica** 	|
 |:---:	|:---:	|
 |	Requisito Associado 	| RF-006 - Permitir que os veterinários vejam informações sobre a clínica antes de se candidatarem a uma oportunidade		 |
 | Objetivo do Teste 	| Verificar inserção dos dados informados pelo profissional. |
 | *Critério de Êxito* | Perfil do candidato é exibido corretamente, mostrando todas as informações completas e atualizadas. |
 
 
-| **Caso de Teste** 	| **CT-11 – Permitir que o veterinário consiga alterar as informações do seu perfil** 	|
+| **Caso de Teste** 	| **CT-12 – Permitir que o veterinário consiga alterar as informações do seu perfil** 	|
 |:---:	|:---:	|
 |	Requisito Associado 	| RF-007 serção dos dados informados pelo profissional. |
 | *Critério de Êxito* | Perfil da clínica é exibido corretamente, mostrando todas as informações completas e atualizadas. |
@@ -104,4 +104,36 @@ Evidência de teste CT 04  - Resultado ok
 ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/26627d36-7e19-400b-92e2-7fca7ed41cc0)
 Evidência:
 ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/42197c51-b5b9-48ce-b746-9602548d0f01)
+
+Evidência de teste CT 05  - Resultado ok
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/d9f1b25c-4d66-4118-a9be-255d1fb096e9)
+Evidência:
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/85fa1c62-bff7-4f8c-a6ba-b65f105effe7)
+
+Evidência de teste CT 06  - Resultado ok
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/d9f1b25c-4d66-4118-a9be-255d1fb096e9)
+Evidência:
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/b7a57e76-83c7-4115-92fe-02aee8982a84)
+
+Evidência de teste CT 07  - Resultado ok
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/0afb3f5e-05e9-403a-97c3-800a7ad21b50)
+Evidência:
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/452c3396-870b-4f01-a41e-a4d35cf12de6)
+
+Evidência de teste CT 08  - Resultado ok
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/b9155afb-0595-453c-a32d-873ecd07d4f6)
+
+Evidência de teste CT 09  - Resultado ok
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/d8cafac1-0813-4ab2-bfc7-520093fc3b45)
+
+Evidência de teste CT 10  - Resultado ok
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/edb36261-a142-4c45-8f68-255577f26894)
+
+Evidência de teste CT 11  - Resultado ok
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/a99c9971-0733-44c3-b75c-d133155bf2cf)
+
+Evidência de teste CT 12  - Resultado ok
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/512aafa4-e7d6-4df8-b0ba-43f5df82783a)
+Evidêcia:
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet/assets/3579780/1e04c1eb-5f1f-4756-b9aa-a555329334f6)
 
