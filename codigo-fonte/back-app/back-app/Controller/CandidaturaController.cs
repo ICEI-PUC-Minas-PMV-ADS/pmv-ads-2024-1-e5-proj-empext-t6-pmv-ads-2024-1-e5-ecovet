@@ -58,11 +58,17 @@ namespace back_app.Controller
             return Ok(mapper.Map<IEnumerable<ObterCandidaturasComVagaEVeterinarioModel>>(candidaturas));
         }
 
-        [HttpPost("cadastrarCandidatura")]
+        [HttpPost("")]
         [ProducesResponseType(201)]
         public async Task<IActionResult> CadastrarCandidatura([FromBody] CandidaturaModel candidaturaModel)
         {
+            candidaturaModel.DataDaCandidatura = DateTime.UtcNow;
+
+            candidaturaModel.Status = "Aberto";
+
             var candidatura = mapper.Map<Candidatura>(candidaturaModel);
+
+
             await candidaturaService.InserirCandidaturaAsync(candidatura);
             return CreatedAtAction(nameof(ObterCandidaturaPorId), new { id = candidatura.IDCandidatura }, candidaturaModel);
         }
