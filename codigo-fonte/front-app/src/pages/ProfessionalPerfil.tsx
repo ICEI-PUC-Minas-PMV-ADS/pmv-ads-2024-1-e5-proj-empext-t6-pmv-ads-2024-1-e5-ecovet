@@ -31,23 +31,8 @@ interface Professional {
   localizacao: any
 }
 
-const fakeProfessional = {
-  id: "1",
-  name: "John Dove",
-  email: "email@example.com",
-  avatar: "/img/avatar.png",
-  contact: "99 9999 9999",
-  job: "Enfermeiro",
-  localizacao: "onde:?",
-  about:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor, ornare at commodo non, feugiat non nisi. Phasellus faucibus mollis pharetra. Proin blandit ac massa sed rhoncus",
-  experience:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor, ornare at commodo non, feugiat non nisi. Phasellus faucibus mollis phaLorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor, ornare at commodo non, feugiat non nisi. Phasellus faucibus mollis pharetra. Proin blandit ac massa sed rhoncusLorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor, ornare at commodo non, feugiat non nisi. Phasellus faucibus mollis pharetra. Proin blandit ac massa sed rhoncusretra. Proin blandit ac massa sed rhoncus",
-};
-/////
-
 const ProfessionalPerfil = () => {
-  const [professional, setProfessional] = useState<Professional | null>(null);
+  const [profissional, setProfissional] = useState<Professional>();
 
   const isTooSmallScreen = useMediaQuery("(max-width: 1000px)");
   const { name, id, userName, role } = useSelector((state: RootState) => state.user)
@@ -73,7 +58,9 @@ const ProfessionalPerfil = () => {
             localizacao: "aqui" // MUDAR
           };
 
-          setProfessional(professionalResponse);
+          console.log(id)
+          console.log(response.idProfissional)
+          setProfissional(professionalResponse);
         } else {
           console.error("Erro ao obter dados do veterinário");
         }
@@ -85,6 +72,7 @@ const ProfessionalPerfil = () => {
     fetchVeterinario();
   }, [idVeterinario]);
 
+
   return (
     <div className="container-flexgrow" style={{ backgroundColor: "white" }}>
       <React.Fragment>
@@ -92,21 +80,16 @@ const ProfessionalPerfil = () => {
         <Container maxWidth={"xl"}>
           <Grid container>
             <Grid item sm={10} md={isTooSmallScreen ? 9 : 7}>
-            <Box>
-                {professional ? (
-                  role === "Clínica" ? (
-                    <PerfilCommonVersion professional={professional} />
-                  ) : role === "Profissional" && id !== professional.id ? (
-                    <PerfilCommonVersion professional={professional} />
-                  ) : role === "Profissional" && id === professional.id ? (
-                    <PerfilOnwerVersion professional={professional} />
-                  ) : (
-                    <></>
-                  )
-                ) : (
-                  <></>
-                )}
-              </Box>
+              {
+                profissional &&
+                <Box>
+                    {
+                        role === "Clínica" ? <PerfilCommonVersion professional={profissional} /> : 
+                        id == profissional.id ? <PerfilOnwerVersion professional={profissional} /> : 
+                        <PerfilCommonVersion professional={profissional} />
+                    }
+                  </Box>
+              }
             </Grid>
 
             <Grid item md={5}>

@@ -27,9 +27,7 @@ import LoginPage from '../pages/Login';
 
 const HeaderComponent = () => {
   const isLoading = useSelector((state: RootState) => state.loading.isLoading)
-  const isAuthorized = useSelector((state: RootState) => state.user.isAuthorized)
-  const user = useSelector((state: RootState) => state.user)
-  const role = useSelector((state: RootState) => state.user.role)
+  const {isAuthorized, role, id} = useSelector((state: RootState) => state.user)
   const isDialogOpen = useSelector((state: RootState) => state.dialog.isOpen)
   const dispatch = useDispatch<AppDispatch>()
   const theme = useTheme();
@@ -59,8 +57,6 @@ const HeaderComponent = () => {
 
 
   useEffect(() => {
-    console.log("======= USER")
-    console.log(user)
     if(role == 'Profissional'){
       setPages([
         //@ts-ignore
@@ -69,7 +65,7 @@ const HeaderComponent = () => {
         },
         //@ts-ignore
         {
-          name: 'Vagas aceitas', options: [ ], link: ''
+          name: 'Meu perfil', options: [ ], link: `perfilprofessional/publico/${id}`
         }
       ])
     }else if(role == 'Clínica'){
