@@ -170,7 +170,7 @@ const FindBar = ({
               <SearchInput
                 setValue={setJobLocation}
                 value={jobLocation}
-                placeholder="Localização"
+                placeholder="Título da Clínica"
                 name="location"
               />
             )}
