@@ -179,6 +179,7 @@ const ProfissionalVeterinario = () => {
   const [countJobs, setCountJobs] = useState(0);
   const [jobs, setJobs] = useState([]);
   const [sort, setSort] = useState("Novo")
+  const [allJobs, setAllJobs] = useState([]);
 
   const [expirience, setExpirience] = useState({
     under1year: false,
@@ -189,9 +190,30 @@ const ProfissionalVeterinario = () => {
 
   // SearcBar ///
   const sendSearch = () => {
-    console.log("values", { searchQuery, jobLocation });
-    if (searchQuery === "" || jobLocation === "") return;
 
+    let filteredJobs = allJobs; // Use allJobs como base para o filtro
+
+    // Filtrar por experiência
+    filteredJobs = filteredJobs.filter((job) => filter(job));
+
+    // Filtrar por searchQuery
+    if (searchQuery) {
+      filteredJobs = filteredJobs.filter((job: any) =>
+        job.tituloVaga.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        job.descricao.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    // Filtrar por jobLocation (nome da clínica)
+    if (jobLocation) {
+      filteredJobs = filteredJobs.filter((job: any) =>
+        job.clinicaVaga.nome.toLowerCase().includes(jobLocation.toLowerCase())
+      );
+    }
+
+
+    setJobs(filteredJobs);
+    setCountJobs(filteredJobs.length);
     try {
     } catch (error) {
       console.log("error on shearcing: ", error);
@@ -209,6 +231,7 @@ const ProfissionalVeterinario = () => {
     const response = await get(`Vaga/obterVagas`);
     if(response.status = 200){
       setJobs(response)
+      setAllJobs(response);
       setCountJobs(response.length)
       // setJobs(response)
     }else{
