@@ -24,6 +24,7 @@ import {
 } from "@mui/material";
 
 import ListBox from "../component/ListBox";
+import FindBar from "../component/FindBar";
 
 const CheckboxLabel = ({
   title,
@@ -186,7 +187,7 @@ const ProfissionalVeterinario = () => {
     moreThan6years: false,
   });
 
-
+  // SearcBar ///
   const sendSearch = () => {
     console.log("values", { searchQuery, jobLocation });
     if (searchQuery === "" || jobLocation === "") return;
@@ -238,8 +239,15 @@ const ProfissionalVeterinario = () => {
     <React.Fragment>
       <CssBaseline />
 
+      <FindBar
+        sendSearch={sendSearch}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        jobLocation={jobLocation}
+        setJobLocation={setJobLocation}
+      />
 
-      <Container maxWidth={"xl"}>
+      <Container className="container-flexgrow" maxWidth={"xl"}>
         <Stack
           style={{marginTop:'10px'}}
           direction={"row"}
