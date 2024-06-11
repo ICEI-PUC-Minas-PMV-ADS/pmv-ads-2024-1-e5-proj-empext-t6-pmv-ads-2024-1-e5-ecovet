@@ -23,11 +23,11 @@ const AuthorizedPage = ({ children, userRole }: any) => {
 
 
 
-  // useEffect(() => {
-  //   if(!isAuthorized ){
-  //     navigate('/')
-  //   }
-  // },[isAuthorized])
+  useEffect(() => {
+    if(!isAuthorized ){
+      navigate('/')
+    }
+  },[isAuthorized])
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
