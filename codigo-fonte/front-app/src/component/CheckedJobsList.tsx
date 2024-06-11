@@ -26,7 +26,8 @@ const CheckedJobsList = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const startIndex = (currentPage - 1) * itemPerPage;
-  const endIndex = Math.min(startIndex + itemPerPage, fakeData.length);
+  const endIndex = Math.min(startIndex + itemPerPage, jobs.length);
+  const visibleData = jobs.slice(startIndex, endIndex);
 
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
@@ -84,7 +85,24 @@ const CheckedJobsList = () => {
         </Box>
       :
       //@ts-ignore 
+      // jobs?.map((item, index) => <JobCard job={item.vaga} role={role} key={index} applied={true} />)
+      visibleData && jobs.length && (<>
+      {
+         //@ts-ignore 
       jobs?.map((item, index) => <JobCard job={item.vaga} role={role} key={index} applied={true} />)
+
+
+      }
+
+          {totalCount > 0 && totalCount > itemPerPage && (
+            <Pagination
+              page={currentPage}
+              onChange={handlePageChange}
+              count={Math.ceil(totalCount / itemPerPage)}
+              color="primary"
+            />
+          )}
+      </>)
     }
   
     </Box>
