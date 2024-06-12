@@ -21,8 +21,6 @@ import { useNavigate } from "react-router-dom";
 import Chip from '@mui/material/Chip';
 
 const JobCard = ({job, role, handleDeleteJob, applied}: any) => {
-  console.log(">>>>>>>>>>>>>>>>>>>> JOB")
-  console.log(job)
   const isDialogOpen = useSelector((state: RootState) => state.dialog.isOpen)
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
