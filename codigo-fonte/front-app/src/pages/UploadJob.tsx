@@ -5,8 +5,9 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField, { TextFieldProps } from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
 import { useTheme } from "@mui/material/styles";
-import { Box, Container, styled } from "@mui/material";
+import { Box, Container, styled, Select, FormControl, InputLabel } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { post } from "../services/agent";
 import JobCard from "../component/JobCard";
@@ -89,7 +90,15 @@ const initialValues = {
   Descricao: "",
   Requisitos: "",
   PeriodoDeDisponibilidade: "",
+  Experiencia: 1, // Adicionando campo de experiência
 };
+
+const experienceOptions = [
+  { value: 1, label: "Menos de 1 ano" },
+  { value: 2, label: "Entre 1 e 2 anos" },
+  { value: 3, label: "Entre 2 e 6 anos" },
+  { value: 4, label: "Mais de 6 anos" },
+];
 
 const UploadJob = () => {
   const [formValues, setFormValues] = useState(initialValues);
@@ -110,13 +119,22 @@ const UploadJob = () => {
     }));
   };
 
+  const handleSelectChange = (e: any) => {
+    const { name, value } = e.target;
+
+    setFormValues((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+
   const sendForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
       const response = await post("Vaga/cadastrarVaga", formValues);
       if (response.status == 200) {
-        // const data = await response.json();
         alert("Vaga criada com sucesso!");
         navigate("/clinica");
       } else {
@@ -196,6 +214,26 @@ const UploadJob = () => {
                     fullWidth
                     required
                   />
+                </TextFieldLabel>
+
+                <TextFieldLabel title="Experiência" margin>
+                  <FormControl fullWidth>
+                    <Select
+                      labelId="experience-label"
+                      id="Experiencia"
+                      name="Experiencia"
+                      value={formValues.Experiencia}
+                      onChange={handleSelectChange}
+                      fullWidth
+                      required
+                    >
+                      {experienceOptions.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
                 </TextFieldLabel>
 
                 <Button
