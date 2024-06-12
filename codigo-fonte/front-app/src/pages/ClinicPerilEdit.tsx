@@ -3,13 +3,8 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import CssBaseline from "@mui/material/CssBaseline";
-import type { AppDispatch, RootState } from '../reducers/store'
-import { useSelector, useDispatch } from 'react-redux'
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-
+import type { AppDispatch, RootState } from "../reducers/store";
+import { useSelector, useDispatch } from "react-redux";
 import {
   Box,
   CircularProgress,
@@ -17,20 +12,13 @@ import {
   Modal,
   Stack,
   styled,
-  Pagination
+  Pagination,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
 
-import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
+import { useNavigate } from "react-router-dom";
 import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
-import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
-import CallOutlinedIcon from "@mui/icons-material/CallOutlined";
-import EditNoteIcon from "@mui/icons-material/EditNote";
-import PlaceIcon from "@mui/icons-material/Place";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import JobCard from "../component/JobCard";
-import { get, del } from '../services/agent'
+import { get, del } from "../services/agent";
 
 const TypographyMold = styled(Typography)({
   fontFamily: "red-hat-display",
@@ -59,24 +47,23 @@ const UploadButton = styled(Button)(({ theme }) => ({
   fontWeight: "normal",
 }));
 
-
 const VetClinicInitialPage = () => {
-  const {isAuthorized, role} = useSelector((state: RootState) => state.user)
+  const { isAuthorized, role } = useSelector((state: RootState) => state.user);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
-  const { name } = useSelector((state: RootState) => state.user)
+  const { name } = useSelector((state: RootState) => state.user);
   const [isLoading, setIsloading] = useState<Boolean>(false);
-  const [currentJob, setCurrentJob] = useState({ idVaga: 0, tituloVaga: ''});
+  const [currentJob, setCurrentJob] = useState({ idVaga: 0, tituloVaga: "" });
   const [jobs, setJobs] = useState([]);
   const [totalCount, setTotalCount] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
-  const [data, setData] = useState([]);
-  const itemPerPage = 20;
-  const startIndex = (currentPage - 1) * itemPerPage;
-  const endIndex = Math.min(startIndex + itemPerPage, itemPerPage);
-  const visibleData = data.slice(startIndex, endIndex);
-  const navigate = useNavigate();
 
+  const itemPerPage = 6;
+  const startIndex = (currentPage - 1) * itemPerPage;
+  const endIndex = Math.min(startIndex + itemPerPage, jobs.length);
+  const visibleData = jobs.slice(startIndex, endIndex);
+
+  const navigate = useNavigate();
 
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
@@ -85,47 +72,46 @@ const VetClinicInitialPage = () => {
     setCurrentPage(value);
   };
 
-  const getJobs = async() => {
-    setIsloading(true)
+  const getJobs = async () => {
+    setIsloading(true);
     const response = await get("Vaga/obterVagasClinica");
-    if(response.status = 200){
-      setJobs(response)
-    }else{
-
+    if ((response.status = 200)) {
+      setJobs(response);
+      setTotalCount(jobs.length);
+    } else {
     }
-    setIsloading(false)
-  }
-
-  const handleSetModalIsOpen = async () => {
-    setModalIsOpen(!modalIsOpen)
+    setIsloading(false);
   };
 
+  const handleSetModalIsOpen = async () => {
+    setModalIsOpen(!modalIsOpen);
+  };
 
   const deleteJob = async () => {
-    console.log(currentJob.idVaga)
-    handleSetModalIsOpen()
+    handleSetModalIsOpen();
     try {
       const response = await del(`Vaga/${currentJob.idVaga}`);
       if (response.status === 200) {
-        console.log('Vaga deletada com sucesso:', response);
-        getJobs()
+        getJobs();
       }
     } catch (error) {
-      console.error('Erro ao deletar a conta:', error);
+      console.error("Erro ao deletar a conta:", error);
     }
   };
 
   const handleDeleteJob = async (idVaga: number, tituloVaga: string) => {
-    handleSetModalIsOpen()
+    handleSetModalIsOpen();
     setCurrentJob({
-      idVaga, tituloVaga
-    })
+      idVaga,
+      tituloVaga,
+    });
   };
 
-  
+  console.log("JOBS", jobs);
+
   useEffect(() => {
-    getJobs()
-  },[isAuthorized]) 
+    getJobs();
+  }, [isAuthorized]);
 
   if (isLoading) {
     return (
@@ -140,13 +126,17 @@ const VetClinicInitialPage = () => {
       </Box>
     );
   }
-  const clickCandidaturasVaga = (idVaga : number) => {
+  const clickCandidaturasVaga = (idVaga: number) => {
     navigate(`/candidaturas/${idVaga}`);
   };
-  return (
-      <Container fixed maxWidth={"xl"}>
 
-        <Modal
+  return (
+    <div className="container-flexgrow" style={{ backgroundColor: "white" }}>
+      <React.Fragment>
+        <CssBaseline />
+
+        <Container maxWidth={"xl"}>
+          <Modal
             open={modalIsOpen}
             onClose={() => handleSetModalIsOpen}
             aria-labelledby="delete-modal-title"
@@ -165,11 +155,16 @@ const VetClinicInitialPage = () => {
                 borderRadius: "20px",
               }}
             >
-              <TypographyMold fontSize={"18px"} id="delete-modal-title" variant="h6">
+              <TypographyMold
+                fontSize={"18px"}
+                id="delete-modal-title"
+                variant="h6"
+              >
                 Confirmar Deleção da Vaga
               </TypographyMold>
               <TypographyMold id="delete-modal-description">
-                Você tem certeza que deseja deletar: {currentJob.tituloVaga}? Esta ação não pode ser desfeita.
+                Você tem certeza que deseja deletar: {currentJob.tituloVaga}?
+                Esta ação não pode ser desfeita.
               </TypographyMold>
               <Button
                 sx={{
@@ -196,91 +191,103 @@ const VetClinicInitialPage = () => {
             </Box>
           </Modal>
 
-        <Stack direction={"column"} paddingY={"20px"}>
-          <Grid container flex={1}>
-            <Grid
-              item
-              md={12}
-              xs={12}
-              sx={{
-                display: "flex",
-                flexDirection: { xs: "column", md: "row" },
-                alignItems: { md: "center" },
-                width: "100%",
-              }}
-              gap={"12px"}
-              justifyContent={"space-between"}
-            >
-              <TypographyMold
-                variant="h2"
-                fontSize={"20px"}
-                fontWeight={"600"}
-                color={"#4b5563"}
+          <Stack direction={"column"} paddingY={"20px"}>
+            <Grid container flex={1}>
+              <Grid
+                item
+                md={12}
+                xs={12}
+                sx={{
+                  display: "flex",
+                  flexDirection: { xs: "column", md: "row" },
+                  alignItems: { md: "center" },
+                  width: "100%",
+                }}
+                gap={"12px"}
+                justifyContent={"space-between"}
               >
-                Bem-vindo, { name }
-              </TypographyMold>
+                <TypographyMold
+                  variant="h2"
+                  fontSize={"20px"}
+                  fontWeight={"600"}
+                  color={"#4b5563"}
+                >
+                  Bem-vindo, {name}
+                </TypographyMold>
 
-              <Box
+                <Box
+                  display={"flex"}
+                  alignItems={"center"}
+                  justifyContent={"center"}
+                  sx={{ paddingY: { xs: "20px", md: "0px" } }}
+                  gap={"20px"}
+                >
+                  <UploadButton
+                    variant="outlined"
+                    endIcon={<FileUploadOutlinedIcon />}
+                    onClick={() => navigate("/upload-job")}
+                  >
+                    Upload vaga
+                  </UploadButton>
+                </Box>
+              </Grid>
+            </Grid>
+
+            <Grid container md={12} gap={"6px"} marginTop={"80px"}>
+              <Grid item md={12} xs={20} lg={12}>
+                <TypographyMold fontSize={"16px"} variant="h6">
+                  Vagas Criadas
+                </TypographyMold>
+              </Grid>
+
+              <Grid
+                item
+                md={12}
+                xs={20}
+                lg={12}
+                display={"flex"}
+                gap={"12px"}
+                flexWrap={"wrap"}
+              >
+                {visibleData && visibleData.length ? (
+                  visibleData.map((job: any) => (
+                    <div>
+                      <JobCard
+                        job={job}
+                        role={role}
+                        handleDeleteJob={handleDeleteJob}
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <TypographyMold>Nao há vagas criadas</TypographyMold>
+                )}
+              </Grid>
+
+              <Grid
+                item
+                md={12}
+                xs={12}
+                lg={12}
                 display={"flex"}
                 alignItems={"center"}
                 justifyContent={"center"}
-                sx={{ paddingY: { xs: "20px", md: "0px" } }}
-                gap={"20px"}
+                padding={5}
               >
-
-                <UploadButton
-                  variant="outlined"
-                  endIcon={<FileUploadOutlinedIcon />}
-                  onClick={() => navigate("/upload-job")}
-                >
-                  Upload vaga
-                </UploadButton>
-              </Box>
-            </Grid> 
-          </Grid>
-          <Grid container flex={1} style={{marginTop : '3em'}}>
-          <Grid item>
-            <Typography variant="subtitle1">Minhas Vagas Cadastradas</Typography>
-          </Grid>
-          </Grid>
-          <Grid container flex={1} spacing={8} style={{marginTop : '-2em'}}>
-          {
-              jobs?.length != 0 ? 
-                jobs.map((job: any) =>
-                  <Grid item style={{marginTop : '-2em'}} >          
-                    {/* <div style={{cursor:'pointer'}} onClick={() => clickCandidaturasVaga(job.idVaga)}> */}
-                    <div>
-                      <JobCard job={job} role={role} handleDeleteJob={handleDeleteJob}   />
-                    </div>
-                  </Grid >
-                )
-              :                      
-            <TypographyMold>
-              Nao há vagas criadas ainda 😓{" "}
-            </TypographyMold>
-            }
-                  <Grid
-                      item
-                      md={12}
-                      xs={20}
-                      lg={12}
-                      display={"flex"}
-                      alignItems={"center"}
-                      justifyContent={"center"}
-                      padding={5}
-                    >
-                      <Pagination
-                        page={currentPage}
-                        onChange={handlePageChange}
-                        count={Math.ceil(totalCount / itemPerPage)}
-                        color="primary"
-                      />
-                    </Grid>
-          </Grid>
-          
-        </Stack>
-
-      </Container>
+                {totalCount > 0 && totalCount > itemPerPage && (
+                  <Pagination
+                    page={currentPage}
+                    onChange={handlePageChange}
+                    count={Math.ceil(totalCount / itemPerPage)}
+                    color="primary"
+                  />
+                )}
+              </Grid>
+            </Grid>
+          </Stack>
+        </Container>
+      </React.Fragment>
+    </div>
   );
 };
 
