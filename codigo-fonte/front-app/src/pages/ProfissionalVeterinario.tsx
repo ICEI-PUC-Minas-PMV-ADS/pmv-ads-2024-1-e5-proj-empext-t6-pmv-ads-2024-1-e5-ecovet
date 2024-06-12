@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AutoAwesomeSharpIcon from "@mui/icons-material/AutoAwesomeSharp";
-import { get } from '../services/agent'
+import { get } from "../services/agent";
 import JobCard from "../component/JobCard";
 import {
   Box,
@@ -19,6 +19,7 @@ import {
   FormControlLabel,
   FormGroup,
   FormHelperText,
+  Pagination,
   Stack,
   styled,
 } from "@mui/material";
@@ -78,10 +79,7 @@ type FilterFindjobProps = {
   };
 };
 
-function FilterFindjob({
-  expirience,
-  setExpirience,
-}: FilterFindjobProps) {
+function FilterFindjob({ expirience, setExpirience }: FilterFindjobProps) {
   const handlechangeExpirience = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -171,13 +169,17 @@ function FilterFindjob({
 }
 
 const ProfissionalVeterinario = () => {
-  const {isAuthorized, role, id} = useSelector((state: RootState) => state.user)
+  const { isAuthorized, role, id } = useSelector(
+    (state: RootState) => state.user
+  );
   const [searchQuery, setSearchQuery] = useState("");
   const [jobLocation, setJobLocation] = useState("");
   const [isLoading, setIsloading] = useState<Boolean>(false);
   const [countJobs, setCountJobs] = useState(0);
   const [jobs, setJobs] = useState([]);
-  const [sort, setSort] = useState("Novo")
+  const [sort, setSort] = useState("Novo");
+  const [totalCount, setTotalCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const [expirience, setExpirience] = useState({
     under1year: false,
@@ -185,7 +187,6 @@ const ProfissionalVeterinario = () => {
     between2to6years: false,
     moreThan6years: false,
   });
-
 
   const sendSearch = () => {
     console.log("values", { searchQuery, jobLocation });
@@ -197,28 +198,49 @@ const ProfissionalVeterinario = () => {
     }
   };
 
-  const filter = (job: any) => {
-    let filter = expirience.under1year ? 1 : expirience.between1to2years ? 2 : expirience.between2to6years ? 3 : expirience.moreThan6years ? 4 : null
-    return filter ? job.experiencia == filter && job : job
-  }
+  const itemPerPage = 6;
 
-  const getJobs = async() => {
-    setIsloading(true)
+  const startIndex = (currentPage - 1) * itemPerPage;
+  const endIndex = Math.min(startIndex + itemPerPage, jobs.length);
+  const visibleData = jobs.slice(startIndex, endIndex);
+
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setCurrentPage(value);
+  };
+
+  const filter = (job: any) => {
+    let filter = expirience.under1year
+      ? 1
+      : expirience.between1to2years
+      ? 2
+      : expirience.between2to6years
+      ? 3
+      : expirience.moreThan6years
+      ? 4
+      : null;
+    return filter ? job.experiencia == filter && job : job;
+  };
+
+  const getJobs = async () => {
+    setIsloading(true);
     // const response = await get(`Candidatura/Veterinario/${id}`);
     const response = await get(`Vaga/obterVagas`);
-    if(response.status = 200){
-      setJobs(response)
-      setCountJobs(response.length)
+    if ((response.status = 200)) {
+      setJobs(response);
+      setCountJobs(response.length);
+      setTotalCount(response.length);
       // setJobs(response)
-    }else{
-
+    } else {
     }
-    setIsloading(false)
-  }
+    setIsloading(false);
+  };
 
   useEffect(() => {
-    getJobs()
-  },[isAuthorized]) 
+    getJobs();
+  }, [isAuthorized]);
 
   if (isLoading) {
     return (
@@ -238,10 +260,9 @@ const ProfissionalVeterinario = () => {
     <React.Fragment>
       <CssBaseline />
 
-
-      <Container maxWidth={"xl"}>
+      <Container className="container-flexgrow" maxWidth={"xl"}>
         <Stack
-          style={{marginTop:'10px'}}
+          style={{ marginTop: "10px" }}
           direction={"row"}
           bgcolor={"#ffffff"}
           sx={{
@@ -251,11 +272,10 @@ const ProfissionalVeterinario = () => {
         >
           <Box
             bgcolor={"white"}
-            
             sx={{
               boxShadow: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
-              display: {xs: "none", md: "block"},
-              flex: {md: 2, lg: 1}
+              display: { xs: "none", md: "block" },
+              flex: { md: 2, lg: 1 },
             }}
           >
             <FilterFindjob
@@ -264,15 +284,20 @@ const ProfissionalVeterinario = () => {
             />
           </Box>
 
-          <Box sx={{flex: { md:  4, lg: 5}}}>
+          <Box sx={{ flex: { md: 4, lg: 5 } }}>
             <Grid container>
-              <Grid item xs={12} sm={12} md={12} sx={{ padding: { xs: "20px", sm: "0px" } }}>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={12}
+                sx={{ padding: { xs: "20px", sm: "0px" } }}
+              >
                 <Box
                   display={"flex"}
                   justifyContent={"space-between"}
                   marginBottom={"16px"}
                   alignItems={"center"}
-                  
                 >
                   <TypographyMold sx={{ fontSize: { xs: "14px", sm: "16px" } }}>
                     Mostrando{" "}
@@ -287,38 +312,77 @@ const ProfissionalVeterinario = () => {
                         sm: "row",
                       },
                       gap: { xs: "0", sm: "8px" },
-               
                     }}
                     alignItems={"center"}
                   >
-                    <TypographyMold sx={{
-                      fontSize: {sx: "14px", sm: "16px"}
-                    }}>Filtrar por: </TypographyMold>
+                    <TypographyMold
+                      sx={{
+                        fontSize: { sx: "14px", sm: "16px" },
+                      }}
+                    >
+                      Filtrar por:{" "}
+                    </TypographyMold>
 
-                      <ListBox sort={sort} setSort={setSort} />
+                    <ListBox sort={sort} setSort={setSort} />
                   </Box>
                 </Box>
               </Grid>
 
-              
               {/* Grid de vagas */}
-              <Grid item container xs={12} sm={12} md={12} flex={1} spacing={8} style={{marginTop : '-2em'}}>
-                {
-                  jobs?.length != 0 ? 
-                    jobs.filter(x => filter(x)).map((job: any) =>
-                      <Grid item style={{marginTop : '-2em'}} >          
-                        <div>
-                          <JobCard job={job} role={role} handleDeleteJob={() => {}}   />
-                        </div>
-                      </Grid >
-                    )
-                  :                      
+              <Grid
+                item
+                container
+                xs={12}
+                sm={12}
+                md={12}
+                flex={1}
+                spacing={8}
+                style={{ marginTop: "-2em" }}
+              >
+                {jobs?.length != 0 ? (
+                  visibleData
+                    .filter((x) => filter(x))
+                    .map((job: any) => (
+                      <>
+                        <Grid item style={{ marginTop: "-2em" }}>
+                          <div>
+                            <JobCard
+                              job={job}
+                              role={role}
+                              handleDeleteJob={() => {}}
+                            />
+                          </div>
+                        </Grid>
+                      </>
+                    ))
+                ) : (
                   <TypographyMold>
                     Nao há vagas criadas ainda 😓{" "}
                   </TypographyMold>
-                }
+                )}
               </Grid>
 
+              <Grid
+                item
+                md={12}
+                xs={20}
+                lg={12}
+                display={"flex"}
+                alignItems={"center"}
+                justifyContent={"center"}
+                padding={5}
+              >
+                {totalCount > 0 &&
+                  totalCount > itemPerPage &&
+                  visibleData.filter((x) => filter(x)).length !== 0 && (
+                    <Pagination
+                      page={currentPage}
+                      onChange={handlePageChange}
+                      count={Math.ceil(totalCount / itemPerPage)}
+                      color="primary"
+                    />
+                  )}
+              </Grid>
             </Grid>
           </Box>
         </Stack>
