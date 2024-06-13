@@ -7,22 +7,16 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import CardHeader from '@mui/material/CardHeader';
 import Avatar from '@mui/material/Avatar';
-import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import { red } from '@mui/material/colors';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
 import DialogComponent from '../component/Dialog'
 import type { AppDispatch, RootState } from '../reducers/store'
 import { useSelector, useDispatch } from 'react-redux'
-import { setDialog, setDialogIdle } from '../reducers/dialogReducer'
+import {  setDialogIdle } from '../reducers/dialogReducer'
 import { useNavigate } from "react-router-dom";
 import Chip from '@mui/material/Chip';
 
 const JobCard = ({job, role, handleDeleteJob, applied}: any) => {
-  console.log(">>>>>>>>>>>>>>>>>>>> JOB")
-  console.log(job)
+
   const isDialogOpen = useSelector((state: RootState) => state.dialog.isOpen)
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -67,7 +61,7 @@ const JobCard = ({job, role, handleDeleteJob, applied}: any) => {
   }
 
   return (   
-    <Card sx={{ width: 345, minHeight: 300 }}>
+    <Card sx={{ width: 345, height: 300 }}>
       <DialogComponent open={isDialogOpen} handleClose={() => dispatch(setDialogIdle())} />
       <CardHeader
         avatar={

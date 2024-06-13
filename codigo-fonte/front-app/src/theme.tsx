@@ -22,7 +22,7 @@ const theme = createTheme({
             }
           }
         }
-      }
+      },
     }
   });
 
