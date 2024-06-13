@@ -112,8 +112,7 @@ const JobDetail = () => {
     const response = await get(`Vaga/${idvaga}`);
     if(response.status = 200){
       setJobDetail(response)
-      console.log("response.clinicaVaga")
-      console.log(response.clinicaVaga.idClinica)
+      console.log("response.clinicaVaga", response)
     }else{
 
     }
@@ -276,7 +275,7 @@ const JobDetail = () => {
 
                     <Box bgcolor={"#fed0ab"} sx={sqyareStyle}>
                       <TypographyMold sx={{ fontSize: "14px" }}>
-                        Tipo
+                        Período de disposição
                       </TypographyMold>
 
                       <TypographyMold
@@ -286,7 +285,7 @@ const JobDetail = () => {
                           color: "#374151",
                         }}
                       >
-                        Pra agora
+                       {jobDetail.periodoDeDisponibilidade}
                       </TypographyMold>
                     </Box>
                   </Box>
