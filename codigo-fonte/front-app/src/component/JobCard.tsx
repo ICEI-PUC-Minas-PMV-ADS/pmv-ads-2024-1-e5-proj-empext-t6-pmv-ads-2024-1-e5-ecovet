@@ -138,7 +138,7 @@ const JobCard = ({ job, role, handleDeleteJob, applied }: any) => {
           color="text.secondary"
           sx={{ height: 50 }}
         >
-          {job.descricao.length > 80
+          {job.descricao?.length > 80
             ? job.descricao.slice(0, 80) + "..."
             : job.descricao}
         </TypographyMold>
@@ -156,7 +156,7 @@ const JobCard = ({ job, role, handleDeleteJob, applied }: any) => {
         <Chip
           sx={{ fontFamily: "red-hat-display" }}
           label={decisorExp(job.experiencia)}
-          color="success"
+          color="primary"
           variant="outlined"
         />
       </CardContent>
@@ -214,7 +214,7 @@ const JobCard = ({ job, role, handleDeleteJob, applied }: any) => {
           </TypographyMold>
 
           <TypographyMold variant="body2" color="text.secondary">
-            {job.requisitos.length > 300
+            {job.requisitos?.length > 300
               ? "- " + job.requisitos.slice(0, 300) + "..."
               : "- " + job.requisitos}
           </TypographyMold>
