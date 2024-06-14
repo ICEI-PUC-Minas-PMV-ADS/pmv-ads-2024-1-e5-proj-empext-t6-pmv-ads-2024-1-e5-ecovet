@@ -14,6 +14,6 @@ namespace Domain.Dto
         public string PeriodoDeDisponibilidade { get; set; }
         public int IdClinicaVeterinaria { get; set; }
         public ExperienciaEnumModel Experiencia { get; set; }
-
+        public StatusVagaModel StatusVaga { get; set; }
     }
 }

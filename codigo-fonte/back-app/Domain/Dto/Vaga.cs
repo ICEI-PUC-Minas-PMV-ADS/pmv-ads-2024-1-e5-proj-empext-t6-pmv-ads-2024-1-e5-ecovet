@@ -14,5 +14,11 @@ namespace Domain.Dto
         public string PeriodoDeDisponibilidade { get; set; }
         public ExperienciaEnum Experiencia { get; set; }
         public int IDClinicaVeterinaria { get; set; }
+        public StatusVaga StatusVaga { get; set; }
+    }
+    public enum StatusVaga
+    {
+        Aberto = 1,
+        Fechado = 2
     }
 }

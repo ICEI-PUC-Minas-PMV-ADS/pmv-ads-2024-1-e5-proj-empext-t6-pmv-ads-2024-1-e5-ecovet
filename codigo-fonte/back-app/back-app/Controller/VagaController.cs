@@ -94,6 +94,8 @@ namespace back_app.Controller
         [ProducesResponseType(typeof(IActionResult), 200)]
         public async Task<IActionResult> CadastrarVaga([FromBody] VagaModel vagaModel)
         {
+            vagaModel.StatusVaga = StatusVagaModel.Aberto;
+
             var vaga = mapper.Map<Vaga>(vagaModel);
 
             vaga.IDClinicaVeterinaria = int.Parse(User?.FindFirst("IdUsuario")?.Value);
