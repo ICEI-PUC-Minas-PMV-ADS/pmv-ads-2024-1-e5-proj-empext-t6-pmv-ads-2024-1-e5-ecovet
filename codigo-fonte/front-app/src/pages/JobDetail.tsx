@@ -99,7 +99,6 @@ const JobDetail = () => {
   const isSmallScreen = useMediaQuery("(max-width:800px)");
 
   const getJobFromClinic = async (idclinica: number) => {
-    console.log(` === =====  getJobFromClinic ${idclinica}`);
     const response = await get(`ClinicaVeterinaria/${idclinica}/vagas`);
     if ((response.status = 200)) {
       setSimilarJobs(response);
@@ -111,7 +110,6 @@ const JobDetail = () => {
     const response = await get(`Vaga/${idvaga}`);
     if ((response.status = 200)) {
       setJobDetail(response);
-      console.log("response.clinicaVaga", response);
     } else {
     }
   };
@@ -156,6 +154,9 @@ const JobDetail = () => {
 
   const decisorExp = (exp: number) => {
     switch (exp) {
+      case 0: {
+        return "sem experiência";
+      }
       case 1: {
         return "Menos de 1 ano de experiência";
       }

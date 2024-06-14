@@ -85,6 +85,7 @@ const JobCard = ({ job, role, handleDeleteJob, applied }: any) => {
 
   const decisorExp = (exp: number) => {
     switch (exp) {
+      
       case 1: {
         return "Menos de 1 ano de experiência";
       }
