@@ -79,6 +79,7 @@ type JobData = {
     nome: string;
     endereco: string;
   };
+  requisitos: string
 };
 
 const VerCandidaturas = () => {
@@ -107,7 +108,9 @@ const VerCandidaturas = () => {
               nome: response[0].clinicaVeterinaria.nome,
               endereco: response[0].clinicaVeterinaria.endereco,
             },
+            requisitos: response[0].vaga.requisitos
           };
+          console.log("----------", response)
           setJob(jobData);
           setCandidaturas(response);
         } else {
