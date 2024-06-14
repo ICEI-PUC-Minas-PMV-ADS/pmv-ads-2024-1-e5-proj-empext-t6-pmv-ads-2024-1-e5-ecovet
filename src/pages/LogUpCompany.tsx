@@ -12,9 +12,10 @@ import TextField, { TextFieldProps } from "@mui/material/TextField";
 import { setDialog, setDialogIdle } from "../reducers/dialogReducer";
 import { useSelector, useDispatch } from "react-redux";
 import { styled, useTheme } from "@mui/material/styles";
-import { IconButton, InputAdornment } from "@mui/material";
+import { IconButton, InputAdornment,Alert } from "@mui/material";
 import type { AppDispatch, RootState } from "../reducers/store";
 import { post } from '../services/agent'
+import { useNavigate } from "react-router-dom";
 
 const TyphographyLabel = styled(Typography)({
   fontSize: "14px",
@@ -94,6 +95,7 @@ const LogUpCompany = () => {
   const dispatch = useDispatch<AppDispatch>();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(
@@ -118,21 +120,40 @@ const LogUpCompany = () => {
     e.preventDefault();
 
     const data = new FormData(e.currentTarget);
-
     if (isClinic) {
-      console.log("clinic");
+          const response = await post(
+            "ClinicaVeterinaria/cadastrarClinicaVeterinaria",
+            {
+              idClinica: 0,
+              ...formValue,
+            }
+          );
 
-    } else {
-      console.log("professional");
-    }
-    console.log(formValue);
+          if (response.status === 200) {
+            alert(`Clínica cadastrada com sucesso`)
+            setTimeout(() => {
+              navigate("/login");
+            }, 1000); // Timeout de 3 segundos
+          
+          } 
+    }else{
+          const { endereco, ...rest } = formValue; // Desestruturação para remover o campo 'endereco'
+          const modifiedFormValue = { ...rest, localizacao: endereco };
 
-
-    const response = await post("ClinicaVeterinaria/cadastrarClinicaVeterinaria",{
-      idClinica: 0,
-      ...formValue
-    });
-
+          const response = await post(
+            "ProfissionalVeterinario/cadastrarProfissionalVeterinario",
+            {
+              idProfissional: 0,
+              ...modifiedFormValue,
+            }
+          );
+          if (response.status === 200) {
+            alert(`Profissional cadastrado com sucesso`)
+            setTimeout(() => {
+              navigate("/login");
+            }, 1000); // Timeout de 3 segundos
+          }
+        }
   };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);

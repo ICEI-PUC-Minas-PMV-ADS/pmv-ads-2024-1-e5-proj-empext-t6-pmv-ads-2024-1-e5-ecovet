@@ -173,7 +173,7 @@ const LoginPage = () => {
               <TextField id="filled-basic" style={{width: '100%'}} label="Endereço de e-mail" variant="outlined"  value={email} onChange={(e) => setEmail(e.target.value)}/>
             </Grid>
             <Grid item xs={12}>
-              <TextField id="filled-basic" style={{width: '100%'}} label="Senha" variant="outlined"  value={senha} onChange={(e) => setSenha(e.target.value)} />
+              <TextField id="filled-basic" style={{width: '100%'}} type="password" label="Senha" variant="outlined"  value={senha} onChange={(e) => setSenha(e.target.value)} />
             </Grid>
             <Grid item xs={12}>
               <Button variant="contained" style={{width: '100%'}}   onClick={handleSubmit} >Entrar</Button>
