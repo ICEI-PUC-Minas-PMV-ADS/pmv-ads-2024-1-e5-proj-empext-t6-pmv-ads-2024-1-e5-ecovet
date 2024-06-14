@@ -60,6 +60,7 @@ const JobCard = ({ job, role, handleDeleteJob, applied }: any) => {
   };
 
   const isDialogOpen = useSelector((state: RootState) => state.dialog.isOpen);
+  
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
 

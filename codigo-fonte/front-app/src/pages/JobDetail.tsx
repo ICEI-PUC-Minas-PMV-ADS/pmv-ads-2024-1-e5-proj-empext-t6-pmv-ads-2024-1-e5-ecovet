@@ -176,7 +176,7 @@ const JobDetail = () => {
       <React.Fragment>
         <CssBaseline />
         <Container maxWidth={"xl"}>
-          <Grid container columnSpacing={"40px"}>
+          <Grid container columnSpacing={"10px"}>
             <Grid
               item
               sm={12}
@@ -329,27 +329,26 @@ const JobDetail = () => {
                             textAlign={"justify"}
                             fontSize={"16px"}
                           >
-                            {jobDetail.requisitos + "Unindo veterinários e clínicas para cuidar dos animais. Juntos, transformamos vidas na EcoVet: a ponte da saúde animal.Unindo veterinários e clínicas para cuidar dos animais. Juntos, transformamos vidas na EcoVet: a ponte da saúde animal."}
+                            {jobDetail.requisitos}
                           </TypographyMold>
 
-                        <Box sx={{
-                          display: "flex",
-                          justifyContent: "center",
-                          
-                        }}>
-
-                      
+                          <Box
+                            sx={{
+                              display: "flex",
+                              justifyContent: "center",
+                            }}
+                          >
                             <Chip
                               label={decisorExp(jobDetail.experiencia)}
                               color="success"
                               variant="outlined"
                               sx={{
                                 fontFamily: "red-hat-family",
-                                marginY: 2
+                                marginY: 2,
+                                fontSize: "16px",
                               }}
                             />
-                     
-                        </Box>
+                          </Box>
                         </Box>
                       </>
                     ) : (
@@ -416,31 +415,39 @@ const JobDetail = () => {
                 Mais vagas da clínica
               </TypographyMold>
 
-              {loadingSimilarJobs ? (
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    padding: "20px",
-                    height: "100%",
-                  }}
-                >
-                  <CircularProgress />
-                </Box>
-              ) : similarJobs && similarJobs.length ? (
-                <>
-                  <Box display={"flex"} flexWrap={"wrap"} gap={"16px"}>
-                    {similarJobs.map((item) => (
-                      <JobCard job={item} role={role} key={item.id} />
-                    ))}
+              <Box
+                sx={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "20px",
+                  justifyContent: "space-around",
+                }}
+              >
+                {loadingSimilarJobs ? (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      padding: "20px",
+
+                      width: "100%",
+                    }}
+                  >
+                    <CircularProgress />
                   </Box>
-                </>
-              ) : (
-                <TypographyMold>
-                  Ainda não foram criadas vagas 😓{" "}
-                </TypographyMold>
-              )}
+                ) : similarJobs && similarJobs.length ? (
+                  similarJobs.slice(0, 4).map((item) => (
+                    <Box>
+                      <JobCard job={item} role={role} key={item.id} />
+                    </Box>
+                  ))
+                ) : (
+                  <TypographyMold>
+                    Ainda não foram criadas vagas 😓{" "}
+                  </TypographyMold>
+                )}
+              </Box>
             </Grid>
           </Grid>
         </Container>
