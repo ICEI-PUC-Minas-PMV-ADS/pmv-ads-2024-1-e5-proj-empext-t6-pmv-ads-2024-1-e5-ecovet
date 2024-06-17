@@ -55,11 +55,11 @@ const ProfessionalPerfil = () => {
             job: response.especialidade,
             avatar: "/img/avatar.png",
             experience: response.experiencia || "", 
-            localizacao: "aqui" // MUDAR
+            localizacao: response.localizacao
           };
 
-          console.log(id)
-          console.log(response.idProfissional)
+          console.log("professionalResponse", response)
+        
           setProfissional(professionalResponse);
         } else {
           console.error("Erro ao obter dados do veterinário");

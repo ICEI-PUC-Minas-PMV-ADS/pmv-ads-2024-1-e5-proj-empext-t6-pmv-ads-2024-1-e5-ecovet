@@ -14,7 +14,6 @@ import CadastroProfissionalPage from './pages/CadastroProfissional';
 import UploadJob from './pages/UploadJob';
 import LogUpCompany from './pages/LogUpCompany';
 import VetClinicInitialPage from './pages/ClinicPerilEdit';
-import CadastroClinicaPage from './pages/CadastroClinica';
 import ProfissionalVeterinario from './pages/ProfissionalVeterinario';
 import PerfilPublicClinica from './pages/PerfilPublicClinica';
 import ProfessionalPerfil from './pages/ProfessionalPerfil';

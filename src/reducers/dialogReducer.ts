@@ -13,6 +13,7 @@ export const dialogSlice = createSlice({
   initialState,
   reducers: {
     setDialog: (state, { payload }) => {
+      console.log(">>>>>>>>>>>>>>>>>> setDialog")
       state.isOpen = true
       state.title = payload.title
       state.action = payload.action
@@ -21,6 +22,7 @@ export const dialogSlice = createSlice({
       state.redirect = payload.redirect
     },
     setDialogIdle: (state) => {
+      console.log(">>>>>>>>>>>>>>>>>> setDialogIdle")
       state.isOpen = false
       state.title = ''
       state.action = ''
