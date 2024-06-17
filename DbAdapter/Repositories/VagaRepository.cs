@@ -1,4 +1,5 @@
 ﻿using Domain.Dto;
+using Domain.Dto.Enum;
 using Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -70,8 +71,8 @@ namespace DbAdapter.Repositories
                                               Requisitos = vaga.Requisitos,
                                               PeriodoDeDisponibilidade = vaga.PeriodoDeDisponibilidade,
                                               IDClinicaVeterinaria = vaga.IDClinicaVeterinaria,
-                                              Experiencia = vaga.Experiencia,
-                                              ClinicaVaga = clinica
+                                              Experiencia = (ExperienciaEnum)vaga.Experiencia,
+                                              ClinicaVaga = clinica,
                                           }).ToListAsync();
 
             return vagasComClinicas;
@@ -91,7 +92,8 @@ namespace DbAdapter.Repositories
                                               Requisitos = vaga.Requisitos,
                                               PeriodoDeDisponibilidade = vaga.PeriodoDeDisponibilidade,
                                               IDClinicaVeterinaria = vaga.IDClinicaVeterinaria,
-                                              ClinicaVaga = clinica
+                                              ClinicaVaga = clinica,
+                                              Experiencia = (ExperienciaEnum)vaga.Experiencia,
                                           }).ToListAsync();
 
             return vagasComClinicas;
