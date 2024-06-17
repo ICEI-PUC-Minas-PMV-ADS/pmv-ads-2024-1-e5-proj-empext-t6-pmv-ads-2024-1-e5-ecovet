@@ -15,8 +15,13 @@ import { useNavigate } from "react-router-dom";
 import { logout } from '../reducers/userReducer';
 import ClinicPerfilModal from './ClinicPerfilModal';
 import VeterinarioPerfilModal from './VeterinarioPerfilModal';
+import { styled } from '@mui/material';
 
 var ls = require('local-storage');
+
+const TypographyMold = styled(Typography)({
+  fontFamily: "red-hat-display",
+});
 
 const UserMenuComponent = ({ field }: any) => {
   const { name, userName, role } = useSelector((state: RootState) => state.user)
@@ -73,7 +78,7 @@ const UserMenuComponent = ({ field }: any) => {
           onClick={handleMenu}>
           <Grid item xs={8} container>
             <Grid item xs={12}>
-              <Typography>{name}</Typography>
+              <TypographyMold>{name}</TypographyMold>
             </Grid>
 
           </Grid>
@@ -102,8 +107,8 @@ const UserMenuComponent = ({ field }: any) => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={editarPerfil}>Configurações</MenuItem>
-          <MenuItem onClick={handleLogout}>Sair</MenuItem>
+          <MenuItem sx={{fontFamily: "red-hat-display"}} onClick={editarPerfil}>Configurações</MenuItem>
+          <MenuItem sx={{fontFamily: "red-hat-display"}} onClick={handleLogout}>Sair</MenuItem>
         </Menu>
       <ClinicPerfilModal
         open={openModalEditarClinica}

@@ -98,8 +98,8 @@ const HomePage = () => {
           </Stack>
         </Container>
       </PageContainerComponent>
-      <Footer />
     </Box>
+    
   )
 }
 

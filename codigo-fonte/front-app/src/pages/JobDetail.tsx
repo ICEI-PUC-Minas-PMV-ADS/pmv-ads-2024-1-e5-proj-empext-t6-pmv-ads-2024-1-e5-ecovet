@@ -13,24 +13,24 @@ import {
 } from "@mui/material";
 import { useParams } from "react-router-dom";
 import JobCard from "../component/JobCard";
-import { get, post } from '../services/agent'
-import Chip from '@mui/material/Chip';
+import { get, post } from "../services/agent";
+import Chip from "@mui/material/Chip";
 import { useSelector, useDispatch } from "react-redux";
-import type { AppDispatch, RootState } from '../reducers/store'
-
+import type { AppDispatch, RootState } from "../reducers/store";
 
 const TypographyMold = styled(Typography)({
   fontFamily: "red-hat-display",
 });
 
 const sqyareStyle = {
-  width: "160px",
+  minWidth: "160px",
   height: "70px",
   borderRadius: "8px",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
+  padding: 1,
 };
 
 const CssButton = styled(Button)({
@@ -82,10 +82,12 @@ const buttonStyle3 = {
   },
 };
 
-const isAplicatedOnJob = false
+const isAplicatedOnJob = false;
 
 const JobDetail = () => {
-  const {isAuthorized, role, id} = useSelector((state: RootState) => state.user)
+  const { isAuthorized, role, id } = useSelector(
+    (state: RootState) => state.user
+  );
   const [selected, setSelected] = useState("0");
   const [similarJobs, setSimilarJobs] = useState<any[] | null>(null);
   const [loadingSimilarJobs, setLoadingSimilarJobs] = useState(false);
@@ -96,52 +98,43 @@ const JobDetail = () => {
 
   const isSmallScreen = useMediaQuery("(max-width:800px)");
 
-
-
-  const getJobFromClinic = async(idclinica: number) =>{
-    console.log(` === =====  getJobFromClinic ${idclinica}`)
+  const getJobFromClinic = async (idclinica: number) => {
     const response = await get(`ClinicaVeterinaria/${idclinica}/vagas`);
-    if(response.status = 200){
-      setSimilarJobs(response)
-    }else{
-
+    if ((response.status = 200)) {
+      setSimilarJobs(response);
+    } else {
     }
-  }
+  };
 
-  const getJobDetail = async(idvaga: number) =>{
+  const getJobDetail = async (idvaga: number) => {
     const response = await get(`Vaga/${idvaga}`);
-    if(response.status = 200){
-      setJobDetail(response)
-      console.log("response.clinicaVaga")
-      console.log(response.clinicaVaga.idClinica)
-    }else{
-
+    if ((response.status = 200)) {
+      setJobDetail(response);
+    } else {
     }
-  }
+  };
 
-
-  const jobApplication = async(jobDetail: any) =>{
+  const jobApplication = async (jobDetail: any) => {
     const application = {
-      status: 'Aberto',
+      status: "Aberto",
       idProfissionalVeterinario: id,
-      idVaga: jobDetail.idVaga
+      idVaga: jobDetail.idVaga,
     };
 
     try {
-      const response = await post('Candidatura', application);
+      const response = await post("Candidatura", application);
       if (response.ok) {
         // Tratamento de sucesso
-        alert('Cadastro realizado com sucesso!');
+        alert("Cadastro realizado com sucesso!");
       } else {
         // Tratamento de erro
-        alert('Erro ao realizar o cadastro.');
+        alert("Erro ao realizar o cadastro.");
       }
     } catch (error) {
       console.error("Erro ao cadastrar profissional veterinário:", error);
-      alert('Erro ao conectar com o servidor.');
+      alert("Erro ao conectar com o servidor.");
     }
-
-  }
+  };
 
   // carrega detalhe da vaga
   useEffect(() => {
@@ -151,41 +144,40 @@ const JobDetail = () => {
     getJobFromClinic(parseInt(idClinic));
   }, []);
 
-
-
-  
   const setAplication = async () => {
     // FAZER APLICAÇAO NA VAGA
-  }
+  };
 
   const cancelAplication = async () => {
-      // CANCELAR APLICAÇAO NA VAGA
-      
-  }
+    // CANCELAR APLICAÇAO NA VAGA
+  };
 
-  const decisorExp = (exp: number) =>{
-    switch(exp){
-      case 1: { 
-        return "Menos de 1 ano de experiência"
-      } 
-      case 2: { 
-        return "Entre 1 à 2 anos de experiência"
-      } 
-      case 3: { 
-        return "Entre 2 à 6 anos de experiência"
-      } 
-      default: { 
-        return "Mais de 6 anos de experiência"
-      } 
+  const decisorExp = (exp: number) => {
+    switch (exp) {
+      case 0: {
+        return "sem experiência";
+      }
+      case 1: {
+        return "Menos de 1 ano de experiência";
+      }
+      case 2: {
+        return "Entre 1 à 2 anos de experiência";
+      }
+      case 3: {
+        return "Entre 2 à 6 anos de experiência";
+      }
+      default: {
+        return "Mais de 6 anos de experiência";
+      }
     }
-  }
+  };
 
   return (
     <div className="container-flexgrow" style={{ backgroundColor: "white" }}>
       <React.Fragment>
         <CssBaseline />
         <Container maxWidth={"xl"}>
-          <Grid container columnSpacing={"40px"}>
+          <Grid container columnSpacing={"10px"}>
             <Grid
               item
               sm={12}
@@ -276,7 +268,7 @@ const JobDetail = () => {
 
                     <Box bgcolor={"#fed0ab"} sx={sqyareStyle}>
                       <TypographyMold sx={{ fontSize: "14px" }}>
-                        Tipo
+                        Período de disposição
                       </TypographyMold>
 
                       <TypographyMold
@@ -286,7 +278,7 @@ const JobDetail = () => {
                           color: "#374151",
                         }}
                       >
-                        Pra agora
+                        {jobDetail.periodoDeDisponibilidade}
                       </TypographyMold>
                     </Box>
                   </Box>
@@ -340,12 +332,24 @@ const JobDetail = () => {
                           >
                             {jobDetail.requisitos}
                           </TypographyMold>
-                          <TypographyMold
-                            textAlign={"justify"}
-                            fontSize={"16px"}
+
+                          <Box
+                            sx={{
+                              display: "flex",
+                              justifyContent: "center",
+                            }}
                           >
-                            <Chip label={decisorExp(jobDetail.experiencia)} color="success" variant="outlined" />
-                          </TypographyMold>
+                            <Chip
+                              label={decisorExp(jobDetail.experiencia)}
+                              color="success"
+                              variant="outlined"
+                              sx={{
+                                fontFamily: "red-hat-family",
+                                marginY: 2,
+                                fontSize: "16px",
+                              }}
+                            />
+                          </Box>
                         </Box>
                       </>
                     ) : (
@@ -362,7 +366,7 @@ const JobDetail = () => {
                             {jobDetail.clinicaVaga.endereco}
                           </TypographyMold>
                           <TypographyMold>
-                          {jobDetail.clinicaVaga.email}
+                            {jobDetail.clinicaVaga.email}
                           </TypographyMold>
                         </Box>
 
@@ -376,70 +380,76 @@ const JobDetail = () => {
                     )}
                   </Box>
 
-
                   <Box marginY={4}>
-                   <CssButton
-                       onClick={() => jobApplication(jobDetail)}
-                       variant="contained"
-                       fullWidth
-                       sx={isAplicatedOnJob ? buttonStyle3 :
-                        buttonStyle1
-                       }
-                   > {
-                    isAplicatedOnJob ? "Cancerlar canditatura" : "Aplicar Agora"
-                   }</CssButton>
+                    <CssButton
+                      onClick={() => jobApplication(jobDetail)}
+                      variant="contained"
+                      fullWidth
+                      sx={isAplicatedOnJob ? buttonStyle3 : buttonStyle1}
+                    >
+                      {" "}
+                      {isAplicatedOnJob
+                        ? "Cancerlar canditatura"
+                        : "Aplicar Agora"}
+                    </CssButton>
                   </Box>
                   <Divider />
                 </>
               )}
             </Grid>
 
-
-
-          <Grid
-       
-            sx={{
-              marginTop: { xs: "80px", sm: "0px" },
-            }}
-            item
-            sm={12}
-            md={6}
-      
-          >
-              <TypographyMold
+            <Grid
               sx={{
-                color: "#6b7280",
-                fontWeight: 600,
-                opacity: 0.7,
+                marginTop: { xs: "80px", sm: "0px" },
               }}
+              item
+              sm={12}
+              md={6}
             >
-              Mais vagas da clínica
-            </TypographyMold>
+              <TypographyMold
+                sx={{
+                  color: "#6b7280",
+                  fontWeight: 600,
+                  opacity: 0.7,
+                }}
+              >
+                Mais vagas da clínica
+              </TypographyMold>
 
-            {loadingSimilarJobs ? (
               <Box
                 sx={{
                   display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  padding: "20px",
-                  height: "100%",
+                  flexWrap: "wrap",
+                  gap: "20px",
+                  justifyContent: "space-around",
                 }}
               >
-                <CircularProgress />
+                {loadingSimilarJobs ? (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      padding: "20px",
+
+                      width: "100%",
+                    }}
+                  >
+                    <CircularProgress />
+                  </Box>
+                ) : similarJobs && similarJobs.length ? (
+                  similarJobs.slice(0, 4).map((item) => (
+                    <Box>
+                      <JobCard job={item} role={role} key={item.id} />
+                    </Box>
+                  ))
+                ) : (
+                  <TypographyMold>
+                    Ainda não foram criadas vagas 😓{" "}
+                  </TypographyMold>
+                )}
               </Box>
-            ) : similarJobs && similarJobs.length ? (
-              <>
-                <Box display={"flex"} flexWrap={"wrap"} gap={"16px"}>
-                  {similarJobs.map((item) => (
-                    <JobCard job={item} role={role} key={item.id} />
-                  ))}
-                </Box>
-              </>
-            ) : (
-              <TypographyMold>Ainda não foram criadas vagas 😓 </TypographyMold>
-            )}
-          </Grid>
+            </Grid>
           </Grid>
         </Container>
       </React.Fragment>
