@@ -16,7 +16,7 @@ const TypographyModel = styled(Typography)({
   fontFamily: "red-hat-display",
 });
 
-const itemPerPage = 6;
+const itemPerPage = 2;
 
 const CheckedJobsList = () => {
   const { name, id, userName, role } = useSelector(
@@ -88,7 +88,7 @@ const CheckedJobsList = () => {
           <>
             {
               //@ts-ignore
-              jobs?.map((item, index) => (
+              visibleData?.map((item, index) => (
                 <JobCard
                    //@ts-ignore
                   job={item.vaga}

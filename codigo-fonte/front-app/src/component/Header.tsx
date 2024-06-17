@@ -3,26 +3,20 @@ import { useState, useEffect } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Divider from '@mui/material/Divider';
 import UserMenuComponent from './UserMenu';
-import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
-import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
-import DialogComponent from '../component/Dialog'
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-import { useNavigate } from "react-router-dom";
-import type { RootState, AppDispatch } from '../reducers/store'
-import LinearProgress from '@mui/material/LinearProgress';
-import Snackbar from '@mui/material/Snackbar';
-import { useSelector, useDispatch } from 'react-redux'
-import { setDialogIdle } from '../reducers/dialogReducer';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import LoginPage from '../pages/Login';
+import Menu from '@mui/material/Menu';
+import LinearProgress from '@mui/material/LinearProgress';
+import Snackbar from '@mui/material/Snackbar';
+import { useNavigate } from "react-router-dom";
+import type { RootState, AppDispatch } from '../reducers/store'
+import { useSelector, useDispatch } from 'react-redux'
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 
 const HeaderComponent = () => {
@@ -87,13 +81,16 @@ const HeaderComponent = () => {
       flexDirection: 'row', 
       justifyContent: 'flex-end' }}>
       <Container maxWidth="xl">
-        <Toolbar >
+        <Toolbar 
+        >
           
           <Box 
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' }
-            }}>
+            }}
+            >
+              
             <Typography
                 variant="h6"
                 noWrap
@@ -125,8 +122,8 @@ const HeaderComponent = () => {
             </Typography>
           </Box>
           
-            <Box>
-              <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+         
+              <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex',   justifyContent: 'center'  } }}>
                 {isAuthorized && pages && pages.map((page) => (
 
                   <Button
@@ -134,7 +131,7 @@ const HeaderComponent = () => {
                     onClick={(event) => page.link ? handleMenuClick(page.link) : handleMenu(event, page.options)}
                     //@ts-ignore
                     key={page.name}
-                    sx={{ ml: 5, my: 2, display: 'block' }}
+                    sx={{ ml: 5, my: 2, display: 'block', fontFamily: "red-hat-display" }}
                   >
                     {
                       //@ts-ignore
@@ -144,7 +141,7 @@ const HeaderComponent = () => {
                 ))}
               </Box>
   
-            </Box>
+      
 
           {menuOptions.length > 0 &&
             <Menu
@@ -179,7 +176,7 @@ const HeaderComponent = () => {
             flexDirection: 'row', 
             justifyContent: 'flex-end' }}>
             {isAuthorized ?
-              <UserMenuComponent />: <Button variant="outlined" onClick={() => navigate('/login')}>Login</Button>
+              <UserMenuComponent />: <Button sx={{fontFamily: "red-had-display"}} variant="outlined" onClick={() => navigate('/login')}>Login</Button>
             }
           </Box> 
         </Toolbar>
