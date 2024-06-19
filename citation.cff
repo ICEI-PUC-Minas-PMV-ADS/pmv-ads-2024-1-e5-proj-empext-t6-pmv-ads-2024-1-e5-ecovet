@@ -1,0 +1,26 @@
+message: Please cite this software using these metadata.
+title: Ecovet
+authors:
+  - family-names: Henrique Pastor Pereira
+    given-names: Fellipe 
+  - family-names: De Oliveira Borges
+    given-names: Lucas 
+  - family-names: Furlan Cavalcante
+    given-names: Fábio 
+  - family-names: Xavier
+    given-names: Leonardo 
+  - family-names: Monteiro Fortino
+    given-names: Vinicius 
+  - family-names: Carolina Silva Mendes
+    given-names: Ana 
+  - name-suffix: Professor
+    affiliation: PUC Minas
+    family-names: Christina de Paiva Carvalho
+    given-names: Joyce
+keywords:
+  - Saúde 
+  - Veterinaria
+  - Empregos
+repository-code: https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2024-1-e5-proj-empext-t6-pmv-ads-2024-1-e5-ecovet
+version: 1.0.0
+date-released: 2023-06-17
