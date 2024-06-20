@@ -1,7 +1,6 @@
 Você deve colocar aqui todas as atas dos encontros realizados com o parceiro.
 
-
-[ADS.-.Ata.de.Reuniao 1.docx](https://github.com/user-attachments/files/15914401/ADS.-.Ata.de.Reuniao.1.docx)
+[ADS-Ata de Reuniao 1.docx](https://github.com/user-attachments/files/15914446/ADS-Ata.de.Reuniao.1.docx)
 
 [ADS -  Reunião Etapa 2.docx](https://github.com/user-attachments/files/15907427/ADS.-.Reuniao.Etapa.2.docx)
 
