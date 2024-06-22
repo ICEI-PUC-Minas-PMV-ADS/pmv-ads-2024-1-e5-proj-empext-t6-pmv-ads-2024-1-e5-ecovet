@@ -8,4 +8,6 @@ Você deve colocar aqui todas as atas dos encontros realizados com o parceiro.
 
 [ADS -  Reunião Etapa 4.docx](https://github.com/user-attachments/files/15907743/ADS.-.Reuniao.Etapa.4.docx)
 
+[ADS - Reunião Etapa 5.docx](https://github.com/user-attachments/files/15936531/ADS.-.Reuniao.Etapa.5.docx)
 
+[Ata Reunião Final.pdf](https://github.com/user-attachments/files/15936535/Ata.Reuniao.Final.pdf)
